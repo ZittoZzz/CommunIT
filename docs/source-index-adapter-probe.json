@@ -1,0 +1,696 @@
+{
+  "started_at": "2026-11-21T16:41:46.932088+00:00",
+  "method": "Configured enabled publisher-index adapters invoked directly with known=[] and one shared Client; no database opened; no Tavily requests. Recurring URL inputs only.",
+  "source_count": 6,
+  "sources": [
+    {
+      "source_id": "rootcon-bluesky",
+      "index_id": "rootcon-community",
+      "name": "ROOTCON · Bluesky",
+      "adapter": "bluesky",
+      "url": "https://bsky.app/profile/rootcon.bsky.social",
+      "started_at": "2026-11-21T16:41:46.939547+00:00",
+      "status": "ok",
+      "discovered": 146,
+      "announcement_count": 3,
+      "announcements": [
+        {
+          "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h",
+          "title": "This year, we wanted to do something special for our ROOTCON 20 CTF Champions.",
+          "posted_at": "2026-09-30T07:03:13.117Z",
+          "access": "full",
+          "kind": "recap",
+          "external_id": "at://did:plc:ydimusmod455q2xhqngepksy/app.bsky.feed.post/3mwprmced2e2h",
+          "evidence": "This year, we wanted to do something special for our ROOTCON 20 CTF Champions. Congratulations, Team Pulang Araw, on taking the CTF crown this year!",
+          "identity": {
+            "organizer_key": "rootcon",
+            "series": "ROOTCON CTF",
+            "edition": "20",
+            "region": "Unspecified",
+            "stage": "main"
+          },
+          "facts": {
+            "name": "ROOTCON 20 CTF",
+            "organizer": "ROOTCON",
+            "region": "Unspecified",
+            "format": "unknown",
+            "eligibility": null,
+            "registration_url": null,
+            "start": null,
+            "end": null,
+            "deadline": null,
+            "registration_opens": null,
+            "summary": null,
+            "lifecycle": "finished",
+            "registration_state": "closed"
+          },
+          "field_evidence": {
+            "name": {
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h",
+              "quote": "This year, we wanted to do something special for our ROOTCON 20 CTF Champions."
+            },
+            "lifecycle": {
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h",
+              "quote": "This year, we wanted to do something special for our ROOTCON 20 CTF Champions. This year, we wanted to do something special for our ROOTCON 20 CTF Champions. Congratulations, Team Pulang Araw, on taking the CTF crown this year!"
+            },
+            "organizer": {
+              "url": "https://bsky.app/profile/rootcon.bsky.social",
+              "quote": "Official account linked from rootcon.org; Philippine organizer."
+            },
+            "posted_at": {
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h",
+              "quote": "Publisher publication metadata: 2026-09-30T07:03:13.117Z"
+            }
+          },
+          "publisher": {
+            "id": "rootcon-bluesky",
+            "name": "ROOTCON · Official community feed",
+            "role": "organizer",
+            "url": "https://bsky.app/profile/rootcon.bsky.social"
+          },
+          "discovery_path": [
+            "https://bsky.app/profile/rootcon.bsky.social",
+            "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h"
+          ],
+          "related_links": []
+        },
+        {
+          "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24",
+          "title": "Good luck to all teams competing in the ROOTCON 20 CTF Qualifiers!",
+          "posted_at": "2026-09-19T01:55:05.102Z",
+          "access": "full",
+          "kind": "announcement",
+          "external_id": "at://did:plc:ydimusmod455q2xhqngepksy/app.bsky.feed.post/3mvtlb6qlyc24",
+          "evidence": "Good luck to all teams competing in the ROOTCON 20 CTF Qualifiers! #ROOTCON20 #CTF",
+          "identity": {
+            "organizer_key": "rootcon",
+            "series": "ROOTCON CTF",
+            "edition": "20",
+            "region": "Unspecified",
+            "stage": "qualifier"
+          },
+          "facts": {
+            "name": "ROOTCON 20 CTF · Qualifier",
+            "organizer": "ROOTCON",
+            "region": "Unspecified",
+            "format": "unknown",
+            "eligibility": null,
+            "registration_url": null,
+            "start": null,
+            "end": null,
+            "deadline": null,
+            "registration_opens": null,
+            "summary": null,
+            "lifecycle": null,
+            "registration_state": null
+          },
+          "field_evidence": {
+            "name": {
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24",
+              "quote": "Good luck to all teams competing in the ROOTCON 20 CTF Qualifiers!"
+            },
+            "organizer": {
+              "url": "https://bsky.app/profile/rootcon.bsky.social",
+              "quote": "Official account linked from rootcon.org; Philippine organizer."
+            },
+            "posted_at": {
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24",
+              "quote": "Publisher publication metadata: 2026-09-19T01:55:05.102Z"
+            }
+          },
+          "publisher": {
+            "id": "rootcon-bluesky",
+            "name": "ROOTCON · Official community feed",
+            "role": "organizer",
+            "url": "https://bsky.app/profile/rootcon.bsky.social"
+          },
+          "discovery_path": [
+            "https://bsky.app/profile/rootcon.bsky.social",
+            "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24"
+          ],
+          "related_links": []
+        },
+        {
+          "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z",
+          "title": "Behind every challenge is a team that made it possible.",
+          "posted_at": "2026-09-12T05:08:12.613Z",
+          "access": "full",
+          "kind": "announcement",
+          "external_id": "at://did:plc:ydimusmod455q2xhqngepksy/app.bsky.feed.post/3mvccs3acfk2z",
+          "evidence": "Meet ANM—the hands and brains behind this year's ROOTCON 20 CTF. #ROOTCON20 #CTF",
+          "identity": {
+            "organizer_key": "rootcon",
+            "series": "ROOTCON CTF",
+            "edition": "20",
+            "region": "Unspecified",
+            "stage": "main"
+          },
+          "facts": {
+            "name": "ROOTCON 20 CTF",
+            "organizer": "ROOTCON",
+            "region": "Unspecified",
+            "format": "unknown",
+            "eligibility": null,
+            "registration_url": null,
+            "start": null,
+            "end": null,
+            "deadline": null,
+            "registration_opens": null,
+            "summary": null,
+            "lifecycle": null,
+            "registration_state": null
+          },
+          "field_evidence": {
+            "name": {
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z",
+              "quote": "Behind every challenge is a team that made it possible. | Meet ANM—the hands and brains behind this year's ROOTCON 20 CTF."
+            },
+            "organizer": {
+              "url": "https://bsky.app/profile/rootcon.bsky.social",
+              "quote": "Official account linked from rootcon.org; Philippine organizer."
+            },
+            "posted_at": {
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z",
+              "quote": "Publisher publication metadata: 2026-09-12T05:08:12.613Z"
+            }
+          },
+          "publisher": {
+            "id": "rootcon-bluesky",
+            "name": "ROOTCON · Official community feed",
+            "role": "organizer",
+            "url": "https://bsky.app/profile/rootcon.bsky.social"
+          },
+          "discovery_path": [
+            "https://bsky.app/profile/rootcon.bsky.social",
+            "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z"
+          ],
+          "related_links": []
+        }
+      ],
+      "decisions": [],
+      "warnings": [],
+      "message": "Public author feed and full post text read through the documented Bluesky API; only extracted facts and brief excerpts retained, no media.",
+      "finished_at": "2026-11-21T16:41:47.909100+00:00"
+    },
+    {
+      "source_id": "up-manila",
+      "index_id": "up-manila",
+      "name": "UP Manila · Competition invitations",
+      "adapter": "rss",
+      "url": "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag",
+      "started_at": "2026-11-21T16:41:47.911432+00:00",
+      "status": "ok",
+      "discovered": 1,
+      "announcement_count": 1,
+      "announcements": [
+        {
+          "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/",
+          "title": "LearnPossible – The Hexcore Labs PH University Challenge",
+          "posted_at": "2025-09-02T02:17:55+00:00",
+          "access": "full",
+          "kind": "announcement",
+          "external_id": null,
+          "evidence": "The Gamified Capture the Flag (CTF) Tournament",
+          "identity": {
+            "organizer_key": "hexcore-labs-ph",
+            "series": "LearnPossible – The Hexcore Labs PH University Challenge · CTF",
+            "edition": "2025",
+            "region": "Unspecified",
+            "stage": "main"
+          },
+          "facts": {
+            "name": "LearnPossible – The Hexcore Labs PH University Challenge · CTF 2025",
+            "organizer": "Hexcore Labs PH",
+            "region": "Unspecified",
+            "format": "unknown",
+            "eligibility": null,
+            "registration_url": null,
+            "start": null,
+            "end": null,
+            "deadline": null,
+            "registration_opens": null,
+            "summary": "Publisher event context: Event Details: Date: October 6, 2025 Time:. CTF clock times and registration window are not confirmed.",
+            "lifecycle": null,
+            "registration_state": null
+          },
+          "field_evidence": {
+            "name": {
+              "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/",
+              "quote": "LearnPossible – The Hexcore Labs PH University Challenge | The Gamified Capture the Flag (CTF) Tournament"
+            },
+            "edition": {
+              "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/",
+              "quote": "Event Details:\nDate:\nOctober 6, 2025\nTime:"
+            },
+            "summary": {
+              "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/",
+              "quote": "Event Details:\nDate:\nOctober 6, 2025\nTime:"
+            },
+            "organizer": {
+              "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/",
+              "quote": "Respectfully yours,\nThe Hexcore Labs PH Team"
+            },
+            "posted_at": {
+              "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/",
+              "quote": "Publisher publication metadata: 2025-09-02T02:17:55+00:00"
+            }
+          },
+          "publisher": {
+            "id": "up-manila",
+            "name": "UP Manila · Competition invitations",
+            "role": "resharer",
+            "url": "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag"
+          },
+          "official": false,
+          "relationship": "reshare",
+          "scope_evidence": {
+            "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/",
+            "quote": "Venue:\nAsian Institute of Management, Makati City"
+          },
+          "discovery_path": [
+            "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag",
+            "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+          ],
+          "related_links": [
+            {
+              "url": "https://www.upm.edu.ph/wp-content/uploads/2025/09/5555_1756429668_EXPERTSPRIME_HEXCORE_UNIVERSITY_INVITATION_V1_UP.pdf",
+              "label": "Download",
+              "access": "linked_only",
+              "discovered_on": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+            }
+          ]
+        }
+      ],
+      "decisions": [
+        {
+          "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/",
+          "title": "LearnPossible – The Hexcore Labs PH University Challenge",
+          "accepted": true,
+          "stage": "feed_body",
+          "reason": "Identified CTF announcement"
+        }
+      ],
+      "warnings": [],
+      "message": "Public RSS/Atom feed scanned; 1 new or retained article URLs rechecked.",
+      "finished_at": "2026-11-21T16:41:50.232809+00:00"
+    },
+    {
+      "source_id": "htb-meetup-ph",
+      "index_id": "htb-meetup-ph",
+      "name": "Hack The Box Meetup Manila · Community feed",
+      "adapter": "rss",
+      "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/rss/",
+      "started_at": "2026-11-21T16:41:50.235116+00:00",
+      "status": "ok",
+      "discovered": 1,
+      "announcement_count": 1,
+      "announcements": [
+        {
+          "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/317031526/",
+          "title": "Hack The Box Meetup #11",
+          "posted_at": "2026-10-18T06:45:09+00:00",
+          "access": "full",
+          "kind": "announcement",
+          "external_id": null,
+          "evidence": "Happening on November 4, 2026, at Quezon City University, the event will feature interactive cybersecurity talks, demonstrations, and activities, alongside a hands-on Capture the Flag (CTF) competition. As the 10th HTB Meetup hosted by the community, the event aims to promote cyb",
+          "identity": {
+            "organizer_key": "aws-student-builder-group-qcu-and-jpcs-qcu",
+            "series": "Hack The Box Meetup #11 · CTF",
+            "edition": "2026",
+            "region": "Unspecified",
+            "stage": "main"
+          },
+          "facts": {
+            "name": "Hack The Box Meetup #11 · CTF 2026",
+            "organizer": "AWS Student Builder Group – QCU and JPCS – QCU",
+            "region": "Unspecified",
+            "format": "unknown",
+            "eligibility": "Only currently enrolled students of the Quezon City University are allowed to attend",
+            "registration_url": null,
+            "start": null,
+            "end": null,
+            "deadline": null,
+            "registration_opens": null,
+            "summary": "Publisher event context: Happening on November 4, 2026. CTF clock times and registration window are not confirmed.",
+            "lifecycle": null,
+            "registration_state": null
+          },
+          "field_evidence": {
+            "name": {
+              "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/317031526/",
+              "quote": "Hack The Box Meetup #11 | Happening on November 4, 2026, at Quezon City University, the event will feature interactive cybersecurity talks, demonstrations, and activities, alongside a hands-on Capture the Flag (CTF) competition. As the 10th HTB Meetup hosted by the community, the event aims to promote cybersecurity awareness, strengthen practical security skills, and bring students together to explore ethical hacking and cybersecurity through collaborative learning and real-world challenges."
+            },
+            "edition": {
+              "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/317031526/",
+              "quote": "Happening on November 4, 2026"
+            },
+            "summary": {
+              "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/317031526/",
+              "quote": "Happening on November 4, 2026"
+            },
+            "eligibility": {
+              "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/317031526/",
+              "quote": "Only currently enrolled students of the* Quezon City University *are allowed to attend"
+            },
+            "organizer": {
+              "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/317031526/",
+              "quote": "organized by the AWS Student Builder Group – QCU and JPCS – QCU in celebration of National Cybersecurity Awareness Mo"
+            },
+            "posted_at": {
+              "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/317031526/",
+              "quote": "Publisher publication metadata: 2026-10-18T06:45:09+00:00"
+            }
+          },
+          "publisher": {
+            "id": "htb-meetup-ph",
+            "name": "Hack The Box Meetup Manila · Community feed",
+            "role": "both",
+            "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/rss/"
+          },
+          "official": false,
+          "relationship": "reshare",
+          "scope_evidence": {
+            "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/317031526/",
+            "quote": "at Quezon City University, the event will feature interactive cybersecurit"
+          },
+          "discovery_path": [
+            "https://www.meetup.com/hack-the-box-meetup-ph/events/rss/",
+            "https://www.meetup.com/hack-the-box-meetup-ph/events/317031526/"
+          ],
+          "related_links": []
+        }
+      ],
+      "decisions": [
+        {
+          "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/317031526/",
+          "title": "Hack The Box Meetup #11",
+          "accepted": true,
+          "stage": "feed_body",
+          "reason": "Identified CTF announcement"
+        }
+      ],
+      "warnings": [],
+      "message": "Public RSS/Atom feed scanned; 0 new or retained article URLs rechecked.",
+      "finished_at": "2026-11-21T16:41:50.926113+00:00"
+    },
+    {
+      "source_id": "aws-mindanao",
+      "index_id": "aws-mindanao",
+      "name": "AWS student communities · Mindanao",
+      "adapter": "html",
+      "url": "https://awsscd-mindanao.org/",
+      "started_at": "2026-11-21T16:41:50.932002+00:00",
+      "status": "ok",
+      "discovered": 1,
+      "announcement_count": 1,
+      "announcements": [
+        {
+          "url": "https://awsscd-mindanao.org/",
+          "title": "AWS Student Community Day Mindanao 2026 · CTF",
+          "posted_at": null,
+          "access": "full",
+          "kind": "announcement",
+          "external_id": null,
+          "evidence": "Capture The Flag",
+          "identity": {
+            "organizer_key": "aws-sbg-mindanao",
+            "series": "AWS Student Community Day Mindanao · CTF",
+            "edition": "2026",
+            "region": "Region XI — Davao",
+            "stage": "main"
+          },
+          "facts": {
+            "name": "AWS Student Community Day Mindanao · CTF 2026",
+            "organizer": "AWS Student Builder Group UP Mindanao and AWS Student Builder Group Apex Ateneo de Davao",
+            "region": "Region XI — Davao",
+            "format": "unknown",
+            "eligibility": null,
+            "registration_url": null,
+            "start": null,
+            "end": null,
+            "deadline": null,
+            "registration_opens": null,
+            "summary": null,
+            "lifecycle": null,
+            "registration_state": null
+          },
+          "field_evidence": {
+            "name": {
+              "url": "https://awsscd-mindanao.org/",
+              "quote": "AWS Student Community Day Mindanao 2026 · CTF"
+            },
+            "organizer": {
+              "url": "https://awsscd-mindanao.org/",
+              "quote": "Annual student community event in Davao, Philippines; organizing student groups named on the publisher website."
+            },
+            "region": {
+              "url": "https://awsscd-mindanao.org/",
+              "quote": "Tutorials Dojo | AWS User Group Davao"
+            }
+          },
+          "publisher": {
+            "id": "aws-mindanao",
+            "name": "AWS student communities · Mindanao",
+            "role": "organizer",
+            "url": "https://awsscd-mindanao.org/"
+          },
+          "discovery_path": [
+            "https://awsscd-mindanao.org/"
+          ],
+          "related_links": []
+        }
+      ],
+      "decisions": [
+        {
+          "url": "https://awsscd-mindanao.org/",
+          "title": "AWS Student Community Day Mindanao 2026 · CTF",
+          "accepted": true,
+          "reason": "Identified CTF announcement"
+        }
+      ],
+      "warnings": [],
+      "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded.",
+      "finished_at": "2026-11-21T16:41:52.100984+00:00"
+    },
+    {
+      "source_id": "feu-eventually",
+      "index_id": "feu-eventually",
+      "name": "FEU Tech · Eventually campus calendar",
+      "adapter": "html",
+      "url": "https://paraverse.feutech.edu.ph/eventually/discover/",
+      "started_at": "2026-11-21T16:41:52.103911+00:00",
+      "status": "ok",
+      "discovered": 30,
+      "announcement_count": 0,
+      "announcements": [],
+      "decisions": [
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/discover/",
+          "title": "Eventually",
+          "accepted": false,
+          "reason": "Archive index"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/ee-finals-review-class-in-ee0033-electrical-apparatus-and-devices-lec-1t2627-1795154669",
+          "title": "EE Finals Review Class in EE0033 ELECTRICAL APPARATUS AND DEVICES (LEC) (1T2627)",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/mps-finals-review-class-in-coe0003-engineering-mathematics-2-1t2627-1795253440",
+          "title": "MPS Finals Review Class in COE0003 ENGINEERING MATHEMATICS 2 (1T2627)",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/mps-finals-review-class-in-coe0015ged0083-physics-2-1t2627-1795253224",
+          "title": "MPS Finals Review Class in COE0015/GED0083 PHYSICS 2 (1T2627)",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/mps-finals-review-class-in-coe0013-calculus-2-1t2627-1795252979",
+          "title": "MPS Finals Review Class in COE0013 CALCULUS 2 (1T2627)",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/mps-finals-review-class-in-coe0001-engineering-mathematics-1-1t2627-1795252653",
+          "title": "MPS Finals Review Class in COE0001 Engineering Mathematics 1 (1T2627)",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/fit-games-2026-finals-1795183553",
+          "title": "FIT Games 2026: Finals",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/cpe-midterm-review-class-in-cpe0029-microprocessor-1t2627-1795173706",
+          "title": "CPE Midterm Review Class in CPE0029 MICROPROCESSOR (1T2627)",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/information-session-on-research-best-practices--1795158263",
+          "title": "Information Session on Research Best Practices ",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/artist-spotlight-1795157103",
+          "title": "Artist Spotlight",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/ee-finals-review-class-in-ee0031-electrical-machines-1-lec-1t2627-1795155263",
+          "title": "EE Finals Review Class in EE0031 ELECTRICAL MACHINES 1 (LEC) (1T2627)",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/ee-finals-review-class-in-ee0051-power-system-analysis-lec-1t2627-1795155099",
+          "title": "EE Finals Review Class in EE0051 POWER SYSTEM ANALYSIS (LEC) (1T2627)",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/psych-finals-review-class-in-psy1201-developmental-psychology-1t2627-1795139022",
+          "title": "PSYCH Finals Review Class in PSY1201 DEVELOPMENTAL PSYCHOLOGY (1T2627)",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/cpe-midterm-review-class-in-cpe0013-numerical-methods-for-cpe-1t2627-1794809586",
+          "title": "CPE Finals Review Class in CPE0013 NUMERICAL METHODS FOR CPE (1T2627)",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/ge-finals-review-class-in-ged0083-college-physics-2-lecture-1t2627-1795138482",
+          "title": "GE Finals Review Class in GED0083 COLLEGE PHYSICS 2 LECTURE (1T2627)",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/institutional-first-wednesday-mass-1777246894",
+          "title": "[INSTITUTIONAL] First Wednesday Mass",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/stem-team-assessment-amp-reviewer-system-stars-1789022669",
+          "title": "STEM Team Assessment & Reviewer System (STARS)",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/scc--train-atam-ay-26-27-1790402846",
+          "title": "SCC- TRAIN ATAM A.Y. 26-27",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/fit-games-2026-final-four-1794572569",
+          "title": "FIT Games 2026: Final Four",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/the-institution-of-engineers-malaysia-managing-mega-projects-1725591733",
+          "title": "Managing Mega Projects",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/storytelling-in-visual-arts-of-an-icon-a-dialogue-with-armand-serrano-1725937066",
+          "title": "Storytelling in Visual Arts of an Icon: A Dialogue with Armand Serrano",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/tech-talks-the-public-cloud-1726042530",
+          "title": "Tech Talks: The Public Cloud",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/career-development-activity-gabay-series-level-1-charting-your-career-path-batch-2-ay2627-1792215423",
+          "title": "Career Development Activity: G.A.B.A.Y. Series Level 1: Charting Your Career Path BATCH 2 AY2627",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/aits-assist-1st-term-midterm-and-final-tutorials-1792163288",
+          "title": "AITS ASSIST: 1st Term Final Review",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/multimedia-seminar-x-vibe4her-1795053272",
+          "title": "MULTIMEDIA SEMINAR X VIBE4HER",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/ge-finals-review-class-in-ged0081-college-physics-1-1t2627-1795138370",
+          "title": "GE Finals Review Class in GED0081 COLLEGE PHYSICS 1 (1T2627)",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/it-midterm-review-class-in-ccs0023-object-oriented-programming-1t2627-1794808319",
+          "title": "IT Finals Review Class in CCS0023 Object-oriented Programming (1T2627)",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/all-rise--1726123151",
+          "title": "ALL R.I.S.E: Recognizing Individual Self Efficacy",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/unlocking-potential-the-art-of-self-management-1726119779",
+          "title": "Unlocking Potential: The Art of Self-management (Elite Scholars Edition)",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        },
+        {
+          "url": "https://paraverse.feutech.edu.ph/eventually/event/cope-charting-oneself-towards-personal-empowerment--1726624257",
+          "title": "COPE: Charting Oneself towards Personal Empowerment ",
+          "accepted": false,
+          "reason": "Body/title does not establish an in-scope competition and edition"
+        }
+      ],
+      "warnings": [
+        "Page budget reached; additional links deferred"
+      ],
+      "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded.",
+      "finished_at": "2026-11-21T16:42:10.294318+00:00"
+    },
+    {
+      "source_id": "crest-asia",
+      "index_id": "crest-asia",
+      "name": "CREST · Philippine partner announcements",
+      "adapter": "html",
+      "url": "https://www.crest-approved.org/events/category/asia-events/list/",
+      "status": "cancelled",
+      "reason": "Investigation stopped at parent request before adapter returned. Original configuration followed unrelated Asia event links under a verified 10-second crawl delay. No successful collection or zero-result conclusion is claimed.",
+      "robots_url": "https://www.crest-approved.org/robots.txt",
+      "robots_wildcard_crawl_delay_seconds": 10,
+      "discovered": null,
+      "announcement_count": null,
+      "announcements": [],
+      "decisions": [],
+      "warnings": [
+        "Partial internal results were not exposed before interruption."
+      ],
+      "finished_at": "2026-11-21T16:44:53.807167+00:00"
+    }
+  ],
+  "finished_at": "2026-11-21T16:44:53.807167+00:00",
+  "implementation_note": "This probe imported the pre-fix traversal code. FEU followed recommended links to its 30-page budget; later code limits index-only monitors to links from index pages. CREST configured links were narrowed after this interrupted probe. Final normal-run reports supersede these diagnostics."
+}

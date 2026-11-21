@@ -1,0 +1,244 @@
+{
+  "evaluated_at": "2026-11-22 Asia/Manila",
+  "method": "Generic web searches and backend.network.Client.public_page with robots checks, no cookies, Facebook fetching, paid API, or Tavily requests by this researcher. Historical examples are research evidence, not runtime seeds.",
+  "queries": [
+    "site:upm.edu.ph \"capture the flag\"",
+    "Philippines university \"capture the flag\" \"register\" announcement",
+    "Philippines cybersecurity community CTF \"registration\" -\"HackForGov\" -\"ROOTCON\"",
+    "site:meetup.com Philippines \"capture the flag\"",
+    "VEKTR cybersecurity Philippines community website",
+    "\"VEKTR Security\" website"
+  ],
+  "qualified": [
+    {
+      "publisher": "University of the Philippines Manila",
+      "role": "resharer",
+      "coverage": [
+        "NCR",
+        "national university invitations"
+      ],
+      "recurring_url": "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag",
+      "adapter": "rss",
+      "allowed_hosts": [
+        "www.upm.edu.ph"
+      ],
+      "readable_live": true,
+      "items_returned": 1,
+      "response_bytes": 6455,
+      "alternative_recurring_url": "https://www.upm.edu.ph/?s=capture+the+flag&post_type=cpt_announcements",
+      "article_selector": ".a-descriptions",
+      "title_selector": ".featured-a-content h3.text-black",
+      "rss_body_field": "content:encoded contains complete body; description is an excerpt",
+      "example": {
+        "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/",
+        "title": "LearnPossible – The Hexcore Labs PH University Challenge",
+        "published_at": "2025-09-02T02:17:55+00:00",
+        "modified_at": "2025-09-04T01:39:29+00:00",
+        "kind": "advance invitation",
+        "competition_date": "2025-10-06",
+        "time_text": "9:00 AM – 6:00 PM",
+        "timezone": null,
+        "organizer": "Hexcore Labs PH (invitation signed by its team; linked PDF names Experts Academy and Asian Institute of Management as cooperating partners)",
+        "publisher_is_not_organizer": true,
+        "eligibility_evidence": "Invitation addresses university students nationwide. Full constraints are not established by the HTML body.",
+        "registration_window": null,
+        "original_facebook_post": null,
+        "additional_evidence_url": "https://www.upm.edu.ph/wp-content/uploads/2025/09/5555_1756429668_EXPERTSPRIME_HEXCORE_UNIVERSITY_INVITATION_V1_UP.pdf"
+      },
+      "discovery_path": [
+        "Generic archive search capture the flag",
+        "RSS item permalink",
+        "Article body; link to invitation PDF"
+      ],
+      "pitfalls": [
+        "Title contains neither CTF nor year.",
+        "Body includes earlier workshop dates; competition date is specifically under Event Details.",
+        "Do not assign UP Manila as organizer.",
+        "Date-only or unzoned times require preserved original wording.",
+        "RSS search s=CTF also works but returns irrelevant substring matches."
+      ]
+    },
+    {
+      "publisher": "Hack The Box Meetup: Manila, PH",
+      "role": "both",
+      "coverage": [
+        "NCR",
+        "Philippine cybersecurity community"
+      ],
+      "recurring_url": "https://www.meetup.com/hack-the-box-meetup-ph/events/rss/",
+      "adapter": "rss",
+      "allowed_hosts": [
+        "www.meetup.com"
+      ],
+      "readable_live": true,
+      "items_returned": 1,
+      "response_bytes": 1871,
+      "example": {
+        "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/317031526/",
+        "title": "Hack The Box Meetup #11",
+        "published_at": "2026-10-18T06:45:09+00:00",
+        "kind": "advance announcement / community reshare",
+        "event_identity_in_body": "CyberSecureU 2026: Break. Defend. Secure.",
+        "organizer": "AWS Student Builder Group – QCU and JPCS – QCU",
+        "eligibility": "Currently enrolled Quezon City University students only",
+        "body_date": "2026-11-04",
+        "calendar_date": "2026-11-18",
+        "calendar_time_text": "1:00 PM to 4:00 PM PHT",
+        "registration_deadline": null,
+        "original_facebook_post": null
+      },
+      "discovery_path": [
+        "Generic Philippine CTF registration web query",
+        "https://brouky.tech/events/country/philippines",
+        "https://brouky.tech/events/hack-the-box-meetup-11-2026-11-18",
+        "Meetup organizer link",
+        "Recurring Meetup RSS"
+      ],
+      "pitfalls": [
+        "RSS title does not contain CTF or year; body names actual CTF competition.",
+        "RSS body and current event calendar conflict on date; preserve conflict, do not silently choose.",
+        "May match event from AWS QCU feed; merge by supported event identity rather than publisher name.",
+        "No registration deadline available, and historical first-seen cannot prove timely discovery."
+      ]
+    }
+  ],
+  "candidates_and_rechecks": [
+    {
+      "publisher": "FEU Tech / Eventually",
+      "role": "both",
+      "coverage": [
+        "NCR",
+        "FEU campuses"
+      ],
+      "recurring_url": "https://paraverse.feutech.edu.ph/eventually/discover/",
+      "live_read": "HTTP200, current calendar yields event links; tag pages return only JavaScript loading shells",
+      "example_url": "https://paraverse.feutech.edu.ph/eventually/event/cyberxplore-xplore-xecute-xcel-1761732412",
+      "advance_evidence": "Article invites students to actual Capture the Flag competition, now explicitly cancelled.",
+      "note": "Regional source researcher owns final verification/configuration; generic ?search parameter did not filter. /discover/tag/CTF and /discover/tag/Capture-The-Flag readable but no server-rendered event links."
+    },
+    {
+      "publisher": "VEKTR Security",
+      "role": "sponsor / resharer",
+      "coverage": [
+        "Philippine cybersecurity community"
+      ],
+      "recurring_url": "https://vektrsec.com/",
+      "live_read": "HTTP200, 27030 bytes",
+      "qualification": "candidate only",
+      "blocker": "Public website is a services site with no CTF, news, blog, event, or feed links. Advance sponsorship was visible only through indexed LinkedIn; no permitted recurring announcement endpoint established.",
+      "note": "VEKTOR at vektor.ph is a different company and must not be conflated."
+    },
+    {
+      "publisher": "HackTheNorth.ph",
+      "role": "organizer",
+      "coverage": [
+        "Northern Luzon"
+      ],
+      "recurring_url": "https://hackthenorth.ph/",
+      "live_read": "HTTP200, public homepage with blog links",
+      "qualification": "existing working source; advance competition edition not established in this probe",
+      "blocker": "Generic TCON Capture the Flag series description confirms activity but does not identify an edition, date, or registration invitation; current conference registration page cannot supply dates for an unconfirmed CTF."
+    },
+    {
+      "publisher": "UP ACM",
+      "role": "organizer",
+      "coverage": [
+        "NCR",
+        "university competitions"
+      ],
+      "recurring_url": "https://upacm.net/events/",
+      "live_read": "HTTP200, 132671 bytes",
+      "qualification": "existing working source; advance invitation not established",
+      "blocker": "Haxxor 2017–2019 labels appear in carousel content, but no individual announcement anchors or actual CTF invitation text were available. Guessed /events/haxxor/ returned404."
+    },
+    {
+      "publisher": "Sophie’s Information Technology / HKNL",
+      "role": "organizer",
+      "coverage": [
+        "CALABARZON",
+        "Lipa City"
+      ],
+      "recurring_url": "https://hknl.sitesphil.com/",
+      "live_read": "Homepage HTTP200383737 bytes; /feed/ HTTP2001122 bytes, zero items; 2025 archive also readable",
+      "qualification": "candidate only",
+      "blocker": "Advance CTF invitation appears in indexed LinkedIn, but readable homepage and 2025 archive contain no CTF text. Public conference date/registration cannot establish a CTF."
+    },
+    {
+      "publisher": "Philippine Information Agency",
+      "role": "resharer",
+      "coverage": [
+        "nationwide"
+      ],
+      "recurring_url": "https://pia.gov.ph/?s=capture+the+flag",
+      "live_read": "Cannot verify robots.txt: HTTP403",
+      "qualification": "candidate only",
+      "example_url": "https://pia.gov.ph/news/dict-calls-for-participants-in-hackforgov-cybersecurity-skills-bout/",
+      "advance_evidence": "Indexed April14,2025 invitation reports registration April2–25 for CALABARZON regional HackForGov.",
+      "blocker": "Backend public-page access blocked at robots check; search visibility is not reliable recurring feed access."
+    },
+    {
+      "publisher": "CREST",
+      "role": "sponsor / resharer",
+      "coverage": [
+        "Asia",
+        "selected Philippine competitions"
+      ],
+      "recurring_url": "https://www.crest-approved.org/events/category/asia-events/",
+      "live_read": "HTTP200264212 bytes; no currently linked ROOTCON event in this snapshot",
+      "qualification": "root agent owns final configuration/research",
+      "notes": [
+        "Generic /?s=ctf and /?s=capture+the+flag return European challenge article, not ROOTCON.",
+        "/feed/?s=CTF&post_type=any returns2 items, Asia2024 highlights and European2024 challenge.",
+        "/feed/?s=capture+the+flag&post_type=tribe_events returns0 items."
+      ]
+    },
+    {
+      "publisher": "Brouky Philippines calendar",
+      "role": "aggregator / resharer",
+      "coverage": [
+        "Philippines"
+      ],
+      "recurring_url": "https://brouky.tech/events/country/philippines",
+      "live_read": "HTTP200268875 bytes",
+      "qualification": "useful research bridge, not independently established Philippine publisher",
+      "result": "Linked HTB Manila actual CTF, enabling discovery of organizer-owned recurring RSS.",
+      "pitfall": "Calendar date Nov18 conflicts with event body Nov4. Follow organizer evidence."
+    },
+    {
+      "publisher": "JISSA TIP Quezon City student website",
+      "role": "organizer",
+      "coverage": [
+        "NCR"
+      ],
+      "recurring_url": "https://jissaweb.github.io/",
+      "live_read": "HTTP200480bytes, JavaScript application shell only",
+      "qualification": "candidate only",
+      "advance_evidence": "Generic publisher search indexes Hack the Beat CTF invitation language forFebruary15,2025, but no publication timestamp confirmed.",
+      "blocker": "Current HTML gives noannouncementlinks/body; staticJSdataendpointnotestablished, no new adapter justified in this pilot."
+    },
+    {
+      "publisher": "WorkFlow PH",
+      "role": "both",
+      "coverage": [
+        "NCR",
+        "online"
+      ],
+      "recurring_url": "https://workflowph.org/showcase",
+      "live_read": "Homepage HTTP200119250bytes, current showcase links publicly readable",
+      "qualification": "candidate only",
+      "blocker": "Known CTF co-organizing evidence exists onLuma, but website currentshowcase publishes23mostlynonCTFevents throughAugust2026; noCTFadvanceannouncementdetected or reliableLumaorganizerfeedestablished."
+    }
+  ],
+  "evaluation_only_research": {
+    "acceptance_competition": "RAIJIN CTF 2026",
+    "generic_query": "Philippines \"CTF\" \"register\" community website event -site:facebook.com -site:instagram.com",
+    "research_search_result_url": "https://ph.linkedin.com/in/c-revillosa/tl",
+    "observed_by": "Root agent live web-search investigation; this researcher independently saw same indexed profile from generic VEKTR publisher search, but full-page open returned429.",
+    "research_result": "Root reported indexed sponsor/community reshare identifying the acceptance competition. This is research search evidence, not an existing daily collector result.",
+    "daily_provider_diagnostic": "docs/source-index-search-probe.json records same generic query against free keyless Tavily: HTTP429 with Retry-After297seconds at2026-11-21T16:35:41.795471+00:00. Failed request, notsuccessfulzeromatches.",
+    "exact_original_facebook_post": "Not established by this researcher; no original post link obtained from the recurring website.",
+    "publisher_website": "https://vektrsec.com/",
+    "publisher_website_result": "Readable services website, no recurring announcement feed or archive found. Candidate only.",
+    "separation": "No acceptance event title, author, event dates, Facebook IDs, sample URLs, registration shortlink, or caption wording used in discovery queries, production configuration, or fixtures."
+  }
+}

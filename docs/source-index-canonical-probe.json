@@ -1,0 +1,72 @@
+{
+  "observed_at": "2026-11-21T16:50:18.255714+00:00",
+  "method": "Research-only robots-aware public article request with backend.network.Client, requests response hook and BeautifulSoup metadata extraction. Response HTML was held in memory only. No search API, runtime seed, production database or service changes.",
+  "requested_url": "https://www.crest-approved.org/event/rootcon-20-philippines-2026",
+  "responses": [
+    {
+      "url": "https://www.crest-approved.org/robots.txt",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://www.crest-approved.org/event/rootcon-20-philippines-2026",
+      "status": 301,
+      "location": "https://www.crest-approved.org/event/rootcon-20-philippines-2026/"
+    },
+    {
+      "url": "https://www.crest-approved.org/event/rootcon-20-philippines-2026/",
+      "status": 200,
+      "location": null
+    }
+  ],
+  "canonical_url": "https://www.crest-approved.org/event/rootcon-20-philippines-2026/",
+  "robots_url": "https://www.crest-approved.org/robots.txt",
+  "crawl_delay_seconds": 10,
+  "publication_metadata": [
+    {
+      "key": "article:modified_time",
+      "content": "2026-06-19T13:46:53+00:00"
+    }
+  ],
+  "structured_metadata": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.crest-approved.org/event/rootcon-20-philippines-2026/",
+      "url": "https://www.crest-approved.org/event/rootcon-20-philippines-2026/",
+      "name": "ROOTCON 20 Philippines 2026 | CREST CTF Prize Sponsor & CPSA Certification Prize",
+      "datePublished": "2026-06-19T13:45:09+00:00",
+      "dateModified": "2026-06-19T13:46:53+00:00"
+    },
+    {
+      "@type": "Event",
+      "name": "ROOTCON 20 Philippines 2026",
+      "url": "https://www.crest-approved.org/event/rootcon-20-philippines-2026/",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "startDate": "2026-09-23T00:00:00+01:00",
+      "endDate": "2026-09-25T23:59:59+01:00",
+      "@id": "https://www.crest-approved.org/event/rootcon-20-philippines-2026/#event"
+    }
+  ],
+  "advertised_api_links": [
+    {
+      "rel": [
+        "alternate"
+      ],
+      "href": "https://www.crest-approved.org/wp-json/wp/v2/tribe_events/9967"
+    },
+    {
+      "rel": [
+        "alternate"
+      ],
+      "href": "https://www.crest-approved.org/wp-json/tribe/events/v1/events/9967"
+    }
+  ],
+  "scope": "Historical example and URL-alias proof only; this individual URL is not a collector input.",
+  "conclusions": {
+    "url_alias_verified": "The no-slash article URL returned HTTP 301 to the slash URL. The slash response was HTTP 200 and its HTML rel=canonical agreed. These two URL forms identify one announcement.",
+    "advance_publication_supported": "Publisher WebPage JSON-LD reports publication on 2026-06-19 and last modification on 2026-06-19, before the September 23\u201325, 2026 conference calendar dates. Combined with the article's CTF prize-sponsorship/invitation text retained in the normal collection evidence, this supports advance-announcement source qualification.",
+    "timely_collection_not_established": "This is a historical backfill observed on 2026-11-21. Publication before the event does not prove the collector found it while registration was available.",
+    "event_dates_caution": "The Event JSON-LD describes the conference and contains all-day boundaries 00:00:00 / 23:59:59 with +01:00. Do not treat these as confirmed CTF start/end clock times or Philippine timezone. Registration availability is not established by these fields.",
+    "api_endpoints": "Links were advertised by the HTML; endpoints were not requested. JSON-LD was sufficient so no additional request was made."
+  }
+}

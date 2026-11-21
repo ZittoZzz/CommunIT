@@ -1,0 +1,136 @@
+{
+  "researched_on": "2026-11-22",
+  "timezone": "Asia/Manila",
+  "purpose": "Publisher qualification research only. Historical example URLs are not collector seeds and this document is not runtime configuration.",
+  "method": "Generic web searches followed by identified, robots-aware public reads using backend.network.Client.public_page. No Tavily requests, social credentials, cookies or paid API used by this research agent.",
+  "query_themes_normalized": [
+    "Philippines Visayas cybersecurity capture the flag registration university",
+    "Mindanao capture the flag registration competition university",
+    "Visayas capture the flag register",
+    "Mindanao CTF registration",
+    "Cebu cybersecurity CTF competition register",
+    "Philippines CTF community upcoming competition blog registration",
+    "Philippines capture the flag invitation",
+    "Cebu capture the flag meetup",
+    "Iloilo CTF registration"
+  ],
+  "selected_exact_discovery_queries": [
+    "Philippines Visayas cybersecurity \"capture the flag\" registration university",
+    "Mindanao \"capture the flag\" registration competition university",
+    "Mindanao CTF \"registration\" -site:facebook.com -site:globgov.com -site:glunis.com",
+    "site:paraverse.feutech.edu.ph/eventually/ \"Capture the Flag\"",
+    "\"Cebu\" \"Capture the Flag\" meetup",
+    "\"Iloilo\" \"CTF\" competition register",
+    "\"Quantum\" \"Capture the Flag\" \"Philippines\" registration"
+  ],
+  "publishers": [
+    {
+      "name": "AWS Student Builder Group UP Mindanao / AWS SBG Apex Ateneo de Davao",
+      "role": "organizer",
+      "coverage": ["Mindanao", "Davao Region"],
+      "recurring_url": "https://awsscd-mindanao.org/",
+      "suggested_adapter": "html_homepage with explicit include_self and full page CTF identity detection",
+      "live_access": {"status": "ok", "bytes": 345910, "robots": "permitted by existing client"},
+      "selectors": {"body": "main", "title": "title", "ctf_track": "article.schedule-item h3"},
+      "qualification": "The annual conference publisher root has no edition in its URL, includes a prior-year gallery, and currently advertises a Capture The Flag track before November 28, 2026. A historical organizer teaser and organizer-authored recap establish that its prior CTF was an actual competition. This monitors an identified recurring publisher; it does not discover an unknown organizer.",
+      "advance_evidence": [
+        {"url": "https://awsscd-mindanao.org/", "access": "live backend read", "summary": "Current conference page lists a distinct Capture The Flag schedule track and conference ticket CTA. The page is read before its stated November 28, 2026 conference date.", "posted_at": null},
+        {"url": "https://ph.linkedin.com/company/awssbg-upmin", "access": "indexed organizer text only", "summary": "Prior 2025 teaser describes the AWS CTF booth and asks readers to follow for registration opening; another organizer post describes CTF competitions. No exact post publication timestamp independently established."},
+        {"url": "https://builder.aws.com/content/31yj3GtlcDPWCT8UyJwtz9EJmsn/aws-student-community-day-davao-2025-bloom-in-the-cloud", "access": "indexed organizer-authored recap", "summary": "Recap identifies the prior event's cloud CTF as a competitive track operated by the club Security Department."}
+      ],
+      "current_facts": {"conference_date": "2026-11-28", "ctf_clock_text": "12:45 PM - 03:15 PM", "ctf_timezone_confirmed": false, "conference_registration_url": "https://forms.gle/G1MnG7pjCiSUCbAz5", "ctf_registration_url": null, "ctf_registration_status": "unknown", "ctf_eligibility": "unknown"},
+      "limitations": "The ticket form is for the conference, not confirmed separate CTF registration. Conference eligibility must not automatically become CTF eligibility. Search index retained an older schedule mentioning CTF Tournament Awarding; current backend page has Capture The Flag track. Prefer live page facts and retain ambiguity."
+    },
+    {
+      "name": "FEU Educational Innovation and Technology Hub — Eventually",
+      "role": "resharer/calendar publisher for school clubs",
+      "coverage": ["Luzon", "National Capital Region", "FEU campuses"],
+      "recurring_url": "https://paraverse.feutech.edu.ph/eventually/discover/",
+      "suggested_adapter": "html_index reading relevant event bodies even when titles omit CTF",
+      "live_access": {"status": "ok", "bytes": 68128, "unique_event_links": 11, "ctf_announcements_in_current_index": 0, "robots": "permitted by existing client"},
+      "selectors": {"index_links": "a[href*='/eventually/event/']", "title": "meta[property='og:title']", "body": "#event-info", "organizer": "#event-organizer h3", "status": "h5.alert-heading"},
+      "advance_evidence": [
+        {"url": "https://paraverse.feutech.edu.ph/eventually/event/cyberxplore-xplore-xecute-xcel-1760501867", "access": "live backend read", "summary": "Invitation-style school event listing explicitly describes competitions including Capture the Flag. It identifies the AITS club as organizer, FEU Tech-only and student-only restrictions. Publication timestamp is not established.", "posted_at": null},
+        {"url": "https://paraverse.feutech.edu.ph/eventually/event/cyberxplore-xplore-xecute-xcel-1761732412", "access": "live backend read", "summary": "A differently dated rendition explicitly says Event Cancelled. Must preserve cancellation and avoid treating the program's overall date range as a precise CTF interval."}
+      ],
+      "limitations": "The /discover/status/published and AITS organizer URLs returned JavaScript shells without event links despite richer search-index text. Current /discover page works but only exposes its recent cards. First h1 is the website title Eventually, so prefer og:title. Whole main includes recommended unrelated events; use #event-info for identity. The rendition ending 1760705638 is explicitly a draft and should not be published."
+    },
+    {
+      "name": "UMSDC — University of Mindanao Student Developer Community",
+      "role": "organizer",
+      "coverage": ["Mindanao", "Davao Region", "University of Mindanao"],
+      "recurring_url": "https://luma.com/user/usr-8iOKid6iGmryO2o",
+      "suggested_adapter": null,
+      "live_access": {"status": "readable_profile_without_events", "bytes": 37374, "event_links": 0, "robots": "permitted by existing client"},
+      "advance_evidence": [{"url": "https://luma.com/rqk7jyvp", "access": "public organizer event page read via web tool", "summary": "Hackathon - CrackTheCode page invites teams of four to a Jeopardy CTF, requires UMindanao email and states top scorers can represent the school. Currently Past Event; no first-seen-before-registration evidence."}],
+      "qualification": "candidate only",
+      "blocker": "A real advance-style registration page exists, but the recurring host profile returns no public event URLs in HTML. No supported credential-free recurring feed was verified. Individual event URL must not be seeded."
+    },
+    {
+      "name": "OWASP Cebu",
+      "role": "organizer",
+      "coverage": ["Visayas", "Central Visayas", "Cebu"],
+      "recurring_url": "https://www.owasp-cebu.org/ctfs",
+      "suggested_adapter": null,
+      "live_access": {"status": "login_required", "bytes": 11408, "page_title": "Login | OWASP Cebu", "robots": "permitted but competition index requires login"},
+      "evidence_urls": ["https://www.owasp-cebu.org/", "https://github.com/OWASP/www-chapter-cebu/blob/main/index.md", "https://medium.owasp-cebu.org/"],
+      "qualification": "candidate only",
+      "blocker": "Own CTF index redirects to login. Homepage and OWASP-maintained repository establish a CTF series but no public advance invitation plus functioning announcement feed was verified. Legacy OWASP chapter route hit a second redirect unsupported by current client. Medium feed robots verification initially redirected outside configured host."
+    },
+    {
+      "name": "GDG on Campus University of San Carlos",
+      "role": "organizer",
+      "coverage": ["Visayas", "Central Visayas", "Cebu"],
+      "recurring_url": "https://gdg.community.dev/gdg-on-campus-university-of-san-carlos-cebu-philippines/",
+      "suggested_adapter": "html_index if future qualifying competition evidence appears",
+      "live_access": {"status": "ok", "bytes": 583255, "robots": "permitted by existing client"},
+      "example_url": "https://gdg.community.dev/events/details/google-gdg-on-campus-university-of-san-carlos-cebu-philippines-presents-game-jams-capture-the-flag/",
+      "qualification": "candidate only",
+      "blocker": "Readable recurring page and historical CTF challenge invitation, but the article explicitly calls it a beginner hands-on workshop. Competitive format, scoreboard or prizes were not established; do not count it as a competition merely to fill regional coverage."
+    },
+    {
+      "name": "Philippine Information Agency",
+      "role": "resharer",
+      "coverage": ["Nationwide", "Luzon", "Visayas", "Mindanao"],
+      "recurring_url": "https://pia.gov.ph/feed/?s=capture+the+flag",
+      "suggested_adapter": "rss if publisher access becomes permitted",
+      "live_access": {"status": "blocked", "error": "Cannot verify robots.txt: HTTP 403"},
+      "advance_evidence": [{"url": "https://pia.gov.ph/news/dict-calls-for-participants-in-hackforgov-cybersecurity-skills-bout/", "access": "web-indexed article text", "published_date": "2025-04-14", "summary": "Article announces CALABARZON registration April 2–25, 2025 and explicitly describes the CTF. DICT is organizer; PIA reports the invitation."}],
+      "qualification": "candidate only",
+      "blocker": "Both generic search archive and RSS attempts stopped at robots HTTP 403. Search-index readability is not backend accessibility."
+    },
+    {
+      "name": "Quantum Computing Society of the Philippines",
+      "role": "both organizer and community publisher",
+      "coverage": ["Nationwide", "Luzon", "Visayas", "Mindanao"],
+      "recurring_url": "https://www.qcsp.ph/news.html",
+      "additional_recurring_urls": ["https://www.qcsp.ph/events.html", "https://www.qcsp.ph/feed.xml"],
+      "suggested_adapter": "html_index if qualifying advance CTF evidence is established",
+      "live_access": {"status": "ok", "news_bytes": 416692, "events_bytes": 367943, "feed_bytes": 255098, "robots": "permitted by existing client"},
+      "advance_evidence": [{"url": "https://www.qcsp.ph/news/2026-10-03-riex-2026-neust/", "published_date_text": "Oct 02, 2026", "access": "public full article read", "summary": "Advance RIEx conference invitation includes a quantum/cybersecurity hackathon but does not itself identify a CTF. Conference author-registration deadline must not be applied to CTF entrants."}],
+      "ctf_recap_urls": ["https://www.qcsp.ph/news/2026-11-19-riex-quantum-cybersecurity-hackathon-neust/", "https://www.qcsp.ph/news/2026-06-13-upv-quantum-cybersecurity-hackathon/", "https://www.qcsp.ph/news/2026-06-27-addu-quantum-cybersecurity-hackathon/"],
+      "qualification": "candidate: advance hackathon invitation plus later CTF confirmation, but advance text omits CTF",
+      "limitations": "The default feed contains technical blog posts and is not confirmed to include the separate news collection. News archive is fully readable. Current useful CTF articles are recaps. This publisher could improve historical coverage, but no advance CTF recognition path was verified in the existing parser."
+    },
+    {
+      "name": "Philippine Information Technology Organization",
+      "role": "resharer",
+      "coverage": ["Nationwide", "Luzon", "National Capital Region"],
+      "recurring_url": "https://phil-it.org.ph/feed/?s=capture+the+flag",
+      "suggested_adapter": "rss if publisher TLS and access are repaired",
+      "live_access": {"status": "blocked", "error": "Cannot verify robots.txt: SSLError"},
+      "advance_evidence": [{"url": "https://phil-it.org.ph/ai-security-take-spotlight-decode-2025/", "published_date": "2025-09-05", "access": "web-indexed article text", "summary": "Advance article announces the September 9, 2025 DECODE conference and explicitly identifies its annual Capture the Flag activity. Trend Micro is organizer, publisher is a resharer."}],
+      "qualification": "candidate only",
+      "blocker": "Existing client fails certificate validation before robots can be verified. No TLS verification bypass attempted."
+    },
+    {
+      "name": "Naonao events community calendar",
+      "role": "resharer/calendar publisher",
+      "coverage": ["Mindanao", "Davao"],
+      "recurring_url": "https://naonao.ph/events",
+      "live_access": {"status": "ok", "bytes": 163837, "event_links": 20, "ctf_mentions": 0},
+      "qualification": "candidate only",
+      "blocker": "Readable public event calendar, but no actual CTF advance announcement established. AI hackathons must not be assumed to contain a CTF."
+    }
+  ]
+}

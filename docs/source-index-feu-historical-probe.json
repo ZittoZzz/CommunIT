@@ -1,0 +1,84 @@
+{
+  "checked_at": "2026-11-21T16:46:55.031749+00:00",
+  "purpose": "Historical example evaluation only; URL was not discovered by the current normal collector and is not a runtime seed.",
+  "url": "https://paraverse.feutech.edu.ph/eventually/event/cyberxplore-xplore-xecute-xcel-1760501867",
+  "source": {
+    "id": "feu-eventually",
+    "name": "FEU Tech · Eventually campus calendar",
+    "kind": "html",
+    "url": "https://paraverse.feutech.edu.ph/eventually/discover/",
+    "allowed_hosts": [
+      "paraverse.feutech.edu.ph"
+    ],
+    "index_only": true,
+    "body_identity": true,
+    "article_selector": "#event-info",
+    "title_from_metadata": true,
+    "organizer_selector": "#event-organizer h3",
+    "status_selector": ".alert",
+    "reject_text_pattern": "\\bstill a draft\\b|\\bEvent Draft\\b",
+    "link_pattern": "/eventually/event/",
+    "link_selector": "a[href*=\"/eventually/event/\"]",
+    "max_pages": 30,
+    "index_id": "feu-eventually",
+    "publisher_name": "FEU Tech · Eventually campus calendar",
+    "publisher_role": "resharer",
+    "coverage": [
+      "NCR",
+      "Campus competitions"
+    ],
+    "enabled": true,
+    "index_status": "active",
+    "index_reason": ""
+  },
+  "title": "CyberXplore: Xplore, Xecute, Xcel",
+  "article_links": [],
+  "extract_result": null,
+  "publication_metadata": [],
+  "times": [],
+  "timestamped_advance_publication_proven": false,
+  "scope": "Research-only direct read of a historical example; not a normal discovery run and not a runtime source seed.",
+  "pipeline_diagnosis": {
+    "ctf_mentioned_in_article": true,
+    "publisher_scope_passes": false,
+    "first_rejection": "publisher_context: #event-info omits the calendar venue needed to verify the reshared event is Philippine",
+    "additional_blockers": {
+      "contest_recognition": false,
+      "confirmed_edition_context": false
+    },
+    "reason_identity_would_also_fail": "The CTF name and competition description are separate text lines; the edition date is in a sibling metadata container."
+  },
+  "proposed_metadata_selectors": {
+    "container": "#event-single-metadata",
+    "date": "#event-single-metadata > .row > div:nth-child(1) .fw-bold",
+    "school_restriction": "#event-single-metadata > .row > div:nth-child(2) .fw-bold",
+    "venue": "#event-single-metadata > .row > div:nth-child(3) .flex-grow-1",
+    "audience_restriction": "#event-single-metadata > .row > div:nth-child(4) .fw-bold",
+    "organizer": "#event-organizer h3",
+    "status": ".alert",
+    "draft_rejection": "Unpublished draft status, before extract"
+  },
+  "confirmed_calendar_context": {
+    "program_date_start": "2025-10-27",
+    "program_date_end": "2025-10-29",
+    "ctf_specific_dates_confirmed": false,
+    "clock_time_scope": "Overall program only; do not promote to CTF clock times",
+    "venue_city": "Manila",
+    "school_restriction": "FEU Institute of Technology",
+    "audience_restriction": "Students",
+    "organizer": "FEU Tech Alliance of Information Technology Students",
+    "publisher_role": "Calendar publisher sharing the named student organization event"
+  },
+  "advance_evidence": {
+    "invitation_style": true,
+    "timestamped_advance_publication": false,
+    "reason": "No article publication metadata or time nodes were present. The URL suffix is not accepted as publication evidence."
+  },
+  "recommendation": "Keep the exact event URL in research only. Read metadata via configured selectors, preserve the parent-program date as context, and recognize the structurally associated CTF competition description. Do not count this direct read as independent discovery or a verified timely discovery.",
+  "structural_contest_evidence": {
+    "element": "#event-info li",
+    "structure": "strong element names Capture the Flag; its own list-item text describes a competition.",
+    "normalization_issue": "clean_html inserts a newline between the strong label and its following text; current CONTEST also caps the distance at 45 characters.",
+    "recommended_scope": "Use one list-item or equivalent local semantic container when recognizing a CTF competition; do not merge unrelated activity descriptions."
+  }
+}

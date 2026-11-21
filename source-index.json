@@ -1,0 +1,247 @@
+{
+  "version": 1,
+  "description": "Recurring publisher monitors. Historical examples and qualification evidence are in docs/source-index.md, never collector inputs.",
+  "publishers": [
+    {
+      "id": "up-manila",
+      "name": "UP Manila · Competition invitations",
+      "role": "resharer",
+      "coverage": [
+        "NCR",
+        "National university invitations"
+      ],
+      "enabled": true,
+      "status": "active",
+      "reason": "",
+      "monitor": {
+        "id": "up-manila",
+        "name": "UP Manila · Competition invitations",
+        "kind": "rss",
+        "url": "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag",
+        "body_identity": true,
+        "follow_articles": true,
+        "allowed_hosts": [
+          "www.upm.edu.ph"
+        ],
+        "article_selector": ".featured-a-content",
+        "title_selector": "h3.text-black",
+        "max_items": 30
+      }
+    },
+    {
+      "id": "rootcon-community",
+      "name": "ROOTCON · Official community feed",
+      "role": "organizer",
+      "coverage": [
+        "Luzon",
+        "National",
+        "Online"
+      ],
+      "enabled": true,
+      "status": "active",
+      "reason": "",
+      "source_id": "rootcon-bluesky"
+    },
+    {
+      "id": "htb-meetup-ph",
+      "name": "Hack The Box Meetup Manila · Community feed",
+      "role": "both",
+      "coverage": [
+        "NCR",
+        "Philippine cybersecurity community"
+      ],
+      "enabled": true,
+      "status": "active",
+      "reason": "",
+      "monitor": {
+        "id": "htb-meetup-ph",
+        "name": "Hack The Box Meetup Manila · Community feed",
+        "kind": "rss",
+        "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/rss/",
+        "body_identity": true,
+        "feed_text_format": "markdown",
+        "content_complete": true,
+        "allowed_hosts": [
+          "www.meetup.com"
+        ],
+        "max_items": 40
+      }
+    },
+    {
+      "id": "aws-mindanao",
+      "name": "AWS student communities · Mindanao",
+      "role": "organizer",
+      "coverage": [
+        "Mindanao",
+        "Davao"
+      ],
+      "enabled": true,
+      "status": "active",
+      "reason": "",
+      "monitor": {
+        "id": "aws-mindanao",
+        "name": "AWS student communities · Mindanao",
+        "kind": "html",
+        "url": "https://awsscd-mindanao.org/",
+        "organizer": "AWS Student Builder Group UP Mindanao and AWS Student Builder Group Apex Ateneo de Davao",
+        "organizer_key": "aws-sbg-mindanao",
+        "philippine_connection": "Annual student community event in Davao, Philippines; organizing student groups named on the publisher website.",
+        "region": "Region XI — Davao",
+        "article_selector": "main",
+        "title_from_metadata": true,
+        "ctf_component_heading": true,
+        "link_pattern": "(?!)",
+        "max_pages": 2
+      }
+    },
+    {
+      "id": "feu-eventually",
+      "name": "FEU Tech · Eventually campus calendar",
+      "role": "resharer",
+      "coverage": [
+        "NCR",
+        "Campus competitions"
+      ],
+      "enabled": false,
+      "status": "candidate",
+      "reason": "Calendar is readable, but the documented CTF invitation needs structured date/venue extraction outside its article body. Advance publication timing is also unverified. Not counted as a working CTF monitor.",
+      "monitor": {
+        "id": "feu-eventually",
+        "name": "FEU Tech · Eventually campus calendar",
+        "kind": "html",
+        "url": "https://paraverse.feutech.edu.ph/eventually/discover/",
+        "allowed_hosts": [
+          "paraverse.feutech.edu.ph"
+        ],
+        "index_only": true,
+        "body_identity": true,
+        "article_selector": "#event-info",
+        "title_from_metadata": true,
+        "organizer_selector": "#event-organizer h3",
+        "status_selector": ".alert",
+        "reject_text_pattern": "\\bstill a draft\\b|\\bEvent Draft\\b",
+        "link_pattern": "/eventually/event/",
+        "link_selector": "a[href*=\"/eventually/event/\"]",
+        "max_pages": 30
+      }
+    },
+    {
+      "id": "crest-asia",
+      "name": "CREST · Philippine partner announcements",
+      "role": "resharer",
+      "coverage": [
+        "Philippine events in an Asia partner calendar",
+        "Luzon"
+      ],
+      "enabled": true,
+      "status": "active",
+      "reason": "",
+      "monitor": {
+        "id": "crest-asia",
+        "name": "CREST · Philippine partner announcements",
+        "kind": "html",
+        "url": "https://www.crest-approved.org/events/category/asia-events/list/",
+        "index_urls": [
+          "https://www.crest-approved.org/events/category/asia-events/list/?eventDisplay=past"
+        ],
+        "allowed_hosts": [
+          "www.crest-approved.org"
+        ],
+        "index_only": true,
+        "body_identity": true,
+        "article_selector": ".tribe-events-single-event-description",
+        "title_selector": "h2",
+        "link_selector": "a[href*=\"/event/\"]",
+        "link_pattern": "/event/[^?#]*rootcon",
+        "scope_pattern": "\\bROOTCON\\s*\\d+\\b",
+        "organizer": "ROOTCON",
+        "organizer_key": "rootcon",
+        "philippine_connection": "Verified recurring sponsor relationship with Philippine organizer ROOTCON; other Asia events are not automatically Philippine events.",
+        "max_pages": 8,
+        "url_normalization": {
+          "hosts": [
+            "www.crest-approved.org",
+            "crest-approved.org"
+          ],
+          "path_prefixes": [
+            "/event/"
+          ],
+          "trailing_slash": true
+        }
+      }
+    },
+    {
+      "id": "um-sdc",
+      "name": "University of Mindanao Student Developers Community",
+      "role": "organizer",
+      "coverage": [
+        "Mindanao",
+        "Davao"
+      ],
+      "enabled": false,
+      "status": "candidate",
+      "reason": "Historical CTF invitation exists, but a reliable recurring calendar returning event links has not been verified. No event URL seeded.",
+      "monitor": {
+        "id": "um-sdc",
+        "name": "University of Mindanao Student Developers Community",
+        "kind": "html",
+        "url": "https://luma.com/user/usr-8iOKid6iGmryO2o"
+      }
+    },
+    {
+      "id": "owasp-cebu",
+      "name": "OWASP Cebu",
+      "role": "organizer",
+      "coverage": [
+        "Visayas",
+        "Cebu"
+      ],
+      "enabled": false,
+      "status": "candidate",
+      "reason": "CTF index redirects to login; public feed access not verified. No credentials or cookies used.",
+      "monitor": {
+        "id": "owasp-cebu",
+        "name": "OWASP Cebu",
+        "kind": "html",
+        "url": "https://www.owasp-cebu.org/ctfs"
+      }
+    },
+    {
+      "id": "pia",
+      "name": "Philippine Information Agency",
+      "role": "resharer",
+      "coverage": [
+        "National",
+        "Luzon",
+        "Visayas",
+        "Mindanao"
+      ],
+      "enabled": false,
+      "status": "candidate",
+      "reason": "Advance competition invitations documented, but robots.txt verification returns HTTP 403. Candidate only.",
+      "monitor": {
+        "id": "pia",
+        "name": "Philippine Information Agency",
+        "kind": "rss",
+        "url": "https://pia.gov.ph/feed/?s=capture+the+flag"
+      }
+    },
+    {
+      "id": "vektr-community",
+      "name": "VEKTR Security · Community sponsor",
+      "role": "resharer",
+      "coverage": [
+        "Philippine community competitions"
+      ],
+      "enabled": false,
+      "status": "candidate",
+      "reason": "Website readable but no recurring announcement feed or archive links found. Indexed social reshares are not a working publisher integration.",
+      "monitor": {
+        "id": "vektr-community",
+        "name": "VEKTR Security · Community sponsor",
+        "kind": "html",
+        "url": "https://vektrsec.com/"
+      }
+    }
+  ]
+}

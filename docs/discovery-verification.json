@@ -1,0 +1,691 @@
+{
+  "verified_on": "2026-11-21",
+  "acceptance": {
+    "competition_independently_discovered": false,
+    "exact_facebook_post_independently_discovered": false,
+    "blocker": "No configured readable recurring source returned the acceptance competition or post. Optional search provider was not called because its credentials/storage entitlement were unavailable."
+  },
+  "configuration_sha256": "bb80876f45d20eaaea81b49252b5529c2d496fa67406f3d23536f70f62f1d3c1",
+  "baseline_run": {
+    "started_at": "2026-11-21T14:13:49.417854+00:00",
+    "sources": [
+      {
+        "id": "rootcon-bluesky",
+        "name": "ROOTCON · Bluesky",
+        "status": "ok",
+        "discovered": 146,
+        "accepted": 3,
+        "new_announcements": 3,
+        "message": "Public author feed and full post text read through the documented Bluesky API; only extracted facts and brief excerpts retained, no media."
+      },
+      {
+        "id": "hackthenorth",
+        "name": "HackTheNorth.ph · Announcements",
+        "status": "ok",
+        "discovered": 11,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded."
+      },
+      {
+        "id": "up-acm",
+        "name": "UP ACM · Events",
+        "status": "ok",
+        "discovered": 1,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded."
+      },
+      {
+        "id": "ncert",
+        "name": "DICT / CERT-PH · Feed",
+        "status": "error",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Cannot verify robots.txt: HTTP 403"
+      },
+      {
+        "id": "dict",
+        "name": "DICT · Announcements",
+        "status": "error",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Cannot verify robots.txt: HTTP 403"
+      },
+      {
+        "id": "rootcon-website",
+        "name": "ROOTCON · Website",
+        "status": "policy_restricted",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Website terms prohibit automated data extraction. Use the official Bluesky API source instead."
+      },
+      {
+        "id": "ctftime",
+        "name": "CTFtime · Philippine connections",
+        "status": "ok",
+        "discovered": 180,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Supplementary event metadata only. Included Philippine venues or explicitly configured Philippine organizers; global events open to everyone are excluded."
+      },
+      {
+        "id": "facebook-search",
+        "name": "Facebook · Indexed announcements",
+        "status": "needs_credentials",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Requires server-side BRAVE_SEARCH_API_KEY and a plan with storage rights (BRAVE_STORAGE_RIGHTS=1). Facebook full posts are not fetched."
+      }
+    ],
+    "finished_at": "2026-11-21T14:14:10.259038+00:00",
+    "events": 2,
+    "announcements": 3
+  },
+  "first_run": {
+    "started_at": "2026-11-21T14:28:59.836583+00:00",
+    "sources": [
+      {
+        "id": "rootcon-bluesky",
+        "name": "ROOTCON · Bluesky",
+        "status": "ok",
+        "discovered": 146,
+        "accepted": 3,
+        "new_announcements": 3,
+        "discoveries": [
+          {
+            "event_id": "775f475db77bea2c6cd288ec",
+            "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h",
+            "path": [
+              "https://bsky.app/profile/rootcon.bsky.social",
+              "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h"
+            ],
+            "related_links": []
+          },
+          {
+            "event_id": "b33d89e59bd6589135a41f58",
+            "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24",
+            "path": [
+              "https://bsky.app/profile/rootcon.bsky.social",
+              "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24"
+            ],
+            "related_links": []
+          },
+          {
+            "event_id": "775f475db77bea2c6cd288ec",
+            "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z",
+            "path": [
+              "https://bsky.app/profile/rootcon.bsky.social",
+              "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z"
+            ],
+            "related_links": []
+          }
+        ],
+        "message": "Public author feed and full post text read through the documented Bluesky API; only extracted facts and brief excerpts retained, no media."
+      },
+      {
+        "id": "hackthenorth",
+        "name": "HackTheNorth.ph · Announcements",
+        "status": "ok",
+        "discovered": 11,
+        "accepted": 0,
+        "new_announcements": 0,
+        "discoveries": [],
+        "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded."
+      },
+      {
+        "id": "up-acm",
+        "name": "UP ACM · Events",
+        "status": "ok",
+        "discovered": 1,
+        "accepted": 0,
+        "new_announcements": 0,
+        "discoveries": [],
+        "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded."
+      },
+      {
+        "id": "pup-announcements",
+        "name": "PUP · Announcements feed",
+        "status": "ok",
+        "discovered": 10,
+        "accepted": 0,
+        "new_announcements": 0,
+        "discoveries": [],
+        "message": "Public RSS/Atom feed scanned; 10 new or retained article URLs rechecked."
+      },
+      {
+        "id": "pup-news",
+        "name": "PUP · News feed",
+        "status": "ok",
+        "discovered": 10,
+        "accepted": 0,
+        "new_announcements": 0,
+        "discoveries": [],
+        "message": "Public RSS/Atom feed scanned; 10 new or retained article URLs rechecked."
+      },
+      {
+        "id": "ncert",
+        "name": "DICT / CERT-PH · Feed",
+        "status": "error",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "discoveries": [],
+        "message": "Cannot verify robots.txt: HTTP 403"
+      },
+      {
+        "id": "dict",
+        "name": "DICT · Announcements",
+        "status": "error",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "discoveries": [],
+        "message": "Cannot verify robots.txt: HTTP 403"
+      },
+      {
+        "id": "rootcon-website",
+        "name": "ROOTCON · Website",
+        "status": "policy_restricted",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "discoveries": [],
+        "message": "Website terms prohibit automated data extraction. Use the official Bluesky API source instead."
+      },
+      {
+        "id": "ctftime",
+        "name": "CTFtime · Philippine connections",
+        "status": "ok",
+        "discovered": 180,
+        "accepted": 0,
+        "new_announcements": 0,
+        "discoveries": [],
+        "message": "Supplementary event metadata only. Included Philippine venues or explicitly configured Philippine organizers; global events open to everyone are excluded."
+      },
+      {
+        "id": "facebook-search",
+        "name": "Facebook · Indexed announcements",
+        "status": "needs_credentials",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "discoveries": [],
+        "message": "Requires server-side BRAVE_SEARCH_API_KEY and a plan with storage rights (BRAVE_STORAGE_RIGHTS=1). Facebook full posts are not fetched."
+      }
+    ],
+    "finished_at": "2026-11-21T14:29:32.051069+00:00",
+    "events": 2,
+    "announcements": 3
+  },
+  "second_run": {
+    "started_at": "2026-11-21T14:29:33.781875+00:00",
+    "sources": [
+      {
+        "id": "rootcon-bluesky",
+        "name": "ROOTCON · Bluesky",
+        "status": "ok",
+        "discovered": 146,
+        "accepted": 3,
+        "new_announcements": 0,
+        "discoveries": [
+          {
+            "event_id": "775f475db77bea2c6cd288ec",
+            "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h",
+            "path": [
+              "https://bsky.app/profile/rootcon.bsky.social",
+              "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h"
+            ],
+            "related_links": []
+          },
+          {
+            "event_id": "b33d89e59bd6589135a41f58",
+            "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24",
+            "path": [
+              "https://bsky.app/profile/rootcon.bsky.social",
+              "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24"
+            ],
+            "related_links": []
+          },
+          {
+            "event_id": "775f475db77bea2c6cd288ec",
+            "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z",
+            "path": [
+              "https://bsky.app/profile/rootcon.bsky.social",
+              "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z"
+            ],
+            "related_links": []
+          }
+        ],
+        "message": "Public author feed and full post text read through the documented Bluesky API; only extracted facts and brief excerpts retained, no media."
+      },
+      {
+        "id": "hackthenorth",
+        "name": "HackTheNorth.ph · Announcements",
+        "status": "ok",
+        "discovered": 11,
+        "accepted": 0,
+        "new_announcements": 0,
+        "discoveries": [],
+        "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded."
+      },
+      {
+        "id": "up-acm",
+        "name": "UP ACM · Events",
+        "status": "ok",
+        "discovered": 1,
+        "accepted": 0,
+        "new_announcements": 0,
+        "discoveries": [],
+        "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded."
+      },
+      {
+        "id": "pup-announcements",
+        "name": "PUP · Announcements feed",
+        "status": "ok",
+        "discovered": 10,
+        "accepted": 0,
+        "new_announcements": 0,
+        "discoveries": [],
+        "message": "Public RSS/Atom feed scanned; 10 new or retained article URLs rechecked."
+      },
+      {
+        "id": "pup-news",
+        "name": "PUP · News feed",
+        "status": "ok",
+        "discovered": 10,
+        "accepted": 0,
+        "new_announcements": 0,
+        "discoveries": [],
+        "message": "Public RSS/Atom feed scanned; 10 new or retained article URLs rechecked."
+      },
+      {
+        "id": "ncert",
+        "name": "DICT / CERT-PH · Feed",
+        "status": "error",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "discoveries": [],
+        "message": "Cannot verify robots.txt: HTTP 403"
+      },
+      {
+        "id": "dict",
+        "name": "DICT · Announcements",
+        "status": "error",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "discoveries": [],
+        "message": "Cannot verify robots.txt: HTTP 403"
+      },
+      {
+        "id": "rootcon-website",
+        "name": "ROOTCON · Website",
+        "status": "policy_restricted",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "discoveries": [],
+        "message": "Website terms prohibit automated data extraction. Use the official Bluesky API source instead."
+      },
+      {
+        "id": "ctftime",
+        "name": "CTFtime · Philippine connections",
+        "status": "ok",
+        "discovered": 180,
+        "accepted": 0,
+        "new_announcements": 0,
+        "discoveries": [],
+        "message": "Supplementary event metadata only. Included Philippine venues or explicitly configured Philippine organizers; global events open to everyone are excluded."
+      },
+      {
+        "id": "facebook-search",
+        "name": "Facebook · Indexed announcements",
+        "status": "needs_credentials",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "discoveries": [],
+        "message": "Requires server-side BRAVE_SEARCH_API_KEY and a plan with storage rights (BRAVE_STORAGE_RIGHTS=1). Facebook full posts are not fetched."
+      }
+    ],
+    "finished_at": "2026-11-21T14:30:02.409146+00:00",
+    "events": 2,
+    "announcements": 3
+  },
+  "idempotency": {
+    "events": 2,
+    "announcements": 3,
+    "second_run_new_announcements": 0,
+    "same_ids_urls_first_seen_revisions_payloads": true
+  },
+  "listings": [
+    {
+      "id": "775f475db77bea2c6cd288ec",
+      "organizer_key": "rootcon",
+      "series": "ROOTCON CTF",
+      "edition": "20",
+      "region": "Unspecified",
+      "stage": "main",
+      "first_seen": "2026-11-21T14:28:59.836583+00:00",
+      "start": null,
+      "end": null,
+      "deadline": null,
+      "registration_opens": null,
+      "eligibility": null,
+      "registration_url": null,
+      "summary": null,
+      "format": "unknown",
+      "registration_state": "unknown",
+      "field_evidence": {
+        "name": {
+          "quote": "This year, we wanted to do something special for our ROOTCON 20 CTF Champions.",
+          "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h"
+        },
+        "organizer": {
+          "quote": "Official account linked from rootcon.org; Philippine organizer.",
+          "url": "https://bsky.app/profile/rootcon.bsky.social"
+        },
+        "lifecycle": {
+          "quote": "This year, we wanted to do something special for our ROOTCON 20 CTF Champions. This year, we wanted to do something special for our ROOTCON 20 CTF Champions. Congratulations, Team Pulang Araw, on taking the CTF crown this year!",
+          "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h"
+        },
+        "posted_at": {
+          "quote": "Publisher publication metadata: 2026-09-12T05:08:12.613Z",
+          "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z"
+        }
+      },
+      "name": "ROOTCON 20 CTF",
+      "organizer": "ROOTCON",
+      "lifecycle": "finished",
+      "announcement_url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z",
+      "announcement_label": "Official announcement",
+      "posted_at": "2026-09-12T05:08:12.613Z",
+      "last_checked": "2026-11-21T14:29:33.781875+00:00",
+      "status": "finished",
+      "registration_status": "closed",
+      "section": "finished",
+      "notices": [],
+      "announcements": [
+        {
+          "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h",
+          "title": "This year, we wanted to do something special for our ROOTCON 20 CTF Champions.",
+          "kind": "completion",
+          "posted_at": "2026-09-30T07:03:13.117Z",
+          "access": "full",
+          "evidence": "This year, we wanted to do something special for our ROOTCON 20 CTF Champions. Congratulations, Team Pulang Araw, on taking the CTF crown this year!",
+          "first_seen": "2026-11-21T14:28:59.836583+00:00",
+          "last_seen": "2026-11-21T14:29:33.781875+00:00",
+          "source_name": "ROOTCON · Bluesky",
+          "revision_count": 1,
+          "related_links": [],
+          "discovery_path": [
+            "https://bsky.app/profile/rootcon.bsky.social",
+            "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h"
+          ],
+          "field_evidence": {
+            "lifecycle": {
+              "quote": "This year, we wanted to do something special for our ROOTCON 20 CTF Champions. This year, we wanted to do something special for our ROOTCON 20 CTF Champions. Congratulations, Team Pulang Araw, on taking the CTF crown this year!",
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h"
+            },
+            "name": {
+              "quote": "This year, we wanted to do something special for our ROOTCON 20 CTF Champions.",
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h"
+            },
+            "organizer": {
+              "quote": "Official account linked from rootcon.org; Philippine organizer.",
+              "url": "https://bsky.app/profile/rootcon.bsky.social"
+            },
+            "posted_at": {
+              "quote": "Publisher publication metadata: 2026-09-30T07:03:13.117Z",
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h"
+            }
+          }
+        },
+        {
+          "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z",
+          "title": "Behind every challenge is a team that made it possible.",
+          "kind": "announcement",
+          "posted_at": "2026-09-12T05:08:12.613Z",
+          "access": "full",
+          "evidence": "Meet ANM—the hands and brains behind this year's ROOTCON 20 CTF. #ROOTCON20 #CTF",
+          "first_seen": "2026-11-21T14:28:59.836583+00:00",
+          "last_seen": "2026-11-21T14:29:33.781875+00:00",
+          "source_name": "ROOTCON · Bluesky",
+          "revision_count": 1,
+          "related_links": [],
+          "discovery_path": [
+            "https://bsky.app/profile/rootcon.bsky.social",
+            "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z"
+          ],
+          "field_evidence": {
+            "name": {
+              "quote": "Meet ANM—the hands and brains behind this year's ROOTCON 20 CTF.",
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z"
+            },
+            "organizer": {
+              "quote": "Official account linked from rootcon.org; Philippine organizer.",
+              "url": "https://bsky.app/profile/rootcon.bsky.social"
+            },
+            "posted_at": {
+              "quote": "Publisher publication metadata: 2026-09-12T05:08:12.613Z",
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "b33d89e59bd6589135a41f58",
+      "organizer_key": "rootcon",
+      "series": "ROOTCON CTF",
+      "edition": "20",
+      "region": "Unspecified",
+      "stage": "qualifier",
+      "first_seen": "2026-11-21T14:28:59.836583+00:00",
+      "start": null,
+      "end": null,
+      "deadline": null,
+      "registration_opens": null,
+      "eligibility": null,
+      "registration_url": null,
+      "summary": null,
+      "format": "unknown",
+      "registration_state": "unknown",
+      "field_evidence": {
+        "name": {
+          "quote": "Good luck to all teams competing in the ROOTCON 20 CTF Qualifiers!",
+          "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24"
+        },
+        "organizer": {
+          "quote": "Official account linked from rootcon.org; Philippine organizer.",
+          "url": "https://bsky.app/profile/rootcon.bsky.social"
+        },
+        "posted_at": {
+          "quote": "Publisher publication metadata: 2026-09-19T01:55:05.102Z",
+          "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24"
+        }
+      },
+      "name": "ROOTCON 20 CTF · Qualifier",
+      "organizer": "ROOTCON",
+      "announcement_url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24",
+      "announcement_label": "Official announcement",
+      "posted_at": "2026-09-19T01:55:05.102Z",
+      "last_checked": "2026-11-21T14:29:33.781875+00:00",
+      "status": "schedule_tba",
+      "registration_status": "unknown",
+      "section": "upcoming",
+      "notices": [
+        "The latest dated announcement is over 45 days old. Current participation and completion are unconfirmed.",
+        "Schedule TBA. This listing does not confirm that registration is open."
+      ],
+      "announcements": [
+        {
+          "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24",
+          "title": "Good luck to all teams competing in the ROOTCON 20 CTF Qualifiers!",
+          "kind": "announcement",
+          "posted_at": "2026-09-19T01:55:05.102Z",
+          "access": "full",
+          "evidence": "Good luck to all teams competing in the ROOTCON 20 CTF Qualifiers! #ROOTCON20 #CTF",
+          "first_seen": "2026-11-21T14:28:59.836583+00:00",
+          "last_seen": "2026-11-21T14:29:33.781875+00:00",
+          "source_name": "ROOTCON · Bluesky",
+          "revision_count": 1,
+          "related_links": [],
+          "discovery_path": [
+            "https://bsky.app/profile/rootcon.bsky.social",
+            "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24"
+          ],
+          "field_evidence": {
+            "name": {
+              "quote": "Good luck to all teams competing in the ROOTCON 20 CTF Qualifiers!",
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24"
+            },
+            "organizer": {
+              "quote": "Official account linked from rootcon.org; Philippine organizer.",
+              "url": "https://bsky.app/profile/rootcon.bsky.social"
+            },
+            "posted_at": {
+              "quote": "Publisher publication metadata: 2026-09-19T01:55:05.102Z",
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "source_states": [
+    {
+      "id": "ctftime",
+      "name": "CTFtime · Philippine connections",
+      "url": "https://ctftime.org/api/v1/events/",
+      "kind": "ctftime",
+      "status": "ok",
+      "last_success": "2026-11-21T14:29:33.781875+00:00",
+      "last_attempt": "2026-11-21T14:29:33.781875+00:00",
+      "message": "Supplementary event metadata only. Included Philippine venues or explicitly configured Philippine organizers; global events open to everyone are excluded.",
+      "discovered": 180,
+      "accepted": 0
+    },
+    {
+      "id": "ncert",
+      "name": "DICT / CERT-PH · Feed",
+      "url": "https://ncert.gov.ph/feed/",
+      "kind": "rss",
+      "status": "error",
+      "last_success": null,
+      "last_attempt": "2026-11-21T14:29:33.781875+00:00",
+      "message": "Cannot verify robots.txt: HTTP 403",
+      "discovered": 0,
+      "accepted": 0
+    },
+    {
+      "id": "dict",
+      "name": "DICT · Announcements",
+      "url": "https://dict.gov.ph/",
+      "kind": "html",
+      "status": "error",
+      "last_success": null,
+      "last_attempt": "2026-11-21T14:29:33.781875+00:00",
+      "message": "Cannot verify robots.txt: HTTP 403",
+      "discovered": 0,
+      "accepted": 0
+    },
+    {
+      "id": "facebook-search",
+      "name": "Facebook · Indexed announcements",
+      "url": "https://api.search.brave.com/res/v1/web/search",
+      "kind": "brave",
+      "status": "needs_credentials",
+      "last_success": null,
+      "last_attempt": "2026-11-21T14:29:33.781875+00:00",
+      "message": "Requires server-side BRAVE_SEARCH_API_KEY and a plan with storage rights (BRAVE_STORAGE_RIGHTS=1). Facebook full posts are not fetched.",
+      "discovered": 0,
+      "accepted": 0
+    },
+    {
+      "id": "hackthenorth",
+      "name": "HackTheNorth.ph · Announcements",
+      "url": "https://hackthenorth.ph/",
+      "kind": "html",
+      "status": "ok",
+      "last_success": "2026-11-21T14:29:33.781875+00:00",
+      "last_attempt": "2026-11-21T14:29:33.781875+00:00",
+      "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded.",
+      "discovered": 11,
+      "accepted": 0
+    },
+    {
+      "id": "pup-announcements",
+      "name": "PUP · Announcements feed",
+      "url": "https://www.pup.edu.ph/rss/announcements/",
+      "kind": "rss",
+      "status": "ok",
+      "last_success": "2026-11-21T14:29:33.781875+00:00",
+      "last_attempt": "2026-11-21T14:29:33.781875+00:00",
+      "message": "Public RSS/Atom feed scanned; 10 new or retained article URLs rechecked.",
+      "discovered": 10,
+      "accepted": 0
+    },
+    {
+      "id": "pup-news",
+      "name": "PUP · News feed",
+      "url": "https://www.pup.edu.ph/rss/news/",
+      "kind": "rss",
+      "status": "ok",
+      "last_success": "2026-11-21T14:29:33.781875+00:00",
+      "last_attempt": "2026-11-21T14:29:33.781875+00:00",
+      "message": "Public RSS/Atom feed scanned; 10 new or retained article URLs rechecked.",
+      "discovered": 10,
+      "accepted": 0
+    },
+    {
+      "id": "rootcon-bluesky",
+      "name": "ROOTCON · Bluesky",
+      "url": "https://bsky.app/profile/rootcon.bsky.social",
+      "kind": "bluesky",
+      "status": "ok",
+      "last_success": "2026-11-21T14:29:33.781875+00:00",
+      "last_attempt": "2026-11-21T14:29:33.781875+00:00",
+      "message": "Public author feed and full post text read through the documented Bluesky API; only extracted facts and brief excerpts retained, no media.",
+      "discovered": 146,
+      "accepted": 3
+    },
+    {
+      "id": "rootcon-website",
+      "name": "ROOTCON · Website",
+      "url": "https://rootcon.org/",
+      "kind": "restricted",
+      "status": "policy_restricted",
+      "last_success": null,
+      "last_attempt": "2026-11-21T14:29:33.781875+00:00",
+      "message": "Website terms prohibit automated data extraction. Use the official Bluesky API source instead.",
+      "discovered": 0,
+      "accepted": 0
+    },
+    {
+      "id": "up-acm",
+      "name": "UP ACM · Events",
+      "url": "https://upacm.net/events/",
+      "kind": "html",
+      "status": "ok",
+      "last_success": "2026-11-21T14:29:33.781875+00:00",
+      "last_attempt": "2026-11-21T14:29:33.781875+00:00",
+      "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded.",
+      "discovered": 1,
+      "accepted": 0
+    }
+  ],
+  "checks": {
+    "backend_tests_passed": 46,
+    "browser_tests_passed": 4,
+    "frontend_production_build": "passed",
+    "mobile_390px_visual_inspection": "passed; no horizontal overflow",
+    "sample_identifiers_in_runtime_sources_and_tests": false
+  }
+}

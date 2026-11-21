@@ -1,0 +1,259 @@
+{
+  "verified_date_manila": "2026-11-21",
+  "first_run": {
+    "started_at": "2026-11-21T13:51:58.594566+00:00",
+    "sources": [
+      {
+        "id": "rootcon-bluesky",
+        "name": "ROOTCON · Bluesky",
+        "status": "ok",
+        "discovered": 146,
+        "accepted": 3,
+        "new_announcements": 3,
+        "message": "Public author feed and full post text read through the documented Bluesky API; no images or full posts retained."
+      },
+      {
+        "id": "hackthenorth",
+        "name": "HackTheNorth.ph · Announcements",
+        "status": "ok",
+        "discovered": 11,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded."
+      },
+      {
+        "id": "up-acm",
+        "name": "UP ACM · Events",
+        "status": "ok",
+        "discovered": 1,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded."
+      },
+      {
+        "id": "ncert",
+        "name": "DICT / CERT-PH · Feed",
+        "status": "error",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Cannot verify robots.txt: Redirect outside configured hosts"
+      },
+      {
+        "id": "dict",
+        "name": "DICT · Announcements",
+        "status": "error",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Cannot verify robots.txt: HTTP 403"
+      },
+      {
+        "id": "rootcon-website",
+        "name": "ROOTCON · Website",
+        "status": "policy_restricted",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Website terms prohibit automated data extraction. Use the official Bluesky API source instead."
+      },
+      {
+        "id": "ctftime",
+        "name": "CTFtime · Philippine connections",
+        "status": "ok",
+        "discovered": 180,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Supplementary event metadata only. Included Philippine venues or explicitly configured Philippine organizers; global events open to everyone are excluded."
+      },
+      {
+        "id": "facebook-search",
+        "name": "Facebook · Indexed announcements",
+        "status": "needs_credentials",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Requires server-side BRAVE_SEARCH_API_KEY and a plan with storage rights (BRAVE_STORAGE_RIGHTS=1). Facebook full posts are not fetched."
+      }
+    ],
+    "finished_at": "2026-11-21T13:52:19.577868+00:00",
+    "events": 2,
+    "announcements": 3
+  },
+  "second_run": {
+    "started_at": "2026-11-21T13:56:12.148088+00:00",
+    "sources": [
+      {
+        "id": "rootcon-bluesky",
+        "name": "ROOTCON · Bluesky",
+        "status": "ok",
+        "discovered": 146,
+        "accepted": 3,
+        "new_announcements": 0,
+        "message": "Public author feed and full post text read through the documented Bluesky API; no images or full posts retained."
+      },
+      {
+        "id": "hackthenorth",
+        "name": "HackTheNorth.ph · Announcements",
+        "status": "ok",
+        "discovered": 11,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded."
+      },
+      {
+        "id": "up-acm",
+        "name": "UP ACM · Events",
+        "status": "ok",
+        "discovered": 1,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded."
+      },
+      {
+        "id": "ncert",
+        "name": "DICT / CERT-PH · Feed",
+        "status": "error",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Cannot verify robots.txt: Redirect outside configured hosts"
+      },
+      {
+        "id": "dict",
+        "name": "DICT · Announcements",
+        "status": "error",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Cannot verify robots.txt: HTTP 403"
+      },
+      {
+        "id": "rootcon-website",
+        "name": "ROOTCON · Website",
+        "status": "policy_restricted",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Website terms prohibit automated data extraction. Use the official Bluesky API source instead."
+      },
+      {
+        "id": "ctftime",
+        "name": "CTFtime · Philippine connections",
+        "status": "ok",
+        "discovered": 180,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Supplementary event metadata only. Included Philippine venues or explicitly configured Philippine organizers; global events open to everyone are excluded."
+      },
+      {
+        "id": "facebook-search",
+        "name": "Facebook · Indexed announcements",
+        "status": "needs_credentials",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Requires server-side BRAVE_SEARCH_API_KEY and a plan with storage rights (BRAVE_STORAGE_RIGHTS=1). Facebook full posts are not fetched."
+      }
+    ],
+    "finished_at": "2026-11-21T13:56:32.201093+00:00",
+    "events": 2,
+    "announcements": 3
+  },
+  "duplicate_check": {
+    "event_count_equal": true,
+    "announcement_count_equal": true,
+    "second_run_new_announcements": 0
+  },
+  "scheduled_service_run": {
+    "started_at": "2026-11-21T13:58:17.629433+00:00",
+    "sources": [
+      {
+        "id": "rootcon-bluesky",
+        "name": "ROOTCON · Bluesky",
+        "status": "ok",
+        "discovered": 146,
+        "accepted": 3,
+        "new_announcements": 0,
+        "message": "Public author feed and full post text read through the documented Bluesky API; no images or full posts retained."
+      },
+      {
+        "id": "hackthenorth",
+        "name": "HackTheNorth.ph · Announcements",
+        "status": "ok",
+        "discovered": 11,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded."
+      },
+      {
+        "id": "up-acm",
+        "name": "UP ACM · Events",
+        "status": "ok",
+        "discovered": 1,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded."
+      },
+      {
+        "id": "ncert",
+        "name": "DICT / CERT-PH · Feed",
+        "status": "error",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Cannot verify robots.txt: HTTP 403"
+      },
+      {
+        "id": "dict",
+        "name": "DICT · Announcements",
+        "status": "error",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Cannot verify robots.txt: HTTP 403"
+      },
+      {
+        "id": "rootcon-website",
+        "name": "ROOTCON · Website",
+        "status": "policy_restricted",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Website terms prohibit automated data extraction. Use the official Bluesky API source instead."
+      },
+      {
+        "id": "ctftime",
+        "name": "CTFtime · Philippine connections",
+        "status": "ok",
+        "discovered": 180,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Supplementary event metadata only. Included Philippine venues or explicitly configured Philippine organizers; global events open to everyone are excluded."
+      },
+      {
+        "id": "facebook-search",
+        "name": "Facebook · Indexed announcements",
+        "status": "needs_credentials",
+        "discovered": 0,
+        "accepted": 0,
+        "new_announcements": 0,
+        "message": "Requires server-side BRAVE_SEARCH_API_KEY and a plan with storage rights (BRAVE_STORAGE_RIGHTS=1). Facebook full posts are not fetched."
+      }
+    ],
+    "finished_at": "2026-11-21T13:58:37.504631+00:00",
+    "events": 2,
+    "announcements": 3
+  },
+  "checks": {
+    "backend_tests_passed": 25,
+    "browser_tests_passed": 3,
+    "typescript_and_vite_build": "passed",
+    "daily_timer": "active; 06:00 Asia/Manila",
+    "web_service": "active; http://127.0.0.1:5000",
+    "screenshots": [
+      "desktop.png",
+      "mobile.png"
+    ]
+  }
+}

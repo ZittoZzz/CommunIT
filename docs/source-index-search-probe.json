@@ -1,0 +1,22 @@
+{
+  "observed_at": "2026-11-21T16:35:41.795471+00:00",
+  "searches": [
+    {
+      "query": "Philippines \"CTF\" \"register\" community website event -site:facebook.com -site:instagram.com",
+      "include_domains": [],
+      "status": "error",
+      "attempts": [
+        {
+          "status": "rate_limited",
+          "retry_after": 297
+        }
+      ],
+      "results": [],
+      "message": "HTTP 429; retry after 297 seconds"
+    }
+  ],
+  "warnings": [
+    "Philippines \"CTF\" \"register\" community website event -site:facebook.com -site:instagram.com: HTTP 429; retry after 297 seconds"
+  ],
+  "purpose": "Secondary publisher research; no event-specific query terms; no database writes"
+}

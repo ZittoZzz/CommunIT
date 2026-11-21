@@ -1,0 +1,1307 @@
+{
+  "access": "free keyless only",
+  "target_comparison_only": {
+    "title": "RAIJIN CTF 2026",
+    "post_id": "1803852510919263",
+    "note": "Not sent to the API. Comparisons inspect retained result titles/URLs; full snippets are not retained."
+  },
+  "comparisons": [
+    {
+      "run": 1,
+      "query": "site:facebook.com Philippines cybersecurity CTF competition registration",
+      "status": "ok",
+      "web_results": 20,
+      "facebook_results": 20,
+      "target_title_or_url_matches": [],
+      "target_numeric_post_matches": []
+    },
+    {
+      "run": 1,
+      "query": "Philippines capture the flag CTF competition registration",
+      "status": "ok",
+      "web_results": 20,
+      "facebook_results": 3,
+      "target_title_or_url_matches": [],
+      "target_numeric_post_matches": []
+    },
+    {
+      "run": 2,
+      "query": "site:facebook.com Philippines cybersecurity CTF competition registration",
+      "status": "ok",
+      "web_results": 20,
+      "facebook_results": 20,
+      "target_title_or_url_matches": [],
+      "target_numeric_post_matches": []
+    },
+    {
+      "run": 2,
+      "query": "Philippines capture the flag CTF competition registration",
+      "status": "ok",
+      "web_results": 20,
+      "facebook_results": 3,
+      "target_title_or_url_matches": [],
+      "target_numeric_post_matches": []
+    }
+  ],
+  "identical_announcement_snapshots": true,
+  "tests": {
+    "backend": 117,
+    "browser": 5,
+    "frontend_build": "passed",
+    "live_mobile_preview": "4 HackForGov cards; correct search-only links; query provenance visible; 390px layout fits"
+  },
+  "listings": [
+    {
+      "id": "b9f3bb09229419f52097289a",
+      "title": "Hackforgov 5 registration open for Mimaropa students",
+      "url": "https://www.facebook.com/dictr4b/posts/-%F0%9D%90%87%F0%9D%90%80%F0%9D%90%82%F0%9D%90%8A%F0%9D%90%85%F0%9D%90%8E%F0%9D%90%91%F0%9D%90%86%F0%9D%90%8E%F0%9D%90%95-%F0%9D%90%8C%F0%9D%90%88%F0%9D%90%8C%F0%9D%90%80%F0%9D%90%91%F0%9D%90%8E%F0%9D%90%8F%F0%9D%90%80-%F0%9D%9F%90%F0%9D%9F%8E%F0%9D%9F%90%F0%9D%9F%94-%F0%9D%90%91%F0%9D%90%84%F0%9D%90%86%F0%9D%90%88%F0%9D%90%92%F0%9D%90%93%F0%9D%90%91%F0%9D%90%80%F0%9D%90%93%F0%9D%90%88%F0%9D%90%8E%F0%9D%90%8D-%F0%9D%90%8D%F0%9D%90%8E%F0%9D%90%96-%F0%9D%90%8E%F0%9D%90%8F%F0%9D%90%84%F0%9D%90%8D-%F0%9D%90%80%F0%9D%90%9B%F0%9D%90%A8%F0%9D%90%AE%F0%9D%90%AD-%F0%9D%90%AD%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%82%F0%9D%90%A8%F0%9D%90%A6%F0%9D%90%A9%F0%9D%90%9E%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7the-hackfor/1089592793724382",
+      "facts": {
+        "deadline": null,
+        "eligibility": null,
+        "end": null,
+        "format": "unknown",
+        "lifecycle": null,
+        "name": "HackForGov edition-5 · MIMAROPA",
+        "organizer": "Organizer unconfirmed",
+        "region": "MIMAROPA",
+        "registration_opens": null,
+        "registration_state": null,
+        "registration_url": null,
+        "start": null,
+        "summary": null
+      },
+      "queries": [
+        "site:facebook.com Philippines cybersecurity CTF competition registration"
+      ],
+      "access": "search_only"
+    },
+    {
+      "id": "e9637c9ff666c35c69b29d64",
+      "title": "HackForGov 5 Bicol qualifying round in Naga City 2026",
+      "url": "https://www.facebook.com/DICTRegionVBicol/posts/%F0%9D%90%82%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%A5%F0%9D%90%A2%F0%9D%90%A7%F0%9D%90%A0-%F0%9D%90%81%F0%9D%90%A2%F0%9D%90%9C%F0%9D%90%A8%F0%9D%90%A5%F0%9D%90%AC-%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%B1%F0%9D%90%AD-%F0%9D%90%A0%F0%9D%90%9E%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%AB%F0%9D%90%9A%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7-%F0%9D%90%A8%F0%9D%90%9F-%F0%9D%90%9C%F0%9D%90%B2%F0%9D%90%9B%F0%9D%90%9E%F0%9D%90%AB%F0%9D%90%AC%F0%9D%90%9E%F0%9D%90%9C%F0%9D%90%AE%F0%9D%90%AB%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%B2-%F0%9D%90%A9%F0%9D%90%AB%F0%9D%90%A8%F0%9D%90%9F%F0%9D%90%9E%F0%9D%90%AC%F0%9D%90%AC%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%AC%EF%B8%8Fdict-bicol-invites/1040492329050739",
+      "facts": {
+        "deadline": null,
+        "eligibility": null,
+        "end": null,
+        "format": "unknown",
+        "lifecycle": null,
+        "name": "HackForGov 2026 · Region V — Bicol · Qualifier",
+        "organizer": "Organizer unconfirmed",
+        "region": "Region V — Bicol",
+        "registration_opens": null,
+        "registration_state": null,
+        "registration_url": null,
+        "start": null,
+        "summary": null
+      },
+      "queries": [
+        "site:facebook.com Philippines cybersecurity CTF competition registration"
+      ],
+      "access": "search_only"
+    },
+    {
+      "id": "4c03c1407c94dd6defaa2921",
+      "title": "HackForGov Central Visayas 2026 – Registration Now Open! DICT ...",
+      "url": "https://www.facebook.com/DICTr7/posts/-hackforgov-central-visayas-2026-registration-now-open-dict-region-7-proudly-lau/1522802749891574",
+      "facts": {
+        "deadline": null,
+        "eligibility": null,
+        "end": null,
+        "format": "unknown",
+        "lifecycle": null,
+        "name": "HackForGov 2026 · Region VII — Central Visayas",
+        "organizer": "Organizer unconfirmed",
+        "region": "Region VII — Central Visayas",
+        "registration_opens": null,
+        "registration_state": null,
+        "registration_url": null,
+        "start": null,
+        "summary": null
+      },
+      "queries": [
+        "site:facebook.com Philippines cybersecurity CTF competition registration"
+      ],
+      "access": "search_only"
+    },
+    {
+      "id": "c167132f342d52e478641b89",
+      "title": "HackForGov 5 2026 CALABARZON Regional ...",
+      "url": "https://www.facebook.com/dictr4a/posts/%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A3%F0%9D%97%A3%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9C%F0%9D%97%A1%F0%9D%97%9A-%F0%9D%97%A1%F0%9D%97%A2%F0%9D%97%AA-%F0%9D%97%9B%F0%9D%97%AE%F0%9D%97%B0%F0%9D%97%B8%F0%9D%97%99%F0%9D%97%BC%F0%9D%97%BF%F0%9D%97%9A%F0%9D%97%BC%F0%9D%98%83-%F0%9D%9F%B1-%F0%9D%9F%AE%F0%9D%9F%AC%F0%9D%9F%AE%F0%9D%9F%B2-%F0%9D%97%96%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%94%F0%9D%97%95%F0%9D%97%94%F0%9D%97%A5%F0%9D%97%AD%F0%9D%97%A2%F0%9D%97%A1-%F0%9D%97%A5%F0%9D%97%B2%F0%9D%97%B4%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB%F0%9D%97%AE%F0%9D%97%B9-%F0%9D%97%96%F0%9D%97%BC%F0%9D%97%BA%F0%9D%97%BD%F0%9D%97%B2%F0%9D%98%81%F0%9D%97%B6%F0%9D%98%81%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB%F0%9D%99%8F%F0%9D%99%9D%F0%9D%99%9A-%F0%9D%99%98%F0%9D%99%A4%F0%9D%99%A2%F0%9D%99%A5%F0%9D%99%9A%F0%9D%99%A9%F0%9D%99%9E%F0%9D%99%A9%F0%9D%99%9E%F0%9D%99%A4%F0%9D%99%A3-%F0%9D%99%9E/1534594968700265",
+      "facts": {
+        "deadline": null,
+        "eligibility": null,
+        "end": null,
+        "format": "unknown",
+        "lifecycle": null,
+        "name": "HackForGov 2026 · Region IV-A — CALABARZON",
+        "organizer": "Organizer unconfirmed",
+        "region": "Region IV-A — CALABARZON",
+        "registration_opens": null,
+        "registration_state": null,
+        "registration_url": null,
+        "start": null,
+        "summary": null
+      },
+      "queries": [
+        "site:facebook.com Philippines cybersecurity CTF competition registration"
+      ],
+      "access": "search_only"
+    }
+  ],
+  "runs": [
+    {
+      "started_at": "2026-11-21T15:40:51.362927+00:00",
+      "sources": [
+        {
+          "id": "tavily-keyless",
+          "name": "Tavily · Free Philippine CTF discovery",
+          "status": "ok",
+          "discovered": 40,
+          "accepted": 4,
+          "new_announcements": 4,
+          "discoveries": [
+            {
+              "event_id": "b9f3bb09229419f52097289a",
+              "url": "https://www.facebook.com/dictr4b/posts/-%F0%9D%90%87%F0%9D%90%80%F0%9D%90%82%F0%9D%90%8A%F0%9D%90%85%F0%9D%90%8E%F0%9D%90%91%F0%9D%90%86%F0%9D%90%8E%F0%9D%90%95-%F0%9D%90%8C%F0%9D%90%88%F0%9D%90%8C%F0%9D%90%80%F0%9D%90%91%F0%9D%90%8E%F0%9D%90%8F%F0%9D%90%80-%F0%9D%9F%90%F0%9D%9F%8E%F0%9D%9F%90%F0%9D%9F%94-%F0%9D%90%91%F0%9D%90%84%F0%9D%90%86%F0%9D%90%88%F0%9D%90%92%F0%9D%90%93%F0%9D%90%91%F0%9D%90%80%F0%9D%90%93%F0%9D%90%88%F0%9D%90%8E%F0%9D%90%8D-%F0%9D%90%8D%F0%9D%90%8E%F0%9D%90%96-%F0%9D%90%8E%F0%9D%90%8F%F0%9D%90%84%F0%9D%90%8D-%F0%9D%90%80%F0%9D%90%9B%F0%9D%90%A8%F0%9D%90%AE%F0%9D%90%AD-%F0%9D%90%AD%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%82%F0%9D%90%A8%F0%9D%90%A6%F0%9D%90%A9%F0%9D%90%9E%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7the-hackfor/1089592793724382",
+              "path": [
+                "https://api.tavily.com/search",
+                "https://www.facebook.com/dictr4b/posts/-%F0%9D%90%87%F0%9D%90%80%F0%9D%90%82%F0%9D%90%8A%F0%9D%90%85%F0%9D%90%8E%F0%9D%90%91%F0%9D%90%86%F0%9D%90%8E%F0%9D%90%95-%F0%9D%90%8C%F0%9D%90%88%F0%9D%90%8C%F0%9D%90%80%F0%9D%90%91%F0%9D%90%8E%F0%9D%90%8F%F0%9D%90%80-%F0%9D%9F%90%F0%9D%9F%8E%F0%9D%9F%90%F0%9D%9F%94-%F0%9D%90%91%F0%9D%90%84%F0%9D%90%86%F0%9D%90%88%F0%9D%90%92%F0%9D%90%93%F0%9D%90%91%F0%9D%90%80%F0%9D%90%93%F0%9D%90%88%F0%9D%90%8E%F0%9D%90%8D-%F0%9D%90%8D%F0%9D%90%8E%F0%9D%90%96-%F0%9D%90%8E%F0%9D%90%8F%F0%9D%90%84%F0%9D%90%8D-%F0%9D%90%80%F0%9D%90%9B%F0%9D%90%A8%F0%9D%90%AE%F0%9D%90%AD-%F0%9D%90%AD%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%82%F0%9D%90%A8%F0%9D%90%A6%F0%9D%90%A9%F0%9D%90%9E%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7the-hackfor/1089592793724382"
+              ],
+              "related_links": []
+            },
+            {
+              "event_id": "e9637c9ff666c35c69b29d64",
+              "url": "https://www.facebook.com/DICTRegionVBicol/posts/%F0%9D%90%82%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%A5%F0%9D%90%A2%F0%9D%90%A7%F0%9D%90%A0-%F0%9D%90%81%F0%9D%90%A2%F0%9D%90%9C%F0%9D%90%A8%F0%9D%90%A5%F0%9D%90%AC-%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%B1%F0%9D%90%AD-%F0%9D%90%A0%F0%9D%90%9E%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%AB%F0%9D%90%9A%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7-%F0%9D%90%A8%F0%9D%90%9F-%F0%9D%90%9C%F0%9D%90%B2%F0%9D%90%9B%F0%9D%90%9E%F0%9D%90%AB%F0%9D%90%AC%F0%9D%90%9E%F0%9D%90%9C%F0%9D%90%AE%F0%9D%90%AB%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%B2-%F0%9D%90%A9%F0%9D%90%AB%F0%9D%90%A8%F0%9D%90%9F%F0%9D%90%9E%F0%9D%90%AC%F0%9D%90%AC%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%AC%EF%B8%8Fdict-bicol-invites/1040492329050739",
+              "path": [
+                "https://api.tavily.com/search",
+                "https://www.facebook.com/DICTRegionVBicol/posts/%F0%9D%90%82%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%A5%F0%9D%90%A2%F0%9D%90%A7%F0%9D%90%A0-%F0%9D%90%81%F0%9D%90%A2%F0%9D%90%9C%F0%9D%90%A8%F0%9D%90%A5%F0%9D%90%AC-%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%B1%F0%9D%90%AD-%F0%9D%90%A0%F0%9D%90%9E%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%AB%F0%9D%90%9A%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7-%F0%9D%90%A8%F0%9D%90%9F-%F0%9D%90%9C%F0%9D%90%B2%F0%9D%90%9B%F0%9D%90%9E%F0%9D%90%AB%F0%9D%90%AC%F0%9D%90%9E%F0%9D%90%9C%F0%9D%90%AE%F0%9D%90%AB%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%B2-%F0%9D%90%A9%F0%9D%90%AB%F0%9D%90%A8%F0%9D%90%9F%F0%9D%90%9E%F0%9D%90%AC%F0%9D%90%AC%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%AC%EF%B8%8Fdict-bicol-invites/1040492329050739"
+              ],
+              "related_links": []
+            },
+            {
+              "event_id": "4c03c1407c94dd6defaa2921",
+              "url": "https://www.facebook.com/DICTr7/posts/-hackforgov-central-visayas-2026-registration-now-open-dict-region-7-proudly-lau/1522802749891574",
+              "path": [
+                "https://api.tavily.com/search",
+                "https://www.facebook.com/DICTr7/posts/-hackforgov-central-visayas-2026-registration-now-open-dict-region-7-proudly-lau/1522802749891574"
+              ],
+              "related_links": []
+            },
+            {
+              "event_id": "c167132f342d52e478641b89",
+              "url": "https://www.facebook.com/dictr4a/posts/%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A3%F0%9D%97%A3%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9C%F0%9D%97%A1%F0%9D%97%9A-%F0%9D%97%A1%F0%9D%97%A2%F0%9D%97%AA-%F0%9D%97%9B%F0%9D%97%AE%F0%9D%97%B0%F0%9D%97%B8%F0%9D%97%99%F0%9D%97%BC%F0%9D%97%BF%F0%9D%97%9A%F0%9D%97%BC%F0%9D%98%83-%F0%9D%9F%B1-%F0%9D%9F%AE%F0%9D%9F%AC%F0%9D%9F%AE%F0%9D%9F%B2-%F0%9D%97%96%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%94%F0%9D%97%95%F0%9D%97%94%F0%9D%97%A5%F0%9D%97%AD%F0%9D%97%A2%F0%9D%97%A1-%F0%9D%97%A5%F0%9D%97%B2%F0%9D%97%B4%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB%F0%9D%97%AE%F0%9D%97%B9-%F0%9D%97%96%F0%9D%97%BC%F0%9D%97%BA%F0%9D%97%BD%F0%9D%97%B2%F0%9D%98%81%F0%9D%97%B6%F0%9D%98%81%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB%F0%9D%99%8F%F0%9D%99%9D%F0%9D%99%9A-%F0%9D%99%98%F0%9D%99%A4%F0%9D%99%A2%F0%9D%99%A5%F0%9D%99%9A%F0%9D%99%A9%F0%9D%99%9E%F0%9D%99%A9%F0%9D%99%9E%F0%9D%99%A4%F0%9D%99%A3-%F0%9D%99%9E/1534594968700265",
+              "path": [
+                "https://api.tavily.com/search",
+                "https://www.facebook.com/dictr4a/posts/%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A3%F0%9D%97%A3%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9C%F0%9D%97%A1%F0%9D%97%9A-%F0%9D%97%A1%F0%9D%97%A2%F0%9D%97%AA-%F0%9D%97%9B%F0%9D%97%AE%F0%9D%97%B0%F0%9D%97%B8%F0%9D%97%99%F0%9D%97%BC%F0%9D%97%BF%F0%9D%97%9A%F0%9D%97%BC%F0%9D%98%83-%F0%9D%9F%B1-%F0%9D%9F%AE%F0%9D%9F%AC%F0%9D%9F%AE%F0%9D%9F%B2-%F0%9D%97%96%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%94%F0%9D%97%95%F0%9D%97%94%F0%9D%97%A5%F0%9D%97%AD%F0%9D%97%A2%F0%9D%97%A1-%F0%9D%97%A5%F0%9D%97%B2%F0%9D%97%B4%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB%F0%9D%97%AE%F0%9D%97%B9-%F0%9D%97%96%F0%9D%97%BC%F0%9D%97%BA%F0%9D%97%BD%F0%9D%97%B2%F0%9D%98%81%F0%9D%97%B6%F0%9D%98%81%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB%F0%9D%99%8F%F0%9D%99%9D%F0%9D%99%9A-%F0%9D%99%98%F0%9D%99%A4%F0%9D%99%A2%F0%9D%99%A5%F0%9D%99%9A%F0%9D%99%A9%F0%9D%99%9E%F0%9D%99%A9%F0%9D%99%9E%F0%9D%99%A4%F0%9D%99%A3-%F0%9D%99%9E/1534594968700265"
+              ],
+              "related_links": []
+            }
+          ],
+          "message": "Free Tavily keyless search; no API key or paid fallback. All returned URLs are recorded before scope filtering. Search titles identify leads only; full posts, schedules and registration are unverified.",
+          "searches": [
+            {
+              "query": "site:facebook.com Philippines cybersecurity CTF competition registration",
+              "include_domains": [
+                "facebook.com"
+              ],
+              "status": "ok",
+              "attempts": [
+                {
+                  "status": "ok"
+                }
+              ],
+              "results": [
+                {
+                  "url": "https://www.facebook.com/sliit.cscs/posts/-registrations-closing-soonthe-cyber-security-community-at-sliit-is-hosting-its-/1426545785926305",
+                  "title": "🚩 Registrations closing Soon! The Cyber Security Community at SLIIT is ..."
+                },
+                {
+                  "url": "https://www.facebook.com/Ncertgovph/posts/are-your-ready-for-the-battle-of-the-greatest-and-toughest-mindroadtoh4gfinalsha/626618902974475",
+                  "title": "5.8K views · 76 reactions | Are your ready for the battle of the greatest and toughest mind?\n\n#ROADTOH4GFINALS\n#HACKFORGOVFINALS2023\n#CYBERSECURITY | Philippines National CERT"
+                },
+                {
+                  "url": "https://www.facebook.com/dictr4b/posts/-%F0%9D%90%87%F0%9D%90%80%F0%9D%90%82%F0%9D%90%8A%F0%9D%90%85%F0%9D%90%8E%F0%9D%90%91%F0%9D%90%86%F0%9D%90%8E%F0%9D%90%95-%F0%9D%90%8C%F0%9D%90%88%F0%9D%90%8C%F0%9D%90%80%F0%9D%90%91%F0%9D%90%8E%F0%9D%90%8F%F0%9D%90%80-%F0%9D%9F%90%F0%9D%9F%8E%F0%9D%9F%90%F0%9D%9F%94-%F0%9D%90%91%F0%9D%90%84%F0%9D%90%86%F0%9D%90%88%F0%9D%90%92%F0%9D%90%93%F0%9D%90%91%F0%9D%90%80%F0%9D%90%93%F0%9D%90%88%F0%9D%90%8E%F0%9D%90%8D-%F0%9D%90%8D%F0%9D%90%8E%F0%9D%90%96-%F0%9D%90%8E%F0%9D%90%8F%F0%9D%90%84%F0%9D%90%8D-%F0%9D%90%80%F0%9D%90%9B%F0%9D%90%A8%F0%9D%90%AE%F0%9D%90%AD-%F0%9D%90%AD%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%82%F0%9D%90%A8%F0%9D%90%A6%F0%9D%90%A9%F0%9D%90%9E%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7the-hackfor/1089592793724382",
+                  "title": "Hackforgov 5 registration open for Mimaropa students"
+                },
+                {
+                  "url": "https://www.facebook.com/pngdepartmentofict/posts/dts26-capture-the-flag-challenge-registration-now-openthe-capture-the-flag-ctf-c/1351753220415088",
+                  "title": "Registration Now Open! . The Capture the Flag (CTF) Challenge 2026, co‑ ..."
+                },
+                {
+                  "url": "https://www.facebook.com/DICTRegionVBicol/posts/%F0%9D%90%82%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%A5%F0%9D%90%A2%F0%9D%90%A7%F0%9D%90%A0-%F0%9D%90%81%F0%9D%90%A2%F0%9D%90%9C%F0%9D%90%A8%F0%9D%90%A5%F0%9D%90%AC-%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%B1%F0%9D%90%AD-%F0%9D%90%A0%F0%9D%90%9E%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%AB%F0%9D%90%9A%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7-%F0%9D%90%A8%F0%9D%90%9F-%F0%9D%90%9C%F0%9D%90%B2%F0%9D%90%9B%F0%9D%90%9E%F0%9D%90%AB%F0%9D%90%AC%F0%9D%90%9E%F0%9D%90%9C%F0%9D%90%AE%F0%9D%90%AB%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%B2-%F0%9D%90%A9%F0%9D%90%AB%F0%9D%90%A8%F0%9D%90%9F%F0%9D%90%9E%F0%9D%90%AC%F0%9D%90%AC%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%AC%EF%B8%8Fdict-bicol-invites/1040492329050739",
+                  "title": "HackForGov 5 Bicol qualifying round in Naga City 2026"
+                },
+                {
+                  "url": "https://www.facebook.com/DICTr7/posts/-hackforgov-central-visayas-2026-registration-now-open-dict-region-7-proudly-lau/1522802749891574",
+                  "title": "HackForGov Central Visayas 2026 – Registration Now Open! DICT ..."
+                },
+                {
+                  "url": "https://www.facebook.com/SecuriNets.ISI/posts/-only-3-days-left-to-registerthe-other-side-is-closer-than-you-think-%EF%B8%8Fdont-miss-/1462032572768120",
+                  "title": "Cr4ckout ctf registration closes in 3 days"
+                },
+                {
+                  "url": "https://www.facebook.com/LearnCyberPH/posts/-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8%F0%9D%97%A5-%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%94%F0%9D%97%A0-%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A6-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%98%F0%9D%97%A1-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%97-%F0%9D%97%AA%F0%9D%97%9C%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8-%F0%9D%97%94%F0%9D%97%96%F0%9D%97%96%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A7-the-challenge-is-waiting-gather-y/122190342752805200",
+                  "title": "Packet Capture CTF competition registration open"
+                },
+                {
+                  "url": "https://www.facebook.com/CISA/videos/from-unforgettable-moments-in-past-presidents-cup-competitions-to-new-challenges/2290188004885638",
+                  "title": "President's Cup Cybersecurity Competition Registration Opens ..."
+                },
+                {
+                  "url": "https://www.facebook.com/dictr4a/posts/%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A3%F0%9D%97%A3%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9C%F0%9D%97%A1%F0%9D%97%9A-%F0%9D%97%A1%F0%9D%97%A2%F0%9D%97%AA-%F0%9D%97%9B%F0%9D%97%AE%F0%9D%97%B0%F0%9D%97%B8%F0%9D%97%99%F0%9D%97%BC%F0%9D%97%BF%F0%9D%97%9A%F0%9D%97%BC%F0%9D%98%83-%F0%9D%9F%B1-%F0%9D%9F%AE%F0%9D%9F%AC%F0%9D%9F%AE%F0%9D%9F%B2-%F0%9D%97%96%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%94%F0%9D%97%95%F0%9D%97%94%F0%9D%97%A5%F0%9D%97%AD%F0%9D%97%A2%F0%9D%97%A1-%F0%9D%97%A5%F0%9D%97%B2%F0%9D%97%B4%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB%F0%9D%97%AE%F0%9D%97%B9-%F0%9D%97%96%F0%9D%97%BC%F0%9D%97%BA%F0%9D%97%BD%F0%9D%97%B2%F0%9D%98%81%F0%9D%97%B6%F0%9D%98%81%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB%F0%9D%99%8F%F0%9D%99%9D%F0%9D%99%9A-%F0%9D%99%98%F0%9D%99%A4%F0%9D%99%A2%F0%9D%99%A5%F0%9D%99%9A%F0%9D%99%A9%F0%9D%99%9E%F0%9D%99%A9%F0%9D%99%9E%F0%9D%99%A4%F0%9D%99%A3-%F0%9D%99%9E/1534594968700265",
+                  "title": "𝗛𝗮𝗰𝗸𝗙𝗼𝗿𝗚𝗼𝘃 𝟱 𝟮𝟬𝟮𝟲 𝗖𝗔𝗟𝗔𝗕𝗔𝗥𝗭𝗢𝗡 𝗥𝗲𝗴𝗶𝗼𝗻𝗮𝗹 ..."
+                },
+                {
+                  "url": "https://www.facebook.com/edenuniversity2022/posts/-cybersecurity-ctf-competition-learn-hack-win-ready-to-test-your-cybersecurity-s/1072500681951164",
+                  "title": "Eden University zm on Facebook: \"🔐 CYBERSECURITY CTF COMPETITION | LEARN. HACK. WIN! 💻🏆 Ready to test your cybersecurity skills? Join…\""
+                },
+                {
+                  "url": "https://www.facebook.com/borneobulletin.news/posts/cyber-battle-capture-the-flag-2026-returns-for-its-11th-year-with-the-theme-ai-i/1605946771541747",
+                  "title": "Cyber Battle: Capture The Flag 2026 returns for its 11th year with the theme ..."
+                },
+                {
+                  "url": "https://www.facebook.com/namaluniversitylive/posts/the-3-day-cybersecurity-ctf-workshop-was-held-at-namal-university-providing-stud/1387785733355975",
+                  "title": "The 3-Day Cybersecurity & CTF Workshop... - Namal University"
+                },
+                {
+                  "url": "https://www.facebook.com/picoctf.competition/videos/whats-a-capture-the-flag-ctf-competition-its-not-the-gym-class-kindin-cybersecur/1445870643435844",
+                  "title": "picoCTF: High School Hacking Competition on Facebook: \"picoCTF: High School Hacking Competition\""
+                },
+                {
+                  "url": "https://www.facebook.com/61564048179639/videos/cyberx-ctf-ready-to-test-your-cybersecurity-skills-19th-september-2026-comment/1609876830501863",
+                  "title": "🚩 CyberX CTF 🔥\n\nReady to test your cybersecurity skills? 👨‍💻⚡\n📅 19th September 2026\n\n💬 Comment “LINK” to get the registration details!\n\n#cyberxctf #ctf #cybersecurity #capturetheflag #viral\n\n[cyberx ctf 2026, capture the flag, cybersecurity challenge, ctf competition, cybersecurity competition, ethi..."
+                },
+                {
+                  "url": "https://www.facebook.com/groups/pitsf/posts/32074803912104814",
+                  "title": "Can anyone here provide suggestions (from personal experience) how to ..."
+                },
+                {
+                  "url": "https://www.facebook.com/Jpuraflames/posts/securex-cybersecurity-ctf-competition-organized-by-the-ict-department-of-the-uni/1551883446295451",
+                  "title": "J'pura Flames - “SecureX”- Cybersecurity CTF Competition,..."
+                },
+                {
+                  "url": "https://www.facebook.com/TowsonCIS/posts/upcoming-ctf-capture-the-flag-event-join-us-for-guard-maryland-cyber-showdown-20/1687527326557741",
+                  "title": "Upcoming CTF (Capture the Flag) Event! ⛳💻 Join us for Guard Maryland: Cyber Showdown 2026, a free, live capture-the-flag (CTF) competition sponsored by the Maryland Air National Guard, Towson University Cyber Defense Club, and Hack The Box! All skill levels are welcome, from novice, intermediate, to..."
+                },
+                {
+                  "url": "https://www.facebook.com/cybertalentsofficial/posts/why-join-egypt-national-cybersecurity-ctf-2025this-is-more-than-just-a-competiti/1351806316984145",
+                  "title": "CyberTalents - Why Join Egypt National Cybersecurity CTF..."
+                },
+                {
+                  "url": "https://www.facebook.com/japzdivino/posts/hey-yo-hackers-check-this-out-if-youre-looking-to-test-your-skills-ctfs-are-a-gr/1721833606395295",
+                  "title": "Japz Divino on Facebook: \"Hey yo, hackers! 👋 Check this out! If you're looking to test your skills, CTFs are a great way to le…\""
+                }
+              ],
+              "provider_query": "Philippines cybersecurity CTF competition registration",
+              "request_id": "ce506b8b-f1a0-4900-b26a-0eb81ade1ed3"
+            },
+            {
+              "query": "Philippines capture the flag CTF competition registration",
+              "include_domains": [],
+              "status": "ok",
+              "attempts": [
+                {
+                  "status": "ok"
+                }
+              ],
+              "results": [
+                {
+                  "url": "https://curtin.edu.my/event/capture-the-flag",
+                  "title": "Capture The Flag Hackathon 2026 v4.0 (Online) | Events"
+                },
+                {
+                  "url": "https://pja.edu.pl/en/capture-the-flag-2026",
+                  "title": "Capture the Flag 2026 at PJAIT Join the PJHACK CTF Competition - PJAIT"
+                },
+                {
+                  "url": "https://ncc-cnc.ca/capture-the-flag",
+                  "title": "Capture the Flag | National Cybersecurity Consortium"
+                },
+                {
+                  "url": "https://codefest.lk/capture-the-flag",
+                  "title": "Capture the Flag - Codefest"
+                },
+                {
+                  "url": "https://www.instagram.com/p/DejKWLdiGyN",
+                  "title": "Rush to capture the flag! The Computer Society of Ateneo (CompSAt ..."
+                },
+                {
+                  "url": "https://capturetheflag.withgoogle.com",
+                  "title": "Google CTF"
+                },
+                {
+                  "url": "https://hub.dragos.com/ctf-registration-26",
+                  "title": "Capture the Flag 2026: Virtual OT Cybersecurity Challenge | Dragos"
+                },
+                {
+                  "url": "https://www.huntress.com/cybersecurity-education/cybersecurity-awareness/capture-the-flag",
+                  "title": "Cybersecurity Capture the Flag | Hands-On CTF by Huntress | Huntress"
+                },
+                {
+                  "url": "https://www.facebook.com/LearnCyberPH/posts/-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8%F0%9D%97%A5-%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%94%F0%9D%97%A0-%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A6-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%98%F0%9D%97%A1-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%97-%F0%9D%97%AA%F0%9D%97%9C%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8-%F0%9D%97%94%F0%9D%97%96%F0%9D%97%96%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A7-the-challenge-is-waiting-gather-y/122190342752805200",
+                  "title": "Packet Capture CTF competition registration open - Facebook"
+                },
+                {
+                  "url": "https://hackerdna.com/blog/ctf-competitions",
+                  "title": "CTF Competitions: How to Enter Your First One in 2026 | HackerDNA"
+                },
+                {
+                  "url": "https://www.facebook.com/Ncertgovph/videos/the-wait-is-finally-overhackforgov-capture-the-flag-competition-is-backyouve-wai/2753785511476593",
+                  "title": "The wait is finally over! HackForGov: Capture the Flag Competition ..."
+                },
+                {
+                  "url": "https://ctftime.org/event/list",
+                  "title": "CTF events - CTFtime"
+                },
+                {
+                  "url": "https://www.splunk.com/en_us/blog/learn/capture-the-flag-ctf.html",
+                  "title": "What’s CTF? Capture The Flag Competitions for Cybersecurity | Splunk"
+                },
+                {
+                  "url": "https://www.facebook.com/CYBERSECgovph/posts/the-wait-is-finally-overhackforgov-capture-the-flag-competition-is-backyouve-wai/1237762491716037",
+                  "title": "The wait is finally over! HackForGov: Capture the Flag Competition ..."
+                },
+                {
+                  "url": "https://www.enterprisecayman.ky/events/capture-the-flag-competition-2026",
+                  "title": "Capture The Flag Competition - Enterprise Cayman"
+                },
+                {
+                  "url": "https://en.wikipedia.org/wiki/Capture_the_flag_(cybersecurity)",
+                  "title": "Capture the flag (cybersecurity) - Wikipedia"
+                },
+                {
+                  "url": "https://ccb.belgium.be/capture-flag-competitions",
+                  "title": "Capture the flag competitions | CCB Belgium"
+                },
+                {
+                  "url": "https://www.hackthebox.com/capture-the-flag",
+                  "title": "Hack The Box CTF Platform | Cybersecurity Team Assessment"
+                },
+                {
+                  "url": "https://www.eccouncil.org/cybersecurity-exchange/ethical-hacking/capture-the-flag-ctf-cybersecurity",
+                  "title": "What is Capture The Flag? | CTF Types & Important in Cybersecurity"
+                },
+                {
+                  "url": "https://www.google.com/about/careers/applications/buildyourfuture/events/ctf",
+                  "title": "Capture the flag competition - Google Careers"
+                }
+              ],
+              "provider_query": "Philippines capture the flag CTF competition registration",
+              "request_id": "af2f6e33-555f-4b9d-9b00-906a08cd8670"
+            }
+          ],
+          "decisions": [
+            {
+              "url": "https://www.facebook.com/sliit.cscs/posts/-registrations-closing-soonthe-cyber-security-community-at-sliit-is-hosting-its-/1426545785926305",
+              "accepted": false,
+              "reason": "No identifiable CTF in result title"
+            },
+            {
+              "url": "https://www.facebook.com/Ncertgovph/posts/are-your-ready-for-the-battle-of-the-greatest-and-toughest-mindroadtoh4gfinalsha/626618902974475",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/dictr4b/posts/-%F0%9D%90%87%F0%9D%90%80%F0%9D%90%82%F0%9D%90%8A%F0%9D%90%85%F0%9D%90%8E%F0%9D%90%91%F0%9D%90%86%F0%9D%90%8E%F0%9D%90%95-%F0%9D%90%8C%F0%9D%90%88%F0%9D%90%8C%F0%9D%90%80%F0%9D%90%91%F0%9D%90%8E%F0%9D%90%8F%F0%9D%90%80-%F0%9D%9F%90%F0%9D%9F%8E%F0%9D%9F%90%F0%9D%9F%94-%F0%9D%90%91%F0%9D%90%84%F0%9D%90%86%F0%9D%90%88%F0%9D%90%92%F0%9D%90%93%F0%9D%90%91%F0%9D%90%80%F0%9D%90%93%F0%9D%90%88%F0%9D%90%8E%F0%9D%90%8D-%F0%9D%90%8D%F0%9D%90%8E%F0%9D%90%96-%F0%9D%90%8E%F0%9D%90%8F%F0%9D%90%84%F0%9D%90%8D-%F0%9D%90%80%F0%9D%90%9B%F0%9D%90%A8%F0%9D%90%AE%F0%9D%90%AD-%F0%9D%90%AD%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%82%F0%9D%90%A8%F0%9D%90%A6%F0%9D%90%A9%F0%9D%90%9E%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7the-hackfor/1089592793724382",
+              "accepted": true,
+              "reason": "Accepted as search-only; schedule and registration remain unconfirmed"
+            },
+            {
+              "url": "https://www.facebook.com/pngdepartmentofict/posts/dts26-capture-the-flag-challenge-registration-now-openthe-capture-the-flag-ctf-c/1351753220415088",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/DICTRegionVBicol/posts/%F0%9D%90%82%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%A5%F0%9D%90%A2%F0%9D%90%A7%F0%9D%90%A0-%F0%9D%90%81%F0%9D%90%A2%F0%9D%90%9C%F0%9D%90%A8%F0%9D%90%A5%F0%9D%90%AC-%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%B1%F0%9D%90%AD-%F0%9D%90%A0%F0%9D%90%9E%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%AB%F0%9D%90%9A%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7-%F0%9D%90%A8%F0%9D%90%9F-%F0%9D%90%9C%F0%9D%90%B2%F0%9D%90%9B%F0%9D%90%9E%F0%9D%90%AB%F0%9D%90%AC%F0%9D%90%9E%F0%9D%90%9C%F0%9D%90%AE%F0%9D%90%AB%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%B2-%F0%9D%90%A9%F0%9D%90%AB%F0%9D%90%A8%F0%9D%90%9F%F0%9D%90%9E%F0%9D%90%AC%F0%9D%90%AC%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%AC%EF%B8%8Fdict-bicol-invites/1040492329050739",
+              "accepted": true,
+              "reason": "Accepted as search-only; schedule and registration remain unconfirmed"
+            },
+            {
+              "url": "https://www.facebook.com/DICTr7/posts/-hackforgov-central-visayas-2026-registration-now-open-dict-region-7-proudly-lau/1522802749891574",
+              "accepted": true,
+              "reason": "Accepted as search-only; schedule and registration remain unconfirmed"
+            },
+            {
+              "url": "https://www.facebook.com/SecuriNets.ISI/posts/-only-3-days-left-to-registerthe-other-side-is-closer-than-you-think-%EF%B8%8Fdont-miss-/1462032572768120",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/LearnCyberPH/posts/-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8%F0%9D%97%A5-%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%94%F0%9D%97%A0-%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A6-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%98%F0%9D%97%A1-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%97-%F0%9D%97%AA%F0%9D%97%9C%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8-%F0%9D%97%94%F0%9D%97%96%F0%9D%97%96%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A7-the-challenge-is-waiting-gather-y/122190342752805200",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/CISA/videos/from-unforgettable-moments-in-past-presidents-cup-competitions-to-new-challenges/2290188004885638",
+              "accepted": false,
+              "reason": "No identifiable CTF in result title"
+            },
+            {
+              "url": "https://www.facebook.com/dictr4a/posts/%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A3%F0%9D%97%A3%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9C%F0%9D%97%A1%F0%9D%97%9A-%F0%9D%97%A1%F0%9D%97%A2%F0%9D%97%AA-%F0%9D%97%9B%F0%9D%97%AE%F0%9D%97%B0%F0%9D%97%B8%F0%9D%97%99%F0%9D%97%BC%F0%9D%97%BF%F0%9D%97%9A%F0%9D%97%BC%F0%9D%98%83-%F0%9D%9F%B1-%F0%9D%9F%AE%F0%9D%9F%AC%F0%9D%9F%AE%F0%9D%9F%B2-%F0%9D%97%96%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%94%F0%9D%97%95%F0%9D%97%94%F0%9D%97%A5%F0%9D%97%AD%F0%9D%97%A2%F0%9D%97%A1-%F0%9D%97%A5%F0%9D%97%B2%F0%9D%97%B4%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB%F0%9D%97%AE%F0%9D%97%B9-%F0%9D%97%96%F0%9D%97%BC%F0%9D%97%BA%F0%9D%97%BD%F0%9D%97%B2%F0%9D%98%81%F0%9D%97%B6%F0%9D%98%81%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB%F0%9D%99%8F%F0%9D%99%9D%F0%9D%99%9A-%F0%9D%99%98%F0%9D%99%A4%F0%9D%99%A2%F0%9D%99%A5%F0%9D%99%9A%F0%9D%99%A9%F0%9D%99%9E%F0%9D%99%A9%F0%9D%99%9E%F0%9D%99%A4%F0%9D%99%A3-%F0%9D%99%9E/1534594968700265",
+              "accepted": true,
+              "reason": "Accepted as search-only; schedule and registration remain unconfirmed"
+            },
+            {
+              "url": "https://www.facebook.com/edenuniversity2022/posts/-cybersecurity-ctf-competition-learn-hack-win-ready-to-test-your-cybersecurity-s/1072500681951164",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/borneobulletin.news/posts/cyber-battle-capture-the-flag-2026-returns-for-its-11th-year-with-the-theme-ai-i/1605946771541747",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/namaluniversitylive/posts/the-3-day-cybersecurity-ctf-workshop-was-held-at-namal-university-providing-stud/1387785733355975",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/picoctf.competition/videos/whats-a-capture-the-flag-ctf-competition-its-not-the-gym-class-kindin-cybersecur/1445870643435844",
+              "accepted": false,
+              "reason": "No identifiable CTF in result title"
+            },
+            {
+              "url": "https://www.facebook.com/61564048179639/videos/cyberx-ctf-ready-to-test-your-cybersecurity-skills-19th-september-2026-comment/1609876830501863",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/groups/pitsf/posts/32074803912104814",
+              "accepted": false,
+              "reason": "No identifiable CTF in result title"
+            },
+            {
+              "url": "https://www.facebook.com/Jpuraflames/posts/securex-cybersecurity-ctf-competition-organized-by-the-ict-department-of-the-uni/1551883446295451",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/TowsonCIS/posts/upcoming-ctf-capture-the-flag-event-join-us-for-guard-maryland-cyber-showdown-20/1687527326557741",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/cybertalentsofficial/posts/why-join-egypt-national-cybersecurity-ctf-2025this-is-more-than-just-a-competiti/1351806316984145",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/japzdivino/posts/hey-yo-hackers-check-this-out-if-youre-looking-to-test-your-skills-ctfs-are-a-gr/1721833606395295",
+              "accepted": false,
+              "reason": "No identifiable CTF in result title"
+            },
+            {
+              "url": "https://curtin.edu.my/event/capture-the-flag",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://pja.edu.pl/en/capture-the-flag-2026",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://ncc-cnc.ca/capture-the-flag",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://codefest.lk/capture-the-flag",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.instagram.com/p/DejKWLdiGyN",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://capturetheflag.withgoogle.com",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://hub.dragos.com/ctf-registration-26",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.huntress.com/cybersecurity-education/cybersecurity-awareness/capture-the-flag",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/LearnCyberPH/posts/-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8%F0%9D%97%A5-%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%94%F0%9D%97%A0-%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A6-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%98%F0%9D%97%A1-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%97-%F0%9D%97%AA%F0%9D%97%9C%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8-%F0%9D%97%94%F0%9D%97%96%F0%9D%97%96%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A7-the-challenge-is-waiting-gather-y/122190342752805200",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://hackerdna.com/blog/ctf-competitions",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/Ncertgovph/videos/the-wait-is-finally-overhackforgov-capture-the-flag-competition-is-backyouve-wai/2753785511476593",
+              "accepted": false,
+              "reason": "Title lacks an unambiguous competition edition"
+            },
+            {
+              "url": "https://ctftime.org/event/list",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.splunk.com/en_us/blog/learn/capture-the-flag-ctf.html",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/CYBERSECgovph/posts/the-wait-is-finally-overhackforgov-capture-the-flag-competition-is-backyouve-wai/1237762491716037",
+              "accepted": false,
+              "reason": "Title lacks an unambiguous competition edition"
+            },
+            {
+              "url": "https://www.enterprisecayman.ky/events/capture-the-flag-competition-2026",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/Capture_the_flag_(cybersecurity)",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://ccb.belgium.be/capture-flag-competitions",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.hackthebox.com/capture-the-flag",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.eccouncil.org/cybersecurity-exchange/ethical-hacking/capture-the-flag-ctf-cybersecurity",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.google.com/about/careers/applications/buildyourfuture/events/ctf",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            }
+          ]
+        },
+        {
+          "id": "rootcon-bluesky",
+          "name": "ROOTCON · Bluesky",
+          "status": "ok",
+          "discovered": 146,
+          "accepted": 3,
+          "new_announcements": 3,
+          "discoveries": [
+            {
+              "event_id": "775f475db77bea2c6cd288ec",
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h",
+              "path": [
+                "https://bsky.app/profile/rootcon.bsky.social",
+                "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h"
+              ],
+              "related_links": []
+            },
+            {
+              "event_id": "b33d89e59bd6589135a41f58",
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24",
+              "path": [
+                "https://bsky.app/profile/rootcon.bsky.social",
+                "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24"
+              ],
+              "related_links": []
+            },
+            {
+              "event_id": "775f475db77bea2c6cd288ec",
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z",
+              "path": [
+                "https://bsky.app/profile/rootcon.bsky.social",
+                "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z"
+              ],
+              "related_links": []
+            }
+          ],
+          "message": "Public author feed and full post text read through the documented Bluesky API; only extracted facts and brief excerpts retained, no media."
+        },
+        {
+          "id": "hackthenorth",
+          "name": "HackTheNorth.ph · Announcements",
+          "status": "ok",
+          "discovered": 11,
+          "accepted": 0,
+          "new_announcements": 0,
+          "discoveries": [],
+          "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded."
+        },
+        {
+          "id": "up-acm",
+          "name": "UP ACM · Events",
+          "status": "ok",
+          "discovered": 1,
+          "accepted": 0,
+          "new_announcements": 0,
+          "discoveries": [],
+          "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded."
+        },
+        {
+          "id": "pup-announcements",
+          "name": "PUP · Announcements feed",
+          "status": "ok",
+          "discovered": 10,
+          "accepted": 0,
+          "new_announcements": 0,
+          "discoveries": [],
+          "message": "Public RSS/Atom feed scanned; 10 new or retained article URLs rechecked."
+        },
+        {
+          "id": "pup-news",
+          "name": "PUP · News feed",
+          "status": "ok",
+          "discovered": 10,
+          "accepted": 0,
+          "new_announcements": 0,
+          "discoveries": [],
+          "message": "Public RSS/Atom feed scanned; 10 new or retained article URLs rechecked."
+        },
+        {
+          "id": "ncert",
+          "name": "DICT / CERT-PH · Feed",
+          "status": "error",
+          "discovered": 0,
+          "accepted": 0,
+          "new_announcements": 0,
+          "discoveries": [],
+          "message": "Cannot verify robots.txt: HTTP 403"
+        },
+        {
+          "id": "dict",
+          "name": "DICT · Announcements",
+          "status": "error",
+          "discovered": 0,
+          "accepted": 0,
+          "new_announcements": 0,
+          "discoveries": [],
+          "message": "Cannot verify robots.txt: HTTP 403"
+        },
+        {
+          "id": "rootcon-website",
+          "name": "ROOTCON · Website",
+          "status": "policy_restricted",
+          "discovered": 0,
+          "accepted": 0,
+          "new_announcements": 0,
+          "discoveries": [],
+          "message": "Website terms prohibit automated data extraction. Use the official Bluesky API source instead."
+        },
+        {
+          "id": "ctftime",
+          "name": "CTFtime · Philippine connections",
+          "status": "ok",
+          "discovered": 180,
+          "accepted": 0,
+          "new_announcements": 0,
+          "discoveries": [],
+          "message": "Supplementary event metadata only. Included Philippine venues or explicitly configured Philippine organizers; global events open to everyone are excluded."
+        },
+        {
+          "id": "facebook-search",
+          "name": "Facebook · Indexed announcements",
+          "status": "needs_credentials",
+          "discovered": 0,
+          "accepted": 0,
+          "new_announcements": 0,
+          "discoveries": [],
+          "message": "Requires server-side BRAVE_SEARCH_API_KEY and a plan with storage rights (BRAVE_STORAGE_RIGHTS=1). Facebook full posts are not fetched."
+        }
+      ],
+      "finished_at": "2026-11-21T15:41:37.504213+00:00",
+      "events": 6,
+      "announcements": 7
+    },
+    {
+      "started_at": "2026-11-21T15:41:38.876776+00:00",
+      "sources": [
+        {
+          "id": "tavily-keyless",
+          "name": "Tavily · Free Philippine CTF discovery",
+          "status": "ok",
+          "discovered": 40,
+          "accepted": 4,
+          "new_announcements": 0,
+          "discoveries": [
+            {
+              "event_id": "b9f3bb09229419f52097289a",
+              "url": "https://www.facebook.com/dictr4b/posts/-%F0%9D%90%87%F0%9D%90%80%F0%9D%90%82%F0%9D%90%8A%F0%9D%90%85%F0%9D%90%8E%F0%9D%90%91%F0%9D%90%86%F0%9D%90%8E%F0%9D%90%95-%F0%9D%90%8C%F0%9D%90%88%F0%9D%90%8C%F0%9D%90%80%F0%9D%90%91%F0%9D%90%8E%F0%9D%90%8F%F0%9D%90%80-%F0%9D%9F%90%F0%9D%9F%8E%F0%9D%9F%90%F0%9D%9F%94-%F0%9D%90%91%F0%9D%90%84%F0%9D%90%86%F0%9D%90%88%F0%9D%90%92%F0%9D%90%93%F0%9D%90%91%F0%9D%90%80%F0%9D%90%93%F0%9D%90%88%F0%9D%90%8E%F0%9D%90%8D-%F0%9D%90%8D%F0%9D%90%8E%F0%9D%90%96-%F0%9D%90%8E%F0%9D%90%8F%F0%9D%90%84%F0%9D%90%8D-%F0%9D%90%80%F0%9D%90%9B%F0%9D%90%A8%F0%9D%90%AE%F0%9D%90%AD-%F0%9D%90%AD%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%82%F0%9D%90%A8%F0%9D%90%A6%F0%9D%90%A9%F0%9D%90%9E%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7the-hackfor/1089592793724382",
+              "path": [
+                "https://api.tavily.com/search",
+                "https://www.facebook.com/dictr4b/posts/-%F0%9D%90%87%F0%9D%90%80%F0%9D%90%82%F0%9D%90%8A%F0%9D%90%85%F0%9D%90%8E%F0%9D%90%91%F0%9D%90%86%F0%9D%90%8E%F0%9D%90%95-%F0%9D%90%8C%F0%9D%90%88%F0%9D%90%8C%F0%9D%90%80%F0%9D%90%91%F0%9D%90%8E%F0%9D%90%8F%F0%9D%90%80-%F0%9D%9F%90%F0%9D%9F%8E%F0%9D%9F%90%F0%9D%9F%94-%F0%9D%90%91%F0%9D%90%84%F0%9D%90%86%F0%9D%90%88%F0%9D%90%92%F0%9D%90%93%F0%9D%90%91%F0%9D%90%80%F0%9D%90%93%F0%9D%90%88%F0%9D%90%8E%F0%9D%90%8D-%F0%9D%90%8D%F0%9D%90%8E%F0%9D%90%96-%F0%9D%90%8E%F0%9D%90%8F%F0%9D%90%84%F0%9D%90%8D-%F0%9D%90%80%F0%9D%90%9B%F0%9D%90%A8%F0%9D%90%AE%F0%9D%90%AD-%F0%9D%90%AD%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%82%F0%9D%90%A8%F0%9D%90%A6%F0%9D%90%A9%F0%9D%90%9E%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7the-hackfor/1089592793724382"
+              ],
+              "related_links": []
+            },
+            {
+              "event_id": "e9637c9ff666c35c69b29d64",
+              "url": "https://www.facebook.com/DICTRegionVBicol/posts/%F0%9D%90%82%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%A5%F0%9D%90%A2%F0%9D%90%A7%F0%9D%90%A0-%F0%9D%90%81%F0%9D%90%A2%F0%9D%90%9C%F0%9D%90%A8%F0%9D%90%A5%F0%9D%90%AC-%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%B1%F0%9D%90%AD-%F0%9D%90%A0%F0%9D%90%9E%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%AB%F0%9D%90%9A%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7-%F0%9D%90%A8%F0%9D%90%9F-%F0%9D%90%9C%F0%9D%90%B2%F0%9D%90%9B%F0%9D%90%9E%F0%9D%90%AB%F0%9D%90%AC%F0%9D%90%9E%F0%9D%90%9C%F0%9D%90%AE%F0%9D%90%AB%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%B2-%F0%9D%90%A9%F0%9D%90%AB%F0%9D%90%A8%F0%9D%90%9F%F0%9D%90%9E%F0%9D%90%AC%F0%9D%90%AC%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%AC%EF%B8%8Fdict-bicol-invites/1040492329050739",
+              "path": [
+                "https://api.tavily.com/search",
+                "https://www.facebook.com/DICTRegionVBicol/posts/%F0%9D%90%82%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%A5%F0%9D%90%A2%F0%9D%90%A7%F0%9D%90%A0-%F0%9D%90%81%F0%9D%90%A2%F0%9D%90%9C%F0%9D%90%A8%F0%9D%90%A5%F0%9D%90%AC-%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%B1%F0%9D%90%AD-%F0%9D%90%A0%F0%9D%90%9E%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%AB%F0%9D%90%9A%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7-%F0%9D%90%A8%F0%9D%90%9F-%F0%9D%90%9C%F0%9D%90%B2%F0%9D%90%9B%F0%9D%90%9E%F0%9D%90%AB%F0%9D%90%AC%F0%9D%90%9E%F0%9D%90%9C%F0%9D%90%AE%F0%9D%90%AB%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%B2-%F0%9D%90%A9%F0%9D%90%AB%F0%9D%90%A8%F0%9D%90%9F%F0%9D%90%9E%F0%9D%90%AC%F0%9D%90%AC%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%AC%EF%B8%8Fdict-bicol-invites/1040492329050739"
+              ],
+              "related_links": []
+            },
+            {
+              "event_id": "4c03c1407c94dd6defaa2921",
+              "url": "https://www.facebook.com/DICTr7/posts/-hackforgov-central-visayas-2026-registration-now-open-dict-region-7-proudly-lau/1522802749891574",
+              "path": [
+                "https://api.tavily.com/search",
+                "https://www.facebook.com/DICTr7/posts/-hackforgov-central-visayas-2026-registration-now-open-dict-region-7-proudly-lau/1522802749891574"
+              ],
+              "related_links": []
+            },
+            {
+              "event_id": "c167132f342d52e478641b89",
+              "url": "https://www.facebook.com/dictr4a/posts/%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A3%F0%9D%97%A3%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9C%F0%9D%97%A1%F0%9D%97%9A-%F0%9D%97%A1%F0%9D%97%A2%F0%9D%97%AA-%F0%9D%97%9B%F0%9D%97%AE%F0%9D%97%B0%F0%9D%97%B8%F0%9D%97%99%F0%9D%97%BC%F0%9D%97%BF%F0%9D%97%9A%F0%9D%97%BC%F0%9D%98%83-%F0%9D%9F%B1-%F0%9D%9F%AE%F0%9D%9F%AC%F0%9D%9F%AE%F0%9D%9F%B2-%F0%9D%97%96%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%94%F0%9D%97%95%F0%9D%97%94%F0%9D%97%A5%F0%9D%97%AD%F0%9D%97%A2%F0%9D%97%A1-%F0%9D%97%A5%F0%9D%97%B2%F0%9D%97%B4%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB%F0%9D%97%AE%F0%9D%97%B9-%F0%9D%97%96%F0%9D%97%BC%F0%9D%97%BA%F0%9D%97%BD%F0%9D%97%B2%F0%9D%98%81%F0%9D%97%B6%F0%9D%98%81%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB%F0%9D%99%8F%F0%9D%99%9D%F0%9D%99%9A-%F0%9D%99%98%F0%9D%99%A4%F0%9D%99%A2%F0%9D%99%A5%F0%9D%99%9A%F0%9D%99%A9%F0%9D%99%9E%F0%9D%99%A9%F0%9D%99%9E%F0%9D%99%A4%F0%9D%99%A3-%F0%9D%99%9E/1534594968700265",
+              "path": [
+                "https://api.tavily.com/search",
+                "https://www.facebook.com/dictr4a/posts/%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A3%F0%9D%97%A3%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9C%F0%9D%97%A1%F0%9D%97%9A-%F0%9D%97%A1%F0%9D%97%A2%F0%9D%97%AA-%F0%9D%97%9B%F0%9D%97%AE%F0%9D%97%B0%F0%9D%97%B8%F0%9D%97%99%F0%9D%97%BC%F0%9D%97%BF%F0%9D%97%9A%F0%9D%97%BC%F0%9D%98%83-%F0%9D%9F%B1-%F0%9D%9F%AE%F0%9D%9F%AC%F0%9D%9F%AE%F0%9D%9F%B2-%F0%9D%97%96%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%94%F0%9D%97%95%F0%9D%97%94%F0%9D%97%A5%F0%9D%97%AD%F0%9D%97%A2%F0%9D%97%A1-%F0%9D%97%A5%F0%9D%97%B2%F0%9D%97%B4%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB%F0%9D%97%AE%F0%9D%97%B9-%F0%9D%97%96%F0%9D%97%BC%F0%9D%97%BA%F0%9D%97%BD%F0%9D%97%B2%F0%9D%98%81%F0%9D%97%B6%F0%9D%98%81%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB%F0%9D%99%8F%F0%9D%99%9D%F0%9D%99%9A-%F0%9D%99%98%F0%9D%99%A4%F0%9D%99%A2%F0%9D%99%A5%F0%9D%99%9A%F0%9D%99%A9%F0%9D%99%9E%F0%9D%99%A9%F0%9D%99%9E%F0%9D%99%A4%F0%9D%99%A3-%F0%9D%99%9E/1534594968700265"
+              ],
+              "related_links": []
+            }
+          ],
+          "message": "Free Tavily keyless search; no API key or paid fallback. All returned URLs are recorded before scope filtering. Search titles identify leads only; full posts, schedules and registration are unverified.",
+          "searches": [
+            {
+              "query": "site:facebook.com Philippines cybersecurity CTF competition registration",
+              "include_domains": [
+                "facebook.com"
+              ],
+              "status": "ok",
+              "attempts": [
+                {
+                  "status": "ok"
+                }
+              ],
+              "results": [
+                {
+                  "url": "https://www.facebook.com/sliit.cscs/posts/-registrations-closing-soonthe-cyber-security-community-at-sliit-is-hosting-its-/1426545785926305",
+                  "title": "🚩 Registrations closing Soon! The Cyber Security Community at SLIIT is ..."
+                },
+                {
+                  "url": "https://www.facebook.com/Ncertgovph/posts/are-your-ready-for-the-battle-of-the-greatest-and-toughest-mindroadtoh4gfinalsha/626618902974475",
+                  "title": "5.8K views · 76 reactions | Are your ready for the battle of the greatest and toughest mind?\n\n#ROADTOH4GFINALS\n#HACKFORGOVFINALS2023\n#CYBERSECURITY | Philippines National CERT"
+                },
+                {
+                  "url": "https://www.facebook.com/dictr4b/posts/-%F0%9D%90%87%F0%9D%90%80%F0%9D%90%82%F0%9D%90%8A%F0%9D%90%85%F0%9D%90%8E%F0%9D%90%91%F0%9D%90%86%F0%9D%90%8E%F0%9D%90%95-%F0%9D%90%8C%F0%9D%90%88%F0%9D%90%8C%F0%9D%90%80%F0%9D%90%91%F0%9D%90%8E%F0%9D%90%8F%F0%9D%90%80-%F0%9D%9F%90%F0%9D%9F%8E%F0%9D%9F%90%F0%9D%9F%94-%F0%9D%90%91%F0%9D%90%84%F0%9D%90%86%F0%9D%90%88%F0%9D%90%92%F0%9D%90%93%F0%9D%90%91%F0%9D%90%80%F0%9D%90%93%F0%9D%90%88%F0%9D%90%8E%F0%9D%90%8D-%F0%9D%90%8D%F0%9D%90%8E%F0%9D%90%96-%F0%9D%90%8E%F0%9D%90%8F%F0%9D%90%84%F0%9D%90%8D-%F0%9D%90%80%F0%9D%90%9B%F0%9D%90%A8%F0%9D%90%AE%F0%9D%90%AD-%F0%9D%90%AD%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%82%F0%9D%90%A8%F0%9D%90%A6%F0%9D%90%A9%F0%9D%90%9E%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7the-hackfor/1089592793724382",
+                  "title": "Hackforgov 5 registration open for Mimaropa students"
+                },
+                {
+                  "url": "https://www.facebook.com/pngdepartmentofict/posts/dts26-capture-the-flag-challenge-registration-now-openthe-capture-the-flag-ctf-c/1351753220415088",
+                  "title": "Registration Now Open! . The Capture the Flag (CTF) Challenge 2026, co‑ ..."
+                },
+                {
+                  "url": "https://www.facebook.com/DICTRegionVBicol/posts/%F0%9D%90%82%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%A5%F0%9D%90%A2%F0%9D%90%A7%F0%9D%90%A0-%F0%9D%90%81%F0%9D%90%A2%F0%9D%90%9C%F0%9D%90%A8%F0%9D%90%A5%F0%9D%90%AC-%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%B1%F0%9D%90%AD-%F0%9D%90%A0%F0%9D%90%9E%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%AB%F0%9D%90%9A%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7-%F0%9D%90%A8%F0%9D%90%9F-%F0%9D%90%9C%F0%9D%90%B2%F0%9D%90%9B%F0%9D%90%9E%F0%9D%90%AB%F0%9D%90%AC%F0%9D%90%9E%F0%9D%90%9C%F0%9D%90%AE%F0%9D%90%AB%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%B2-%F0%9D%90%A9%F0%9D%90%AB%F0%9D%90%A8%F0%9D%90%9F%F0%9D%90%9E%F0%9D%90%AC%F0%9D%90%AC%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%AC%EF%B8%8Fdict-bicol-invites/1040492329050739",
+                  "title": "HackForGov 5 Bicol qualifying round in Naga City 2026"
+                },
+                {
+                  "url": "https://www.facebook.com/DICTr7/posts/-hackforgov-central-visayas-2026-registration-now-open-dict-region-7-proudly-lau/1522802749891574",
+                  "title": "HackForGov Central Visayas 2026 – Registration Now Open! DICT ..."
+                },
+                {
+                  "url": "https://www.facebook.com/SecuriNets.ISI/posts/-only-3-days-left-to-registerthe-other-side-is-closer-than-you-think-%EF%B8%8Fdont-miss-/1462032572768120",
+                  "title": "Cr4ckout ctf registration closes in 3 days"
+                },
+                {
+                  "url": "https://www.facebook.com/LearnCyberPH/posts/-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8%F0%9D%97%A5-%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%94%F0%9D%97%A0-%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A6-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%98%F0%9D%97%A1-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%97-%F0%9D%97%AA%F0%9D%97%9C%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8-%F0%9D%97%94%F0%9D%97%96%F0%9D%97%96%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A7-the-challenge-is-waiting-gather-y/122190342752805200",
+                  "title": "Packet Capture CTF competition registration open"
+                },
+                {
+                  "url": "https://www.facebook.com/CISA/videos/from-unforgettable-moments-in-past-presidents-cup-competitions-to-new-challenges/2290188004885638",
+                  "title": "President's Cup Cybersecurity Competition Registration Opens ..."
+                },
+                {
+                  "url": "https://www.facebook.com/dictr4a/posts/%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A3%F0%9D%97%A3%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9C%F0%9D%97%A1%F0%9D%97%9A-%F0%9D%97%A1%F0%9D%97%A2%F0%9D%97%AA-%F0%9D%97%9B%F0%9D%97%AE%F0%9D%97%B0%F0%9D%97%B8%F0%9D%97%99%F0%9D%97%BC%F0%9D%97%BF%F0%9D%97%9A%F0%9D%97%BC%F0%9D%98%83-%F0%9D%9F%B1-%F0%9D%9F%AE%F0%9D%9F%AC%F0%9D%9F%AE%F0%9D%9F%B2-%F0%9D%97%96%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%94%F0%9D%97%95%F0%9D%97%94%F0%9D%97%A5%F0%9D%97%AD%F0%9D%97%A2%F0%9D%97%A1-%F0%9D%97%A5%F0%9D%97%B2%F0%9D%97%B4%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB%F0%9D%97%AE%F0%9D%97%B9-%F0%9D%97%96%F0%9D%97%BC%F0%9D%97%BA%F0%9D%97%BD%F0%9D%97%B2%F0%9D%98%81%F0%9D%97%B6%F0%9D%98%81%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB%F0%9D%99%8F%F0%9D%99%9D%F0%9D%99%9A-%F0%9D%99%98%F0%9D%99%A4%F0%9D%99%A2%F0%9D%99%A5%F0%9D%99%9A%F0%9D%99%A9%F0%9D%99%9E%F0%9D%99%A9%F0%9D%99%9E%F0%9D%99%A4%F0%9D%99%A3-%F0%9D%99%9E/1534594968700265",
+                  "title": "𝗛𝗮𝗰𝗸𝗙𝗼𝗿𝗚𝗼𝘃 𝟱 𝟮𝟬𝟮𝟲 𝗖𝗔𝗟𝗔𝗕𝗔𝗥𝗭𝗢𝗡 𝗥𝗲𝗴𝗶𝗼𝗻𝗮𝗹 ..."
+                },
+                {
+                  "url": "https://www.facebook.com/edenuniversity2022/posts/-cybersecurity-ctf-competition-learn-hack-win-ready-to-test-your-cybersecurity-s/1072500681951164",
+                  "title": "Eden University zm on Facebook: \"🔐 CYBERSECURITY CTF COMPETITION | LEARN. HACK. WIN! 💻🏆 Ready to test your cybersecurity skills? Join…\""
+                },
+                {
+                  "url": "https://www.facebook.com/borneobulletin.news/posts/cyber-battle-capture-the-flag-2026-returns-for-its-11th-year-with-the-theme-ai-i/1605946771541747",
+                  "title": "Cyber Battle: Capture The Flag 2026 returns for its 11th year with the theme ..."
+                },
+                {
+                  "url": "https://www.facebook.com/namaluniversitylive/posts/the-3-day-cybersecurity-ctf-workshop-was-held-at-namal-university-providing-stud/1387785733355975",
+                  "title": "The 3-Day Cybersecurity & CTF Workshop... - Namal University"
+                },
+                {
+                  "url": "https://www.facebook.com/picoctf.competition/videos/whats-a-capture-the-flag-ctf-competition-its-not-the-gym-class-kindin-cybersecur/1445870643435844",
+                  "title": "picoCTF: High School Hacking Competition on Facebook: \"picoCTF: High School Hacking Competition\""
+                },
+                {
+                  "url": "https://www.facebook.com/61564048179639/videos/cyberx-ctf-ready-to-test-your-cybersecurity-skills-19th-september-2026-comment/1609876830501863",
+                  "title": "🚩 CyberX CTF 🔥\n\nReady to test your cybersecurity skills? 👨‍💻⚡\n📅 19th September 2026\n\n💬 Comment “LINK” to get the registration details!\n\n#cyberxctf #ctf #cybersecurity #capturetheflag #viral\n\n[cyberx ctf 2026, capture the flag, cybersecurity challenge, ctf competition, cybersecurity competition, ethi..."
+                },
+                {
+                  "url": "https://www.facebook.com/groups/pitsf/posts/32074803912104814",
+                  "title": "Can anyone here provide suggestions (from personal experience) how to ..."
+                },
+                {
+                  "url": "https://www.facebook.com/Jpuraflames/posts/securex-cybersecurity-ctf-competition-organized-by-the-ict-department-of-the-uni/1551883446295451",
+                  "title": "J'pura Flames - “SecureX”- Cybersecurity CTF Competition,..."
+                },
+                {
+                  "url": "https://www.facebook.com/TowsonCIS/posts/upcoming-ctf-capture-the-flag-event-join-us-for-guard-maryland-cyber-showdown-20/1687527326557741",
+                  "title": "Upcoming CTF (Capture the Flag) Event! ⛳💻 Join us for Guard Maryland: Cyber Showdown 2026, a free, live capture-the-flag (CTF) competition sponsored by the Maryland Air National Guard, Towson University Cyber Defense Club, and Hack The Box! All skill levels are welcome, from novice, intermediate, to..."
+                },
+                {
+                  "url": "https://www.facebook.com/cybertalentsofficial/posts/why-join-egypt-national-cybersecurity-ctf-2025this-is-more-than-just-a-competiti/1351806316984145",
+                  "title": "CyberTalents - Why Join Egypt National Cybersecurity CTF..."
+                },
+                {
+                  "url": "https://www.facebook.com/japzdivino/posts/hey-yo-hackers-check-this-out-if-youre-looking-to-test-your-skills-ctfs-are-a-gr/1721833606395295",
+                  "title": "Japz Divino on Facebook: \"Hey yo, hackers! 👋 Check this out! If you're looking to test your skills, CTFs are a great way to le…\""
+                }
+              ],
+              "provider_query": "Philippines cybersecurity CTF competition registration",
+              "request_id": "57a9640f-5945-4e60-9bc3-faecf8e1551f"
+            },
+            {
+              "query": "Philippines capture the flag CTF competition registration",
+              "include_domains": [],
+              "status": "ok",
+              "attempts": [
+                {
+                  "status": "ok"
+                }
+              ],
+              "results": [
+                {
+                  "url": "https://curtin.edu.my/event/capture-the-flag",
+                  "title": "Capture The Flag Hackathon 2026 v4.0 (Online) | Events"
+                },
+                {
+                  "url": "https://pja.edu.pl/en/capture-the-flag-2026",
+                  "title": "Capture the Flag 2026 at PJAIT Join the PJHACK CTF Competition - PJAIT"
+                },
+                {
+                  "url": "https://ncc-cnc.ca/capture-the-flag",
+                  "title": "Capture the Flag | National Cybersecurity Consortium"
+                },
+                {
+                  "url": "https://codefest.lk/capture-the-flag",
+                  "title": "Capture the Flag - Codefest"
+                },
+                {
+                  "url": "https://www.instagram.com/p/DejKWLdiGyN",
+                  "title": "Rush to capture the flag! The Computer Society of Ateneo (CompSAt ..."
+                },
+                {
+                  "url": "https://capturetheflag.withgoogle.com",
+                  "title": "Google CTF"
+                },
+                {
+                  "url": "https://hub.dragos.com/ctf-registration-26",
+                  "title": "Capture the Flag 2026: Virtual OT Cybersecurity Challenge | Dragos"
+                },
+                {
+                  "url": "https://www.huntress.com/cybersecurity-education/cybersecurity-awareness/capture-the-flag",
+                  "title": "Cybersecurity Capture the Flag | Hands-On CTF by Huntress | Huntress"
+                },
+                {
+                  "url": "https://www.facebook.com/LearnCyberPH/posts/-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8%F0%9D%97%A5-%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%94%F0%9D%97%A0-%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A6-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%98%F0%9D%97%A1-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%97-%F0%9D%97%AA%F0%9D%97%9C%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8-%F0%9D%97%94%F0%9D%97%96%F0%9D%97%96%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A7-the-challenge-is-waiting-gather-y/122190342752805200",
+                  "title": "Packet Capture CTF competition registration open - Facebook"
+                },
+                {
+                  "url": "https://hackerdna.com/blog/ctf-competitions",
+                  "title": "CTF Competitions: How to Enter Your First One in 2026 | HackerDNA"
+                },
+                {
+                  "url": "https://www.facebook.com/Ncertgovph/videos/the-wait-is-finally-overhackforgov-capture-the-flag-competition-is-backyouve-wai/2753785511476593",
+                  "title": "The wait is finally over! HackForGov: Capture the Flag Competition ..."
+                },
+                {
+                  "url": "https://ctftime.org/event/list",
+                  "title": "CTF events - CTFtime"
+                },
+                {
+                  "url": "https://www.splunk.com/en_us/blog/learn/capture-the-flag-ctf.html",
+                  "title": "What’s CTF? Capture The Flag Competitions for Cybersecurity | Splunk"
+                },
+                {
+                  "url": "https://www.facebook.com/CYBERSECgovph/posts/the-wait-is-finally-overhackforgov-capture-the-flag-competition-is-backyouve-wai/1237762491716037",
+                  "title": "The wait is finally over! HackForGov: Capture the Flag Competition ..."
+                },
+                {
+                  "url": "https://www.enterprisecayman.ky/events/capture-the-flag-competition-2026",
+                  "title": "Capture The Flag Competition - Enterprise Cayman"
+                },
+                {
+                  "url": "https://en.wikipedia.org/wiki/Capture_the_flag_(cybersecurity)",
+                  "title": "Capture the flag (cybersecurity) - Wikipedia"
+                },
+                {
+                  "url": "https://ccb.belgium.be/capture-flag-competitions",
+                  "title": "Capture the flag competitions | CCB Belgium"
+                },
+                {
+                  "url": "https://www.hackthebox.com/capture-the-flag",
+                  "title": "Hack The Box CTF Platform | Cybersecurity Team Assessment"
+                },
+                {
+                  "url": "https://www.eccouncil.org/cybersecurity-exchange/ethical-hacking/capture-the-flag-ctf-cybersecurity",
+                  "title": "What is Capture The Flag? | CTF Types & Important in Cybersecurity"
+                },
+                {
+                  "url": "https://www.google.com/about/careers/applications/buildyourfuture/events/ctf",
+                  "title": "Capture the flag competition - Google Careers"
+                }
+              ],
+              "provider_query": "Philippines capture the flag CTF competition registration",
+              "request_id": "e3cc7aa5-247b-4a86-a205-e97e4b5c58f5"
+            }
+          ],
+          "decisions": [
+            {
+              "url": "https://www.facebook.com/sliit.cscs/posts/-registrations-closing-soonthe-cyber-security-community-at-sliit-is-hosting-its-/1426545785926305",
+              "accepted": false,
+              "reason": "No identifiable CTF in result title"
+            },
+            {
+              "url": "https://www.facebook.com/Ncertgovph/posts/are-your-ready-for-the-battle-of-the-greatest-and-toughest-mindroadtoh4gfinalsha/626618902974475",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/dictr4b/posts/-%F0%9D%90%87%F0%9D%90%80%F0%9D%90%82%F0%9D%90%8A%F0%9D%90%85%F0%9D%90%8E%F0%9D%90%91%F0%9D%90%86%F0%9D%90%8E%F0%9D%90%95-%F0%9D%90%8C%F0%9D%90%88%F0%9D%90%8C%F0%9D%90%80%F0%9D%90%91%F0%9D%90%8E%F0%9D%90%8F%F0%9D%90%80-%F0%9D%9F%90%F0%9D%9F%8E%F0%9D%9F%90%F0%9D%9F%94-%F0%9D%90%91%F0%9D%90%84%F0%9D%90%86%F0%9D%90%88%F0%9D%90%92%F0%9D%90%93%F0%9D%90%91%F0%9D%90%80%F0%9D%90%93%F0%9D%90%88%F0%9D%90%8E%F0%9D%90%8D-%F0%9D%90%8D%F0%9D%90%8E%F0%9D%90%96-%F0%9D%90%8E%F0%9D%90%8F%F0%9D%90%84%F0%9D%90%8D-%F0%9D%90%80%F0%9D%90%9B%F0%9D%90%A8%F0%9D%90%AE%F0%9D%90%AD-%F0%9D%90%AD%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%82%F0%9D%90%A8%F0%9D%90%A6%F0%9D%90%A9%F0%9D%90%9E%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7the-hackfor/1089592793724382",
+              "accepted": true,
+              "reason": "Accepted as search-only; schedule and registration remain unconfirmed"
+            },
+            {
+              "url": "https://www.facebook.com/pngdepartmentofict/posts/dts26-capture-the-flag-challenge-registration-now-openthe-capture-the-flag-ctf-c/1351753220415088",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/DICTRegionVBicol/posts/%F0%9D%90%82%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%A5%F0%9D%90%A2%F0%9D%90%A7%F0%9D%90%A0-%F0%9D%90%81%F0%9D%90%A2%F0%9D%90%9C%F0%9D%90%A8%F0%9D%90%A5%F0%9D%90%AC-%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%B1%F0%9D%90%AD-%F0%9D%90%A0%F0%9D%90%9E%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%AB%F0%9D%90%9A%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7-%F0%9D%90%A8%F0%9D%90%9F-%F0%9D%90%9C%F0%9D%90%B2%F0%9D%90%9B%F0%9D%90%9E%F0%9D%90%AB%F0%9D%90%AC%F0%9D%90%9E%F0%9D%90%9C%F0%9D%90%AE%F0%9D%90%AB%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%B2-%F0%9D%90%A9%F0%9D%90%AB%F0%9D%90%A8%F0%9D%90%9F%F0%9D%90%9E%F0%9D%90%AC%F0%9D%90%AC%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7%F0%9D%90%9A%F0%9D%90%A5%F0%9D%90%AC%EF%B8%8Fdict-bicol-invites/1040492329050739",
+              "accepted": true,
+              "reason": "Accepted as search-only; schedule and registration remain unconfirmed"
+            },
+            {
+              "url": "https://www.facebook.com/DICTr7/posts/-hackforgov-central-visayas-2026-registration-now-open-dict-region-7-proudly-lau/1522802749891574",
+              "accepted": true,
+              "reason": "Accepted as search-only; schedule and registration remain unconfirmed"
+            },
+            {
+              "url": "https://www.facebook.com/SecuriNets.ISI/posts/-only-3-days-left-to-registerthe-other-side-is-closer-than-you-think-%EF%B8%8Fdont-miss-/1462032572768120",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/LearnCyberPH/posts/-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8%F0%9D%97%A5-%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%94%F0%9D%97%A0-%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A6-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%98%F0%9D%97%A1-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%97-%F0%9D%97%AA%F0%9D%97%9C%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8-%F0%9D%97%94%F0%9D%97%96%F0%9D%97%96%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A7-the-challenge-is-waiting-gather-y/122190342752805200",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/CISA/videos/from-unforgettable-moments-in-past-presidents-cup-competitions-to-new-challenges/2290188004885638",
+              "accepted": false,
+              "reason": "No identifiable CTF in result title"
+            },
+            {
+              "url": "https://www.facebook.com/dictr4a/posts/%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A3%F0%9D%97%A3%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9C%F0%9D%97%A1%F0%9D%97%9A-%F0%9D%97%A1%F0%9D%97%A2%F0%9D%97%AA-%F0%9D%97%9B%F0%9D%97%AE%F0%9D%97%B0%F0%9D%97%B8%F0%9D%97%99%F0%9D%97%BC%F0%9D%97%BF%F0%9D%97%9A%F0%9D%97%BC%F0%9D%98%83-%F0%9D%9F%B1-%F0%9D%9F%AE%F0%9D%9F%AC%F0%9D%9F%AE%F0%9D%9F%B2-%F0%9D%97%96%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%94%F0%9D%97%95%F0%9D%97%94%F0%9D%97%A5%F0%9D%97%AD%F0%9D%97%A2%F0%9D%97%A1-%F0%9D%97%A5%F0%9D%97%B2%F0%9D%97%B4%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB%F0%9D%97%AE%F0%9D%97%B9-%F0%9D%97%96%F0%9D%97%BC%F0%9D%97%BA%F0%9D%97%BD%F0%9D%97%B2%F0%9D%98%81%F0%9D%97%B6%F0%9D%98%81%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB%F0%9D%99%8F%F0%9D%99%9D%F0%9D%99%9A-%F0%9D%99%98%F0%9D%99%A4%F0%9D%99%A2%F0%9D%99%A5%F0%9D%99%9A%F0%9D%99%A9%F0%9D%99%9E%F0%9D%99%A9%F0%9D%99%9E%F0%9D%99%A4%F0%9D%99%A3-%F0%9D%99%9E/1534594968700265",
+              "accepted": true,
+              "reason": "Accepted as search-only; schedule and registration remain unconfirmed"
+            },
+            {
+              "url": "https://www.facebook.com/edenuniversity2022/posts/-cybersecurity-ctf-competition-learn-hack-win-ready-to-test-your-cybersecurity-s/1072500681951164",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/borneobulletin.news/posts/cyber-battle-capture-the-flag-2026-returns-for-its-11th-year-with-the-theme-ai-i/1605946771541747",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/namaluniversitylive/posts/the-3-day-cybersecurity-ctf-workshop-was-held-at-namal-university-providing-stud/1387785733355975",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/picoctf.competition/videos/whats-a-capture-the-flag-ctf-competition-its-not-the-gym-class-kindin-cybersecur/1445870643435844",
+              "accepted": false,
+              "reason": "No identifiable CTF in result title"
+            },
+            {
+              "url": "https://www.facebook.com/61564048179639/videos/cyberx-ctf-ready-to-test-your-cybersecurity-skills-19th-september-2026-comment/1609876830501863",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/groups/pitsf/posts/32074803912104814",
+              "accepted": false,
+              "reason": "No identifiable CTF in result title"
+            },
+            {
+              "url": "https://www.facebook.com/Jpuraflames/posts/securex-cybersecurity-ctf-competition-organized-by-the-ict-department-of-the-uni/1551883446295451",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/TowsonCIS/posts/upcoming-ctf-capture-the-flag-event-join-us-for-guard-maryland-cyber-showdown-20/1687527326557741",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/cybertalentsofficial/posts/why-join-egypt-national-cybersecurity-ctf-2025this-is-more-than-just-a-competiti/1351806316984145",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/japzdivino/posts/hey-yo-hackers-check-this-out-if-youre-looking-to-test-your-skills-ctfs-are-a-gr/1721833606395295",
+              "accepted": false,
+              "reason": "No identifiable CTF in result title"
+            },
+            {
+              "url": "https://curtin.edu.my/event/capture-the-flag",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://pja.edu.pl/en/capture-the-flag-2026",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://ncc-cnc.ca/capture-the-flag",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://codefest.lk/capture-the-flag",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.instagram.com/p/DejKWLdiGyN",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://capturetheflag.withgoogle.com",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://hub.dragos.com/ctf-registration-26",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.huntress.com/cybersecurity-education/cybersecurity-awareness/capture-the-flag",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/LearnCyberPH/posts/-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8%F0%9D%97%A5-%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%94%F0%9D%97%A0-%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A6-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%98%F0%9D%97%A1-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%97-%F0%9D%97%AA%F0%9D%97%9C%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8-%F0%9D%97%94%F0%9D%97%96%F0%9D%97%96%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A7-the-challenge-is-waiting-gather-y/122190342752805200",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://hackerdna.com/blog/ctf-competitions",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/Ncertgovph/videos/the-wait-is-finally-overhackforgov-capture-the-flag-competition-is-backyouve-wai/2753785511476593",
+              "accepted": false,
+              "reason": "Title lacks an unambiguous competition edition"
+            },
+            {
+              "url": "https://ctftime.org/event/list",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.splunk.com/en_us/blog/learn/capture-the-flag-ctf.html",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.facebook.com/CYBERSECgovph/posts/the-wait-is-finally-overhackforgov-capture-the-flag-competition-is-backyouve-wai/1237762491716037",
+              "accepted": false,
+              "reason": "Title lacks an unambiguous competition edition"
+            },
+            {
+              "url": "https://www.enterprisecayman.ky/events/capture-the-flag-competition-2026",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/Capture_the_flag_(cybersecurity)",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://ccb.belgium.be/capture-flag-competitions",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.hackthebox.com/capture-the-flag",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.eccouncil.org/cybersecurity-exchange/ethical-hacking/capture-the-flag-ctf-cybersecurity",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            },
+            {
+              "url": "https://www.google.com/about/careers/applications/buildyourfuture/events/ctf",
+              "accepted": false,
+              "reason": "Philippine organizer or venue not established by title/source"
+            }
+          ]
+        },
+        {
+          "id": "rootcon-bluesky",
+          "name": "ROOTCON · Bluesky",
+          "status": "ok",
+          "discovered": 146,
+          "accepted": 3,
+          "new_announcements": 0,
+          "discoveries": [
+            {
+              "event_id": "775f475db77bea2c6cd288ec",
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h",
+              "path": [
+                "https://bsky.app/profile/rootcon.bsky.social",
+                "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h"
+              ],
+              "related_links": []
+            },
+            {
+              "event_id": "b33d89e59bd6589135a41f58",
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24",
+              "path": [
+                "https://bsky.app/profile/rootcon.bsky.social",
+                "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24"
+              ],
+              "related_links": []
+            },
+            {
+              "event_id": "775f475db77bea2c6cd288ec",
+              "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z",
+              "path": [
+                "https://bsky.app/profile/rootcon.bsky.social",
+                "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z"
+              ],
+              "related_links": []
+            }
+          ],
+          "message": "Public author feed and full post text read through the documented Bluesky API; only extracted facts and brief excerpts retained, no media."
+        },
+        {
+          "id": "hackthenorth",
+          "name": "HackTheNorth.ph · Announcements",
+          "status": "ok",
+          "discovered": 11,
+          "accepted": 0,
+          "new_announcements": 0,
+          "discoveries": [],
+          "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded."
+        },
+        {
+          "id": "up-acm",
+          "name": "UP ACM · Events",
+          "status": "ok",
+          "discovered": 1,
+          "accepted": 0,
+          "new_announcements": 0,
+          "discoveries": [],
+          "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded."
+        },
+        {
+          "id": "pup-announcements",
+          "name": "PUP · Announcements feed",
+          "status": "ok",
+          "discovered": 10,
+          "accepted": 0,
+          "new_announcements": 0,
+          "discoveries": [],
+          "message": "Public RSS/Atom feed scanned; 10 new or retained article URLs rechecked."
+        },
+        {
+          "id": "pup-news",
+          "name": "PUP · News feed",
+          "status": "ok",
+          "discovered": 10,
+          "accepted": 0,
+          "new_announcements": 0,
+          "discoveries": [],
+          "message": "Public RSS/Atom feed scanned; 10 new or retained article URLs rechecked."
+        },
+        {
+          "id": "ncert",
+          "name": "DICT / CERT-PH · Feed",
+          "status": "error",
+          "discovered": 0,
+          "accepted": 0,
+          "new_announcements": 0,
+          "discoveries": [],
+          "message": "Cannot verify robots.txt: HTTP 403"
+        },
+        {
+          "id": "dict",
+          "name": "DICT · Announcements",
+          "status": "error",
+          "discovered": 0,
+          "accepted": 0,
+          "new_announcements": 0,
+          "discoveries": [],
+          "message": "Cannot verify robots.txt: HTTP 403"
+        },
+        {
+          "id": "rootcon-website",
+          "name": "ROOTCON · Website",
+          "status": "policy_restricted",
+          "discovered": 0,
+          "accepted": 0,
+          "new_announcements": 0,
+          "discoveries": [],
+          "message": "Website terms prohibit automated data extraction. Use the official Bluesky API source instead."
+        },
+        {
+          "id": "ctftime",
+          "name": "CTFtime · Philippine connections",
+          "status": "ok",
+          "discovered": 180,
+          "accepted": 0,
+          "new_announcements": 0,
+          "discoveries": [],
+          "message": "Supplementary event metadata only. Included Philippine venues or explicitly configured Philippine organizers; global events open to everyone are excluded."
+        },
+        {
+          "id": "facebook-search",
+          "name": "Facebook · Indexed announcements",
+          "status": "needs_credentials",
+          "discovered": 0,
+          "accepted": 0,
+          "new_announcements": 0,
+          "discoveries": [],
+          "message": "Requires server-side BRAVE_SEARCH_API_KEY and a plan with storage rights (BRAVE_STORAGE_RIGHTS=1). Facebook full posts are not fetched."
+        }
+      ],
+      "finished_at": "2026-11-21T15:42:22.644100+00:00",
+      "events": 6,
+      "announcements": 7
+    }
+  ]
+}

@@ -1,0 +1,610 @@
+{
+  "started_at": "2026-11-21T15:59:35.561875+00:00",
+  "access": "free keyless",
+  "queries": [
+    {
+      "query": "Philippines cybersecurity community CTF events calendar registration",
+      "include_domains": [],
+      "status": "ok",
+      "attempts": [
+        {
+          "status": "ok"
+        }
+      ],
+      "results": [
+        {
+          "url": "https://www.crest-approved.org/event/rootcon-20-philippines-2026",
+          "title": "ROOTCON 20 Philippines 2026 | CREST CTF Prize Sponsor & CPSA Certification Prize"
+        },
+        {
+          "url": "https://hackthedate.com/stats",
+          "title": "Cybersecurity Events & CTF Competitions Calendar | Hack The Date"
+        },
+        {
+          "url": "https://hexcore-labs.com/post/hexcore-labs-philippines-launches-with-nationwide-cybersecurity-and-ai-competition",
+          "title": "Hexcore Labs Philippines Launches with Nationwide…"
+        },
+        {
+          "url": "https://hub.dragos.com/ctf-registration-26",
+          "title": "Capture the Flag 2026: Virtual OT Cybersecurity Challenge | Dragos"
+        },
+        {
+          "url": "https://internationalconferencealerts.com/cybersecurity/philippines",
+          "title": "Cybersecurity Conferences in Philippines 2026-2027 + CFP | ICA"
+        },
+        {
+          "url": "https://www.allconferencealert.com/philippines/cybersecurity",
+          "title": "Cybersecurity Conferences in Philippines 2026 & 2027 | ACA"
+        },
+        {
+          "url": "https://ctf.hackthebox.com/events/upcoming",
+          "title": "Upcoming Events - Hack The Box CTF"
+        },
+        {
+          "url": "https://www.instagram.com/p/DVDuWWuDcXH",
+          "title": "CAPTURE THE FLAG (CTF) 2026 IS HERE! 💻. Join us on Monday, 9th ..."
+        },
+        {
+          "url": "https://www.huntress.com/cybersecurity-education/cybersecurity-awareness/capture-the-flag",
+          "title": "Cybersecurity Capture the Flag | Hands-On CTF by Huntress | Huntress"
+        },
+        {
+          "url": "https://hackthedate.replit.app",
+          "title": "CTF Events & Cybersecurity Events | Hack The Date"
+        },
+        {
+          "url": "https://www.facebook.com/gdg.pupmnl/posts/unlock-your-potential-challenge-your-skills-dive-into-our-event-schedule-for-our/373586798817145",
+          "title": "Unlock your potential, challenge your skills 🚩 – dive into our event schedule ..."
+        },
+        {
+          "url": "https://www.philsecsummit.com",
+          "title": "PhilSec 2026 | Top Cybersecurity Conference in Philippines"
+        },
+        {
+          "url": "https://hackerdna.com/blog/ctf-competitions",
+          "title": "CTF Competitions: How to Enter Your First One in 2026 | HackerDNA"
+        },
+        {
+          "url": "https://cellebrite.com/en/ctf-registration",
+          "title": "Capture the Flag 2026 - Cellebrite"
+        },
+        {
+          "url": "https://www.enisa.europa.eu/sites/default/files/publications/ENISA%20Report%20-%20CTF%20Events.pdf",
+          "title": "CTF EVENTS - ENISA"
+        },
+        {
+          "url": "https://www.facebook.com/ACTNOWEDUCATION/posts/breaking-into-cybersecurity-is-harder-when-you-have-nowhere-to-practiceyou-study/1710982551038325",
+          "title": "Veterans Day BootUp CTF free cybersecurity competition 2026"
+        },
+        {
+          "url": "https://ctftime.org/event/list",
+          "title": "CTF events"
+        },
+        {
+          "url": "https://www.facebook.com/LearnCyberPH/posts/%F0%9D%97%99%F0%9D%97%9C%F0%9D%97%A1%F0%9D%97%94%F0%9D%97%9F-%F0%9D%97%96%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%99%F0%9D%97%A2%F0%9D%97%A5-%F0%9D%97%A5%F0%9D%97%98%F0%9D%97%9A%F0%9D%97%9C%F0%9D%97%A6%F0%9D%97%A7%F0%9D%97%A5%F0%9D%97%94%F0%9D%97%A7%F0%9D%97%9C%F0%9D%97%A2%F0%9D%97%A1-this-is-it-future-challengers%F0%9D%97%A5%F0%9D%97%B2%F0%9D%97%B4%F0%9D%97%B6%F0%9D%98%80%F0%9D%98%81%F0%9D%97%BF%F0%9D%97%AE%F0%9D%98%81%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB-%F0%9D%97%B0%F0%9D%97%B9%F0%9D%97%BC%F0%9D%98%80%F0%9D%97%B2%F0%9D%98%80-%F0%9D%98%81%F0%9D%97%BC%F0%9D%97%B1/122191081976805200",
+          "title": "Packet Capture registration deadline October 13 2026"
+        },
+        {
+          "url": "https://www.instagram.com/p/DYzRTgImkjD",
+          "title": "Instagram"
+        }
+      ],
+      "provider_query": "Philippines cybersecurity community CTF events calendar registration",
+      "request_id": "79e8671a-1091-4e26-9aab-ea22f303a69b"
+    }
+  ],
+  "warnings": [],
+  "decisions": [
+    {
+      "url": "https://www.crest-approved.org/event/rootcon-20-philippines-2026",
+      "accepted": false,
+      "reason": "Philippine organizer or venue not established by title/source"
+    },
+    {
+      "url": "https://hackthedate.com/stats",
+      "accepted": false,
+      "reason": "Philippine organizer or venue not established by title/source"
+    },
+    {
+      "url": "https://hexcore-labs.com/post/hexcore-labs-philippines-launches-with-nationwide-cybersecurity-and-ai-competition",
+      "accepted": false,
+      "reason": "No identifiable CTF in result title"
+    },
+    {
+      "url": "https://hub.dragos.com/ctf-registration-26",
+      "accepted": false,
+      "reason": "Philippine organizer or venue not established by title/source"
+    },
+    {
+      "url": "https://internationalconferencealerts.com/cybersecurity/philippines",
+      "accepted": false,
+      "reason": "No identifiable CTF in result title"
+    },
+    {
+      "url": "https://www.allconferencealert.com/philippines/cybersecurity",
+      "accepted": false,
+      "reason": "No identifiable CTF in result title"
+    },
+    {
+      "url": "https://ctf.hackthebox.com/events/upcoming",
+      "accepted": false,
+      "reason": "Philippine organizer or venue not established by title/source"
+    },
+    {
+      "url": "https://www.instagram.com/p/DVDuWWuDcXH",
+      "accepted": false,
+      "reason": "Philippine organizer or venue not established by title/source"
+    },
+    {
+      "url": "https://www.huntress.com/cybersecurity-education/cybersecurity-awareness/capture-the-flag",
+      "accepted": false,
+      "reason": "Philippine organizer or venue not established by title/source"
+    },
+    {
+      "url": "https://hackthedate.replit.app",
+      "accepted": false,
+      "reason": "Philippine organizer or venue not established by title/source"
+    },
+    {
+      "url": "https://www.facebook.com/gdg.pupmnl/posts/unlock-your-potential-challenge-your-skills-dive-into-our-event-schedule-for-our/373586798817145",
+      "accepted": false,
+      "reason": "No identifiable CTF in result title"
+    },
+    {
+      "url": "https://www.philsecsummit.com",
+      "accepted": false,
+      "reason": "No identifiable CTF in result title"
+    },
+    {
+      "url": "https://hackerdna.com/blog/ctf-competitions",
+      "accepted": false,
+      "reason": "Philippine organizer or venue not established by title/source"
+    },
+    {
+      "url": "https://cellebrite.com/en/ctf-registration",
+      "accepted": false,
+      "reason": "Philippine organizer or venue not established by title/source"
+    },
+    {
+      "url": "https://www.enisa.europa.eu/sites/default/files/publications/ENISA%20Report%20-%20CTF%20Events.pdf",
+      "accepted": false,
+      "reason": "Philippine organizer or venue not established by title/source"
+    },
+    {
+      "url": "https://www.facebook.com/ACTNOWEDUCATION/posts/breaking-into-cybersecurity-is-harder-when-you-have-nowhere-to-practiceyou-study/1710982551038325",
+      "accepted": false,
+      "reason": "Philippine organizer or venue not established by title/source"
+    },
+    {
+      "url": "https://ctftime.org/event/list",
+      "accepted": false,
+      "reason": "Philippine organizer or venue not established by title/source"
+    },
+    {
+      "url": "https://www.facebook.com/LearnCyberPH/posts/%F0%9D%97%99%F0%9D%97%9C%F0%9D%97%A1%F0%9D%97%94%F0%9D%97%9F-%F0%9D%97%96%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%99%F0%9D%97%A2%F0%9D%97%A5-%F0%9D%97%A5%F0%9D%97%98%F0%9D%97%9A%F0%9D%97%9C%F0%9D%97%A6%F0%9D%97%A7%F0%9D%97%A5%F0%9D%97%94%F0%9D%97%A7%F0%9D%97%9C%F0%9D%97%A2%F0%9D%97%A1-this-is-it-future-challengers%F0%9D%97%A5%F0%9D%97%B2%F0%9D%97%B4%F0%9D%97%B6%F0%9D%98%80%F0%9D%98%81%F0%9D%97%BF%F0%9D%97%AE%F0%9D%98%81%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB-%F0%9D%97%B0%F0%9D%97%B9%F0%9D%97%BC%F0%9D%98%80%F0%9D%97%B2%F0%9D%98%80-%F0%9D%98%81%F0%9D%97%BC%F0%9D%97%B1/122191081976805200",
+      "accepted": false,
+      "reason": "No identifiable CTF in result title"
+    },
+    {
+      "url": "https://www.instagram.com/p/DYzRTgImkjD",
+      "accepted": false,
+      "reason": "No identifiable CTF in result title"
+    }
+  ],
+  "followups": [
+    {
+      "started_at": "2026-11-21T16:01:06.457955+00:00",
+      "access": "free keyless",
+      "queries": [
+        {
+          "query": "Philippines cybersecurity student club CTF registration",
+          "include_domains": [],
+          "status": "ok",
+          "attempts": [
+            {
+              "status": "ok"
+            }
+          ],
+          "results": [
+            {
+              "url": "https://www.facebook.com/groups/pitsf/posts/39978371468414646",
+              "title": "For those who are here at BSides Manila. Here is a clue for your CTF"
+            },
+            {
+              "url": "https://hexcore-labs.com/post/hexcore-labs-philippines-launches-with-nationwide-cybersecurity-and-ai-competition",
+              "title": "Hexcore Labs Philippines Launches with Nationwide…"
+            },
+            {
+              "url": "https://ctf.asu.edu/education/ace-ctf-academy",
+              "title": "CTF Academy - Cybersecurity and Trusted Foundations"
+            },
+            {
+              "url": "https://www.scribd.com/document/677830865/Presentation-CERT-PH-Regional-Activities",
+              "title": "HackForGov 2: CTF Competition Guide | PDF | Security | Computer Security"
+            },
+            {
+              "url": "https://ctf7.com/community-partner",
+              "title": "Community Partner Program for Cyber Clubs - CTF7"
+            },
+            {
+              "url": "https://www.facebook.com/61574079930724/videos/%F0%9D%97%96%F0%9D%97%AC%F0%9D%97%95%F0%9D%97%98%F0%9D%97%A5%F0%9D%97%96%F0%9D%97%A2%F0%9D%97%A1%F0%9D%97%A1%F0%9D%97%98%F0%9D%97%96%F0%9D%97%A7-%F0%9D%9F%AE%F0%9D%9F%AC%F0%9D%9F%AE%F0%9D%9F%B2-%F0%9D%97%A7%F0%9D%97%9B%F0%9D%97%98-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98-%F0%9D%97%9C%F0%9D%97%A6-%F0%9D%97%A2%F0%9D%97%A1-from-learning-the-fundamentals-to-putting-/1139585488601354",
+              "title": "CyberConnect 2026 CTF Training at USTP Main Campus Alubijid"
+            },
+            {
+              "url": "https://www.crest-approved.org/event/rootcon-20-philippines-2026",
+              "title": "ROOTCON 20 Philippines 2026 | CREST CTF Prize Sponsor & CPSA Certification Prize"
+            },
+            {
+              "url": "https://www.uapcybersiege.com/ctf-registration.html",
+              "title": "CTF Registration | UAP Cyber Siege 2026"
+            },
+            {
+              "url": "https://cyber-atlas.caecommunity.org/competitions",
+              "title": "Competitions - Cyber Atlas"
+            },
+            {
+              "url": "https://www.hackerverse.com",
+              "title": "Join the Hackerverse: CTF challenges and cybersecurity competitions"
+            },
+            {
+              "url": "https://www.facebook.com/DICT.RO9BASULTA/videos/hack4gov-2026/2983395955343934",
+              "title": "Hack4Gov 2026 - DICT IX BASULTA - Facebook"
+            },
+            {
+              "url": "https://www.instagram.com/p/DVqDZslgdAe",
+              "title": "Instagram"
+            },
+            {
+              "url": "https://hackerdna.com/blog/ctf-competitions",
+              "title": "CTF Competitions: How to Enter Your First One in 2026 | HackerDNA"
+            },
+            {
+              "url": "https://ctfrvcexiitbevnt.netlify.app",
+              "title": "CTF | Coding Club"
+            },
+            {
+              "url": "https://cyberdojo.ie/about-ctf",
+              "title": "About CTF - Cyber Dojo @ ZeroDays"
+            },
+            {
+              "url": "https://www.facebook.com/edenuniversity2022/posts/-cybersecurity-ctf-competition-learn-hack-win-ready-to-test-your-cybersecurity-s/1072500681951164",
+              "title": "Eden University zm on Facebook: \"🔐 CYBERSECURITY CTF COMPETITION | LEARN. HACK. WIN! 💻🏆 Ready to test your cybersecurity skills? Join…\""
+            },
+            {
+              "url": "https://cybersecuritychallenge.gr",
+              "title": "Cyber Security Challenge Greece"
+            },
+            {
+              "url": "https://soclab.wust.edu/ctf-2026",
+              "title": "CTF-2026 – SOC Lab – Washington University of Science and Technology – WUST"
+            },
+            {
+              "url": "https://ctftime.org/event/list",
+              "title": "CTF events - CTFtime"
+            },
+            {
+              "url": "https://cert.ph",
+              "title": "CSP-CERT® | Cyber Security Philippines - Computer Emergency ..."
+            }
+          ],
+          "provider_query": "Philippines cybersecurity student club CTF registration",
+          "request_id": "67d64331-09e4-42af-8d56-fc33acc24f81"
+        }
+      ],
+      "warnings": [],
+      "decisions": [
+        {
+          "url": "https://www.facebook.com/groups/pitsf/posts/39978371468414646",
+          "accepted": false,
+          "reason": "Facebook result is not an identifiable post URL"
+        },
+        {
+          "url": "https://hexcore-labs.com/post/hexcore-labs-philippines-launches-with-nationwide-cybersecurity-and-ai-competition",
+          "accepted": false,
+          "reason": "No identifiable CTF in result title"
+        },
+        {
+          "url": "https://ctf.asu.edu/education/ace-ctf-academy",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://www.scribd.com/document/677830865/Presentation-CERT-PH-Regional-Activities",
+          "accepted": true,
+          "reason": "Accepted as search-only; schedule and registration remain unconfirmed"
+        },
+        {
+          "url": "https://ctf7.com/community-partner",
+          "accepted": false,
+          "reason": "No identifiable CTF in result title"
+        },
+        {
+          "url": "https://www.facebook.com/61574079930724/videos/%F0%9D%97%96%F0%9D%97%AC%F0%9D%97%95%F0%9D%97%98%F0%9D%97%A5%F0%9D%97%96%F0%9D%97%A2%F0%9D%97%A1%F0%9D%97%A1%F0%9D%97%98%F0%9D%97%96%F0%9D%97%A7-%F0%9D%9F%AE%F0%9D%9F%AC%F0%9D%9F%AE%F0%9D%9F%B2-%F0%9D%97%A7%F0%9D%97%9B%F0%9D%97%98-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98-%F0%9D%97%9C%F0%9D%97%A6-%F0%9D%97%A2%F0%9D%97%A1-from-learning-the-fundamentals-to-putting-/1139585488601354",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://www.crest-approved.org/event/rootcon-20-philippines-2026",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://www.uapcybersiege.com/ctf-registration.html",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://cyber-atlas.caecommunity.org/competitions",
+          "accepted": false,
+          "reason": "No identifiable CTF in result title"
+        },
+        {
+          "url": "https://www.hackerverse.com",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://www.facebook.com/DICT.RO9BASULTA/videos/hack4gov-2026/2983395955343934",
+          "accepted": true,
+          "reason": "Accepted as search-only; schedule and registration remain unconfirmed"
+        },
+        {
+          "url": "https://www.instagram.com/p/DVqDZslgdAe",
+          "accepted": false,
+          "reason": "No identifiable CTF in result title"
+        },
+        {
+          "url": "https://hackerdna.com/blog/ctf-competitions",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://ctfrvcexiitbevnt.netlify.app",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://cyberdojo.ie/about-ctf",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://www.facebook.com/edenuniversity2022/posts/-cybersecurity-ctf-competition-learn-hack-win-ready-to-test-your-cybersecurity-s/1072500681951164",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://cybersecuritychallenge.gr",
+          "accepted": false,
+          "reason": "No identifiable CTF in result title"
+        },
+        {
+          "url": "https://soclab.wust.edu/ctf-2026",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://ctftime.org/event/list",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://cert.ph",
+          "accepted": false,
+          "reason": "No identifiable CTF in result title"
+        }
+      ]
+    },
+    {
+      "started_at": "2026-11-21T16:03:04.031756+00:00",
+      "access": "free keyless",
+      "queries": [
+        {
+          "query": "Philippines CTF community registration announcement",
+          "include_domains": [],
+          "status": "ok",
+          "attempts": [
+            {
+              "status": "ok"
+            }
+          ],
+          "results": [
+            {
+              "url": "https://www.crest-approved.org/event/rootcon-20-philippines-2026",
+              "title": "ROOTCON 20 Philippines 2026 | CREST CTF Prize Sponsor & CPSA Certification Prize"
+            },
+            {
+              "url": "https://hexcore-labs.com/post/hexcore-labs-philippines-launches-with-nationwide-cybersecurity-and-ai-competition",
+              "title": "Hexcore Labs Philippines Launches with Nationwide…"
+            },
+            {
+              "url": "https://c2c-ctf2026.ui.ac.id/registration",
+              "title": "Registration – C2C CTF 2026"
+            },
+            {
+              "url": "https://dev.to/adityapidurkar/how-to-get-your-ctf-listed-on-ctftime-34dj",
+              "title": "How to Get Your CTF Listed on CTFtime - DEV Community"
+            },
+            {
+              "url": "https://www.facebook.com/LearnCyberPH/posts/-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8%F0%9D%97%A5-%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%94%F0%9D%97%A0-%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A6-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%98%F0%9D%97%A1-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%97-%F0%9D%97%AA%F0%9D%97%9C%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8-%F0%9D%97%94%F0%9D%97%96%F0%9D%97%96%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A7-the-challenge-is-waiting-gather-y/122190342752805200",
+              "title": "Packet Capture CTF competition registration open - Facebook"
+            },
+            {
+              "url": "https://www.scribd.com/document/677830865/Presentation-CERT-PH-Regional-Activities",
+              "title": "HackForGov 2: CTF Competition Guide | PDF | Security | Computer Security"
+            },
+            {
+              "url": "https://ctf.first.org/register",
+              "title": "Register - first ctf"
+            },
+            {
+              "url": "https://www.facebook.com/DICTr7/posts/-hackforgov-central-visayas-2026-registration-now-open-dict-region-7-proudly-lau/1522802749891574",
+              "title": "HackForGov Central Visayas 2026 – Registration Now Open! DICT ..."
+            },
+            {
+              "url": "https://ajccbc.ncsa.or.th/ctf-rules",
+              "title": "OTHER CTFs"
+            },
+            {
+              "url": "https://asisctf.com/register",
+              "title": "how_to_reg Register - ASIS CTF Quals 2026"
+            },
+            {
+              "url": "https://hackerdna.com/blog/ctf-competitions",
+              "title": "CTF Competitions: How to Enter Your First One in 2026 | HackerDNA"
+            },
+            {
+              "url": "https://www.facebook.com/DICT.RO9BASULTA/videos/ctf-basilan/2497275890683692",
+              "title": "Basilan Provincial Cyber Hunt CTF League 2026 Recap at Hardam ..."
+            },
+            {
+              "url": "https://www.instagram.com/p/DVDuWWuDcXH",
+              "title": "CAPTURE THE FLAG (CTF) 2026 IS HERE! . Join us on ... - Instagram"
+            },
+            {
+              "url": "https://www.instagram.com/reel/Cr9lZZpOXSn",
+              "title": "We are delighted to announce that registration is now open for the ..."
+            },
+            {
+              "url": "https://ctftime.org/event/list",
+              "title": "CTF events - CTFtime"
+            },
+            {
+              "url": "https://acronyms.thefreedictionary.com/CTF",
+              "title": "CTF"
+            },
+            {
+              "url": "https://www.facebook.com/DICTDavaoRegion/posts/the-battle-continues-gear-up-for-%F0%9D%97%9B%F0%9D%97%AE%F0%9D%97%B0%F0%9D%97%B8%F0%9D%9F%B0%F0%9D%97%9A%F0%9D%97%BC%F0%9D%98%83-%F0%9D%9F%B1-%F0%9D%9F%AE%F0%9D%9F%AC%F0%9D%9F%AE%F0%9D%9F%B2-carrying-the-theme-%F0%9D%97%97%F0%9D%97%B2%F0%9D%97%B0%F0%9D%97%BC%F0%9D%97%B1%F0%9D%97%B6%F0%9D%97%BB%F0%9D%97%B4-%F0%9D%97%AC%F0%9D%97%BC%F0%9D%98%82/1067935402828637",
+              "title": "The battle continues! Gear up for Hack4Gov 5 2026, carrying ..."
+            },
+            {
+              "url": "https://www.facebook.com/Ncertgovph/videos/the-wait-is-finally-overhackforgov-capture-the-flag-competition-is-backyouve-wai/2753785511476593",
+              "title": "The wait is finally over! HackForGov: Capture the Flag Competition ..."
+            },
+            {
+              "url": "https://capturetheflag.withgoogle.com",
+              "title": "Google CTF"
+            },
+            {
+              "url": "https://tavily.com/knowledge/company/QqzFo8EPBvsF",
+              "title": "CTF"
+            }
+          ],
+          "provider_query": "Philippines CTF community registration announcement",
+          "request_id": "3dfecc40-ed90-4569-9d93-b80b35c440b4"
+        }
+      ],
+      "warnings": [],
+      "decisions": [
+        {
+          "url": "https://www.crest-approved.org/event/rootcon-20-philippines-2026",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://hexcore-labs.com/post/hexcore-labs-philippines-launches-with-nationwide-cybersecurity-and-ai-competition",
+          "accepted": false,
+          "reason": "No identifiable CTF in result title"
+        },
+        {
+          "url": "https://c2c-ctf2026.ui.ac.id/registration",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://dev.to/adityapidurkar/how-to-get-your-ctf-listed-on-ctftime-34dj",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://www.facebook.com/LearnCyberPH/posts/-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8%F0%9D%97%A5-%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%94%F0%9D%97%A0-%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A6-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%98%F0%9D%97%A1-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%97-%F0%9D%97%AA%F0%9D%97%9C%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8-%F0%9D%97%94%F0%9D%97%96%F0%9D%97%96%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A7-the-challenge-is-waiting-gather-y/122190342752805200",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://www.scribd.com/document/677830865/Presentation-CERT-PH-Regional-Activities",
+          "accepted": true,
+          "reason": "Accepted as search-only; schedule and registration remain unconfirmed"
+        },
+        {
+          "url": "https://ctf.first.org/register",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://www.facebook.com/DICTr7/posts/-hackforgov-central-visayas-2026-registration-now-open-dict-region-7-proudly-lau/1522802749891574",
+          "accepted": true,
+          "reason": "Accepted as search-only; schedule and registration remain unconfirmed"
+        },
+        {
+          "url": "https://ajccbc.ncsa.or.th/ctf-rules",
+          "accepted": false,
+          "reason": "No identifiable CTF in result title"
+        },
+        {
+          "url": "https://asisctf.com/register",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://hackerdna.com/blog/ctf-competitions",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://www.facebook.com/DICT.RO9BASULTA/videos/ctf-basilan/2497275890683692",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://www.instagram.com/p/DVDuWWuDcXH",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://www.instagram.com/reel/Cr9lZZpOXSn",
+          "accepted": false,
+          "reason": "No identifiable CTF in result title"
+        },
+        {
+          "url": "https://ctftime.org/event/list",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://acronyms.thefreedictionary.com/CTF",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://www.facebook.com/DICTDavaoRegion/posts/the-battle-continues-gear-up-for-%F0%9D%97%9B%F0%9D%97%AE%F0%9D%97%B0%F0%9D%97%B8%F0%9D%9F%B0%F0%9D%97%9A%F0%9D%97%BC%F0%9D%98%83-%F0%9D%9F%B1-%F0%9D%9F%AE%F0%9D%9F%AC%F0%9D%9F%AE%F0%9D%9F%B2-carrying-the-theme-%F0%9D%97%97%F0%9D%97%B2%F0%9D%97%B0%F0%9D%97%BC%F0%9D%97%B1%F0%9D%97%B6%F0%9D%97%BB%F0%9D%97%B4-%F0%9D%97%AC%F0%9D%97%BC%F0%9D%98%82/1067935402828637",
+          "accepted": true,
+          "reason": "Accepted as search-only; schedule and registration remain unconfirmed"
+        },
+        {
+          "url": "https://www.facebook.com/Ncertgovph/videos/the-wait-is-finally-overhackforgov-capture-the-flag-competition-is-backyouve-wai/2753785511476593",
+          "accepted": false,
+          "reason": "Title lacks an unambiguous competition edition"
+        },
+        {
+          "url": "https://capturetheflag.withgoogle.com",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        },
+        {
+          "url": "https://tavily.com/knowledge/company/QqzFo8EPBvsF",
+          "accepted": false,
+          "reason": "Philippine organizer or venue not established by title/source"
+        }
+      ],
+      "snippet_link_audit": [
+        {
+          "result_url": "https://www.instagram.com/reel/Cr9lZZpOXSn",
+          "urls": [
+            "https://bit.ly/h4g2026r3-reg."
+          ]
+        }
+      ]
+    }
+  ]
+}

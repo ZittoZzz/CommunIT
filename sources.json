@@ -1,0 +1,229 @@
+{
+  "sources": [
+    {
+      "id": "rootcon-bluesky",
+      "name": "ROOTCON · Bluesky",
+      "kind": "bluesky",
+      "url": "https://bsky.app/profile/rootcon.bsky.social",
+      "actor": "rootcon.bsky.social",
+      "organizer": "ROOTCON",
+      "organizer_key": "rootcon",
+      "philippine_connection": "Official account linked from rootcon.org; Philippine organizer.",
+      "max_pages": 4,
+      "lookback_days": 540
+    },
+    {
+      "id": "hackthenorth",
+      "name": "HackTheNorth.ph · Announcements",
+      "kind": "html",
+      "url": "https://hackthenorth.ph/",
+      "organizer": "HackTheNorth.ph",
+      "organizer_key": "hackthenorth",
+      "philippine_connection": "Philippine community based in Northern Luzon.",
+      "allowed_hosts": [
+        "hackthenorth.ph",
+        "tcon.hackthenorth.ph"
+      ],
+      "link_pattern": "/blogs(?:/|$)|tcon\\.hackthenorth\\.ph|ctf|capture|contest|announcement|news|/events/",
+      "max_pages": 12
+    },
+    {
+      "id": "up-acm",
+      "name": "UP ACM · Events",
+      "kind": "html",
+      "url": "https://upacm.net/events/",
+      "organizer": "UP ACM",
+      "organizer_key": "up-acm",
+      "philippine_connection": "University of the Philippines Diliman student chapter; Haxxor organizer.",
+      "allowed_hosts": [
+        "upacm.net"
+      ],
+      "link_pattern": "haxxor|ctf|capture|news|announcement",
+      "max_pages": 8
+    },
+    {
+      "id": "pup-announcements",
+      "name": "PUP · Announcements feed",
+      "kind": "rss",
+      "url": "https://www.pup.edu.ph/rss/announcements/",
+      "organizer": "Polytechnic University of the Philippines",
+      "organizer_key": "pup",
+      "philippine_connection": "Philippine university; require explicit local hosting in the announcement, not just student participation.",
+      "organizer_evidence": "Configured university publisher; listings require the article to explicitly identify PUP as an organizer or host.",
+      "scope_pattern": "\\b(?:organized|hosted|launched)\\s+by\\s+(?:the\\s+)?(?:PUP|Polytechnic University of the Philippines)\\b|\\b(?:PUP|Polytechnic University of the Philippines)\\b[^.!?\\n]{0,80}\\b(?:organizes?|hosts?|launches?)\\b",
+      "allowed_hosts": [
+        "www.pup.edu.ph"
+      ],
+      "article_selector": ".page-content",
+      "title_selector": "h2",
+      "exclude_selector": ".call-action",
+      "follow_articles": true,
+      "max_items": 10
+    },
+    {
+      "id": "pup-news",
+      "name": "PUP · News feed",
+      "kind": "rss",
+      "url": "https://www.pup.edu.ph/rss/news/",
+      "organizer": "Polytechnic University of the Philippines",
+      "organizer_key": "pup",
+      "philippine_connection": "Philippine university; require explicit local hosting in the announcement, not just student participation.",
+      "organizer_evidence": "Configured university publisher; listings require the article to explicitly identify PUP as an organizer or host.",
+      "scope_pattern": "\\b(?:organized|hosted|launched)\\s+by\\s+(?:the\\s+)?(?:PUP|Polytechnic University of the Philippines)\\b|\\b(?:PUP|Polytechnic University of the Philippines)\\b[^.!?\\n]{0,80}\\b(?:organizes?|hosts?|launches?)\\b",
+      "allowed_hosts": [
+        "www.pup.edu.ph"
+      ],
+      "article_selector": ".page-content",
+      "title_selector": "h2",
+      "exclude_selector": ".call-action",
+      "follow_articles": true,
+      "max_items": 10
+    },
+    {
+      "id": "ncert",
+      "name": "DICT / CERT-PH · Feed",
+      "kind": "rss",
+      "url": "https://ncert.gov.ph/feed/",
+      "organizer": "DICT / CERT-PH",
+      "organizer_key": "dict",
+      "philippine_connection": "Philippine government cybersecurity agency.",
+      "max_items": 40
+    },
+    {
+      "id": "dict",
+      "name": "DICT · Announcements",
+      "kind": "html",
+      "url": "https://dict.gov.ph/",
+      "organizer": "DICT",
+      "organizer_key": "dict",
+      "philippine_connection": "Philippine government; HackForGov organizer.",
+      "allowed_hosts": [
+        "dict.gov.ph",
+        "www.dict.gov.ph"
+      ],
+      "link_pattern": "news-and-updates|hackforgov|hack4gov",
+      "max_pages": 10
+    },
+    {
+      "id": "rootcon-website",
+      "name": "ROOTCON · Website",
+      "kind": "restricted",
+      "url": "https://rootcon.org/",
+      "reason": "Website terms prohibit automated data extraction. Use the official Bluesky API source instead.",
+      "policy_url": "https://rootcon.org/html/termsandcondition/"
+    },
+    {
+      "id": "ctftime",
+      "name": "CTFtime · Philippine connections",
+      "kind": "ctftime",
+      "url": "https://ctftime.org/api/v1/events/",
+      "lookback_days": 180,
+      "future_days": 365,
+      "organizer_names": [
+        "ROOTCON",
+        "Pwn De Manila",
+        "HackTheNorth.ph",
+        "Hackstreetboys"
+      ],
+      "organizer_ids": []
+    },
+    {
+      "id": "tavily-keyless",
+      "name": "Tavily · Free Philippine CTF discovery",
+      "kind": "tavily",
+      "url": "https://api.tavily.com/search",
+      "max_results": 20,
+      "queries": [
+        {
+          "query": "site:facebook.com Philippines cybersecurity CTF competition registration",
+          "include_domains": [
+            "facebook.com"
+          ]
+        },
+        {
+          "query": "Philippines capture the flag CTF competition registration"
+        },
+        {
+          "query": "Philippines cybersecurity community CTF events calendar registration"
+        }
+      ],
+      "organizers": [
+        {
+          "facebook_accounts": [
+            "rootcon"
+          ],
+          "publisher_hosts": [
+            "crest-approved.org",
+            "www.crest-approved.org"
+          ],
+          "organizer": "ROOTCON",
+          "organizer_key": "rootcon",
+          "evidence_url": "https://rootcon.org/",
+          "philippine_connection": "Philippine organizer; official social account linked by its website.",
+          "event_pattern": "\\b(?:ROOTCON|RC)\\s*\\d+\\b",
+          "url_normalization": {
+            "hosts": [
+              "www.crest-approved.org",
+              "crest-approved.org"
+            ],
+            "path_prefixes": [
+              "/event/"
+            ],
+            "trailing_slash": true
+          }
+        },
+        {
+          "facebook_accounts": [
+            "upacm"
+          ],
+          "organizer": "UP ACM",
+          "organizer_key": "up-acm",
+          "evidence_url": "https://upacm.net/events/",
+          "philippine_connection": "University of the Philippines Diliman student chapter.",
+          "event_pattern": "\\b(?:Haxxor|ACMastery)\\b"
+        },
+        {
+          "facebook_accounts": [
+            "cyberdictr3"
+          ],
+          "organizer": "DICT Region 3 Cybersecurity",
+          "organizer_key": "dict",
+          "region": "Region III — Central Luzon",
+          "evidence_url": "https://dict.gov.ph/",
+          "philippine_connection": "Philippine government regional cybersecurity organizer."
+        }
+      ]
+    },
+    {
+      "id": "facebook-search",
+      "name": "Facebook · Indexed announcements",
+      "kind": "brave",
+      "url": "https://api.search.brave.com/res/v1/web/search",
+      "targets": [
+        {
+          "account": "cyberdictr3",
+          "organizer": "DICT Region 3 Cybersecurity",
+          "organizer_key": "dict",
+          "region": "Region III — Central Luzon",
+          "query": "site:facebook.com/cyberdictr3/ (HackForGov OR CTF OR capture-the-flag)"
+        },
+        {
+          "account": "upacm",
+          "organizer": "UP ACM",
+          "organizer_key": "up-acm",
+          "region": "NCR",
+          "query": "site:facebook.com/upacm/ (Haxxor OR CTF OR capture-the-flag)"
+        },
+        {
+          "account": "rootcon",
+          "organizer": "ROOTCON",
+          "organizer_key": "rootcon",
+          "query": "site:facebook.com/rootcon/ (CTF OR capture-the-flag)"
+        }
+      ],
+      "enabled": false,
+      "reason": "Disabled in the zero-API-fee configuration; Tavily keyless is the secondary search provider. No credentials are read for this source."
+    }
+  ],
+  "publisher_index": "source-index.json"
+}

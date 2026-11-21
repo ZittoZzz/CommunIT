@@ -1,0 +1,799 @@
+{
+  "schema_version": 1,
+  "research_completed_at": "2026-11-21T16:01:07Z",
+  "purpose": "Offline evaluation evidence only. This file must not be used as collector seeds, queries, runtime fixtures, or event imports.",
+  "selection_method": "Ten distinct Philippine community/student competitions were selected through independent web research without reading collector outputs, retained reports, or runtime source configuration. Generic searches identified publishers and events; event-name follow-up searches verified already independently identified candidates. The supplied acceptance case is separate and excluded from the ten-event denominator.",
+  "initial_discovery_queries": [
+    "Philippines cybersecurity community capture the flag registration competition university",
+    "Philippines CTF competition student cybersecurity registration community",
+    "Philippines university \"CTF\" \"registration\" -site:reddit.com -Hackforgov -Hack4Gov",
+    "Philippines community \"capture the flag\" \"2025\" -Hackforgov -Hack4Gov",
+    "\"Philippines\" \"CTF\" \"community\" -Hackforgov -Hack4Gov -site:reddit.com -site:wikipedia.org",
+    "\"Philippines\" \"capture the flag\" \"university\" \"registration open\"",
+    "\"CTF\" \"Philippines\" \"facebook.com\" \"register\" -Hackforgov -Hack4Gov",
+    "\"CTF\" \"Philippines\" \"student organization\""
+  ],
+  "personal_profile_research_queries": [
+    "\"Philippines\" \"CTF\" \"I am hosting\"",
+    "\"Philippines\" \"CTF\" \"I'm hosting\"",
+    "site:facebook.com \"CTF\" \"Philippines\" \"posts/pfbid\"",
+    "site:facebook.com \"CTF\" \"Philippines\" \"proud to announce\"",
+    "Philippine community CTF competition personal Facebook announcement"
+  ],
+  "limitations": [
+    "This is a small convenience benchmark of independently documented competitions, not a random or representative coverage estimate.",
+    "No additional original personal-profile Facebook announcements, or proof they were the first announcement, were independently established. The supplied RAIJIN case cannot establish coverage across several personal-profile organizers.",
+    "Original Facebook identities are unknown for all ten benchmark events. Absence of an identified original is not evidence that Facebook was unused.",
+    "Several sources are recaps. They prove event existence and Philippine scope but cannot establish an advance registration opportunity.",
+    "A publication date is not a collector first-seen timestamp. Timeliness requires actual collector observations plus registration evidence.",
+    "Research results are distinct from daily collector results. All normal-run measurement fields are initially null for evaluation by the root agent.",
+    "AdU Hackademic Showdown is supported by indexed campus-newsletter content on a third-party PDF host. The publisher account/ownership was not independently confirmed; it is weaker provenance than a first-party university article."
+  ],
+  "events": [
+    {
+      "id": "hexcore-learnpossible-2025",
+      "name": "LearnPossible: Hexcore Labs PH University Challenge — CTF tournament 2025",
+      "organizers": [
+        "Hexcore Labs PH",
+        "Experts Academy",
+        "Asian Institute of Management"
+      ],
+      "philippine_connection": "University teams nationwide; competition at the Asian Institute of Management in Makati.",
+      "event_dates": {
+        "start_date": "2025-10-06",
+        "end_date": "2025-10-06",
+        "time_text": "9:00 AM – 6:00 PM",
+        "timezone": null
+      },
+      "announcement_date": "2025-09-02",
+      "registration": {
+        "start_date": null,
+        "deadline": null,
+        "url": null,
+        "evidence": "The invitation PDF contains a registration QR code, but this research did not decode it or establish a registration deadline."
+      },
+      "sources": [
+        {
+          "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/",
+          "publisher": "University of the Philippines Manila",
+          "relationship": "university invitation reproducing organizer announcement",
+          "type": "announcement",
+          "access": "full page read",
+          "published_date": "2025-09-02",
+          "supports": [
+            "event existence",
+            "organizer",
+            "event date and local clock text",
+            "venue",
+            "national university scope"
+          ],
+          "evidence_summary": "UP Manila publishes an invitation signed by the Hexcore Labs PH Team, explicitly describing a separate CTF tournament and AI hackathon at AIM on October 6."
+        },
+        {
+          "url": "https://www.upm.edu.ph/wp-content/uploads/2025/09/5555_1756429668_EXPERTSPRIME_HEXCORE_UNIVERSITY_INVITATION_V1_UP.pdf",
+          "publisher": "Hexcore Labs PH invitation hosted by UP Manila",
+          "type": "announcement",
+          "access": "PDF text read",
+          "supports": [
+            "CTF identity",
+            "co-organizers",
+            "registration invitation"
+          ],
+          "evidence_summary": "The invitation names the collaborators, identifies the CTF tournament and includes a registration QR code. Workshop dates differ from the HTML invitation; they are not competition dates."
+        }
+      ],
+      "original_facebook_post": {
+        "url": null,
+        "personal_profile": null,
+        "first_announcement_proven": false
+      },
+      "measurement": {
+        "competition_discovered": false,
+        "original_facebook_discovered": null,
+        "original_facebook_identity": "unknown",
+        "collector_source_url": "https://hexcore-labs.com/post/hexcore-labs-philippines-launches-with-nationwide-cybersecurity-and-ai-competition",
+        "collector_source_type": "organizer recap (raw search result, not published)",
+        "first_seen": null,
+        "timely_discovery_verified": false,
+        "timeliness": "not_discovered",
+        "raw_candidates": [
+          {
+            "run": 1,
+            "query": "Philippines cybersecurity community CTF events calendar registration",
+            "url": "https://hexcore-labs.com/post/hexcore-labs-philippines-launches-with-nationwide-cybersecurity-and-ai-competition",
+            "title": "Hexcore Labs Philippines Launches with Nationwide…"
+          },
+          {
+            "run": 2,
+            "query": "Philippines cybersecurity community CTF events calendar registration",
+            "url": "https://hexcore-labs.com/post/hexcore-labs-philippines-launches-with-nationwide-cybersecurity-and-ai-competition",
+            "title": "Hexcore Labs Philippines Launches with Nationwide…"
+          }
+        ],
+        "miss_stage": "Raw search result returned. search_announcement rejects: No identifiable CTF in result title. A permitted research read confirms the page is a 2025 tournament recap. Current university feed no longer includes its older advance invitation.",
+        "raw_candidate_observed_at": "2026-11-21T16:05:32.190229+00:00"
+      },
+      "date_evidence_basis": "stated in cited source; date-only values do not assert midnight or clock times",
+      "end_date_precision": "calendar date plus source clock text; timezone unconfirmed in this research"
+    },
+    {
+      "id": "rootcon-20-ctf-2026",
+      "name": "ROOTCON 20 Capture The Flag 2026",
+      "organizers": [
+        "ROOTCON"
+      ],
+      "philippine_connection": "ROOTCON 20 conference in Clark, Pampanga, Philippines.",
+      "event_dates": {
+        "start_date": "2026-09-24",
+        "end_date": "2026-09-25",
+        "time_text": "Opening September 24 at 10:00; closing September 25 at 15:00",
+        "timezone": null
+      },
+      "announcement_date": null,
+      "registration": {
+        "start_date": null,
+        "deadline": null,
+        "url": null,
+        "evidence": "CTF rules require advance registration, a Human or Human+ badge and teams of two or three. The date of conference registration opening is not evidence of the CTF registration window."
+      },
+      "sources": [
+        {
+          "url": "https://rootcon.org/html/rc20/contests/",
+          "publisher": "ROOTCON",
+          "relationship": "organizer",
+          "type": "announcement",
+          "access": "full page read",
+          "published_date": null,
+          "supports": [
+            "CTF competition",
+            "specific CTF dates and clock times",
+            "eligibility",
+            "advance registration requirement"
+          ],
+          "evidence_summary": "Organizer contest rules explicitly identify the CTF, its two-day opening/closing schedule and pre-registration requirement. This is distinct from the three-day conference schedule."
+        },
+        {
+          "url": "https://info.rootcon.org/xml/contests",
+          "publisher": "ROOTCON",
+          "relationship": "organizer",
+          "type": "announcement",
+          "access": "indexed search result; direct web-tool fetch returned 502",
+          "published_date": null,
+          "supports": [
+            "conference Philippine venue"
+          ],
+          "evidence_summary": "Indexed organizer page identifies Royce Hotel and Casino, Clark, as the ROOTCON 20 venue."
+        }
+      ],
+      "original_facebook_post": {
+        "url": null,
+        "personal_profile": null,
+        "first_announcement_proven": false
+      },
+      "measurement": {
+        "competition_discovered": true,
+        "original_facebook_discovered": null,
+        "original_facebook_identity": "unknown",
+        "collector_source_url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z",
+        "collector_source_type": "organizer announcements/completion notice plus partner sponsor announcement",
+        "first_seen": "2026-11-21T16:05:32.190229+00:00",
+        "timely_discovery_verified": false,
+        "timeliness": "late",
+        "raw_candidates": [],
+        "miss_stage": null,
+        "event_id": "775f475db77bea2c6cd288ec",
+        "announcement_urls": [
+          "https://www.crest-approved.org/event/rootcon-20-philippines-2026",
+          "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h",
+          "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z"
+        ],
+        "timeliness_evidence": "First seen in this fresh database on November 22 Asia/Manila, after the independently documented September competition; organizer completion notice already available. No timely registration observation.",
+        "raw_candidate_observed_at": null
+      },
+      "date_evidence_basis": "stated in cited source; date-only values do not assert midnight or clock times",
+      "end_date_precision": "calendar date plus source clock text; timezone unconfirmed in this research"
+    },
+    {
+      "id": "packet-capture-2026",
+      "name": "Packet Capture: Beneath the Network 2026",
+      "organizers": [
+        "CyberPH",
+        "WorkFlow PH",
+        "Huawei Cloud Developer Groups Philippines",
+        "MQ CyberSec Australia",
+        "Cisco NetConnect PUP",
+        "ICPEP.SE PUP"
+      ],
+      "philippine_connection": "Philippine community/student co-organizers and opening event at Milestone at Fourth Avenue, Taguig.",
+      "event_dates": {
+        "start_date": null,
+        "end_date": null,
+        "time_text": null,
+        "timezone": null,
+        "context": "Kickoff October 4, workshop October 17 and awards October 26, 2026. These are not substituted for the actual CTF challenge start/end."
+      },
+      "announcement_date": null,
+      "registration": {
+        "start_date": null,
+        "deadline": null,
+        "url": "https://luma.com/akv0l0o1",
+        "evidence": "Organizer-hosted Luma page invites registration but is marked Past Event when researched. This does not prove a current registration opportunity."
+      },
+      "sources": [
+        {
+          "url": "https://luma.com/akv0l0o1",
+          "publisher": "CyberPH and WorkFlow PH on Luma",
+          "relationship": "organizer",
+          "type": "announcement",
+          "access": "full public event description read",
+          "published_date": null,
+          "supports": [
+            "event existence",
+            "organizers",
+            "Philippine venue",
+            "registration page"
+          ],
+          "evidence_summary": "Luma listing names the hosts and partner communities and explicitly describes a networking/security CTF. The calendar currently labels it a past event."
+        },
+        {
+          "url": "https://kakacomputer.com/curiosity-to-cybersecurity-open-community-and-opportunity-through-packet-capturing/",
+          "publisher": "KakaComputer",
+          "relationship": "community report",
+          "type": "recap",
+          "access": "full page read",
+          "published_date": null,
+          "supports": [
+            "event year",
+            "completion",
+            "related program dates",
+            "Philippine partners"
+          ],
+          "evidence_summary": "Report describes the October 2026 kickoff, subsequent workshop and October 26 awards, naming participating community partners and CTF winners."
+        }
+      ],
+      "original_facebook_post": {
+        "url": null,
+        "personal_profile": null,
+        "first_announcement_proven": false
+      },
+      "measurement": {
+        "competition_discovered": false,
+        "original_facebook_discovered": null,
+        "original_facebook_identity": "unknown",
+        "collector_source_url": "https://www.facebook.com/LearnCyberPH/posts/-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8%F0%9D%97%A5-%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%94%F0%9D%97%A0-%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A6-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%98%F0%9D%97%A1-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%97-%F0%9D%97%AA%F0%9D%97%9C%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8-%F0%9D%97%94%F0%9D%97%96%F0%9D%97%96%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A7-the-challenge-is-waiting-gather-y/122190342752805200",
+        "collector_source_type": "registration-related search titles; full posts unread; original vs reshare unknown",
+        "first_seen": null,
+        "timely_discovery_verified": false,
+        "timeliness": "not_discovered",
+        "raw_candidates": [
+          {
+            "run": 1,
+            "query": "site:facebook.com Philippines cybersecurity CTF competition registration",
+            "url": "https://www.facebook.com/LearnCyberPH/posts/-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8%F0%9D%97%A5-%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%94%F0%9D%97%A0-%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A6-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%98%F0%9D%97%A1-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%97-%F0%9D%97%AA%F0%9D%97%9C%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8-%F0%9D%97%94%F0%9D%97%96%F0%9D%97%96%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A7-the-challenge-is-waiting-gather-y/122190342752805200",
+            "title": "Packet Capture CTF competition registration open - Facebook"
+          },
+          {
+            "run": 1,
+            "query": "Philippines capture the flag CTF competition registration",
+            "url": "https://www.facebook.com/LearnCyberPH/posts/-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8%F0%9D%97%A5-%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%94%F0%9D%97%A0-%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A6-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%98%F0%9D%97%A1-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%97-%F0%9D%97%AA%F0%9D%97%9C%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8-%F0%9D%97%94%F0%9D%97%96%F0%9D%97%96%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A7-the-challenge-is-waiting-gather-y/122190342752805200",
+            "title": "Packet Capture CTF competition registration open"
+          },
+          {
+            "run": 1,
+            "query": "Philippines cybersecurity community CTF events calendar registration",
+            "url": "https://www.facebook.com/LearnCyberPH/posts/-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8%F0%9D%97%A5-%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%94%F0%9D%97%A0-%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A6-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%98%F0%9D%97%A1-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%97-%F0%9D%97%AA%F0%9D%97%9C%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8-%F0%9D%97%94%F0%9D%97%96%F0%9D%97%96%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A7-the-challenge-is-waiting-gather-y/122190342752805200",
+            "title": "Packet Capture CTF competition registration open"
+          },
+          {
+            "run": 1,
+            "query": "Philippines cybersecurity community CTF events calendar registration",
+            "url": "https://www.facebook.com/LearnCyberPH/posts/%F0%9D%97%99%F0%9D%97%9C%F0%9D%97%A1%F0%9D%97%94%F0%9D%97%9F-%F0%9D%97%96%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%99%F0%9D%97%A2%F0%9D%97%A5-%F0%9D%97%A5%F0%9D%97%98%F0%9D%97%9A%F0%9D%97%9C%F0%9D%97%A6%F0%9D%97%A7%F0%9D%97%A5%F0%9D%97%94%F0%9D%97%A7%F0%9D%97%9C%F0%9D%97%A2%F0%9D%97%A1-this-is-it-future-challengers%F0%9D%97%A5%F0%9D%97%B2%F0%9D%97%B4%F0%9D%97%B6%F0%9D%98%80%F0%9D%98%81%F0%9D%97%BF%F0%9D%97%AE%F0%9D%98%81%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB-%F0%9D%97%B0%F0%9D%97%B9%F0%9D%97%BC%F0%9D%98%80%F0%9D%97%B2%F0%9D%98%80-%F0%9D%98%81%F0%9D%97%BC%F0%9D%97%B1/122191081976805200",
+            "title": "Packet Capture registration deadline October 13 2026"
+          },
+          {
+            "run": 2,
+            "query": "site:facebook.com Philippines cybersecurity CTF competition registration",
+            "url": "https://www.facebook.com/LearnCyberPH/posts/-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8%F0%9D%97%A5-%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%94%F0%9D%97%A0-%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A6-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%98%F0%9D%97%A1-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%97-%F0%9D%97%AA%F0%9D%97%9C%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8-%F0%9D%97%94%F0%9D%97%96%F0%9D%97%96%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A7-the-challenge-is-waiting-gather-y/122190342752805200",
+            "title": "Packet Capture CTF competition registration open - Facebook"
+          },
+          {
+            "run": 2,
+            "query": "Philippines cybersecurity community CTF events calendar registration",
+            "url": "https://www.facebook.com/LearnCyberPH/posts/%F0%9D%97%99%F0%9D%97%9C%F0%9D%97%A1%F0%9D%97%94%F0%9D%97%9F-%F0%9D%97%96%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%99%F0%9D%97%A2%F0%9D%97%A5-%F0%9D%97%A5%F0%9D%97%98%F0%9D%97%9A%F0%9D%97%9C%F0%9D%97%A6%F0%9D%97%A7%F0%9D%97%A5%F0%9D%97%94%F0%9D%97%A7%F0%9D%97%9C%F0%9D%97%A2%F0%9D%97%A1-this-is-it-future-challengers%F0%9D%97%A5%F0%9D%97%B2%F0%9D%97%B4%F0%9D%97%B6%F0%9D%98%80%F0%9D%98%81%F0%9D%97%BF%F0%9D%97%AE%F0%9D%98%81%F0%9D%97%B6%F0%9D%97%BC%F0%9D%97%BB-%F0%9D%97%B0%F0%9D%97%B9%F0%9D%97%BC%F0%9D%98%80%F0%9D%97%B2%F0%9D%98%80-%F0%9D%98%81%F0%9D%97%BC%F0%9D%97%B1/122191081976805200",
+            "title": "Packet Capture registration deadline October 13 2026"
+          }
+        ],
+        "miss_stage": "Possible matching raw leads returned. Registration-post title has no edition and Philippine scope is not established by the existing title/source rule. Deadline title names 2026 but lacks an explicit CTF identifier. Original post identity and cross-post equivalence are unknown.",
+        "raw_candidate_observed_at": "2026-11-21T16:05:32.190229+00:00"
+      },
+      "date_evidence_basis": "CTF start/end unknown; contextual kickoff/workshop/award dates are stated in recap and must not substitute for competition dates",
+      "end_date_precision": "unknown"
+    },
+    {
+      "id": "jissa-signal-lost-2026",
+      "name": "JISSA Capture The Flag 2026: Signal Lost",
+      "organizers": [
+        "JISSA TIP",
+        "JISSA APC"
+      ],
+      "philippine_connection": "Cross-campus Philippine competition organized with TIP and APC chapters and Philippine university partners.",
+      "event_dates": {
+        "start_date": "2026-03-28",
+        "end_date": "2026-03-28",
+        "time_text": null,
+        "timezone": null
+      },
+      "announcement_date": null,
+      "registration": {
+        "start_date": null,
+        "deadline": null,
+        "url": null,
+        "evidence": "A third-party Facebook-page mirror claims a March 25 registration reminder, but no original announcement URL or first-party registration window was established."
+      },
+      "sources": [
+        {
+          "url": "https://www.linkedin.com/posts/hiddeninvestigations_hiddeninvestigations-signallost-ctf2026-activity-7443988462812434432-0daJ",
+          "publisher": "Hidden Investigations",
+          "relationship": "official challenge provider and technical partner",
+          "type": "recap",
+          "access": "public LinkedIn post text read through web tool",
+          "published_date": null,
+          "supports": [
+            "event name/year",
+            "competition date",
+            "Philippine organizer connection",
+            "completion"
+          ],
+          "evidence_summary": "Challenge provider reports a completed March 28 CTF for twenty teams from nine universities and names its TIP/APC collaboration."
+        },
+        {
+          "url": "https://medium.com/@r3nz/signal-lost-jissa-capture-the-flag-2026-f9b8c4938381",
+          "publisher": "Renz Aggabao",
+          "relationship": "participant write-up",
+          "type": "recap",
+          "access": "indexed page text",
+          "published_date": "2026-03-30",
+          "supports": [
+            "competition name/year",
+            "post-event technical write-up"
+          ],
+          "evidence_summary": "Dated participant article documents a cryptography challenge from this named event."
+        }
+      ],
+      "original_facebook_post": {
+        "url": null,
+        "personal_profile": null,
+        "first_announcement_proven": false
+      },
+      "measurement": {
+        "competition_discovered": false,
+        "original_facebook_discovered": null,
+        "original_facebook_identity": "unknown",
+        "collector_source_url": null,
+        "collector_source_type": null,
+        "first_seen": null,
+        "timely_discovery_verified": false,
+        "timeliness": "not_discovered",
+        "raw_candidates": [],
+        "miss_stage": "No identifiable matching result returned by the configured sources in these two runs. Independent research is not collector discovery.",
+        "raw_candidate_observed_at": null
+      },
+      "date_evidence_basis": "stated in cited source; date-only values do not assert midnight or clock times",
+      "end_date_precision": "calendar date only; no end clock time asserted"
+    },
+    {
+      "id": "jissa-apc-resecurity-2026",
+      "name": "JISSA-APC and Resecurity CTF Showdown 2026",
+      "organizers": [
+        "JISSA-APC",
+        "Resecurity"
+      ],
+      "philippine_connection": "Asia Pacific College campus competition for its students at its SOC Laboratory.",
+      "event_dates": {
+        "start_date": "2026-09-18",
+        "end_date": "2026-09-18",
+        "time_text": null,
+        "timezone": null,
+        "context": "Two-day program September 17–18; official report places the CTF proper on day two after day-one workshops."
+      },
+      "announcement_date": null,
+      "registration": {
+        "start_date": null,
+        "deadline": null,
+        "url": null,
+        "evidence": "No registration window established from the university recap."
+      },
+      "sources": [
+        {
+          "url": "https://www.apc.edu.ph/advancing-cybersecurity-excellence-jissa-apc-and-resecurity-crown-new-champions-in-2-day-ctf-showdown/",
+          "publisher": "Asia Pacific College",
+          "relationship": "host university",
+          "type": "recap",
+          "access": "full page read",
+          "published_date": null,
+          "supports": [
+            "event existence",
+            "organizers",
+            "program dates",
+            "CTF on day two",
+            "campus eligibility",
+            "completion"
+          ],
+          "evidence_summary": "Host university describes workshops on September 17 and a CTF on the second day of its September 17–18 program, with winning teams named."
+        }
+      ],
+      "original_facebook_post": {
+        "url": null,
+        "personal_profile": null,
+        "first_announcement_proven": false
+      },
+      "measurement": {
+        "competition_discovered": false,
+        "original_facebook_discovered": null,
+        "original_facebook_identity": "unknown",
+        "collector_source_url": null,
+        "collector_source_type": null,
+        "first_seen": null,
+        "timely_discovery_verified": false,
+        "timeliness": "not_discovered",
+        "raw_candidates": [],
+        "miss_stage": "No identifiable matching result returned by the configured sources in these two runs. Independent research is not collector discovery.",
+        "raw_candidate_observed_at": null
+      },
+      "date_evidence_basis": "derived date: cited host page states September 17–18 program and CTF proper on day two; September 18 is an inference, not a separately quoted CTF date",
+      "end_date_precision": "calendar date only; no end clock time asserted"
+    },
+    {
+      "id": "adu-hackademic-2025",
+      "name": "AdU CTF: Hackademic Showdown 2025",
+      "organizers": [
+        "Adamson Computer Science Society"
+      ],
+      "philippine_connection": "Adamson campus CTF with teams from Adamson, TIP Quezon City and TUP Manila.",
+      "event_dates": {
+        "start_date": "2025-03-21",
+        "end_date": "2025-03-21",
+        "time_text": "competition started at 1:00 PM",
+        "timezone": null
+      },
+      "announcement_date": null,
+      "registration": {
+        "start_date": null,
+        "deadline": null,
+        "url": null,
+        "evidence": "No registration evidence established from the post-event newsletter."
+      },
+      "sources": [
+        {
+          "url": "https://cdnc.heyzine.com/files/uploaded/v3/011fe97614567635330cb5b2ac79ca3cebc8a857.pdf",
+          "publisher": "Newsletter issue 2, May 2025, hosted on Heyzine; Adamson campus coverage",
+          "relationship": "campus newsletter content; publisher ownership not independently confirmed",
+          "type": "recap",
+          "access": "indexed PDF text; direct web-tool opening failed",
+          "published_date": "2025-05",
+          "supports": [
+            "event identity/year",
+            "March 21 date",
+            "local start clock text",
+            "Philippine schools",
+            "completion"
+          ],
+          "evidence_summary": "Newsletter article by Christien Erica Leonor reports a completed March 21 competition supported by ACOMSS and Adamson faculty, with teams from three Philippine schools."
+        }
+      ],
+      "original_facebook_post": {
+        "url": null,
+        "personal_profile": null,
+        "first_announcement_proven": false
+      },
+      "measurement": {
+        "competition_discovered": false,
+        "original_facebook_discovered": null,
+        "original_facebook_identity": "unknown",
+        "collector_source_url": null,
+        "collector_source_type": null,
+        "first_seen": null,
+        "timely_discovery_verified": false,
+        "timeliness": "not_discovered",
+        "raw_candidates": [],
+        "miss_stage": "No identifiable matching result returned by the configured sources in these two runs. Independent research is not collector discovery.",
+        "raw_candidate_observed_at": null
+      },
+      "date_evidence_basis": "day/month and start clock stated in indexed newsletter; year follows named 2025 event; publisher ownership unconfirmed",
+      "end_date_precision": "calendar date only; no end clock time asserted"
+    },
+    {
+      "id": "hackquest-iligan-2025",
+      "name": "HackQuest Iligan 2025: Capture the Flag",
+      "organizers": [
+        "ICTC",
+        "Center for Digital Iligan Innovation and Sustainability"
+      ],
+      "philippine_connection": "Iligan competition involving IMCC, St. Peter College and MSU-IIT.",
+      "event_dates": {
+        "start_date": null,
+        "end_date": null,
+        "time_text": null,
+        "timezone": null,
+        "year": 2025
+      },
+      "announcement_date": null,
+      "registration": {
+        "start_date": null,
+        "deadline": null,
+        "url": null,
+        "evidence": "No registration dates or link established from the recap."
+      },
+      "sources": [
+        {
+          "url": "https://imcc.edu.ph/iligan-students-compete-in-cybersecurity-challenges-at-hackquest-iligan-2025/",
+          "publisher": "Iligan Medical Center College",
+          "relationship": "participating university",
+          "type": "recap",
+          "access": "full page read",
+          "published_date": null,
+          "supports": [
+            "competition identity/year",
+            "Philippine location",
+            "organizers",
+            "completion"
+          ],
+          "evidence_summary": "College recap names the CTF, participating Iligan schools, ICTC/CDIIS organizers and winning teams. It does not supply exact event or registration dates."
+        }
+      ],
+      "original_facebook_post": {
+        "url": null,
+        "personal_profile": null,
+        "first_announcement_proven": false
+      },
+      "measurement": {
+        "competition_discovered": false,
+        "original_facebook_discovered": null,
+        "original_facebook_identity": "unknown",
+        "collector_source_url": null,
+        "collector_source_type": null,
+        "first_seen": null,
+        "timely_discovery_verified": false,
+        "timeliness": "not_discovered",
+        "raw_candidates": [],
+        "miss_stage": "No identifiable matching result returned by the configured sources in these two runs. Independent research is not collector discovery.",
+        "raw_candidate_observed_at": null
+      },
+      "date_evidence_basis": "year from named event; exact dates unknown",
+      "end_date_precision": "unknown"
+    },
+    {
+      "id": "cyberconnect-misocc-2025",
+      "name": "CyberCONNECT: Capture the Flag Training and Challenge 2025",
+      "organizers": [
+        "DICT Misamis Occidental"
+      ],
+      "philippine_connection": "Online competition hosted by DICT Misamis Occidental for teams from six higher education institutions.",
+      "event_dates": {
+        "start_date": "2025-08-30",
+        "end_date": "2025-08-31",
+        "time_text": null,
+        "timezone": null,
+        "context": "Date range covers combined training and pocket CTF; exact competition clock times unknown."
+      },
+      "announcement_date": null,
+      "registration": {
+        "start_date": null,
+        "deadline": null,
+        "url": null,
+        "evidence": "No registration window established from the recap."
+      },
+      "sources": [
+        {
+          "url": "https://mu.edu.ph/news_updates/Misamis-Universitys-College-of-Computer-Studies-Triumphs-at-CyberCONNECT-Capture-the-Flag-Challenge",
+          "publisher": "Misamis University",
+          "relationship": "participating university",
+          "type": "recap",
+          "access": "full page read",
+          "published_date": "2025-09-10",
+          "supports": [
+            "event existence",
+            "organizer",
+            "date range",
+            "online format",
+            "completion"
+          ],
+          "evidence_summary": "University reports that its team won the completed DICT Misamis Occidental online training and CTF held August 30–31, 2025."
+        }
+      ],
+      "original_facebook_post": {
+        "url": null,
+        "personal_profile": null,
+        "first_announcement_proven": false
+      },
+      "measurement": {
+        "competition_discovered": false,
+        "original_facebook_discovered": null,
+        "original_facebook_identity": "unknown",
+        "collector_source_url": null,
+        "collector_source_type": null,
+        "first_seen": null,
+        "timely_discovery_verified": false,
+        "timeliness": "not_discovered",
+        "raw_candidates": [],
+        "miss_stage": "No identifiable matching result returned by the configured sources in these two runs. Independent research is not collector discovery.",
+        "raw_candidate_observed_at": null
+      },
+      "date_evidence_basis": "stated combined training-and-CTF program range; actual competition-only start/end remain unknown",
+      "end_date_precision": "calendar date only; no end clock time asserted"
+    },
+    {
+      "id": "trend-uctf-2025-preliminary",
+      "name": "Trend University Capture the Flag 2025 — Preliminary Round",
+      "organizers": [
+        "Trend Micro"
+      ],
+      "philippine_connection": "Philippine university competition; qualifying teams advance to DECODE in Manila.",
+      "event_dates": {
+        "start_date": "2025-08-22",
+        "end_date": "2025-08-22",
+        "time_text": null,
+        "timezone": null
+      },
+      "announcement_date": null,
+      "registration": {
+        "start_date": null,
+        "deadline": null,
+        "url": null,
+        "evidence": "No registration window established from the university recap. The preliminary and September final are distinct rounds."
+      },
+      "sources": [
+        {
+          "url": "https://www.vsu.edu.ph/articles/news/2813-team-cobra-from-vsu-dcst-secures-top-10-in-national-cybersecurity-competition",
+          "publisher": "Visayas State University",
+          "relationship": "participating university",
+          "type": "recap",
+          "access": "full page read",
+          "published_date": "2025-10-03",
+          "supports": [
+            "event name/year",
+            "preliminary round date",
+            "online format",
+            "Philippine student competition",
+            "completion"
+          ],
+          "evidence_summary": "VSU reports its placing in the August 22 online preliminary round with 199 Philippine teams, separately identifying the September 9 finals at DECODE Manila."
+        }
+      ],
+      "original_facebook_post": {
+        "url": null,
+        "personal_profile": null,
+        "first_announcement_proven": false
+      },
+      "measurement": {
+        "competition_discovered": false,
+        "original_facebook_discovered": null,
+        "original_facebook_identity": "unknown",
+        "collector_source_url": null,
+        "collector_source_type": null,
+        "first_seen": null,
+        "timely_discovery_verified": false,
+        "timeliness": "not_discovered",
+        "raw_candidates": [],
+        "miss_stage": "No identifiable matching result returned by the configured sources in these two runs. Independent research is not collector discovery.",
+        "raw_candidate_observed_at": null
+      },
+      "date_evidence_basis": "stated in cited source; date-only values do not assert midnight or clock times",
+      "end_date_precision": "calendar date only; no end clock time asserted"
+    },
+    {
+      "id": "central-luzon-ctf-2026",
+      "name": "Central Luzon Capture The Flag 2026",
+      "organizers": [
+        "DICT Region 3",
+        "Holy Angel University"
+      ],
+      "philippine_connection": "Central Luzon student competition organized by DICT Region 3 and HAU.",
+      "event_dates": {
+        "start_date": "2026-06-23",
+        "end_date": "2026-06-23",
+        "time_text": null,
+        "timezone": null
+      },
+      "announcement_date": null,
+      "registration": {
+        "start_date": "2026-06-01",
+        "deadline": "2026-06-18",
+        "url": null,
+        "evidence": "Indexed description of DICT Region 3's announcement explicitly gives registration June 1–18, 2026. No clock time or timezone is asserted."
+      },
+      "sources": [
+        {
+          "url": "https://www.youtube.com/watch?v=py0sqfjiWyQ",
+          "publisher": "DICT Region 3",
+          "relationship": "organizer",
+          "type": "announcement",
+          "access": "indexed official YouTube description; direct web-tool fetch throttled",
+          "published_date": null,
+          "supports": [
+            "competition identity/year",
+            "organizers",
+            "June 23 competition date",
+            "June 1–18 registration window"
+          ],
+          "evidence_summary": "Official-channel description invites students to the inaugural regional CTF, names HAU as co-organizer and specifies event and registration dates."
+        },
+        {
+          "url": "https://jpcsolshco.org/",
+          "publisher": "JPCS-OLSHCo",
+          "relationship": "participating student club",
+          "type": "recap",
+          "access": "indexed club home-page text",
+          "published_date": "2026-06-24",
+          "supports": [
+            "completion",
+            "event name/year"
+          ],
+          "evidence_summary": "Student club's dated news item reports its Cyber Crusaders team's championship at the inaugural Central Luzon CTF."
+        }
+      ],
+      "original_facebook_post": {
+        "url": null,
+        "personal_profile": null,
+        "first_announcement_proven": false
+      },
+      "measurement": {
+        "competition_discovered": false,
+        "original_facebook_discovered": null,
+        "original_facebook_identity": "unknown",
+        "collector_source_url": null,
+        "collector_source_type": null,
+        "first_seen": null,
+        "timely_discovery_verified": false,
+        "timeliness": "not_discovered",
+        "raw_candidates": [],
+        "miss_stage": "No identifiable matching result returned by the configured sources in these two runs. Independent research is not collector discovery.",
+        "raw_candidate_observed_at": null
+      },
+      "date_evidence_basis": "stated in cited source; date-only values do not assert midnight or clock times",
+      "end_date_precision": "calendar date only; no end clock time asserted"
+    }
+  ],
+  "supplied_acceptance_case": {
+    "name": "RAIJIN CTF 2026",
+    "independently_selected": false,
+    "included_in_independent_benchmark_denominator": false,
+    "supplied_urls": [
+      "https://www.facebook.com/story.php?story_fbid=1803852510919263&id=100038835946787",
+      "https://www.facebook.com/ivan.dizonii.5/posts/pfbid07b225xaauXFFcYgtxDHg8d55cEsqLm1vMfN8zeLfRXrQhfiWYziSdqCJiQy6kcaFl"
+    ],
+    "supplied_evidence": "User identifies these as two forms of Ivan Dizon's original personal-profile announcement. User describes a screenshot dated November 15 announcing an online December 1–4, 2026 CTF and a registration link. This researcher did not independently access that post or screenshot.",
+    "use_restriction": "Comparison/evaluation only; never discovery query, runtime seed, fixture or hard-coded production match.",
+    "registration": {
+      "start_date": null,
+      "deadline": null,
+      "url": null,
+      "evidence": "User reports a registration link; a registration deadline or still-open state was not established by this researcher."
+    },
+    "measurement": {
+      "competition_discovered": false,
+      "original_facebook_discovered": false,
+      "collector_source_url": null,
+      "collector_source_type": null,
+      "first_seen": null,
+      "timely_discovery_verified": false,
+      "timeliness": "not_discovered",
+      "miss_stage": "No matching retained result URL/title for either supplied post form, including decoded embed hrefs. Old unretained snippets remain untraceable."
+    }
+  },
+  "evaluation_completed_at": "2026-11-21T16:06:51.668795+00:00",
+  "summary": {
+    "independently_documented_events": 10,
+    "published_event_matches": 1,
+    "timely_discoveries_verified": 0,
+    "original_facebook_posts_verified": 0,
+    "benchmark_original_facebook_identities_unknown": 10,
+    "additional_rejected_raw_candidate_events": [
+      "hexcore-learnpossible-2025"
+    ],
+    "additional_ambiguous_raw_candidate_events": [
+      "packet-capture-2026"
+    ],
+    "supplied_acceptance_in_denominator": false
+  }
+}
