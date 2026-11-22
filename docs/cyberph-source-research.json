@@ -1,0 +1,468 @@
+{
+  "checked_at": "2026-11-21T17:57:03.669677+00:00",
+  "scope": "Read-only publisher qualification research; no source configuration, database, services, or collector changes.",
+  "starting_candidate": {
+    "id": "32c20074fa13826744be7dd8",
+    "name": "CyberPH",
+    "public_url": "https://www.facebook.com/learncyberph",
+    "identity_status": "stable",
+    "status": "candidate",
+    "roles": [
+      "contributor"
+    ],
+    "first_seen": "2026-11-21T17:42:36.873158+00:00"
+  },
+  "collector_evidence_path": [
+    "https://kakacomputer.com/tag/ctf/feed/",
+    "https://kakacomputer.com/curiosity-to-cybersecurity-open-community-and-opportunity-through-packet-capturing/"
+  ],
+  "identity_access": {
+    "url": "https://www.facebook.com/learncyberph",
+    "status": "not_requested",
+    "reason": "Facebook HTML, login and cookies are prohibited. The stored public profile URL alone does not expose a verified recurring source."
+  },
+  "clean_publisher_queries": [
+    "\"CyberPH\" Luma events calendar",
+    "\"LearnCyberPH\" website community events",
+    "\"CyberPH\" \"luma.com/user\"",
+    "\"LearnCyberPH\" \"luma\"",
+    "\"CyberPH\" \"calendar\" Luma"
+  ],
+  "search_classification": "Research-tool-assisted publisher lookup, not the production Tavily adapter or the normal collector.",
+  "other_search_note": {
+    "query": "site:luma.com \"CyberPH\" -akv0l0o1 -79gspr7h -9e4z69bw",
+    "classification": "Research-only exclusion query after seeing these results. It supplies no qualifying discovery path and is not a proposed production query."
+  },
+  "search_results_used": [
+    {
+      "url": "https://luma.com/79gspr7h",
+      "kind": "Non-CTF online webinar; publisher host link used for profile research"
+    },
+    {
+      "url": "https://www.linkedin.com/company/cyberphilippines",
+      "kind": "Company page search lead; backend robots blocked"
+    }
+  ],
+  "search_result_not_used_as_route": {
+    "url": "https://luma.com/akv0l0o1",
+    "reason": "Known historical competition also appeared in generic publisher search. It was not used to derive the calendar; later it was requested only after the non-CTF-webinar-derived recurring subscription returned it. Calendar qualification is search-assisted and no event URL is a runtime seed."
+  },
+  "backend_checks": [
+    {
+      "url": "https://luma.com/79gspr7h",
+      "status": "ok",
+      "checked_at": "2026-11-21T17:52:42.802296+00:00",
+      "page_kind": "event",
+      "ctf": false,
+      "online_evidence": "Public description identifies Microsoft Teams; search-rendered page labels Virtual. Raw location_type is unknown.",
+      "event": {
+        "api_id": "evt-nJ4RSmllNJmfNEV",
+        "end_at": "2026-01-28T13:00:00.000Z",
+        "location_type": "unknown",
+        "name": "CyberPH Webinar 3: 𝐎𝐓 𝐒𝐞𝐜𝐮𝐫𝐢𝐭𝐲",
+        "start_at": "2026-01-28T11:00:00.000Z",
+        "timezone": "Asia/Singapore",
+        "url": "79gspr7h",
+        "visibility": "public"
+      },
+      "registration": {
+        "registration_availability": "sold-out",
+        "waitlist_active": false,
+        "ticket_info": {
+          "price": null,
+          "is_free": true,
+          "max_price": null,
+          "is_sold_out": false,
+          "spots_remaining": null,
+          "is_near_capacity": false,
+          "require_approval": false
+        }
+      },
+      "raw_schema_path": "props.pageProps.initialData.data",
+      "public_host_link": "https://luma.com/user/usr-Xf0H4hjDiw6f0tp",
+      "calendar": {
+        "api_id": "cal-ZW4YOEwv4lmL66C",
+        "name": "Personal",
+        "access_level": "public",
+        "is_personal": true,
+        "personal_user_api_id": "usr-Xf0H4hjDiw6f0tp",
+        "slug": null,
+        "website": null
+      },
+      "recurring_subscription_link_found": false
+    },
+    {
+      "url": "https://luma.com/user/usr-Xf0H4hjDiw6f0tp",
+      "status": "ok",
+      "checked_at": "2026-11-21T17:53:03.982530+00:00",
+      "structure": {
+        "event_attended_count": 1,
+        "event_hosted_count": 3,
+        "event_together_count": 0,
+        "joined_at": "2025-10-25T14:08:35.504Z",
+        "user": {
+          "api_id": "usr-Xf0H4hjDiw6f0tp",
+          "avatar_url": "https://images.lumacdn.com/avatars/1f/e1fd8630-04e7-469d-af35-adfd283c580a.png",
+          "bio_short": null,
+          "first_name": "CyberPH",
+          "last_name": null,
+          "instagram_handle": null,
+          "is_verified": false,
+          "linkedin_handle": null,
+          "name": "CyberPH",
+          "tiktok_handle": null,
+          "timezone": "Asia/Manila",
+          "twitter_handle": null,
+          "username": null,
+          "website": null,
+          "youtube_handle": null
+        },
+        "block_robots": false,
+        "block_status": null
+      },
+      "outbound_links": [
+        {
+          "text": "Skip to Content",
+          "url": "#main-content"
+        },
+        {
+          "text": "",
+          "url": "/"
+        },
+        {
+          "text": "Discover Events",
+          "url": "/discover"
+        }
+      ],
+      "event_links_returned": 0,
+      "calendar_links_returned": 0,
+      "interpretation": "Readable user profile with three hosted-event count, not a readable recurring event index. No undocumented endpoint was inferred."
+    },
+    {
+      "url": "https://www.linkedin.com/company/cyberphilippines",
+      "checked_at": "2026-11-21T17:52:45.829328+00:00",
+      "status": "error",
+      "error": "robots.txt disallows automated access"
+    }
+  ],
+  "official_documentation": [
+    {
+      "url": "https://help.luma.com/p/ical-syncing",
+      "finding": "Public calendar subscriptions are supported; a calendar page exposes the subscription control."
+    },
+    {
+      "url": "https://help.luma.com/p/discovering-events",
+      "finding": "Users follow calendars rather than user profiles."
+    },
+    {
+      "url": "https://help.luma.com/p/creating-a-calendar",
+      "finding": "Team calendars have configurable public URLs. The observed personal calendar has no public slug."
+    }
+  ],
+  "online_coverage": {
+    "observed_online_event": true,
+    "recurring_online_discovery_verified": true,
+    "reason": "The publisher iCal response itself returned the online Microsoft Teams webinar; this proves the recurring publisher route can include online events omitted by the city feed. It does not prove an online CTF or complete historical coverage."
+  },
+  "advance_ctf_invitation_evidence": {
+    "verified_on_recurring_route": false,
+    "reason": "Historical CTF registration landing page is returned automatically, but it exposes no confirmed original publication timestamp. Its current kickoff has passed and its raw open flag cannot establish entry now or earlier timely collector discovery."
+  },
+  "identity_equivalence": {
+    "facebook_to_luma_account_confirmed_by_direct_link": false,
+    "reason": "No permitted reciprocal profile link. Associating the saved Facebook candidate with the Luma calendar would be explicit one-time research qualification using the same historical competition, matching CyberPH/WorkFlow PH roles and venue, not an automatic display-name merge.",
+    "qualification_classification": "search-assisted calendar discovery; historical cross-source relationship research required for candidate association"
+  },
+  "recommendation": "The public calendar iCal is a usable credential-free recurring publisher source. Enable only after explicit one-time publisher qualification, store its public calendar/account identities, and inspect future discovered descriptions independently of titles. Preserve registration unknown for the historical kickoff. Keep Facebook-to-Luma equivalence marked research-qualified rather than inferred automatically from display name.",
+  "cost_and_access": {
+    "api_fees_php": 0,
+    "tavily_requests": 0,
+    "facebook_requests": 0,
+    "credentials_or_cookies": false,
+    "paid_fallback": false
+  },
+  "subscription_template": {
+    "url": "https://luma.com/_next/static/chunks/0u7i6g4x378q9.js",
+    "backend_status": "ok",
+    "bytes": 32055,
+    "public_enum_excerpt": "i.Calendar=\"calendar\",i.Discover=\"discover\"",
+    "public_constructor_excerpt": "API_URL.replace(/\\/$/,\"\")}/ics/get?${l.f.stringify(e)}",
+    "official_documentation": "https://help.luma.com/p/ical-syncing",
+    "interpretation": "Documented calendar subscription plus public UI constructor and Calendar enum establish entity=calendar. The calendar identifier is the public non-CTF webinar calendar.api_id, not a guessed private endpoint."
+  },
+  "recurring_subscription": {
+    "url": "https://api.luma.com/ics/get?entity=calendar&id=cal-ZW4YOEwv4lmL66C",
+    "checked_at": "2026-11-21T17:55:46.136956+00:00",
+    "route_origin": "Public webinar calendar.api_id plus documented public calendar subscription and publisher UI Entity.Calendar enum; search-assisted publisher qualification",
+    "status": "ok",
+    "bytes": 1872,
+    "event_links": [
+      "https://luma.com/mz5bi1ln",
+      "https://luma.com/79gspr7h",
+      "https://luma.com/akv0l0o1"
+    ],
+    "entry_count": 3,
+    "calendar_headers": [
+      "X-WR-CALNAME:Personal",
+      "X-WR-CALDESC:Luma Calendar",
+      "REFRESH-INTERVAL;VALUE=DURATION:PT12H",
+      "X-PUBLISHED-TTL:PT12H"
+    ],
+    "entries": [
+      {
+        "public_ical_fields": [
+          "DTSTART:20251114T050000Z",
+          "DTEND:20251114T083000Z",
+          "DTSTAMP:20261121T175546Z",
+          "UID:evt-0zawzF6fIHOaknh@events.lu.ma",
+          "SUMMARY:Jailbreaking Your Own AI (Before Someone Else Does): A Founder's Guide to Building Your Defenses.",
+          "LOCATION:Abaca Room, Mezzanine, Philippine Innovation Hub, Marikina City",
+          "STATUS:TENTATIVE"
+        ]
+      },
+      {
+        "public_ical_fields": [
+          "DTSTART:20260128T110000Z",
+          "DTEND:20260128T130000Z",
+          "DTSTAMP:20261121T175546Z",
+          "UID:evt-nJ4RSmllNJmfNEV@events.lu.ma",
+          "SUMMARY:CyberPH Webinar 3: 𝐎𝐓 𝐒𝐞𝐜𝐮𝐫𝐢𝐭𝐲",
+          "LOCATION:https://luma.com/event/evt-nJ4RSmllNJmfNEV",
+          "STATUS:TENTATIVE"
+        ]
+      },
+      {
+        "public_ical_fields": [
+          "DTSTART:20261004T000000Z",
+          "DTEND:20261004T090000Z",
+          "DTSTAMP:20261121T175546Z",
+          "UID:evt-HivwEyCrWqwNkpC@events.lu.ma",
+          "SUMMARY:HCDG PH x Packet Capture: Beneath the Network",
+          "LOCATION:Milestone at Fourth Avenue, BGC, 4th Ave, Taguig, Metro Manila, Philippines",
+          "STATUS:TENTATIVE"
+        ]
+      }
+    ]
+  },
+  "repeatable_path": [
+    {
+      "step": "Stored candidate",
+      "url": "https://www.facebook.com/learncyberph",
+      "access": "not_requested",
+      "note": "Cannot obtain public outlinks with permitted backend access."
+    },
+    {
+      "step": "One-time research search",
+      "query": "\"CyberPH\" Luma events calendar",
+      "classification": "search-assisted, not normal collector"
+    },
+    {
+      "step": "Search-result non-CTF webinar",
+      "url": "https://luma.com/79gspr7h",
+      "public_fields": [
+        "props.pageProps.initialData.data.calendar.api_id",
+        "calendar.access_level",
+        "calendar.is_personal",
+        "calendar.personal_user_api_id",
+        "hosts[].api_id"
+      ]
+    },
+    {
+      "step": "Recurring documented calendar subscription",
+      "url": "https://api.luma.com/ics/get?entity=calendar&id=cal-ZW4YOEwv4lmL66C",
+      "event_links": [
+        "https://luma.com/mz5bi1ln",
+        "https://luma.com/79gspr7h",
+        "https://luma.com/akv0l0o1"
+      ]
+    },
+    {
+      "step": "Follow automatically returned event links",
+      "source": "Calendar subscription DESCRIPTION/URL fields",
+      "note": "No event URL or title is required in a runtime query or source seed."
+    }
+  ],
+  "calendar_detail_checks": [
+    {
+      "url": "https://luma.com/mz5bi1ln",
+      "discovered_from": "https://api.luma.com/ics/get?entity=calendar&id=cal-ZW4YOEwv4lmL66C",
+      "checked_at": "2026-11-21T17:56:15.513495+00:00",
+      "status": "ok",
+      "event": {
+        "api_id": "evt-0zawzF6fIHOaknh",
+        "name": "Jailbreaking Your Own AI (Before Someone Else Does): A Founder's Guide to Building Your Defenses.",
+        "start_at": "2025-11-14T05:00:00.000Z",
+        "end_at": "2025-11-14T08:30:00.000Z",
+        "timezone": "Asia/Shanghai",
+        "location_type": "offline",
+        "visibility": "public",
+        "created_at": null,
+        "updated_at": null
+      },
+      "calendar": {
+        "api_id": "cal-ZW4YOEwv4lmL66C",
+        "access_level": "public",
+        "is_personal": true,
+        "personal_user_api_id": "usr-Xf0H4hjDiw6f0tp",
+        "slug": null
+      },
+      "owner_host": {
+        "api_id": "usr-Xf0H4hjDiw6f0tp",
+        "name": "CyberPH",
+        "username": null,
+        "website": null,
+        "linkedin_handle": null
+      },
+      "registration_metadata": {
+        "registration_availability": "waitlist",
+        "waitlist_active": true,
+        "ticket_info": {
+          "price": null,
+          "is_free": true,
+          "max_price": null,
+          "is_sold_out": true,
+          "spots_remaining": 0,
+          "is_near_capacity": false,
+          "require_approval": false
+        }
+      },
+      "existing_parser_at_check": {
+        "accepted": false,
+        "reason": "No actual cybersecurity CTF evidence in title and description"
+      },
+      "created_or_published_at": null,
+      "location_summary": {
+        "address": "Abaca Room, Mezzanine, Philippine Innovation Hub, Marikina City"
+      }
+    },
+    {
+      "url": "https://luma.com/79gspr7h",
+      "discovered_from": "https://api.luma.com/ics/get?entity=calendar&id=cal-ZW4YOEwv4lmL66C",
+      "checked_at": "2026-11-21T17:56:17.243376+00:00",
+      "status": "ok",
+      "event": {
+        "api_id": "evt-nJ4RSmllNJmfNEV",
+        "name": "CyberPH Webinar 3: 𝐎𝐓 𝐒𝐞𝐜𝐮𝐫𝐢𝐭𝐲",
+        "start_at": "2026-01-28T11:00:00.000Z",
+        "end_at": "2026-01-28T13:00:00.000Z",
+        "timezone": "Asia/Singapore",
+        "location_type": "unknown",
+        "visibility": "public",
+        "created_at": null,
+        "updated_at": null
+      },
+      "calendar": {
+        "api_id": "cal-ZW4YOEwv4lmL66C",
+        "access_level": "public",
+        "is_personal": true,
+        "personal_user_api_id": "usr-Xf0H4hjDiw6f0tp",
+        "slug": null
+      },
+      "owner_host": {
+        "api_id": "usr-Xf0H4hjDiw6f0tp",
+        "name": "CyberPH",
+        "username": null,
+        "website": null,
+        "linkedin_handle": null
+      },
+      "registration_metadata": {
+        "registration_availability": "sold-out",
+        "waitlist_active": false,
+        "ticket_info": {
+          "price": null,
+          "is_free": true,
+          "max_price": null,
+          "is_sold_out": false,
+          "spots_remaining": null,
+          "is_near_capacity": false,
+          "require_approval": false
+        }
+      },
+      "existing_parser_at_check": {
+        "accepted": false,
+        "reason": "No actual cybersecurity CTF evidence in title and description"
+      },
+      "created_or_published_at": null,
+      "online_evidence": {
+        "description_label": "Platform: Microsoft Teams",
+        "structured_location_type": "unknown",
+        "interpretation": "Online webinar included in publisher calendar despite no country/venue; not a CTF."
+      }
+    },
+    {
+      "url": "https://luma.com/akv0l0o1",
+      "discovered_from": "https://api.luma.com/ics/get?entity=calendar&id=cal-ZW4YOEwv4lmL66C",
+      "checked_at": "2026-11-21T17:56:18.007710+00:00",
+      "status": "ok",
+      "event": {
+        "api_id": "evt-HivwEyCrWqwNkpC",
+        "name": "HCDG PH x Packet Capture: Beneath the Network",
+        "start_at": "2026-10-04T00:00:00.000Z",
+        "end_at": "2026-10-04T09:00:00.000Z",
+        "timezone": "Asia/Manila",
+        "location_type": "offline",
+        "visibility": "public",
+        "created_at": null,
+        "updated_at": null
+      },
+      "calendar": {
+        "api_id": "cal-ZW4YOEwv4lmL66C",
+        "access_level": "public",
+        "is_personal": true,
+        "personal_user_api_id": "usr-Xf0H4hjDiw6f0tp",
+        "slug": null
+      },
+      "owner_host": {
+        "api_id": "usr-Xf0H4hjDiw6f0tp",
+        "name": "CyberPH",
+        "username": null,
+        "website": null,
+        "linkedin_handle": null
+      },
+      "registration_metadata": {
+        "registration_availability": "open",
+        "waitlist_active": false,
+        "ticket_info": {
+          "price": null,
+          "is_free": true,
+          "max_price": null,
+          "is_sold_out": false,
+          "spots_remaining": 31,
+          "is_near_capacity": false,
+          "require_approval": true
+        }
+      },
+      "existing_parser_at_check": {
+        "accepted": true,
+        "reason": "Accepted cybersecurity competition with Philippine scope evidence"
+      },
+      "created_or_published_at": null,
+      "location_summary": {
+        "city": "Taguig",
+        "region": "Metro Manila",
+        "address": "Milestone at Fourth Avenue",
+        "country": "Philippines",
+        "country_code": "PH"
+      },
+      "competition_evidence_excerpt": "Networking x Security Capture-the-Flag (CTF)",
+      "co_hosts": [
+        {
+          "name": "CyberPH",
+          "account_id": "usr-Xf0H4hjDiw6f0tp"
+        },
+        {
+          "name": "WorkFlow PH",
+          "account_id": "usr-eL9qAMoNyJQl2iV"
+        }
+      ],
+      "interpretation": "Historical CTF kickoff/program listing. Parent end is past; raw open/approval metadata does not establish current CTF entry. Full competition schedule, registration window, and original publication date remain unconfirmed."
+    }
+  ],
+  "ownership": {
+    "verified": true,
+    "basis": "All three public event pages identify calendar cal-ZW4YOEwv4lmL66C, access_level public, personal_user_api_id usr-Xf0H4hjDiw6f0tp; each hosts array contains that same public account named CyberPH. The subscription returns all three observed event links.",
+    "calendar_name": "Personal",
+    "personal_calendar": true
+  },
+  "no_runtime_event_seeds": "The proposed monitor needs only the recurring iCal URL/public calendar ID; none of the three event links belong in runtime configuration or fallback logic. Auxiliary research exclusion query is not used for qualification or proposed queries."
+}

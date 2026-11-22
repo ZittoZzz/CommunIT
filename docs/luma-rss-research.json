@@ -1,0 +1,236 @@
+{
+  "checked_at": "2026-11-21T17:24:55.510049+00:00",
+  "environment": "Project .venv/bin/python, backend.network.Client.public_page, robots-aware anonymous HTTP; no Facebook reads, credentials, cookies, paid API, or production database",
+  "purpose": "Live RSS source qualification and research only. Baseline adapter results precede integration. Historical event URLs below are observations, never runtime seeds.",
+  "sources": [
+    {
+      "url": "https://kakacomputer.com/tag/ctf/feed/",
+      "status": "success",
+      "bytes": 18413,
+      "version": "rss20",
+      "feed_title": "CTF – KakaComputer",
+      "entry_count": 1,
+      "access": "Public RSS feed and linked articles were readable with project robots checks.",
+      "baseline_existing_rss_adapter": {
+        "discovered": 1,
+        "decisions": [
+          {
+            "url": "https://kakacomputer.com/curiosity-to-cybersecurity-open-community-and-opportunity-through-packet-capturing/",
+            "title": "Curiosity to Cybersecurity: Open Community and Opportunity through Packet Capturing",
+            "accepted": false,
+            "stage": "feed_body",
+            "reason": "Body/title does not establish an in-scope competition and edition"
+          }
+        ],
+        "warnings": [],
+        "message": "Public RSS/Atom feed scanned; 1 new or retained article URLs rechecked.",
+        "accepted_announcements": 0
+      },
+      "entries": [
+        {
+          "title": "Curiosity to Cybersecurity: Open Community and Opportunity through Packet Capturing",
+          "url": "https://kakacomputer.com/curiosity-to-cybersecurity-open-community-and-opportunity-through-packet-capturing/",
+          "posted": "Sun, 01 Nov 2026 11:24:25 +0000",
+          "article_read": "success",
+          "discovery_path": [
+            "https://kakacomputer.com/tag/ctf/feed/",
+            "https://kakacomputer.com/curiosity-to-cybersecurity-open-community-and-opportunity-through-packet-capturing/"
+          ],
+          "publisher_leads_detected_from_live_body": [
+            {
+              "name": "CyberPH",
+              "role": "contributor",
+              "url": "https://www.facebook.com/LearnCyberPH/",
+              "evidence_url": "https://kakacomputer.com/curiosity-to-cybersecurity-open-community-and-opportunity-through-packet-capturing/",
+              "relationship_evidence": "Explicit relationship clause in the article body; full text not retained in this research report."
+            },
+            {
+              "name": "MQ CyberSec (Australia)",
+              "role": "contributor",
+              "url": "https://www.linkedin.com/company/mqcybersec/",
+              "evidence_url": "https://kakacomputer.com/curiosity-to-cybersecurity-open-community-and-opportunity-through-packet-capturing/",
+              "relationship_evidence": "Explicit relationship clause in the article body; full text not retained in this research report."
+            },
+            {
+              "name": "WorkFlow PH",
+              "role": "contributor",
+              "url": "https://www.facebook.com/WorkFlowPH",
+              "evidence_url": "https://kakacomputer.com/curiosity-to-cybersecurity-open-community-and-opportunity-through-packet-capturing/",
+              "relationship_evidence": "Explicit relationship clause in the article body; full text not retained in this research report."
+            },
+            {
+              "name": "Cisco NetConnect PUP",
+              "role": "contributor",
+              "url": "https://www.facebook.com/cisconetconnectpup",
+              "evidence_url": "https://kakacomputer.com/curiosity-to-cybersecurity-open-community-and-opportunity-through-packet-capturing/",
+              "relationship_evidence": "Explicit relationship clause in the article body; full text not retained in this research report."
+            },
+            {
+              "name": "ICPEP.SE PUP",
+              "role": "contributor",
+              "url": "https://www.facebook.com/icpepse.pupmanila/",
+              "evidence_url": "https://kakacomputer.com/curiosity-to-cybersecurity-open-community-and-opportunity-through-packet-capturing/",
+              "relationship_evidence": "Explicit relationship clause in the article body; full text not retained in this research report."
+            },
+            {
+              "name": "SYNX",
+              "role": "challenge_partner",
+              "url": "https://www.facebook.com/synx.network",
+              "evidence_url": "https://kakacomputer.com/curiosity-to-cybersecurity-open-community-and-opportunity-through-packet-capturing/",
+              "relationship_evidence": "Explicit relationship clause in the article body; full text not retained in this research report."
+            },
+            {
+              "name": "A1SBERG",
+              "role": "challenge_partner",
+              "url": "https://www.facebook.com/A1SBERG",
+              "evidence_url": "https://kakacomputer.com/curiosity-to-cybersecurity-open-community-and-opportunity-through-packet-capturing/",
+              "relationship_evidence": "Explicit relationship clause in the article body; full text not retained in this research report."
+            },
+            {
+              "name": "Huawei Cloud Developer Group Philippines",
+              "role": "contributor",
+              "url": "https://www.facebook.com/groups/1923181361612194",
+              "evidence_url": "https://kakacomputer.com/curiosity-to-cybersecurity-open-community-and-opportunity-through-packet-capturing/",
+              "relationship_evidence": "Explicit relationship clause in the article body; full text not retained in this research report."
+            },
+            {
+              "name": "Appkademiya",
+              "role": "sponsor",
+              "evidence_url": "https://kakacomputer.com/curiosity-to-cybersecurity-open-community-and-opportunity-through-packet-capturing/",
+              "relationship_evidence": "Explicit relationship clause in the article body; full text not retained in this research report."
+            }
+          ],
+          "classification": "Historical competition recap; not an invitation and never an open-registration alert.",
+          "competition": "Packet Capture: Beneath the Network 2026",
+          "competition_evidence": "Article describes a cybersecurity/networking Capture-the-Flag competition, preparation activities, ranked winners, and an award ceremony.",
+          "completion_quote": "On October 26, the event closed with the Awarding Ceremony",
+          "scope": "The event was held with the linked Huawei Cloud Developer Group Philippines; this relationship provides Philippine connection independent of the news publisher.",
+          "source_roles": "The first five linked organizations are contributors under a made-possible-by clause, not explicitly hosts. Two links are explicitly Challenge Partners. The named Philippines group is a held-with contributor. Appkademiya is explicitly a sponsor but has no public link in this article.",
+          "followed_luma_link": false,
+          "original_facebook_post_found": false,
+          "original_facebook_note": "The feed/article links public organization accounts and a group, not an original competition post.",
+          "existing_adapter_miss": "Publisher-context scope gate cannot recognize the held-with relationship; clean feed title omits CTF and lacks a labeled event date. Article metadata title contains CTF, but baseline still rejects scope. Sidebar/footer content must not establish identity.",
+          "suggested_monitor": {
+            "kind": "rss",
+            "body_identity": true,
+            "follow_articles": true,
+            "article_selector": ".post-content",
+            "title_from_metadata": true,
+            "max_items": 40
+          },
+          "usefulness": "Historical corroboration and publisher candidates. No timely registration discovery.",
+          "timely_registration_verified": false
+        }
+      ]
+    },
+    {
+      "url": "https://cyber404.net/blog/feed.xml",
+      "status": "success",
+      "bytes": 1882,
+      "version": "rss20",
+      "feed_title": "THE CYBER404 ARENA Blog",
+      "entry_count": 2,
+      "access": "Public RSS feed and linked articles were readable with project robots checks.",
+      "baseline_existing_rss_adapter": {
+        "discovered": 2,
+        "decisions": [
+          {
+            "url": "https://cyber404.net/blog/cyber404-cybersecurity-society-of-the-philippines-partnership",
+            "title": "CYBER404 Announces Community Partnership with the Cybersecurity Society of the Philippines",
+            "accepted": false,
+            "stage": "feed_body",
+            "reason": "Body/title does not establish an in-scope competition and edition"
+          },
+          {
+            "url": "https://cyber404.net/blog/cyber404-philippine-data-guardians-iot-conference-2026",
+            "title": "CYBER404 × Philippine Data Guardians: Stronger Together for a Safer Digital Future",
+            "accepted": false,
+            "stage": "feed_body",
+            "reason": "Body/title does not establish an in-scope competition and edition"
+          }
+        ],
+        "warnings": [],
+        "message": "Public RSS/Atom feed scanned; 2 new or retained article URLs rechecked.",
+        "accepted_announcements": 0
+      },
+      "entries": [
+        {
+          "title": "CYBER404 Announces Community Partnership with the Cybersecurity Society of the Philippines",
+          "url": "https://cyber404.net/blog/cyber404-cybersecurity-society-of-the-philippines-partnership",
+          "posted": "Mon, 16 Nov 2026 15:56:42 GMT",
+          "article_read": "success",
+          "discovery_path": [
+            "https://cyber404.net/blog/feed.xml",
+            "https://cyber404.net/blog/cyber404-cybersecurity-society-of-the-philippines-partnership"
+          ],
+          "publisher_leads_detected_from_live_body": [
+            {
+              "name": "CYBERSOCPH",
+              "role": "community_partner",
+              "url": "https://www.facebook.com/CyberSocPH",
+              "evidence_url": "https://cyber404.net/blog/cyber404-cybersecurity-society-of-the-philippines-partnership",
+              "relationship_evidence": "Explicit relationship clause in the article body; full text not retained in this research report."
+            }
+          ],
+          "classification": "Community partnership news; no actual competition announcement.",
+          "competition_evidence": null,
+          "existing_adapter_outcome": "Correctly returned no competition. Full articles contain evergreen CTF practice/challenge descriptions, not an edition or registration invitation.",
+          "suggested_monitor": {
+            "kind": "rss",
+            "body_identity": true,
+            "follow_articles": true,
+            "article_selector": "article.space-y-6",
+            "max_items": 40
+          },
+          "usefulness": "Publisher leads only; relationships must have partnership_only status without an event listing.",
+          "timely_registration_verified": false
+        },
+        {
+          "title": "CYBER404 × Philippine Data Guardians: Stronger Together for a Safer Digital Future",
+          "url": "https://cyber404.net/blog/cyber404-philippine-data-guardians-iot-conference-2026",
+          "posted": "Mon, 16 Nov 2026 15:44:38 GMT",
+          "article_read": "success",
+          "discovery_path": [
+            "https://cyber404.net/blog/feed.xml",
+            "https://cyber404.net/blog/cyber404-philippine-data-guardians-iot-conference-2026"
+          ],
+          "publisher_leads_detected_from_live_body": [
+            {
+              "name": "Philippine Data Guardians (PDG)",
+              "role": "community_partner",
+              "evidence_url": "https://cyber404.net/blog/cyber404-philippine-data-guardians-iot-conference-2026",
+              "relationship_evidence": "Explicit relationship clause in the article body; full text not retained in this research report."
+            }
+          ],
+          "classification": "Community partnership news; no actual competition announcement.",
+          "competition_evidence": null,
+          "existing_adapter_outcome": "Correctly returned no competition. Full articles contain evergreen CTF practice/challenge descriptions, not an edition or registration invitation.",
+          "suggested_monitor": {
+            "kind": "rss",
+            "body_identity": true,
+            "follow_articles": true,
+            "article_selector": "article.space-y-6",
+            "max_items": 40
+          },
+          "usefulness": "Publisher leads only; relationships must have partnership_only status without an event listing.",
+          "timely_registration_verified": false
+        }
+      ]
+    }
+  ],
+  "new_extractor": {
+    "module": "backend/relationships.py",
+    "interfaces": [
+      "publisher_leads_from_html(content, announcement_url)",
+      "relationship_scope(content, announcement_url=None)"
+    ],
+    "validation": "13 synthetic regression tests passed; cached live bodies produce 9 recap relationship leads and 2 partnership-only leads. This diagnostic is not evidence of a completed normal collection.",
+    "limits": [
+      "Leads are candidates until recurring public sources are verified. Public Facebook account URLs do not prove backend-readability.",
+      "Names without public URLs stay evidence-scoped; no display-name-only global organization merge.",
+      "Relationship roles do not establish open registration.",
+      "No Luma permalink or original Facebook competition post was linked in these feed articles.",
+      "Philippine sponsorship or generic contributor status alone does not establish event scope; require a named linked host/organizer or explicit held-with organization."
+    ]
+  }
+}

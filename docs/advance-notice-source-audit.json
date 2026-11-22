@@ -1,0 +1,1311 @@
+{
+  "measured_at": "2026-11-21T18:27:11.161522+00:00",
+  "purpose": "Read-only source evidence audit; historical examples and acceptance identifiers are not collector inputs. No runtime configuration or production changes.",
+  "window": {
+    "last_12_months_from": "2025-11-22",
+    "through": "2026-11-22",
+    "exceptions": [
+      "LearnPossible 2025 is requested worked example outside window",
+      "PIA April2025 invitation is explicitly historical access-restriction comparison"
+    ]
+  },
+  "method": [
+    "Seven enabled recurring sources read live using the existing normal adapters, empty known-announcement lists, anonymous robots-aware project Client. No SQLite writes.",
+    "No Tavily requests, Facebook fetching, paid APIs, credentials, or cookies. PIA candidate probed once with the same Client and blocked at robots.",
+    "Publication dates are publisher metadata or explicitly attributed historical evidence. They never substitute for collector first_seen.",
+    "Earliest retained normal verification first_seen comes from persisted checked-in reports; production observations are separately read from existing SQLite in read-only mode. No timestamp backdating.",
+    "Date-only lead times are differences of Asia/Manila calendar dates, not invented midnight instants or guaranteed registration opportunities.",
+    "Additional retained normal SQLite run /tmp/ctfinder-index-live-yxdz5msd/events.sqlite3 contains earlier UP Manila/HTB/AWS observations. Its first_seen equals job start, so preserve that stored timestamp but label legacy precision and provide the completed-run receipt interval. Later response-stamped verification remains separately listed. This audit does not claim an exhaustive search of every temporary experiment."
+  ],
+  "summary": {
+    "live_enabled_sources_succeeded": 7,
+    "live_enabled_sources_failed": 0,
+    "disabled_candidate_blocked": 1,
+    "sources_with_dated_advance_competition_notice": [
+      "up-manila",
+      "rootcon-bluesky",
+      "crest-asia"
+    ],
+    "dated_invitation_with_conflicting_schedule": [
+      "htb-meetup-ph"
+    ],
+    "current_advance_competition_lead_with_unknown_publication_date": [
+      "aws-mindanao"
+    ],
+    "historical_invitation_unknown_advance_publication": [
+      "cyberph-luma-calendar"
+    ],
+    "recap_only": [
+      "kakacomputer-ctf"
+    ],
+    "verified_timely_registrations_in_retained_observations": 0,
+    "note": "Advance publisher notice, collector advance discovery, and verified open registration are three separate claims."
+  },
+  "sources": [
+    {
+      "source_id": "up-manila",
+      "publisher": "UP Manila · Competition invitations",
+      "publisher_role": "resharer",
+      "recurring_urls": [
+        "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag"
+      ],
+      "adapter": "rss",
+      "enabled": true,
+      "live_check": {
+        "checked_at": "2026-11-21T18:23:38.106676+00:00",
+        "checked_at_asia_manila": "2026-11-22T02:23:38.106676+08:00",
+        "status": "ok",
+        "discovered": 1,
+        "accepted_announcements": 1,
+        "warnings": [],
+        "requests": [
+          {
+            "url": "https://www.upm.edu.ph/robots.txt",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:35.403526+00:00",
+            "status": "ok",
+            "bytes": 23
+          },
+          {
+            "url": "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:35.757135+00:00",
+            "status": "ok",
+            "bytes": 6455
+          },
+          {
+            "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:37.261561+00:00",
+            "status": "ok",
+            "bytes": 138466
+          }
+        ]
+      },
+      "example_name": "LearnPossible — CTF tournament 2025",
+      "example": {
+        "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/",
+        "type": "institutional invitation reshare",
+        "organizer": "Hexcore Labs PH",
+        "evidence": [
+          {
+            "field": "publication",
+            "locator": "RSS pubDate and article:published_time",
+            "value": "2025-09-02T02:17:55+00:00"
+          },
+          {
+            "field": "tournament date",
+            "quote": "Event Details: Date: October 6, 2025"
+          },
+          {
+            "field": "workshops",
+            "quote": "September 16–18, 2025"
+          },
+          {
+            "field": "competition identity",
+            "quote": "The Gamified Capture the Flag (CTF) Tournament"
+          }
+        ]
+      },
+      "dates": {
+        "public_announcement_date": "2025-09-02",
+        "announcement_instant": "2025-09-02T02:17:55+00:00",
+        "tournament_date": "2025-10-06",
+        "workshop_dates": [
+          "2025-09-16",
+          "2025-09-18"
+        ],
+        "program_clock_text": "9:00 AM – 6:00 PM",
+        "ctf_clock_times_confirmed": false,
+        "registration_deadline": null,
+        "registration_status_at_observation": "unknown",
+        "outside_last_12_month_window": true
+      },
+      "publisher_notice_measure": {
+        "calendar_days_before_tournament": 34,
+        "calendar_days_before_registration_deadline": null,
+        "interpretation": "Dated public invitation gives 34 days of potential advance notice. Workshop dates are separate. Historical backfill does not establish timely discovery."
+      },
+      "collector_observation": {
+        "earliest_retained_normal_collection": {
+          "first_seen": "2026-11-21T16:45:02.551200+00:00",
+          "first_seen_asia_manila": "2026-11-22T00:45:02.551200+08:00",
+          "retained_database": "/tmp/ctfinder-index-live-yxdz5msd/events.sqlite3",
+          "retained_run_id": 1,
+          "trace_artifact": "docs/learnpossible-before-trace.json",
+          "scope": "Temporary normal multi-source collection at an intermediate configuration; not production daily delivery",
+          "timestamp_precision": "legacy job-start stamp; no source response observed_at retained",
+          "actual_receipt_interval": {
+            "after_or_at": "2026-11-21T16:45:02.551200+00:00",
+            "before_or_at": "2026-11-21T16:46:18.242304+00:00",
+            "after_or_at_asia_manila": "2026-11-22T00:45:02.551200+08:00",
+            "before_or_at_asia_manila": "2026-11-22T00:46:18.242304+08:00"
+          },
+          "normal_run_evidence": {
+            "started_at": "2026-11-21T16:45:02.551200+00:00",
+            "finished_at": "2026-11-21T16:46:18.242304+00:00",
+            "source_status": "ok",
+            "source_accepted": 1,
+            "discovery": {
+              "event_id": "9ce2881dabb3fb36b01fa057",
+              "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/",
+              "path": [
+                "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag",
+                "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+              ],
+              "related_links": [
+                {
+                  "url": "https://www.upm.edu.ph/wp-content/uploads/2025/09/5555_1756429668_EXPERTSPRIME_HEXCORE_UNIVERSITY_INVITATION_V1_UP.pdf",
+                  "label": "Download",
+                  "access": "linked_only",
+                  "discovered_on": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+                }
+              ]
+            }
+          }
+        },
+        "production_first_seen": null,
+        "production_first_seen_asia_manila": null,
+        "production_note": "Read-only existing production database; absence is not retroactively filled by temporary verification.",
+        "collector_calendar_day_lead": -412,
+        "collector_calendar_day_lead_note": "Calendar-date difference only; negative means first seen after the event date. Not proof registration was open.",
+        "retained_registration_observation": {
+          "event_id": "9ce2881dabb3fb36b01fa057",
+          "first_seen": "2026-11-21T18:05:18.990121+00:00",
+          "status": "not_verified",
+          "earliest_verified_at": null,
+          "announcement_id": null,
+          "revision_id": null,
+          "source_id": null,
+          "url": null,
+          "registration_evidence": {},
+          "registration_window": {},
+          "observations_checked": 1,
+          "reasons": [
+            "registration_not_confirmed_open",
+            "registration_state_evidence_missing",
+            "registration_deadline_missing",
+            "registration_deadline_evidence_missing"
+          ],
+          "live_open_observation": null,
+          "first_seen_while_live_open": false,
+          "live_open_reasons": [
+            "registration_not_confirmed_open",
+            "registration_state_evidence_missing",
+            "contemporary_registration_control_not_observed",
+            "future_or_live_competition_time_unconfirmed"
+          ]
+        },
+        "earliest_retained_response_stamped_normal_collection": {
+          "first_seen": "2026-11-21T16:58:46.151481+00:00",
+          "retained_report": "docs/source-index-verification.json",
+          "first_seen_asia_manila": "2026-11-22T00:58:46.151481+08:00",
+          "scope": "Temporary normal-entry-point verification; not proof of production daily delivery"
+        }
+      },
+      "normal_collector_reachability": {
+        "verified": true,
+        "discovery_paths": [
+          [
+            "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag",
+            "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+          ]
+        ],
+        "normal_report": "docs/publisher-opportunity-verification.json",
+        "latest_prior_status": "ok",
+        "latest_prior_observed_at": "2026-11-21T18:07:37.586904+00:00",
+        "latest_prior_accepted": 1,
+        "earlier_stored_first_seen_note": "Earlier successful normal multi-source SQLite run found this announcement before the checked-in final verification report. Legacy first_seen uses job-start timestamp; actual receipt is only bounded by completed run."
+      },
+      "production_source_health": {
+        "id": "up-manila",
+        "name": "UP Manila · Competition invitations",
+        "url": "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag",
+        "kind": "rss",
+        "status": "not_run",
+        "last_success": null,
+        "last_attempt": null,
+        "message": "",
+        "discovered": 0,
+        "accepted": 0,
+        "publisher_name": "UP Manila · Competition invitations",
+        "publisher_role": "resharer",
+        "coverage": "[\"NCR\", \"National university invitations\"]",
+        "index_id": "up-manila",
+        "enabled": 1,
+        "index_status": "active"
+      },
+      "restrictions_and_archive_limits": [
+        "One current generic-phrase RSS hit; max_items=30 is a processing bound, not complete publisher history.",
+        "Normal collector follows article body and retains invitation PDF link but does not read the PDF or decode its QR.",
+        "No published registration deadline found in HTML/feed."
+      ]
+    },
+    {
+      "source_id": "rootcon-bluesky",
+      "publisher": "ROOTCON · Bluesky",
+      "publisher_role": "organizer",
+      "recurring_urls": [
+        "https://bsky.app/profile/rootcon.bsky.social"
+      ],
+      "adapter": "bluesky",
+      "enabled": true,
+      "live_check": {
+        "checked_at": "2026-11-21T18:23:36.904179+00:00",
+        "checked_at_asia_manila": "2026-11-22T02:23:36.904179+08:00",
+        "status": "ok",
+        "discovered": 146,
+        "accepted_announcements": 3,
+        "warnings": [],
+        "requests": [
+          {
+            "url": "https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed",
+            "params": {
+              "actor": "rootcon.bsky.social",
+              "limit": 100,
+              "filter": "posts_no_replies"
+            },
+            "requested_at": "2026-11-21T18:23:35.399909+00:00",
+            "status": "ok",
+            "bytes": 193208
+          },
+          {
+            "url": "https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed",
+            "params": {
+              "actor": "rootcon.bsky.social",
+              "limit": 100,
+              "filter": "posts_no_replies",
+              "cursor": "2026-04-21T02:32:01.559Z"
+            },
+            "requested_at": "2026-11-21T18:23:36.172953+00:00",
+            "status": "ok",
+            "bytes": 86898
+          }
+        ]
+      },
+      "example_name": "ROOTCON 20 CTF; qualifier kept separate",
+      "example": {
+        "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z",
+        "type": "organizer teaser",
+        "organizer": "ROOTCON",
+        "evidence": [
+          {
+            "field": "publication",
+            "locator": "Bluesky record.createdAt",
+            "value": "2026-09-12T05:08:12.613Z"
+          },
+          {
+            "field": "teaser",
+            "quote": "Meet ANM—the hands and brains behind this year's ROOTCON 20 CTF."
+          }
+        ],
+        "related_same_day_update": {
+          "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvtlb6qlyc24",
+          "type": "qualifier live/scoreboard update, not registration invitation",
+          "posted_at": "2026-09-19T01:55:05.102Z",
+          "quote": "Good luck to all teams competing in the ROOTCON 20 CTF Qualifiers!",
+          "notice_days": null,
+          "note": "No qualifier start timestamp supplied. This observed post is contemporaneous competition coverage; do not count it as advance registration notice."
+        },
+        "completion_notice": {
+          "url": "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h",
+          "posted_at": "2026-09-30T07:03:13.117Z",
+          "type": "winner recap"
+        },
+        "companion_tournament_schedule_reference": {
+          "artifact": "docs/community-benchmark-research.json",
+          "id": "rootcon-20-ctf-2026",
+          "url": "https://rootcon.org/html/rc20/contests/",
+          "access": "Previously documented independent research only; current collector correctly does not scrape policy-restricted website.",
+          "recorded_schedule": {
+            "start_date": "2026-09-24",
+            "end_date": "2026-09-25",
+            "time_text": "Opening September 24 at 10:00; closing September 25 at 15:00",
+            "timezone": null
+          },
+          "retained_evidence_summary": "Organizer contest rules explicitly identify the CTF, its two-day opening/closing schedule and pre-registration requirement. This is distinct from the three-day conference schedule.",
+          "notice_calculation": "2026-09-24 minus 2026-09-12 = 12 calendar days; this combines public API teaser date with frozen independent organizer-contest research, not normal collector-extracted start/end."
+        }
+      },
+      "dates": {
+        "public_announcement_date": "2026-09-12",
+        "announcement_instant": "2026-09-12T05:08:12.613Z",
+        "tournament_dates": [
+          "2026-09-24",
+          "2026-09-25"
+        ],
+        "tournament_date_basis": "Frozen independent research, not dates returned by Bluesky adapter",
+        "registration_deadline": null,
+        "registration_status_at_observation": "closed for main event by winner notice; qualifier unknown"
+      },
+      "publisher_notice_measure": {
+        "calendar_days_before_tournament": 12,
+        "calendar_days_before_registration_deadline": null,
+        "interpretation": "Teaser is 12 calendar days before independently documented CTF start; no registration window. The distinct qualifier scoreboard update demonstrates why same-day coverage must not be excluded from reporting or called advance notice."
+      },
+      "collector_observation": {
+        "earliest_retained_normal_collection": {
+          "first_seen": "2026-11-21T14:28:59.836583+00:00",
+          "retained_report": "docs/discovery-verification.json",
+          "first_seen_asia_manila": "2026-11-21T22:28:59.836583+08:00",
+          "scope": "Temporary normal-entry-point verification; not proof of production daily delivery"
+        },
+        "production_first_seen": "2026-11-21T13:51:58.594566+00:00",
+        "production_first_seen_asia_manila": "2026-11-21T21:51:58.594566+08:00",
+        "production_note": "Read-only existing production database; absence is not retroactively filled by temporary verification.",
+        "collector_calendar_day_lead": -58,
+        "collector_calendar_day_lead_note": "Calendar-date difference only; negative means first seen after the event date. Not proof registration was open.",
+        "retained_registration_observation": {
+          "event_id": "775f475db77bea2c6cd288ec",
+          "first_seen": "2026-11-21T18:04:26.159591+00:00",
+          "status": "not_verified",
+          "earliest_verified_at": null,
+          "announcement_id": null,
+          "revision_id": null,
+          "source_id": null,
+          "url": null,
+          "registration_evidence": {},
+          "registration_window": {},
+          "observations_checked": 3,
+          "reasons": [
+            "event_finished_at_observation",
+            "registration_not_confirmed_open",
+            "registration_state_evidence_missing",
+            "registration_deadline_missing",
+            "registration_deadline_evidence_missing"
+          ],
+          "live_open_observation": null,
+          "first_seen_while_live_open": false,
+          "live_open_reasons": [
+            "event_finished_at_observation",
+            "registration_not_confirmed_open",
+            "registration_state_evidence_missing",
+            "contemporary_registration_control_not_observed",
+            "future_or_live_competition_time_unconfirmed"
+          ]
+        }
+      },
+      "normal_collector_reachability": {
+        "verified": true,
+        "discovery_paths": [
+          [
+            "https://bsky.app/profile/rootcon.bsky.social",
+            "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z"
+          ]
+        ],
+        "normal_report": "docs/publisher-opportunity-verification.json",
+        "latest_prior_status": "ok",
+        "latest_prior_observed_at": "2026-11-21T18:07:02.284043+00:00",
+        "latest_prior_accepted": 3
+      },
+      "production_source_health": {
+        "id": "rootcon-bluesky",
+        "name": "ROOTCON · Bluesky",
+        "url": "https://bsky.app/profile/rootcon.bsky.social",
+        "kind": "bluesky",
+        "status": "ok",
+        "last_success": "2026-11-21T14:27:17.521902+00:00",
+        "last_attempt": "2026-11-21T14:27:17.521902+00:00",
+        "message": "Public author feed and full post text read through the documented Bluesky API; only extracted facts and brief excerpts retained, no media.",
+        "discovered": 146,
+        "accepted": 3,
+        "publisher_name": "ROOTCON · Official community feed",
+        "publisher_role": "organizer",
+        "coverage": "[\"Luzon\", \"National\", \"Online\"]",
+        "index_id": "rootcon-community",
+        "enabled": 1,
+        "index_status": "active"
+      },
+      "restrictions_and_archive_limits": [
+        "Bluesky public API succeeded:146 original-author posts,2pages,3acceptedposts. Max4pages,540-daylookback; no page-limit warning this check.",
+        "ROOTCON website automated extraction prohibited by site policy; website not requested.",
+        "Organizer reposts are not treated as original organizer announcements."
+      ]
+    },
+    {
+      "source_id": "htb-meetup-ph",
+      "publisher": "Hack The Box Meetup Manila · Community feed",
+      "publisher_role": "both",
+      "recurring_urls": [
+        "https://www.meetup.com/hack-the-box-meetup-ph/events/rss/"
+      ],
+      "adapter": "rss",
+      "enabled": true,
+      "live_check": {
+        "checked_at": "2026-11-21T18:23:37.272294+00:00",
+        "checked_at_asia_manila": "2026-11-22T02:23:37.272294+08:00",
+        "status": "ok",
+        "discovered": 1,
+        "accepted_announcements": 1,
+        "warnings": [],
+        "requests": [
+          {
+            "url": "https://www.meetup.com/robots.txt",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:35.407157+00:00",
+            "status": "ok",
+            "bytes": 3770
+          },
+          {
+            "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/rss/",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:35.868672+00:00",
+            "status": "ok",
+            "bytes": 1871
+          }
+        ]
+      },
+      "example_name": "CyberSecureU / Hack The Box Meetup #11",
+      "example": {
+        "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/317031526/",
+        "type": "campus CTF invitation reshare",
+        "organizer": "AWS Student Builder Group–QCU and JPCS–QCU",
+        "evidence": [
+          {
+            "field": "publication",
+            "locator": "RSS pubDate",
+            "value": "Sun, 18 Oct 2026 06:45:09 GMT"
+          },
+          {
+            "field": "body date",
+            "quote": "Happening on November 4, 2026"
+          },
+          {
+            "field": "competition",
+            "quote": "alongside a hands-on Capture the Flag (CTF) competition"
+          },
+          {
+            "field": "eligibility",
+            "quote": "THIS EVENT IS EXCLUSIVELY FOR QCU STUDENTS"
+          }
+        ],
+        "research_follow_from_discovered_link": {
+          "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/317031526/",
+          "status": "ok",
+          "checked_at": "2026-11-21T18:24:59.872700+00:00",
+          "jsonld_event": {
+            "startDate": "2026-11-29T13:00:00+08:00",
+            "endDate": "2026-11-29T16:00:00+08:00",
+            "eventStatus": "https://schema.org/EventScheduled"
+          },
+          "note": "This audit followed the actual RSS link. Current normal RSS adapter treats feed body as complete and does not fetch this event page on a new discovery."
+        }
+      },
+      "dates": {
+        "public_announcement_date": "2026-10-18",
+        "announcement_instant": "2026-10-18T06:45:09+00:00",
+        "tournament_date": null,
+        "body_program_date": "2026-11-04",
+        "calendar_program_date": "2026-11-29",
+        "date_conflict": true,
+        "registration_deadline": null,
+        "registration_status_at_observation": "unknown"
+      },
+      "publisher_notice_measure": {
+        "calendar_days_before_tournament": null,
+        "body_date_candidate_notice_days": 17,
+        "calendar_date_candidate_notice_days": 42,
+        "interpretation": "Publication precedes both candidate dates, but conflict prevents a single verified tournament lead time. Unknown deadline and campus restriction remain visible."
+      },
+      "collector_observation": {
+        "earliest_retained_normal_collection": {
+          "first_seen": "2026-11-21T16:45:02.551200+00:00",
+          "first_seen_asia_manila": "2026-11-22T00:45:02.551200+08:00",
+          "retained_database": "/tmp/ctfinder-index-live-yxdz5msd/events.sqlite3",
+          "retained_run_id": 1,
+          "trace_artifact": "docs/learnpossible-before-trace.json",
+          "scope": "Temporary normal multi-source collection at an intermediate configuration; not production daily delivery",
+          "timestamp_precision": "legacy job-start stamp; no source response observed_at retained",
+          "actual_receipt_interval": {
+            "after_or_at": "2026-11-21T16:45:02.551200+00:00",
+            "before_or_at": "2026-11-21T16:46:18.242304+00:00",
+            "after_or_at_asia_manila": "2026-11-22T00:45:02.551200+08:00",
+            "before_or_at_asia_manila": "2026-11-22T00:46:18.242304+08:00"
+          },
+          "normal_run_evidence": {
+            "started_at": "2026-11-21T16:45:02.551200+00:00",
+            "finished_at": "2026-11-21T16:46:18.242304+00:00",
+            "source_status": "ok",
+            "source_accepted": 1,
+            "discovery": {
+              "event_id": "a6f4e09e73b9a682104e0b25",
+              "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/317031526/",
+              "path": [
+                "https://www.meetup.com/hack-the-box-meetup-ph/events/rss/",
+                "https://www.meetup.com/hack-the-box-meetup-ph/events/317031526/"
+              ],
+              "related_links": []
+            }
+          }
+        },
+        "production_first_seen": null,
+        "production_first_seen_asia_manila": null,
+        "production_note": "Read-only existing production database; absence is not retroactively filled by temporary verification.",
+        "retained_registration_observation": {
+          "event_id": "a6f4e09e73b9a682104e0b25",
+          "first_seen": "2026-11-21T18:05:19.744886+00:00",
+          "status": "not_verified",
+          "earliest_verified_at": null,
+          "announcement_id": null,
+          "revision_id": null,
+          "source_id": null,
+          "url": null,
+          "registration_evidence": {},
+          "registration_window": {},
+          "observations_checked": 1,
+          "reasons": [
+            "registration_not_confirmed_open",
+            "registration_state_evidence_missing",
+            "registration_deadline_missing",
+            "registration_deadline_evidence_missing"
+          ],
+          "live_open_observation": null,
+          "first_seen_while_live_open": false,
+          "live_open_reasons": [
+            "registration_not_confirmed_open",
+            "registration_state_evidence_missing",
+            "contemporary_registration_control_not_observed",
+            "future_or_live_competition_time_unconfirmed"
+          ]
+        },
+        "earliest_retained_response_stamped_normal_collection": {
+          "first_seen": "2026-11-21T16:58:47.035994+00:00",
+          "retained_report": "docs/source-index-verification.json",
+          "first_seen_asia_manila": "2026-11-22T00:58:47.035994+08:00",
+          "scope": "Temporary normal-entry-point verification; not proof of production daily delivery"
+        }
+      },
+      "normal_collector_reachability": {
+        "verified": true,
+        "discovery_paths": [
+          [
+            "https://www.meetup.com/hack-the-box-meetup-ph/events/rss/",
+            "https://www.meetup.com/hack-the-box-meetup-ph/events/317031526/"
+          ]
+        ],
+        "normal_report": "docs/publisher-opportunity-verification.json",
+        "latest_prior_status": "ok",
+        "latest_prior_observed_at": "2026-11-21T18:07:38.342722+00:00",
+        "latest_prior_accepted": 1,
+        "earlier_stored_first_seen_note": "Earlier successful normal multi-source SQLite run found this announcement before the checked-in final verification report. Legacy first_seen uses job-start timestamp; actual receipt is only bounded by completed run."
+      },
+      "production_source_health": {
+        "id": "htb-meetup-ph",
+        "name": "Hack The Box Meetup Manila · Community feed",
+        "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/rss/",
+        "kind": "rss",
+        "status": "not_run",
+        "last_success": null,
+        "last_attempt": null,
+        "message": "",
+        "discovered": 0,
+        "accepted": 0,
+        "publisher_name": "Hack The Box Meetup Manila · Community feed",
+        "publisher_role": "both",
+        "coverage": "[\"NCR\", \"Philippine cybersecurity community\"]",
+        "index_id": "htb-meetup-ph",
+        "enabled": 1,
+        "index_status": "active"
+      },
+      "restrictions_and_archive_limits": [
+        "RSS returns one current item, not complete historical archive; max_items40.",
+        "Body is November4 while live event calendar is November29; do not silently choose a date.",
+        "Public event page readable in separate audit, but RSS alone supplies no live registration state."
+      ]
+    },
+    {
+      "source_id": "aws-mindanao",
+      "publisher": "AWS student communities · Mindanao",
+      "publisher_role": "organizer",
+      "recurring_urls": [
+        "https://awsscd-mindanao.org/"
+      ],
+      "adapter": "html",
+      "enabled": true,
+      "live_check": {
+        "checked_at": "2026-11-21T18:23:37.571943+00:00",
+        "checked_at_asia_manila": "2026-11-22T02:23:37.571943+08:00",
+        "status": "ok",
+        "discovered": 1,
+        "accepted_announcements": 1,
+        "warnings": [],
+        "requests": [
+          {
+            "url": "https://awsscd-mindanao.org/robots.txt",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:35.411583+00:00",
+            "status": "ok",
+            "bytes": 73
+          },
+          {
+            "url": "https://awsscd-mindanao.org/",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:35.891116+00:00",
+            "status": "ok",
+            "bytes": 345910
+          }
+        ]
+      },
+      "example_name": "AWS Student Community Day Mindanao CTF track",
+      "example": {
+        "url": "https://awsscd-mindanao.org/",
+        "type": "parent conference announcement with actual named CTF track; parent ticket sale is not CTF entry",
+        "organizer": "AWS SBG UP Mindanao and AWS SBG Apex Ateneo de Davao",
+        "evidence": [
+          {
+            "field": "program date",
+            "quote": "November 28, 2026"
+          },
+          {
+            "field": "CTF slot",
+            "quote": "12:45 PM - 03:15 PM / Track E · Finster Auditorium / Capture The Flag"
+          },
+          {
+            "field": "entry scope",
+            "quote": "Select Your Ticket Tier"
+          }
+        ]
+      },
+      "dates": {
+        "public_announcement_date": null,
+        "tournament_date": "2026-11-28",
+        "tournament_clock_text": "12:45 PM – 03:15 PM",
+        "timezone_explicit_in_slot": false,
+        "tournament_date_basis": "CTF-labelled schedule row within dated November28 program; no timezone assertion added",
+        "registration_deadline": null,
+        "registration_status_at_observation": "CTF-specific unknown; conference tickets advertised"
+      },
+      "publisher_notice_measure": {
+        "calendar_days_before_tournament": null,
+        "minimum_confirmed_days_of_public_notice": 6,
+        "minimum_basis": "Page independently observed by normal temporary collection on November22 Manila, six calendar dates before November28. This is an observed lower bound, not a fabricated publication date.",
+        "interpretation": "An advance competition lead exists; entry rules/eligibility/deadline still unknown. Timely CTF registration is unverified."
+      },
+      "collector_observation": {
+        "earliest_retained_normal_collection": {
+          "first_seen": "2026-11-21T16:45:02.551200+00:00",
+          "first_seen_asia_manila": "2026-11-22T00:45:02.551200+08:00",
+          "retained_database": "/tmp/ctfinder-index-live-yxdz5msd/events.sqlite3",
+          "retained_run_id": 1,
+          "trace_artifact": "docs/learnpossible-before-trace.json",
+          "scope": "Temporary normal multi-source collection at an intermediate configuration; not production daily delivery",
+          "timestamp_precision": "legacy job-start stamp; no source response observed_at retained",
+          "actual_receipt_interval": {
+            "after_or_at": "2026-11-21T16:45:02.551200+00:00",
+            "before_or_at": "2026-11-21T16:46:18.242304+00:00",
+            "after_or_at_asia_manila": "2026-11-22T00:45:02.551200+08:00",
+            "before_or_at_asia_manila": "2026-11-22T00:46:18.242304+08:00"
+          },
+          "normal_run_evidence": {
+            "started_at": "2026-11-21T16:45:02.551200+00:00",
+            "finished_at": "2026-11-21T16:46:18.242304+00:00",
+            "source_status": "ok",
+            "source_accepted": 1,
+            "discovery": {
+              "event_id": "a2ca2700df968f8eb6fd19d6",
+              "url": "https://awsscd-mindanao.org/",
+              "path": [
+                "https://awsscd-mindanao.org/"
+              ],
+              "related_links": []
+            }
+          }
+        },
+        "production_first_seen": null,
+        "production_first_seen_asia_manila": null,
+        "production_note": "Read-only existing production database; absence is not retroactively filled by temporary verification.",
+        "collector_calendar_day_lead": 6,
+        "collector_calendar_day_lead_note": "Calendar-date difference only; negative means first seen after the event date. Not proof registration was open.",
+        "retained_registration_observation": {
+          "event_id": "a2ca2700df968f8eb6fd19d6",
+          "first_seen": "2026-11-21T18:05:20.935042+00:00",
+          "status": "not_verified",
+          "earliest_verified_at": null,
+          "announcement_id": null,
+          "revision_id": null,
+          "source_id": null,
+          "url": null,
+          "registration_evidence": {},
+          "registration_window": {},
+          "observations_checked": 1,
+          "reasons": [
+            "registration_not_confirmed_open",
+            "registration_state_evidence_missing",
+            "registration_deadline_missing",
+            "registration_deadline_evidence_missing"
+          ],
+          "live_open_observation": null,
+          "first_seen_while_live_open": false,
+          "live_open_reasons": [
+            "registration_not_confirmed_open",
+            "registration_state_evidence_missing",
+            "contemporary_registration_control_not_observed",
+            "future_or_live_competition_time_unconfirmed"
+          ]
+        },
+        "earliest_retained_response_stamped_normal_collection": {
+          "first_seen": "2026-11-21T16:58:48.575438+00:00",
+          "retained_report": "docs/source-index-verification.json",
+          "first_seen_asia_manila": "2026-11-22T00:58:48.575438+08:00",
+          "scope": "Temporary normal-entry-point verification; not proof of production daily delivery"
+        }
+      },
+      "normal_collector_reachability": {
+        "verified": true,
+        "discovery_paths": [
+          [
+            "https://awsscd-mindanao.org/"
+          ]
+        ],
+        "normal_report": "docs/publisher-opportunity-verification.json",
+        "latest_prior_status": "ok",
+        "latest_prior_observed_at": "2026-11-21T18:07:39.517048+00:00",
+        "latest_prior_accepted": 1,
+        "earlier_stored_first_seen_note": "Earlier successful normal multi-source SQLite run found this announcement before the checked-in final verification report. Legacy first_seen uses job-start timestamp; actual receipt is only bounded by completed run."
+      },
+      "production_source_health": {
+        "id": "aws-mindanao",
+        "name": "AWS student communities · Mindanao",
+        "url": "https://awsscd-mindanao.org/",
+        "kind": "html",
+        "status": "not_run",
+        "last_success": null,
+        "last_attempt": null,
+        "message": "",
+        "discovered": 0,
+        "accepted": 0,
+        "publisher_name": "AWS student communities · Mindanao",
+        "publisher_role": "organizer",
+        "coverage": "[\"Mindanao\", \"Davao\"]",
+        "index_id": "aws-mindanao",
+        "enabled": 1,
+        "index_status": "active"
+      },
+      "restrictions_and_archive_limits": [
+        "Annual landing page is current edition, not a complete archive.",
+        "No publication metadata found. Normal adapter retains CTF existence but did not map structured schedule to start/end in previous report.",
+        "Tickets/08:00 registration schedule mean conference attendance/check-in, not proof CTF registration open."
+      ]
+    },
+    {
+      "source_id": "crest-asia",
+      "publisher": "CREST · Philippine partner announcements",
+      "publisher_role": "resharer",
+      "recurring_urls": [
+        "https://www.crest-approved.org/events/category/asia-events/list/",
+        "https://www.crest-approved.org/events/category/asia-events/list/?eventDisplay=past"
+      ],
+      "adapter": "html",
+      "enabled": true,
+      "live_check": {
+        "checked_at": "2026-11-21T18:24:08.079635+00:00",
+        "checked_at_asia_manila": "2026-11-22T02:24:08.079635+08:00",
+        "status": "ok",
+        "discovered": 3,
+        "accepted_announcements": 1,
+        "warnings": [],
+        "requests": [
+          {
+            "url": "https://www.crest-approved.org/robots.txt",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:36.912337+00:00",
+            "status": "ok",
+            "bytes": 534
+          },
+          {
+            "url": "https://www.crest-approved.org/events/category/asia-events/list/",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:37.494533+00:00",
+            "status": "ok",
+            "bytes": 264290
+          },
+          {
+            "url": "https://www.crest-approved.org/events/category/asia-events/list/?eventDisplay=past",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:48.726156+00:00",
+            "status": "ok",
+            "bytes": 322438
+          },
+          {
+            "url": "https://www.crest-approved.org/event/rootcon-20-philippines-2026/",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:58.213506+00:00",
+            "status": "ok",
+            "bytes": 245523
+          }
+        ]
+      },
+      "example_name": "ROOTCON 20 partner CTF-prize announcement",
+      "example": {
+        "url": "https://www.crest-approved.org/event/rootcon-20-philippines-2026/",
+        "type": "partner/sponsor advance notice with parent conference registration link",
+        "organizer": "ROOTCON",
+        "evidence": [
+          {
+            "field": "publication",
+            "locator": "JSON-LD WebPage.datePublished",
+            "value": "2026-06-19T13:45:09+00:00"
+          },
+          {
+            "field": "CTF identity",
+            "quote": "CREST is proud to support ROOTCON 20 as a Capture The Flag (CTF) Prize Sponsor"
+          },
+          {
+            "field": "parent dates",
+            "quote": "Date: 23–25 September 2026"
+          }
+        ]
+      },
+      "dates": {
+        "public_announcement_date": "2026-06-19",
+        "announcement_instant": "2026-06-19T13:45:09+00:00",
+        "tournament_dates": null,
+        "parent_conference_dates": [
+          "2026-09-23",
+          "2026-09-25"
+        ],
+        "registration_deadline": null,
+        "registration_status_at_observation": "No CTF entry window; parent ROOTCON website registration link"
+      },
+      "publisher_notice_measure": {
+        "calendar_days_before_tournament": null,
+        "calendar_days_before_parent_conference": 96,
+        "interpretation": "Strong evidence of advance notice that a CTF exists, not a 96-day CTF registration window. Current adapter does not retain WebPage.datePublished as Posted; audit reads metadata explicitly."
+      },
+      "collector_observation": {
+        "earliest_retained_normal_collection": {
+          "first_seen": "2026-11-21T16:05:32.190229+00:00",
+          "retained_report": "docs/community-verification.json",
+          "first_seen_asia_manila": "2026-11-22T00:05:32.190229+08:00",
+          "scope": "Temporary normal-entry-point verification; not proof of production daily delivery"
+        },
+        "production_first_seen": null,
+        "production_first_seen_asia_manila": null,
+        "production_note": "Read-only existing production database; absence is not retroactively filled by temporary verification.",
+        "retained_registration_observation": {
+          "event_id": "775f475db77bea2c6cd288ec",
+          "first_seen": "2026-11-21T18:04:26.159591+00:00",
+          "status": "not_verified",
+          "earliest_verified_at": null,
+          "announcement_id": null,
+          "revision_id": null,
+          "source_id": null,
+          "url": null,
+          "registration_evidence": {},
+          "registration_window": {},
+          "observations_checked": 3,
+          "reasons": [
+            "event_finished_at_observation",
+            "registration_not_confirmed_open",
+            "registration_state_evidence_missing",
+            "registration_deadline_missing",
+            "registration_deadline_evidence_missing"
+          ],
+          "live_open_observation": null,
+          "first_seen_while_live_open": false,
+          "live_open_reasons": [
+            "event_finished_at_observation",
+            "registration_not_confirmed_open",
+            "registration_state_evidence_missing",
+            "contemporary_registration_control_not_observed",
+            "future_or_live_competition_time_unconfirmed"
+          ]
+        }
+      },
+      "normal_collector_reachability": {
+        "verified": true,
+        "discovery_paths": [
+          [
+            "https://www.crest-approved.org/events/category/asia-events/list/",
+            "https://www.crest-approved.org/events/category/asia-events/list/?eventDisplay=past",
+            "https://www.crest-approved.org/event/rootcon-20-philippines-2026/"
+          ]
+        ],
+        "normal_report": "docs/publisher-opportunity-verification.json",
+        "latest_prior_status": "ok",
+        "latest_prior_observed_at": "2026-11-21T18:08:10.303599+00:00",
+        "latest_prior_accepted": 1
+      },
+      "production_source_health": {
+        "id": "crest-asia",
+        "name": "CREST · Philippine partner announcements",
+        "url": "https://www.crest-approved.org/events/category/asia-events/list/",
+        "kind": "html",
+        "status": "not_run",
+        "last_success": null,
+        "last_attempt": null,
+        "message": "",
+        "discovered": 0,
+        "accepted": 0,
+        "publisher_name": "CREST · Philippine partner announcements",
+        "publisher_role": "resharer",
+        "coverage": "[\"Philippine events in an Asia partner calendar\", \"Luzon\"]",
+        "index_id": "crest-asia",
+        "enabled": 1,
+        "index_status": "active"
+      },
+      "restrictions_and_archive_limits": [
+        "Both current and past Asia index pages work, then actual ROOTCON article;3pages checked.",
+        "Configured link filter follows verified ROOTCON partnership only, max8pages; does not prove all Asia/PH events covered.",
+        "One past-page view is not a complete archive.",
+        "CTF times/entry rules are absent; parent event JSON-LD dates must not become CTF bounds."
+      ]
+    },
+    {
+      "source_id": "cyberph-luma-calendar",
+      "publisher": "CyberPH · Public Luma calendar",
+      "publisher_role": "organizer",
+      "recurring_urls": [
+        "https://api.luma.com/ics/get?entity=calendar&id=cal-ZW4YOEwv4lmL66C"
+      ],
+      "adapter": "luma",
+      "enabled": true,
+      "live_check": {
+        "checked_at": "2026-11-21T18:23:42.392637+00:00",
+        "checked_at_asia_manila": "2026-11-22T02:23:42.392637+08:00",
+        "status": "ok",
+        "discovered": 3,
+        "accepted_announcements": 1,
+        "warnings": [],
+        "requests": [
+          {
+            "url": "https://api.luma.com/robots.txt",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:37.575123+00:00",
+            "status": "ok",
+            "bytes": 34
+          },
+          {
+            "url": "https://api.luma.com/ics/get?entity=calendar&id=cal-ZW4YOEwv4lmL66C",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:37.893456+00:00",
+            "status": "ok",
+            "bytes": 1872
+          },
+          {
+            "url": "https://luma.com/robots.txt",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:38.592197+00:00",
+            "status": "ok",
+            "bytes": 150
+          },
+          {
+            "url": "https://luma.com/mz5bi1ln",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:39.379372+00:00",
+            "status": "ok",
+            "bytes": 151936
+          },
+          {
+            "url": "https://luma.com/79gspr7h",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:40.195349+00:00",
+            "status": "ok",
+            "bytes": 162208
+          },
+          {
+            "url": "https://luma.com/akv0l0o1",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:41.178015+00:00",
+            "status": "ok",
+            "bytes": 150745
+          }
+        ]
+      },
+      "example_name": "Packet Capture: Beneath the Network",
+      "example": {
+        "url": "https://luma.com/akv0l0o1",
+        "type": "historical organizer invitation/registration landing page; calendar slot is kickoff",
+        "organizer": "CyberPH and WorkFlow PH",
+        "evidence": [
+          {
+            "field": "competition",
+            "quote": "Networking x Security Capture-the-Flag (CTF)"
+          },
+          {
+            "field": "kickoff",
+            "locator": "Luma event.start_at/end_at/timezone",
+            "value": [
+              "2026-10-04T00:00:00.000Z",
+              "2026-10-04T09:00:00.000Z",
+              "Asia/Manila"
+            ]
+          },
+          {
+            "field": "stale registration control",
+            "locator": "Luma data.registration_availability and ticket_types[].require_approval",
+            "value": {
+              "registration_availability": "open",
+              "require_approval": true,
+              "note": "Already-past kickoff; not proof of current CTF entry"
+            }
+          }
+        ]
+      },
+      "dates": {
+        "public_announcement_date": null,
+        "tournament_dates": null,
+        "kickoff_date": "2026-10-04",
+        "completion_date": "2026-10-26",
+        "completion_date_basis": "Kaka recap",
+        "registration_deadline": null,
+        "registration_status_at_observation": "closed by corroborating completion notice; raw old kickoff widget is not current CTF opportunity"
+      },
+      "publisher_notice_measure": {
+        "calendar_days_before_tournament": null,
+        "calendar_days_before_registration_deadline": null,
+        "interpretation": "Cannot measure publisher advance lead because no publication timestamp. ICS DTSTAMP is current export timestamp and is not used as announcement time."
+      },
+      "collector_observation": {
+        "earliest_retained_normal_collection": {
+          "first_seen": "2026-11-21T18:06:14.435660+00:00",
+          "retained_report": "docs/publisher-opportunity-verification.json",
+          "first_seen_asia_manila": "2026-11-22T02:06:14.435660+08:00",
+          "scope": "Temporary normal-entry-point verification; not proof of production daily delivery"
+        },
+        "production_first_seen": null,
+        "production_first_seen_asia_manila": null,
+        "production_note": "Read-only existing production database; absence is not retroactively filled by temporary verification.",
+        "retained_registration_observation": {
+          "event_id": "503205322bd9e4e23a9562f4",
+          "first_seen": "2026-11-21T18:06:06.506939+00:00",
+          "status": "not_verified",
+          "earliest_verified_at": null,
+          "announcement_id": null,
+          "revision_id": null,
+          "source_id": null,
+          "url": null,
+          "registration_evidence": {},
+          "registration_window": {},
+          "observations_checked": 2,
+          "reasons": [
+            "event_finished_at_observation",
+            "registration_not_confirmed_open",
+            "registration_deadline_missing",
+            "registration_deadline_evidence_missing",
+            "registration_state_evidence_missing"
+          ],
+          "live_open_observation": null,
+          "first_seen_while_live_open": false,
+          "live_open_reasons": [
+            "event_finished_at_observation",
+            "registration_not_confirmed_open",
+            "contemporary_registration_control_not_observed",
+            "future_or_live_competition_time_unconfirmed",
+            "registration_state_evidence_missing"
+          ]
+        }
+      },
+      "normal_collector_reachability": {
+        "verified": true,
+        "discovery_paths": [
+          [
+            "https://api.luma.com/ics/get?entity=calendar&id=cal-ZW4YOEwv4lmL66C",
+            "https://luma.com/akv0l0o1"
+          ]
+        ],
+        "normal_report": "docs/publisher-opportunity-verification.json",
+        "latest_prior_status": "ok",
+        "latest_prior_observed_at": "2026-11-21T18:08:28.383860+00:00",
+        "latest_prior_accepted": 1
+      },
+      "production_source_health": null,
+      "restrictions_and_archive_limits": [
+        "Public iCal returned3events and3readableeventpages, one CTF plus one online webinar and one workshop.",
+        "Max60items; returned past entries do not establish exhaustive historical archive.",
+        "One-time publisher-name search qualified calendar; normal run starts recurring ICS without event name.",
+        "Luma may intermittently403. This check succeeded; no restriction bypass."
+      ]
+    },
+    {
+      "source_id": "kakacomputer-ctf",
+      "publisher": "KakaComputer · CTF reporting",
+      "publisher_role": "resharer",
+      "recurring_urls": [
+        "https://kakacomputer.com/tag/ctf/feed/"
+      ],
+      "adapter": "rss",
+      "enabled": true,
+      "live_check": {
+        "checked_at": "2026-11-21T18:23:40.968866+00:00",
+        "checked_at_asia_manila": "2026-11-22T02:23:40.968866+08:00",
+        "status": "ok",
+        "discovered": 1,
+        "accepted_announcements": 1,
+        "warnings": [],
+        "requests": [
+          {
+            "url": "https://kakacomputer.com/robots.txt",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:37.279575+00:00",
+            "status": "ok",
+            "bytes": 117
+          },
+          {
+            "url": "https://kakacomputer.com/tag/ctf/feed/",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:38.536901+00:00",
+            "status": "ok",
+            "bytes": 18413
+          },
+          {
+            "url": "https://kakacomputer.com/curiosity-to-cybersecurity-open-community-and-opportunity-through-packet-capturing/",
+            "params": null,
+            "requested_at": "2026-11-21T18:23:39.469725+00:00",
+            "status": "ok",
+            "bytes": 196539
+          }
+        ]
+      },
+      "example_name": "Packet Capture completion report",
+      "example": {
+        "url": "https://kakacomputer.com/curiosity-to-cybersecurity-open-community-and-opportunity-through-packet-capturing/",
+        "type": "winner/completion recap, not invitation",
+        "organizer": "CyberPH and WorkFlow PH (corroborated via event hosts)",
+        "evidence": [
+          {
+            "field": "publication",
+            "locator": "RSS pubDate and article:published_time",
+            "value": "2026-11-01T11:24:25+00:00"
+          },
+          {
+            "field": "completion",
+            "quote": "On October 26, the event closed with the Awarding Ceremony"
+          }
+        ]
+      },
+      "dates": {
+        "public_announcement_date": "2026-11-01",
+        "announcement_instant": "2026-11-01T11:24:25+00:00",
+        "tournament_dates": null,
+        "kickoff_date": "2026-10-04",
+        "completion_date": "2026-10-26",
+        "registration_deadline": null,
+        "registration_status_at_observation": "closed/completed"
+      },
+      "publisher_notice_measure": {
+        "calendar_days_before_tournament": null,
+        "calendar_days_after_completion": 6,
+        "interpretation": "Useful for corroboration, completion and publisher discovery; not evidence this source published an advance invitation."
+      },
+      "collector_observation": {
+        "earliest_retained_normal_collection": {
+          "first_seen": "2026-11-21T17:42:36.873158+00:00",
+          "retained_report": "docs/luma-verification.json",
+          "first_seen_asia_manila": "2026-11-22T01:42:36.873158+08:00",
+          "scope": "Temporary normal-entry-point verification; not proof of production daily delivery"
+        },
+        "production_first_seen": null,
+        "production_first_seen_asia_manila": null,
+        "production_note": "Read-only existing production database; absence is not retroactively filled by temporary verification.",
+        "retained_registration_observation": {
+          "event_id": "503205322bd9e4e23a9562f4",
+          "first_seen": "2026-11-21T18:06:06.506939+00:00",
+          "status": "not_verified",
+          "earliest_verified_at": null,
+          "announcement_id": null,
+          "revision_id": null,
+          "source_id": null,
+          "url": null,
+          "registration_evidence": {},
+          "registration_window": {},
+          "observations_checked": 2,
+          "reasons": [
+            "event_finished_at_observation",
+            "registration_not_confirmed_open",
+            "registration_deadline_missing",
+            "registration_deadline_evidence_missing",
+            "registration_state_evidence_missing"
+          ],
+          "live_open_observation": null,
+          "first_seen_while_live_open": false,
+          "live_open_reasons": [
+            "event_finished_at_observation",
+            "registration_not_confirmed_open",
+            "contemporary_registration_control_not_observed",
+            "future_or_live_competition_time_unconfirmed",
+            "registration_state_evidence_missing"
+          ]
+        }
+      },
+      "normal_collector_reachability": {
+        "verified": true,
+        "discovery_paths": [
+          [
+            "https://kakacomputer.com/tag/ctf/feed/",
+            "https://kakacomputer.com/curiosity-to-cybersecurity-open-community-and-opportunity-through-packet-capturing/"
+          ]
+        ],
+        "normal_report": "docs/publisher-opportunity-verification.json",
+        "latest_prior_status": "ok",
+        "latest_prior_observed_at": "2026-11-21T18:08:21.912241+00:00",
+        "latest_prior_accepted": 1
+      },
+      "production_source_health": null,
+      "restrictions_and_archive_limits": [
+        "CTF-tag feed returned1item, bodyfollowworks;max20items.",
+        "Post-event narrative/awards must not become open registration.",
+        "No invitation was found through this current feed."
+      ]
+    },
+    {
+      "source_id": "pia",
+      "publisher": "Philippine Information Agency",
+      "publisher_role": "resharer",
+      "recurring_urls": [
+        "https://pia.gov.ph/feed/?s=capture+the+flag"
+      ],
+      "adapter": "rss candidate",
+      "enabled": false,
+      "live_check": {
+        "url": "https://pia.gov.ph/feed/?s=capture+the+flag",
+        "checked_at": "2026-11-21T18:25:02.079371+00:00",
+        "status": "error",
+        "error": "Cannot verify robots.txt: HTTP 403"
+      },
+      "example_name": "CALABARZON HackForGov invitation 2025",
+      "example": {
+        "url": "https://pia.gov.ph/news/dict-calls-for-participants-in-hackforgov-cybersecurity-skills-bout/",
+        "type": "institutional invitation report",
+        "evidence_access": "Prior independently indexed article evidence only; not fetched in this audit",
+        "retained_evidence_artifact": "docs/source-index-regional-research.json"
+      },
+      "dates": {
+        "public_announcement_date": "2025-04-14",
+        "tournament_date": null,
+        "registration_opens": "2025-04-02",
+        "registration_deadline": "2025-04-25",
+        "deadline_precision": "date only; clock/timezone unknown",
+        "outside_last_12_month_window": true
+      },
+      "publisher_notice_measure": {
+        "calendar_days_before_tournament": null,
+        "calendar_days_before_registration_deadline": 11,
+        "interpretation": "Historical indexed evidence suggests advance invitation; backend cannot independently read recurring source."
+      },
+      "normal_collector_reachability": {
+        "verified": false,
+        "latest_prior_status": "disabled",
+        "last_successful_step": "Prior web-indexed article research; live recurring feed attempt stops at robots HTTP403"
+      },
+      "collector_observation": {
+        "production_first_seen": null,
+        "earliest_retained_normal_collection": null,
+        "verified_timely": false
+      },
+      "restrictions_and_archive_limits": [
+        "Robots verification HTTP403; disabled candidate remains disabled; no circumventing access or social cookies.",
+        "This is evidence-only, not a working monitored invitation route."
+      ]
+    }
+  ],
+  "recommendation": {
+    "source_id": "htb-meetup-ph",
+    "recurring_url": "https://www.meetup.com/hack-the-box-meetup-ph/events/rss/",
+    "action": "Monitor the existing recurring feed and public linked event metadata over the next week, preserving revisions and the November4-versus-November29 schedule conflict; qualify CTF-specific entry information before claiming registration open.",
+    "evidence": "Recent timestamped October18 invitation explicitly names an actual QCU CTF and a live public calendar advertises November29, seven calendar dates after this audit. Both recurring feed and linked page are readable free.",
+    "gap_it_can_help_close": "Student-community CTFs shared by a group outside current university archives, including short-notice schedule edits that static body-only extraction misses.",
+    "verified_today": "Feed→invitation path, publication timestamp, explicit CTF, QCU restriction, and conflicting live event dates.",
+    "future_runs_needed": "A week can establish source uptime/revision behavior and new actual first_seen/registration observations. It cannot retroactively prove an earlier alert or guarantee another invitation appears."
+  }
+}

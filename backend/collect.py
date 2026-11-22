@@ -5,14 +5,15 @@ import argparse
 import fcntl
 import json
 import os
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from . import db as storage
 from .adapters import ADAPTERS, CredentialsRequired
-from .network import Client
+from .network import Client, FetchError, RateLimited
 from .source_index import load_sources
 from .metrics import registration_observations
+from .publishers import ensure_schema, harvest, publisher_summaries, sync_configured_publishers
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -26,6 +27,7 @@ def collect(db, sources, *, client=None, adapters=None, now=None):
     def clock():
         return now if now is not None else datetime.now(timezone.utc)
     stamp = clock().isoformat()
+    ensure_schema(db)
     storage.register_sources(db, sources)
     run_id = db.execute('INSERT INTO runs(started_at) VALUES(?)', (stamp,)).lastrowid
     db.commit()
@@ -39,12 +41,19 @@ def collect(db, sources, *, client=None, adapters=None, now=None):
         status, message = 'error', ''
         discoveries = []
         search_audit = {}
+        publisher_counts = {'new_candidates': 0, 'new_relationships': 0, 'accepted': 0, 'rejected': 0}
+        retry_after = None
+        next_retry_at = None
         try:
             if source.get('enabled') is False:
                 status, message = 'disabled', source.get('index_reason') or source.get('reason') or 'Disabled in source configuration; no request made.'
             elif source['kind'] == 'restricted':
                 status, message = 'policy_restricted', source['reason']
             else:
+                previous_retry = db.execute('SELECT next_retry_at FROM sources WHERE id=?', (sid,)).fetchone()[0]
+                if previous_retry and datetime.fromisoformat(previous_retry) > attempted:
+                    remaining = (datetime.fromisoformat(previous_retry) - attempted).total_seconds()
+                    raise RateLimited(max(1, int(remaining + 0.999)))
                 known = db.execute('SELECT * FROM announcements WHERE source_id=? AND withdrawn=0', (sid,)).fetchall()
                 result = adapters[source['kind']](source, client, known, attempted)
                 observed_stamp = clock().isoformat()
@@ -53,6 +62,14 @@ def collect(db, sources, *, client=None, adapters=None, now=None):
                     search_audit['searches'] = result.searches
                 if hasattr(result, 'decisions'):
                     search_audit['decisions'] = result.decisions
+                if hasattr(result, 'route_checks'):
+                    search_audit['route_checks'] = result.route_checks
+                retry_after = getattr(result, 'retry_after', None)
+                if retry_after is None:
+                    delays = [a['retry_after'] for q in getattr(result, 'searches', [])
+                              if q.get('status') == 'error' for a in q.get('attempts', [])
+                              if a.get('status') == 'rate_limited' and a.get('retry_after') is not None]
+                    retry_after = max(delays) if delays else None
                 # Atomic per-source ingestion. A parsing/DB failure cannot leave a
                 # half-updated source or erase listings from the previous run.
                 with db:
@@ -64,6 +81,13 @@ def collect(db, sources, *, client=None, adapters=None, now=None):
                         announcement.setdefault('publisher_role', source.get('publisher_role'))
                         announcement.setdefault('index_id', source.get('index_id'))
                         event_id, created = storage.ingest(db, sid, announcement, observed_stamp)
+                        leads = [{**lead, 'evidence': {**lead.get('evidence', {}),
+                                  'discovery_path': announcement.get('discovery_path', [source['url'], announcement['url']])}}
+                                 for lead in announcement.get('publisher_leads', [])]
+                        harvested = harvest(db, sid, leads,
+                                            event_id=event_id, announcement_url=announcement['url'], now=observed_stamp)
+                        for field in publisher_counts:
+                            publisher_counts[field] += harvested.get(field, 0)
                         accepted += 1
                         added += int(created)
                         discoveries.append({'event_id': event_id, 'url': announcement['url'],
@@ -71,10 +95,23 @@ def collect(db, sources, *, client=None, adapters=None, now=None):
                                             'related_links': announcement.get('related_links', [])})
                     for external_id in result.deleted:
                         storage.withdraw(db, sid, external_id, observed_stamp)
+                    leads = [{**lead, 'evidence': {**lead.get('evidence', {}),
+                              'discovery_path': [source['url'], lead.get('evidence', {}).get('url')]}}
+                             for lead in getattr(result, 'publisher_leads', [])]
+                    harvested = harvest(db, sid, leads, now=observed_stamp)
+                    for field in publisher_counts:
+                        publisher_counts[field] += harvested.get(field, 0)
                 status = 'error' if getattr(result, 'failed', False) else 'partial' if result.warnings else 'ok'
+                if getattr(result, 'failed', False) and getattr(result, 'failure_status', None):
+                    status = result.failure_status
                 message = result.message + (' ' + '; '.join(result.warnings) if result.warnings else '')
         except CredentialsRequired as exc:
             status, message = 'needs_credentials', str(exc)
+        except RateLimited as exc:
+            status, message, retry_after = 'rate_limited', str(exc), exc.retry_after
+        except FetchError as exc:
+            status = 'blocked' if 'HTTP 403' in str(exc) or 'disallows automated access' in str(exc) else 'error'
+            message = str(exc)[:400]
         except Exception as exc:
             db.rollback()
             # Report a useful but bounded/sanitized error. Request exceptions never
@@ -83,11 +120,14 @@ def collect(db, sources, *, client=None, adapters=None, now=None):
             message = str(exc)[:400] if exc.__class__.__name__ == 'FetchError' else f'{type(exc).__name__}: source could not be processed; previous listings preserved.'
             accepted = added = 0
             discoveries = []
+            publisher_counts = {field: 0 for field in publisher_counts}
         finished_stamp = clock().isoformat()
+        if retry_after is not None:
+            next_retry_at = (datetime.fromisoformat(finished_stamp) + timedelta(seconds=retry_after)).isoformat()
         db.execute('''UPDATE sources SET status=?,last_attempt=?,
           last_success=CASE WHEN ?='ok' THEN ? ELSE last_success END,
-          message=?,discovered=?,accepted=? WHERE id=?''',
-                   (status, attempt_stamp, status, observed_stamp or finished_stamp, message, count, accepted, sid))
+          message=?,discovered=?,accepted=?,next_retry_at=? WHERE id=?''',
+                   (status, attempt_stamp, status, observed_stamp or finished_stamp, message, count, accepted, next_retry_at, sid))
         db.commit()
         report['sources'].append({'id': sid, 'name': source['name'], 'status': status,
                                   'publisher': source.get('publisher_name', source['name']),
@@ -99,12 +139,20 @@ def collect(db, sources, *, client=None, adapters=None, now=None):
                                   'finished_at': finished_stamp,
                                   'discovered': count, 'accepted': accepted, 'new_announcements': added,
                                   'discoveries': discoveries, 'message': message, **search_audit})
+        report['sources'][-1].update(publisher_candidates=publisher_counts, retry_after=retry_after,
+                                    next_retry_at=next_retry_at)
     report['finished_at'] = clock().isoformat()
     report['events'] = db.execute('SELECT count(DISTINCT event_id) FROM announcements WHERE withdrawn=0').fetchone()[0]
     report['announcements'] = db.execute('SELECT count(*) FROM announcements WHERE withdrawn=0').fetchone()[0]
+    sync_configured_publishers(db, sources, now=report['finished_at'])
+    report['publisher_candidates'] = publisher_summaries(db)
     report['registration_observations'] = registration_observations(db)
     report['verified_timely_count'] = sum(item['status'] == 'verified_timely'
                                          for item in report['registration_observations'])
+    report['live_open_observation_count'] = sum(item['live_open_observation'] is not None
+                                               for item in report['registration_observations'])
+    report['first_seen_live_open_count'] = sum(item['first_seen_while_live_open']
+                                              for item in report['registration_observations'])
     db.execute('UPDATE runs SET finished_at=?,report=? WHERE id=?', (report['finished_at'], json.dumps(report), run_id))
     db.commit()
     return report

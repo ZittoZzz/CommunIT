@@ -12,7 +12,8 @@ from bs4 import BeautifulSoup
 
 from .domain import canonical_url, facebook_post, norm, parse_moment, region_from
 from .extract import CTF, clean_html, extract
-from .network import FetchError
+from .network import FetchError, RateLimited
+from .event_context import attach_article_context
 
 
 class Result:
@@ -23,6 +24,7 @@ class Result:
         self.deleted = []
         self.message = ''
         self.decisions = []
+        self.publisher_leads = []
 
 
 def bluesky(source, client, known, now):
@@ -189,6 +191,20 @@ def attach_discovery(ann, links, path):
     return ann
 
 
+def publisher_context_from_content(source, content, url):
+    """Opt-in relationship evidence from the article itself, not site chrome."""
+    if not source.get('discover_publishers'):
+        return source, []
+    from .relationships import publisher_leads_from_html, relationship_scope
+    leads = publisher_leads_from_html(content, url)
+    context = dict(source)
+    if source.get('relationship_scope'):
+        proof = relationship_scope(content)
+        if proof:
+            context['_relationship_scope_quote'] = proof['quote']
+    return context, leads
+
+
 def html(source, client, known, now):
     result = Result()
     allowed = source.get('allowed_hosts', [urlsplit(source['url']).hostname])
@@ -302,7 +318,13 @@ def rss(source, client, known, now):
             continue
         links = content_links(soup, url)
         paths[url] = [source['url'], url]
-        ann = extract(entry.get('title', ''), text, url, source, posted_at=posted, links=links)
+        context, leads = publisher_context_from_content(source, soup, url)
+        ann = extract(entry.get('title', ''), text, url, context, posted_at=posted, links=links)
+        if ann:
+            ann['publisher_leads'] = leads
+            attach_article_context(ann, soup)
+        elif source.get('publisher_news'):
+            result.publisher_leads.extend(leads)
         if ann and (url not in retained_urls or not source.get('follow_articles')):
             result.announcements.append(attach_discovery(ann, links, paths[url]))
         result.decisions.append({'url': url, 'title': entry.get('title', ''), 'accepted': bool(ann),
@@ -322,12 +344,25 @@ def rss(source, client, known, now):
     for url, (fallback_title, fallback_posted) in recheck.items():
         try:
             soup, title, text, links = article_parts(client.public_page(url, allowed), url, source)
-            ann = extract(title or fallback_title, text, url, source,
+            article = soup.select_one(source['article_selector']) if source.get('article_selector') else soup.find('article') or soup.find('main') or soup
+            context, leads = publisher_context_from_content(source, article, url)
+            ann = extract(title or fallback_title, text, url, context,
                           posted_at=posted_from_html(soup) or fallback_posted, links=links)
             if ann:
+                ann['publisher_leads'] = leads
+                attach_article_context(ann, article)
                 # Prefer the rechecked current article over its feed excerpt.
                 result.announcements = [a for a in result.announcements if a['url'] != ann['url']]
                 result.announcements.append(attach_discovery(ann, links, paths[url]))
+            elif source.get('publisher_news'):
+                result.publisher_leads.extend(leads)
+            result.decisions.append({'url': url, 'title': title or fallback_title, 'accepted': bool(ann),
+                                     'stage': 'article_body', 'publisher_leads': len(leads),
+                                     'reason': 'Identified CTF announcement' if ann else 'No confirmed competition; publisher relationships retained only' if leads and source.get('publisher_news') else 'Body/title does not establish an in-scope competition and edition'})
+        except RateLimited as exc:
+            result.retry_after = exc.retry_after
+            result.warnings.append(f'Article recheck rate limited: {exc}')
+            break
         except FetchError as exc:
             result.warnings.append(f'Article recheck: {exc}')
     result.message = f'Public RSS/Atom feed scanned; {len(recheck)} new or retained article URLs rechecked.'
@@ -425,5 +460,6 @@ class CredentialsRequired(Exception):
 
 
 from .tavily import tavily
+from .luma import luma
 
-ADAPTERS = {'bluesky': bluesky, 'html': html, 'rss': rss, 'ctftime': ctftime, 'brave': brave, 'tavily': tavily}
+ADAPTERS = {'bluesky': bluesky, 'html': html, 'rss': rss, 'ctftime': ctftime, 'brave': brave, 'tavily': tavily, 'luma': luma}

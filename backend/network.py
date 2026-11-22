@@ -40,10 +40,25 @@ def retry_seconds(value):
 class Client:
     def __init__(self):
         self.session = requests.Session()
+        self.session.trust_env = False
         self.session.headers.update({'User-Agent': USER_AGENT})
         self.robots = {}
         self.last_request = {}
         self.delays = {}
+        self.rate_limits = {}
+
+    def _check_cooldown(self, host):
+        remaining = self.rate_limits.get(host, 0) - time.monotonic()
+        if remaining > 0:
+            raise RateLimited(math.ceil(remaining))
+
+    def _check_rate_limit(self, response, host):
+        if response.status_code == 429:
+            delay = retry_seconds(response.headers.get('Retry-After'))
+            if delay is not None:
+                self.rate_limits[host] = time.monotonic() + delay
+            response.close()
+            raise RateLimited(delay)
 
     def post_json(self, url, payload, *, headers=None):
         """Bounded anonymous API POST; never inherit credentials or follow redirects."""
@@ -97,12 +112,16 @@ class Client:
             raise FetchError('Facebook HTML fetching is disabled; use authorized APIs or search-only discovery')
         if allowed_hosts is not None and host not in allowed_hosts:
             raise FetchError('URL is outside the configured organizer hosts')
+        self._check_cooldown(host)
         wait = self.delays.get(host, 0.3) - (time.monotonic() - self.last_request.get(host, 0))
         if wait > 0:
             time.sleep(min(wait, 30))
         self.last_request[host] = time.monotonic()
         try:
+            # Public reads never reuse a server's session cookies or .netrc auth.
+            self.session.cookies.clear()
             r = self.session.get(url, params=params, headers=headers, timeout=(5, 15), allow_redirects=False, stream=True)
+            self._check_rate_limit(r, host)
             if 300 <= r.status_code < 400:
                 target = urljoin(url, r.headers.get('Location', ''))
                 r.close()
@@ -129,8 +148,11 @@ class Client:
     def read_redirect(self, url, **kwargs):
         # One redirect maximum avoids loops and unbounded traversal.
         host = urlsplit(url).hostname
+        self._check_cooldown(host)
         try:
+            self.session.cookies.clear()
             r = self.session.get(url, headers=kwargs.get('headers'), timeout=(5, 15), allow_redirects=False)
+            self._check_rate_limit(r, host)
             if r.status_code != 200:
                 raise FetchError(f'HTTP {r.status_code} after redirect')
             if len(r.content) > 4_000_000:
@@ -145,6 +167,8 @@ class Client:
             root = f'{urlsplit(url).scheme}://{urlsplit(url).netloc}/robots.txt'
             try:
                 raw = self.read(root, allowed_hosts=allowed_hosts).decode('utf-8', errors='replace')
+            except RateLimited:
+                raise
             except FetchError as exc:
                 if str(exc) not in ('HTTP 404', 'HTTP 410'):
                     raise FetchError(f'Cannot verify robots.txt: {exc}') from None

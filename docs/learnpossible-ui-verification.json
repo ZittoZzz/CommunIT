@@ -1,0 +1,39 @@
+{
+  "observed_at": "2026-11-21T18:34:43.387Z",
+  "base_url": "http://127.0.0.1:5174",
+  "event_id": "9ce2881dabb3fb36b01fa057",
+  "event_name": "LearnPossible – The Hexcore Labs PH University Challenge · CTF 2025",
+  "api": {
+    "section": "past",
+    "status": "past_date",
+    "competition_date": {
+      "precision": "date",
+      "raw": "October 6, 2025",
+      "timezone": null,
+      "value": "2025-10-06"
+    },
+    "start": null,
+    "end": null,
+    "registration_status": "unknown",
+    "posted_at": "2025-09-02T02:17:55+00:00",
+    "first_seen": "2026-11-21T18:05:18.990121+00:00"
+  },
+  "ui": {
+    "upcoming_matches": 0,
+    "past_tab_matches": 1,
+    "card_text": "Past date · completion unconfirmed\nFormat unconfirmed\nLearnPossible – The Hexcore Labs PH University Challenge · CTF 2025\n\nHexcore Labs PH\n\nPublisher event context: Event Details: Date: October 6, 2025. CTF clock times and registration window are not confirmed.\n\nRegistration unconfirmed\nRegistration deadline\nNot announced\nTournament date\nOctober 6, 2025\nRegion\nUnspecified\nWho can join\nEligibility not announced. Check with the organizer.\n\nThe announced competition date has passed. Completion is unconfirmed; this is historical coverage, not a current registration opportunity.\n\nAnnouncement · verify source\n(opens in a new tab)\nPosted Sep 2, 2025\nFirst seen Nov 22, 2026\nSources & updates\n1",
+    "mobile_horizontal_overflow": false,
+    "page_errors": []
+  },
+  "screenshots": [
+    "learnpossible-ui-desktop.png",
+    "learnpossible-ui-mobile.png",
+    "learnpossible-ui-card.png"
+  ],
+  "verification_scope": "Actual normal-collection API on a temporary copied database, served through isolated Flask port 5001 and Vite port 5174; no route mocks were used for these screenshots.",
+  "checks": {
+    "typescript": "passed",
+    "playwright": "6 passed",
+    "command": "PATH=\"$PWD/.tools/bin:$PATH\" PLAYWRIGHT_BASE_URL=http://127.0.0.1:5174 npm --prefix frontend run test:e2e"
+  }
+}

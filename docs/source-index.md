@@ -1,6 +1,26 @@
 # Publisher source index pilot — 22 November 2026
 
-The backend now has **10 publisher records: five active monitors and five disabled candidates**. Four direct monitors are new; ROOTCON's existing Bluesky integration is reused. The public site remains an event directory. No event-submission form, Facebook login, paid fallback, or competition URL seed was added.
+## Current configuration
+
+The index now contains **15 records: ten enabled monitors and five disabled candidates**. The public site remains an event directory; this iteration changes only the backend collector and reports. The [publisher and registration-opportunity report](publisher-opportunity-report.md) records the latest verification. The original pilot measurements below remain a historical checkpoint, and the existing benchmark is unchanged.
+
+The five original active monitors below are joined by:
+
+| Added monitor | Recurring source | Qualification and limits |
+|---|---|---|
+| Luma Manila | [Public city calendar](https://luma.com/manila), documented city iCal then public-page fallback | Initial check exposed six links while the page advertised seven, with no qualifying CTF. The city calendar excludes online/private events. |
+| KakaComputer | [CTF RSS](https://kakacomputer.com/tag/ctf/feed/) | Historical recap can corroborate a competition and identify publishers; it cannot establish open registration. |
+| Cyber404 | [Blog RSS](https://cyber404.net/blog/feed.xml) | Partnership news yields publisher leads; a competition requires its own announcement. |
+| CyberPH | [Public publisher iCal](https://api.luma.com/ics/get?entity=calendar&id=cal-ZW4YOEwv4lmL66C) | Publisher-name research → non-CTF public event → owning public calendar/account → documented subscription. Includes online events and historical CTF evidence; no timely discovery is implied. |
+| Cisco NetConnect | [Public publisher iCal](https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7) | Independently qualified through the same public route. Includes online events; readable training/community entries do not yet demonstrate CTF discovery. |
+
+The two publisher calendars use the existing Luma adapter with `page_fallback: false`. Their verified Luma account identities do not merge same-name Facebook candidates. A calendar's ownership or timezone does not by itself establish Philippine scope for every online event. WorkFlow PH remains unenabled because a qualifying recurring route with CTF invitation evidence was not established. No individual competition URL is a runtime seed, and the next scheduled job reads these recurring monitors from the index.
+
+Reports now distinguish the existing deadline-backed `verified_timely_count` from `live_open_observation_count`: a current registration control must be observed open with supported future/live competition timing, even if no deadline is published. `first_seen_live_open_count` records which such observations coincide with discovery. Static invitations, stale controls, approval requirements, and waitlists do not qualify. The original benchmark and its historical measurements are not rewritten.
+
+## Original pilot checkpoint
+
+The original pilot had **10 publisher records: five active monitors and five disabled candidates**. Four direct monitors were new; ROOTCON's existing Bluesky integration was reused. No event-submission form, Facebook login, paid fallback, or competition URL seed was added.
 
 **Acceptance outcomes:** normal collection did not establish discovery of RAIJIN from any source, and did not find its original Facebook post. The frozen benchmark has **2/10 competitions found, versus 1/10 in the prior measurement; zero verified timely discoveries**. This pilot improves historical coverage and recurring monitoring, but is **not yet dependable as a comprehensive upcoming-event alert**, especially for personal-profile Facebook announcements.
 
@@ -10,7 +30,7 @@ The backend now has **10 publisher records: five active monitors and five disabl
 
 The RSS/HTML adapters read relevant article bodies, including complete WordPress content and Meetup Markdown. An invitation can identify a CTF without “CTF” in its title. Recognition still requires an actual competition, an evidenced edition, and Philippine scope. Configured article selectors exclude unrelated widgets; calendar dates are not mistaken for publication dates. Resharers stay publishers, while organizer attribution requires evidence. Specific Facebook post embeds and invitation PDFs are retained as supporting links without pretending their contents were fetched.
 
-Provenance records the recurring endpoint → announcement → event, plus publisher and source. Shared announcement/registration links can merge supporting evidence only within compatible editions, stages and regions. CREST's verified trailing-slash redirect is normalized on its event paths. Qualifiers remain separate from finals. First-seen and revision timestamps reflect completed source responses, and retained revision evidence supports conservative future registration-window measurements. Winner recaps cannot become open registration just because an older sentence says “register.”
+Provenance records the recurring endpoint → announcement → event, plus publisher and source. Shared announcement/registration links can merge supporting evidence only within compatible editions, stages and regions. CREST's verified trailing-slash redirect is normalized on its event paths. Qualifiers remain separate from finals. First-seen and revision timestamps reflect completed source responses, and retained revision evidence supports conservative future registration-window measurements. Recognized winner/recap titles are marked closed despite registration wording in the body.
 
 ## Pilot index
 
@@ -44,7 +64,26 @@ Other new listings are **“Hack The Box Meetup #11 · CTF 2026”** (`a6f4e09e7
 
 ## Live verification
 
-FINAL_VERIFICATION_PENDING
+Two normal default-configuration runs on the same fresh database completed at **00:59:22 and 01:00:44 Asia/Manila on 22 November 2026**. Each retained **10 events / 12 announcements**. The second run added **zero events and zero announcements**, and preserved all event and announcement first-seen timestamps. CREST's slash/no-slash URLs now produce one announcement; ROOTCON's qualifier remains separate from the main event.
+
+| Monitor | Run 1 / run 2 | Accepted per run | Meaning |
+|---|---|---:|---|
+| ROOTCON Bluesky | ok / ok | 3 | Existing two competitions |
+| UP Manila | ok / ok | 1 | New historical invitation |
+| HTB Meetup Manila | ok / ok | 1 | New campus competition reshare |
+| AWS Mindanao | ok / ok | 1 | New advance CTF track; registration unconfirmed |
+| CREST Asia | ok / ok | 1 | Direct partner evidence for existing ROOTCON event |
+| Tavily keyless | ok / ok | 6 | 60 raw results per run; five regional HackForGov leads plus the existing CREST URL |
+| HackTheNorth, UP ACM, PUP announcements, PUP news, CTFtime | ok / ok | 0 | Sources checked, no accepted competition from those checks |
+| DICT, NCERT | error / error | 0 | Robots verification HTTP 403; prior data preserved |
+| ROOTCON website | policy_restricted / policy_restricted | 0 | No extraction attempted |
+| Five publisher candidates; Brave | disabled / disabled | 0 | No requests made |
+
+The direct sources contributed five distinct competitions / seven announcements. Tavily added five regional search-only leads; its overlapping CREST result retained the fetched article's fuller evidence. Compared with the baseline, **three competitions are genuinely newly covered**: LearnPossible, the QCU competition, and the Mindanao CTF track. CREST's direct route is new, but its competition was already covered; search-result fluctuations are not counted as an index improvement.
+
+**207 backend tests passed.** Regression coverage includes titleless body recognition, revisions, reshares, cancellation/drafts, exact-link deduplication, separate event boundaries, source failure preservation, and a response arriving after a registration deadline. The temporary application's `/`, `/api/events`, `/api/sources`, and `/api/health` all returned HTTP 200 using Flask's test client. No browser/UI changes were made.
+
+Full per-source results, raw search URL/title audits, rejection decisions, actual discovery paths, displayed API records, benchmark hashes and comparison checks are in [source-index-verification.json](source-index-verification.json). The verified database is `/tmp/ctfinder-index-verified-cifqvzty/events.sqlite3`. Earlier intermediate runs included a duplicate CREST URL alias; these final runs supersede those counts after the scoped redirect fix.
 
 Existing monitors remain enabled: HackTheNorth, UP ACM, PUP announcements/news, DICT, NCERT, CTFtime, and ROOTCON Bluesky. Successful checks with no accepted competition are reported as such. DICT/NCERT stop at robots HTTP 403; ROOTCON's website remains policy-restricted with its public Bluesky feed used instead. Five index candidates and Brave report `disabled`, not successful requests.
 
@@ -60,7 +99,7 @@ One generic research query, `Philippines "CTF" "register" community website even
 
 ## Benchmark and usefulness
 
-The original ten-event research and measurement files are frozen and hash-checked. The new measurement is separate: [source-index-benchmark-results.json](source-index-benchmark-results.json). ROOTCON was already covered; LearnPossible is the newly covered benchmark event. The other eight remain unobserved. Original Facebook identity is unestablished for all ten. RAIJIN is evaluated separately, outside that denominator.
+The original ten-event research and measurement files are frozen and hash-checked. The new measurement is separate: [source-index-benchmark-results.json](source-index-benchmark-results.json). ROOTCON was already covered; LearnPossible is the newly covered benchmark event. The other eight were not published as identifiable benchmark matches; Packet Capture had ambiguous raw search leads. Original Facebook identity is unestablished for all ten. RAIJIN is evaluated separately, outside that denominator.
 
 **Verified timely discovery: 0.** First-seen timestamps are actual collector observations, not backdated publication dates. `registration_observations` stores reasons for unknown availability, and verified observations require contemporaneous source evidence, explicit open registration and a confirmed timed/timezoned deadline. Date-only or ambiguous windows stay unverified. The AWS competition is an advance discovery, but its conference ticket CTA does not verify CTF registration availability. Feed/body date conflicts and missing CTF boundaries remain explicit limitations.
 

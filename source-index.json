@@ -242,6 +242,135 @@
         "kind": "html",
         "url": "https://vektrsec.com/"
       }
+    },
+    {
+      "id": "luma-manila",
+      "name": "Luma Manila · Public city calendar",
+      "role": "resharer",
+      "coverage": [
+        "NCR",
+        "Public approved in-person Manila events; online/private events excluded by city calendar"
+      ],
+      "enabled": true,
+      "status": "active",
+      "reason": "Public city iCal and public page tested; monitor event bodies before competition filtering. No current CTF required to represent a successful calendar check.",
+      "monitor": {
+        "id": "luma-manila",
+        "name": "Luma Manila · Public city calendar",
+        "kind": "luma",
+        "url": "https://luma.com/manila",
+        "ical_url": "https://api.luma.com/ics/get?entity=discover&id=discplace-XeAvnK62YmCW54R",
+        "max_items": 60
+      }
+    },
+    {
+      "id": "kakacomputer-ctf",
+      "name": "KakaComputer · CTF reporting",
+      "role": "resharer",
+      "coverage": [
+        "Philippine community competitions; includes historical recaps"
+      ],
+      "enabled": true,
+      "status": "active",
+      "reason": "Readable recurring CTF RSS and article bodies. Recaps corroborate past competitions and publisher relationships; no advance-alert coverage claimed.",
+      "monitor": {
+        "id": "kakacomputer-ctf",
+        "name": "KakaComputer · CTF reporting",
+        "kind": "rss",
+        "url": "https://kakacomputer.com/tag/ctf/feed/",
+        "allowed_hosts": [
+          "kakacomputer.com"
+        ],
+        "body_identity": true,
+        "follow_articles": true,
+        "title_from_metadata": true,
+        "article_selector": ".post-content",
+        "discover_publishers": true,
+        "relationship_scope": true,
+        "max_items": 20
+      }
+    },
+    {
+      "id": "cyber404-news",
+      "name": "CYBER404 · Community partnerships",
+      "role": "resharer",
+      "coverage": [
+        "Philippine cybersecurity community publisher leads"
+      ],
+      "enabled": true,
+      "status": "active",
+      "reason": "Readable recurring Atom feed and partnership articles. Publisher leads alone never create a competition.",
+      "monitor": {
+        "id": "cyber404-news",
+        "name": "CYBER404 · Community partnerships",
+        "kind": "rss",
+        "url": "https://cyber404.net/blog/feed.xml",
+        "allowed_hosts": [
+          "cyber404.net"
+        ],
+        "body_identity": true,
+        "follow_articles": true,
+        "title_from_metadata": true,
+        "article_selector": "article.space-y-6",
+        "discover_publishers": true,
+        "publisher_news": true,
+        "relationship_scope": true,
+        "max_items": 20
+      }
+    },
+    {
+      "id": "cyberph-luma-calendar",
+      "name": "CyberPH · Public Luma calendar",
+      "role": "organizer",
+      "coverage": [
+        "Philippine community events",
+        "Calendar includes online events; each CTF requires Philippine-scope evidence"
+      ],
+      "enabled": true,
+      "status": "active",
+      "reason": "Documented public subscription returned event links including an online webinar and a CTF activity. Publisher-name search assisted one-time qualification; registration timing is evaluated per event. Facebook and Luma identities are not automatically merged.",
+      "monitor": {
+        "id": "cyberph-luma-calendar",
+        "name": "CyberPH · Public Luma calendar",
+        "kind": "luma",
+        "url": "https://api.luma.com/ics/get?entity=calendar&id=cal-ZW4YOEwv4lmL66C",
+        "ical_url": "https://api.luma.com/ics/get?entity=calendar&id=cal-ZW4YOEwv4lmL66C",
+        "page_fallback": false,
+        "max_items": 60,
+        "publisher_identity_urls": [
+          "https://luma.com/user/usr-Xf0H4hjDiw6f0tp"
+        ],
+        "publisher_account_ids": [
+          "luma:usr-Xf0H4hjDiw6f0tp"
+        ]
+      }
+    },
+    {
+      "id": "cisco-netconnect-luma-calendar",
+      "name": "Cisco NetConnect · Public Luma calendar",
+      "role": "organizer",
+      "coverage": [
+        "Student cybersecurity community events",
+        "Public calendar includes online and in-person events; each CTF requires Philippine-scope evidence"
+      ],
+      "enabled": true,
+      "status": "active",
+      "reason": "Documented public calendar subscription returned nine readable events, including online events. Current entries are historical training and community events, with no CTF accepted. Publisher-name search assisted one-time qualification.",
+      "monitor": {
+        "id": "cisco-netconnect-luma-calendar",
+        "name": "Cisco NetConnect · Public Luma calendar",
+        "kind": "luma",
+        "url": "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7",
+        "ical_url": "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7",
+        "page_fallback": false,
+        "max_items": 60,
+        "publisher_identity_urls": [
+          "https://luma.com/user/usr-OUyBQc4tiwLnxED"
+        ],
+        "publisher_account_ids": [
+          "luma:usr-OUyBQc4tiwLnxED"
+        ]
+      }
     }
   ]
 }

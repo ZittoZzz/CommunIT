@@ -4,7 +4,7 @@ from __future__ import annotations
 import hashlib
 import re
 import unicodedata
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta, date
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 from zoneinfo import ZoneInfo
 
@@ -155,6 +155,26 @@ def expired(value, now):
     return False
 
 
+def calendar_day_passed(value, now):
+    """Classify a past date without assigning an absent clock time/timezone.
+
+    With no confirmed timezone, wait until the stated day has passed even in
+    UTC-12. This is a date comparison only; no midnight instant is stored.
+    """
+    if not value:
+        return False
+    dt = instant(value)
+    if dt:
+        return now.astimezone(dt.tzinfo).date() > dt.date()
+    if value.get('precision') != 'date':
+        return False
+    try:
+        zone = ZoneInfo(value['timezone']) if value.get('timezone') else timezone(timedelta(hours=-12))
+        return now.astimezone(zone).date() > date.fromisoformat(value['value'])
+    except (ValueError, TypeError, KeyError):
+        return False
+
+
 def lifecycle(event, now=None):
     now = now or datetime.now(timezone.utc)
     state = event.get('lifecycle', 'scheduled')
@@ -162,18 +182,25 @@ def lifecycle(event, now=None):
         status = state
     elif state == 'finished' or expired(event.get('end'), now):
         status = 'finished'
+    elif instant(event.get('end')) and instant(event.get('start')) and instant(event['start']) <= now:
+        status = 'live'
+    elif calendar_day_passed(event.get('end') or event.get('competition_date') or event.get('start'), now):
+        status = 'past_date'
     elif instant(event.get('start')) and instant(event['start']) <= now:
-        status = 'live' if instant(event.get('end')) else 'end_unconfirmed'
+        status = 'end_unconfirmed'
     else:
-        status = 'scheduled' if event.get('start') else 'schedule_tba'
-    reg = event.get('registration_state', 'unknown')
+        status = 'scheduled' if event.get('start') or event.get('competition_date') else 'schedule_tba'
+    reg = event.get('registration_state') or 'unknown'
     if status in ('finished', 'cancelled') or expired(event.get('deadline'), now):
         reg = 'closed'
     elif status == 'postponed':
         reg = 'unknown'
+    elif status == 'past_date' and reg in ('open', 'approval_required', 'waitlisted', 'not_yet_open'):
+        # An old invitation does not establish current entry, nor prove closure.
+        reg = 'unknown'
     elif instant(event.get('registration_opens')) and instant(event['registration_opens']) > now:
         reg = 'not_yet_open'
-    return status, reg, 'finished' if status == 'finished' else 'upcoming'
+    return status, reg, 'finished' if status == 'finished' else 'past' if status == 'past_date' else 'upcoming'
 
 
 REGIONS = {

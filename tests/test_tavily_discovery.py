@@ -225,7 +225,7 @@ def test_normal_collect_twice_keeps_equivalent_numeric_post_and_query_trace_once
     assert results[0]['announcements'] == results[1]['announcements'] == 1
     assert results[1]['sources'][0]['new_announcements'] == 0
     event = events(db, NOW)[0]
-    assert event['status'] == 'schedule_tba'
+    assert event['status'] == 'undated_lead'
     assert event['registration_status'] == 'unknown'
     assert event['announcement_label'] == 'Search result · verify source'
     assert event['first_seen'] == NOW.isoformat()

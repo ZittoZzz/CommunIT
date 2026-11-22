@@ -1,0 +1,969 @@
+{
+  "checked_at": "2026-11-21T17:55:51.927933+00:00",
+  "purpose": "Read-only source qualification after automatic publisher candidate discovery. No runtime sources, database, services, or collector code modified.",
+  "cost": "₱0 API fees; search tool used only for publisher-name research; direct project Client.public_page used to verify sources. No Tavily, Facebook HTML, credentials, cookies, or paid fallback.",
+  "starting_identity": {
+    "name": "WorkFlow PH",
+    "saved_candidate_id": "0dbe55459edcaa20a98e2b9d",
+    "public_url": "https://www.facebook.com/workflowph",
+    "evidence_file": "docs/luma-verification.json",
+    "relationship": "Automatically retained as a contributor from the recurring KakaComputer feed and its discovered recap."
+  },
+  "search_assisted_qualification": {
+    "queries": [
+      "\"WorkFlow PH\" community calendar events",
+      "\"WorkFlow PH\" site:luma.com"
+    ],
+    "relevant_returned_urls": [
+      "https://workflowph.org/partners",
+      "https://workflowph.org/press-kit",
+      "https://workflowph.org/showcase",
+      "https://workflowph.org/showcase/autonomous-bedrock-agents-aws-community-day-ph",
+      "https://workflowph.org/showcase/agora-hackathon-philippines-2026",
+      "https://phsw.startup.gov.ph/community-event/",
+      "https://luma.com/ajwrjd1i",
+      "https://luma.com/akv0l0o1"
+    ],
+    "claim": "Publisher-name search located the website. No Facebook profile page was fetched; this is not a Facebook-profile-to-website crawl."
+  },
+  "website_identity": {
+    "url": "https://workflowph.org/",
+    "status": "success",
+    "linked_saved_identity": "https://www.facebook.com/WorkFlowPH/",
+    "identity_evidence": "The website footer links the saved Facebook account; hostname/account-name case and trailing slash normalize to the retained identity.",
+    "philippine_publisher_context": "Website identifies a volunteer-run Philippine community and describes online-first activities."
+  },
+  "recurring_archive": {
+    "url": "https://workflowph.org/showcase",
+    "status": "success",
+    "bytes": 76313,
+    "unique_detail_links": 23,
+    "advertised_records": 23,
+    "dated_records": 8,
+    "date_tbc_stubs": 15,
+    "pagination_observed": false,
+    "coverage": [
+      "online",
+      "in-person",
+      "hybrid",
+      "Philippine community partnership records"
+    ],
+    "public_feed_or_luma_subscription_found": false,
+    "actual_ctfs_confirmed": 0,
+    "advance_ctf_invitation_verified": false,
+    "registration_open_verified": false,
+    "structure": {
+      "rendering": "Server-rendered ordinary /showcase/* links; titles in metadata avoid letter-by-letter visible headings.",
+      "existing_adapter": "html",
+      "index_only": true,
+      "link_selector": "main a[href^=\"/showcase/\"]",
+      "link_pattern": "/showcase/",
+      "article_selector": "main",
+      "title_from_metadata": true,
+      "max_pages_sufficient_for_current_snapshot": 24,
+      "warning": "This is a readable archive, not a qualified advance-CTF monitor. Several records contain obvious placeholder winner names, and 15 have no actual details. Never treat these as verified competitions."
+    },
+    "details": [
+      {
+        "url": "https://workflowph.org/showcase/echelon-philippines-2026",
+        "title": "Echelon Philippines 2026 — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/echelon-philippines-2026"
+        ],
+        "date_tbc_stub": false,
+        "placeholder_winner_text": false,
+        "online_context": false,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/autonomous-bedrock-agents-aws-community-day-ph"
+        ],
+        "interpretation": "Historical record or partner recap; no actual cybersecurity competition or registration window identified."
+      },
+      {
+        "url": "https://workflowph.org/showcase/autonomous-bedrock-agents-aws-community-day-ph",
+        "title": "Autonomous Bedrock Agents — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/autonomous-bedrock-agents-aws-community-day-ph"
+        ],
+        "date_tbc_stub": false,
+        "placeholder_winner_text": false,
+        "online_context": false,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/people",
+          "https://workflowph.org/showcase/cryptita-builders-showcase-wocee-2026"
+        ],
+        "interpretation": "Historical record or partner recap; no actual cybersecurity competition or registration window identified."
+      },
+      {
+        "url": "https://workflowph.org/showcase/cryptita-builders-showcase-wocee-2026",
+        "title": "Cryptita Builders Showcase at WOCEE 2026 — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/cryptita-builders-showcase-wocee-2026"
+        ],
+        "date_tbc_stub": false,
+        "placeholder_winner_text": false,
+        "online_context": false,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/workflow-ph-x-jia-talent-vault"
+        ],
+        "interpretation": "Historical record or partner recap; no actual cybersecurity competition or registration window identified."
+      },
+      {
+        "url": "https://workflowph.org/showcase/workflow-ph-x-jia-talent-vault",
+        "title": "WorkFlow PH x Jia Talent Vault — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/workflow-ph-x-jia-talent-vault"
+        ],
+        "date_tbc_stub": false,
+        "placeholder_winner_text": false,
+        "online_context": true,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/philippine-blockchain-week-2026"
+        ],
+        "interpretation": "Historical record or partner recap; no actual cybersecurity competition or registration window identified."
+      },
+      {
+        "url": "https://workflowph.org/showcase/philippine-blockchain-week-2026",
+        "title": "Philippine Blockchain Week 2026 — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/philippine-blockchain-week-2026"
+        ],
+        "date_tbc_stub": false,
+        "placeholder_winner_text": false,
+        "online_context": false,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/aws-ug-novators-onboarding-2026"
+        ],
+        "interpretation": "Historical record or partner recap; no actual cybersecurity competition or registration window identified."
+      },
+      {
+        "url": "https://workflowph.org/showcase/aws-ug-novators-onboarding-2026",
+        "title": "AWS UG Novators Onboarding 2026 — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/aws-ug-novators-onboarding-2026"
+        ],
+        "date_tbc_stub": false,
+        "placeholder_winner_text": false,
+        "online_context": true,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/agora-hackathon-philippines-2026"
+        ],
+        "interpretation": "Historical record or partner recap; no actual cybersecurity competition or registration window identified."
+      },
+      {
+        "url": "https://workflowph.org/showcase/agora-hackathon-philippines-2026",
+        "title": "Agora Hackathon Philippines 2026 — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/agora-hackathon-philippines-2026"
+        ],
+        "date_tbc_stub": false,
+        "placeholder_winner_text": false,
+        "online_context": false,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/frostbyte-hackathon-2026"
+        ],
+        "interpretation": "Historical record or partner recap; no actual cybersecurity competition or registration window identified."
+      },
+      {
+        "url": "https://workflowph.org/showcase/frostbyte-hackathon-2026",
+        "title": "Frostbyte Hackathon 2026 — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/frostbyte-hackathon-2026"
+        ],
+        "date_tbc_stub": false,
+        "placeholder_winner_text": true,
+        "online_context": true,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/rise-in-stellar-bootcamp"
+        ],
+        "interpretation": "Historical record or partner recap; no actual cybersecurity competition or registration window identified."
+      },
+      {
+        "url": "https://workflowph.org/showcase/rise-in-stellar-bootcamp",
+        "title": "Rise In Stellar Philippines Blockchain Bootcamp — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/rise-in-stellar-bootcamp"
+        ],
+        "date_tbc_stub": true,
+        "placeholder_winner_text": false,
+        "online_context": true,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/habi-4-design-thinking"
+        ],
+        "interpretation": "Placeholder record; title does not establish an actual competition or advance announcement."
+      },
+      {
+        "url": "https://workflowph.org/showcase/habi-4-design-thinking",
+        "title": "Habi 4.0 Design Thinking Workshop — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/habi-4-design-thinking"
+        ],
+        "date_tbc_stub": true,
+        "placeholder_winner_text": false,
+        "online_context": true,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/project-rise-qbo"
+        ],
+        "interpretation": "Placeholder record; title does not establish an actual competition or advance announcement."
+      },
+      {
+        "url": "https://workflowph.org/showcase/project-rise-qbo",
+        "title": "Project RISE QBO — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/project-rise-qbo"
+        ],
+        "date_tbc_stub": true,
+        "placeholder_winner_text": false,
+        "online_context": true,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/stellar-philippines-hackathon"
+        ],
+        "interpretation": "Placeholder record; title does not establish an actual competition or advance announcement."
+      },
+      {
+        "url": "https://workflowph.org/showcase/stellar-philippines-hackathon",
+        "title": "Stellar Philippines Hackathon — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/stellar-philippines-hackathon"
+        ],
+        "date_tbc_stub": true,
+        "placeholder_winner_text": true,
+        "online_context": true,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/egovph-hackathon"
+        ],
+        "interpretation": "Placeholder record; title does not establish an actual competition or advance announcement."
+      },
+      {
+        "url": "https://workflowph.org/showcase/egovph-hackathon",
+        "title": "eGovPH Hackathon — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/egovph-hackathon"
+        ],
+        "date_tbc_stub": true,
+        "placeholder_winner_text": true,
+        "online_context": true,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/stellar-apac-hackathon"
+        ],
+        "interpretation": "Placeholder record; title does not establish an actual competition or advance announcement."
+      },
+      {
+        "url": "https://workflowph.org/showcase/stellar-apac-hackathon",
+        "title": "Stellar APAC Hackathon — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/stellar-apac-hackathon"
+        ],
+        "date_tbc_stub": true,
+        "placeholder_winner_text": true,
+        "online_context": true,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/rise-in-stellar-journey"
+        ],
+        "interpretation": "Placeholder record; title does not establish an actual competition or advance announcement."
+      },
+      {
+        "url": "https://workflowph.org/showcase/rise-in-stellar-journey",
+        "title": "Rise In Stellar Journey to Mastery — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/rise-in-stellar-journey"
+        ],
+        "date_tbc_stub": true,
+        "placeholder_winner_text": false,
+        "online_context": true,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/startup-qc-student-competition"
+        ],
+        "interpretation": "Placeholder record; title does not establish an actual competition or advance announcement."
+      },
+      {
+        "url": "https://workflowph.org/showcase/startup-qc-student-competition",
+        "title": "Startup QC Student Competition — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/startup-qc-student-competition"
+        ],
+        "date_tbc_stub": true,
+        "placeholder_winner_text": true,
+        "online_context": true,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/appcon"
+        ],
+        "interpretation": "Placeholder record; title does not establish an actual competition or advance announcement."
+      },
+      {
+        "url": "https://workflowph.org/showcase/appcon",
+        "title": "AppCon — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/appcon"
+        ],
+        "date_tbc_stub": true,
+        "placeholder_winner_text": true,
+        "online_context": true,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/adph-2026"
+        ],
+        "interpretation": "Placeholder record; title does not establish an actual competition or advance announcement."
+      },
+      {
+        "url": "https://workflowph.org/showcase/adph-2026",
+        "title": "ADPH 2026 — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/adph-2026"
+        ],
+        "date_tbc_stub": true,
+        "placeholder_winner_text": false,
+        "online_context": true,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/blockquest-fiesta"
+        ],
+        "interpretation": "Placeholder record; title does not establish an actual competition or advance announcement."
+      },
+      {
+        "url": "https://workflowph.org/showcase/blockquest-fiesta",
+        "title": "Blockquest Fiesta — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/blockquest-fiesta"
+        ],
+        "date_tbc_stub": true,
+        "placeholder_winner_text": false,
+        "online_context": true,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/cyberph-packet-capture"
+        ],
+        "interpretation": "Placeholder record; title does not establish an actual competition or advance announcement."
+      },
+      {
+        "url": "https://workflowph.org/showcase/cyberph-packet-capture",
+        "title": "CyberPH Packet Capture — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/cyberph-packet-capture"
+        ],
+        "date_tbc_stub": true,
+        "placeholder_winner_text": false,
+        "online_context": true,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/devcon-push2prod"
+        ],
+        "interpretation": "Placeholder record; title does not establish an actual competition or advance announcement."
+      },
+      {
+        "url": "https://workflowph.org/showcase/devcon-push2prod",
+        "title": "DEVCON Push2Prod — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/devcon-push2prod"
+        ],
+        "date_tbc_stub": true,
+        "placeholder_winner_text": false,
+        "online_context": true,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/icpep-freshie-orientation"
+        ],
+        "interpretation": "Placeholder record; title does not establish an actual competition or advance announcement."
+      },
+      {
+        "url": "https://workflowph.org/showcase/icpep-freshie-orientation",
+        "title": "ICPEP Freshie Orientation — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/icpep-freshie-orientation"
+        ],
+        "date_tbc_stub": true,
+        "placeholder_winner_text": false,
+        "online_context": true,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/stackup-build-ai-pup"
+        ],
+        "interpretation": "Placeholder record; title does not establish an actual competition or advance announcement."
+      },
+      {
+        "url": "https://workflowph.org/showcase/stackup-build-ai-pup",
+        "title": "StackUp Build AI PUP — WorkFlow PH",
+        "status": "success",
+        "discovery_path": [
+          "https://workflowph.org/showcase",
+          "https://workflowph.org/showcase/stackup-build-ai-pup"
+        ],
+        "date_tbc_stub": true,
+        "placeholder_winner_text": false,
+        "online_context": true,
+        "actual_ctf_evidence": false,
+        "registration_evidence": null,
+        "publication_metadata": [],
+        "outbound_content_urls": [
+          "https://workflowph.org/showcase/echelon-philippines-2026"
+        ],
+        "interpretation": "Placeholder record; title does not establish an actual competition or advance announcement."
+      }
+    ]
+  },
+  "additional_workflow_routes": [
+    {
+      "url": "https://workflowph.org/join",
+      "status": "success",
+      "result": "Volunteer-interest page and social links only; no event calendar, event registration, or feed."
+    },
+    {
+      "url": "https://luma.com/user/usr-eL9qAMoNyJQl2iV",
+      "status": "success",
+      "qualification_path": [
+        "docs/luma-live-research.json historical_evaluation_only",
+        "https://luma.com/akv0l0o1",
+        "https://luma.com/user/usr-eL9qAMoNyJQl2iV"
+      ],
+      "path_type": "Research-assisted historical evaluation, not automatic calendar discovery",
+      "hosted_count": 6,
+      "event_links_returned": 0,
+      "calendar_subscription_links_returned": 0,
+      "result": "Public user page and __NEXT_DATA__ contain account identity and counts only; no readable recurring event listing was verified. No undocumented endpoint was guessed."
+    }
+  ],
+  "workflow_decision": {
+    "status": "candidate",
+    "reason": "Website identity and readable 23-record archive verified, but no genuine CTF advance notice, registration window, or public recurring Luma event reader was found. Historical CTF-named stub is a lead only."
+  },
+  "next_independent_candidate": {
+    "name": "Cisco NetConnect PUP",
+    "starting_public_url": "https://www.facebook.com/cisconetconnectpup",
+    "queries": [
+      "\"Cisco NetConnect PUP\" events calendar website",
+      "\"Cisco NetConnect PUP\" site:luma.com",
+      "\"Cisco NetConnect PUP\" capture flag registration -site:facebook.com -site:instagram.com"
+    ],
+    "relevant_returned_urls": [
+      "https://oneccisko.site/orgs/cisco-netconnect",
+      "https://www.linkedin.com/company/cncp-mnl",
+      "https://luma.com/2ntq5ce1",
+      "https://luma.com/ygdvvehp"
+    ],
+    "checks": [
+      {
+        "url": "https://www.linkedin.com/company/cncp-mnl",
+        "status": "blocked",
+        "reason": "Project robots check disallows automated access; no page fetch attempted. Search-index snippets are not a supported recurring reader."
+      },
+      {
+        "url": "https://oneccisko.site/orgs/cisco-netconnect",
+        "status": "success",
+        "result": "Public PUP CCIS organization directory; no populated organization activities. Links a numeric Facebook profile, but no automatic equivalence to saved named account was assumed.",
+        "linked_facebook_identity": "https://www.facebook.com/profile.php?id=61564931946208"
+      },
+      {
+        "url": "https://luma.com/2ntq5ce1",
+        "status": "success",
+        "path_type": "Generic publisher-name search result; research qualification only, never a runtime event seed.",
+        "result": "Historical organization launch, not a CTF. Public page links the organizer account.",
+        "registration_status": "closed",
+        "event_start": "2025-12-06T05:30:00.000Z",
+        "event_end": "2025-12-06T09:00:00.000Z",
+        "timezone": "Asia/Manila",
+        "host_profile": "https://luma.com/user/usr-OUyBQc4tiwLnxED",
+        "public_calendar_id_in_page": "cal-eaknIQWG6bEHiP7",
+        "calendar_kind": "Personal",
+        "calendar_link_visible": false
+      },
+      {
+        "url": "https://luma.com/user/usr-OUyBQc4tiwLnxED",
+        "status": "success",
+        "hosted_count": 9,
+        "attended_count": 4,
+        "event_links_returned": 0,
+        "calendar_subscription_links_returned": 0,
+        "result": "Public account count only; no recurring event route verified."
+      }
+    ],
+    "decision": "Public organizer calendar discovery route verified, with nine successfully read historical non-CTF events including four online events. No advance CTF invitation or timely CTF discovered. The profile alone remains inadequate, but its calendar subscription is usable; source enablement and candidate identity association remain explicit qualification decisions.",
+    "recurring_luma_calendar": {
+      "url": "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7",
+      "checked_at": "2026-11-21T17:58:41.757269+00:00",
+      "status": "success",
+      "bytes": 5388,
+      "event_urls": [
+        "https://luma.com/2ntq5ce1",
+        "https://luma.com/t7skbpny",
+        "https://luma.com/0y01bxh0",
+        "https://luma.com/y00p9xxc",
+        "https://luma.com/t1d4p20p",
+        "https://luma.com/t64hlmbq",
+        "https://luma.com/7vwyl9tc",
+        "https://luma.com/ygdvvehp",
+        "https://luma.com/4ewlqpyk"
+      ],
+      "headers": [
+        "X-WR-CALNAME:Personal",
+        "X-WR-CALDESC:Luma Calendar",
+        "REFRESH-INTERVAL;VALUE=DURATION:PT12H",
+        "X-PUBLISHED-TTL:PT12H"
+      ],
+      "entries": [
+        {
+          "DTSTART": "20251206T053000Z",
+          "DTEND": "20251206T090000Z",
+          "DTSTAMP": "20261121T175842Z",
+          "ORGANIZER;CN=\"Cisco NetConnect PUP - Manila\"": "MAILTO:calendar-invite@lu.ma",
+          "UID": "evt-wEVKyJGrlzGdrHU@events.lu.ma",
+          "SUMMARY": "Building Bridges, Powering Connections: Welcome to Cisco NetConnect PUP -Manila!",
+          "DESCRIPTION": "Get up-to-date information at: https://luma.com/2ntq5ce1\\n\\nAddress:\\nWhite Cloak Technologies , Inc.\\nPasig, Kalakhang Maynila\\nPhilippines\\n\\nHosted by Cisco NetConnect PUP - Manila & 3 others",
+          "LOCATION": "White Cloak Technologies , Inc., 20th Floor, Strata 2000, F. Ortigas Jr. Rd, Ortigas Center, Pasig, Kalakhang Maynila, Philippines",
+          "GEO": "14.587167200000001;121.06220619999999",
+          "SEQUENCE": "217447122",
+          "STATUS": "TENTATIVE"
+        },
+        {
+          "DTSTART;VALUE=DATE": "20260127",
+          "DTEND;VALUE=DATE": "20260130",
+          "DTSTAMP": "20261121T175842Z",
+          "ORGANIZER;CN=\"Cisco NetConnect PUP - Manila\"": "MAILTO:calendar-invite@lu.ma",
+          "UID": "evt-abAivnKrCxiJj1D@events.lu.ma",
+          "SUMMARY": "The Connected Chronicles: A 3-Day Adventure Through Network Escapades",
+          "DESCRIPTION": "Get up-to-date information at: https://luma.com/t7skbpny\\n\\nHosted by Cisco NetConnect PUP - Manila & Kyle Justine Tongson",
+          "LOCATION": "https://luma.com/event/evt-abAivnKrCxiJj1D",
+          "SEQUENCE": "217447122",
+          "STATUS": "TENTATIVE"
+        },
+        {
+          "DTSTART": "20260130T060000Z",
+          "DTEND": "20260130T080000Z",
+          "DTSTAMP": "20261121T175842Z",
+          "ORGANIZER;CN=\"Cisco NetConnect PUP - Manila\"": "MAILTO:calendar-invite@lu.ma",
+          "UID": "evt-7ek85izgpTmsSwx@events.lu.ma",
+          "SUMMARY": "AI & Data Science: The New Oil",
+          "DESCRIPTION": "Get up-to-date information at: https://luma.com/0y01bxh0\\n\\nAddress:\\nCheck event page for more details.\\n\\nHosted by Cisco NetConnect PUP - Manila & 3 others",
+          "LOCATION": "https://luma.com/event/evt-7ek85izgpTmsSwx",
+          "SEQUENCE": "217447122",
+          "STATUS": "TENTATIVE"
+        },
+        {
+          "DTSTART": "20260202T010000Z",
+          "DTEND": "20260202T090000Z",
+          "DTSTAMP": "20261121T175842Z",
+          "ORGANIZER;CN=\"Cisco NetConnect PUP - Manila\"": "MAILTO:calendar-invite@lu.ma",
+          "UID": "evt-mk40NZ3TGaaxdf0@events.lu.ma",
+          "SUMMARY": "Connected Chronicles: A 5-Day Adventure Through Networking Escapades in NexusCloud IT Solutions",
+          "DESCRIPTION": "Get up-to-date information at: https://luma.com/y00p9xxc\\n\\nAddress:\\nNEXUSCLOUD IT SOLUTIONS INC\\nTake the lift to 14th floor\\nPasig, Metro Manila\\nPhilippines\\n\\nHosted by Cisco NetConnect PUP - Manila & 3 others",
+          "LOCATION": "NEXUSCLOUD IT SOLUTIONS INC, RM 1414 14th Floor, AIC Burgundy Empire, ADB Ave, Ortigas Center, Pasig, Metro Manila, Philippines",
+          "GEO": "14.589605200000001;121.0610552",
+          "SEQUENCE": "217447122",
+          "STATUS": "TENTATIVE"
+        },
+        {
+          "DTSTART": "20260222T080000Z",
+          "DTEND": "20260222T100000Z",
+          "DTSTAMP": "20261121T175842Z",
+          "ORGANIZER;CN=\"Cisco NetConnect PUP - Manila\"": "MAILTO:calendar-invite@lu.ma",
+          "UID": "evt-7tlJUsniaXKtfQX@events.lu.ma",
+          "SUMMARY": "Cybersecurity and Security Operations Center (SOC) Foundations",
+          "DESCRIPTION": "Get up-to-date information at: https://luma.com/t1d4p20p\\n\\nHosted by Cisco NetConnect PUP - Manila",
+          "LOCATION": "https://luma.com/event/evt-7tlJUsniaXKtfQX",
+          "SEQUENCE": "217447122",
+          "STATUS": "TENTATIVE"
+        },
+        {
+          "DTSTART": "20260222T080000Z",
+          "DTEND": "20260222T100000Z",
+          "DTSTAMP": "20261121T175842Z",
+          "ORGANIZER;CN=\"Cisco NetConnect PUP - Manila\"": "MAILTO:calendar-invite@lu.ma",
+          "UID": "evt-XqBshh2bFOuO5Kg@events.lu.ma",
+          "SUMMARY": "The Wand Chooses the Wizard - Programming Fundamentals and Concepts",
+          "DESCRIPTION": "Get up-to-date information at: https://luma.com/t64hlmbq\\n\\nHosted by Cisco NetConnect PUP - Manila",
+          "LOCATION": "https://luma.com/event/evt-XqBshh2bFOuO5Kg",
+          "SEQUENCE": "217447122",
+          "STATUS": "TENTATIVE"
+        },
+        {
+          "DTSTART": "20260228T040000Z",
+          "DTEND": "20260228T090000Z",
+          "DTSTAMP": "20261121T175842Z",
+          "ORGANIZER;CN=\"Cisco NetConnect PUP - Manila\"": "MAILTO:calendar-invite@lu.ma",
+          "UID": "evt-1SoyceCze2EIIdc@events.lu.ma",
+          "SUMMARY": "Build It to Connect it: Hardware Assembly Workshop",
+          "DESCRIPTION": "Get up-to-date information at: https://luma.com/7vwyl9tc\\n\\nAddress:\\nWhite Cloak Technologies , Inc.\\nPasig, Kalakhang Maynila\\nPhilippines\\n\\nHosted by Cisco NetConnect PUP - Manila & 3 others",
+          "LOCATION": "White Cloak Technologies , Inc., 20th Floor, Strata 2000, F. Ortigas Jr. Rd, Ortigas Center, Pasig, Kalakhang Maynila, Philippines",
+          "GEO": "14.587167200000001;121.06220619999999",
+          "SEQUENCE": "217447122",
+          "STATUS": "TENTATIVE"
+        },
+        {
+          "DTSTART": "20260315T080000Z",
+          "DTEND": "20260315T100000Z",
+          "DTSTAMP": "20261121T175842Z",
+          "ORGANIZER;CN=\"Cisco NetConnect PUP - Manila\"": "MAILTO:calendar-invite@lu.ma",
+          "UID": "evt-VhZGwnP5OEG5DVe@events.lu.ma",
+          "SUMMARY": "Threat Intelligence and Indicator of Compromise (IOC) Investigation",
+          "DESCRIPTION": "Get up-to-date information at: https://luma.com/ygdvvehp\\n\\nAddress:\\nCheck event page for more details.\\n\\nHosted by Cisco NetConnect PUP - Manila",
+          "LOCATION": "https://luma.com/event/evt-VhZGwnP5OEG5DVe",
+          "SEQUENCE": "217447122",
+          "STATUS": "TENTATIVE"
+        },
+        {
+          "DTSTART": "20260517T080000Z",
+          "DTEND": "20260517T100000Z",
+          "DTSTAMP": "20261121T175842Z",
+          "ORGANIZER;CN=\"Cisco NetConnect PUP - Manila\"": "MAILTO:calendar-invite@lu.ma",
+          "UID": "evt-BBDyBgvj2hRuzVM@events.lu.ma",
+          "SUMMARY": "NetLab 3: Log Analysis Fundamentals",
+          "DESCRIPTION": "Get up-to-date information at: https://luma.com/4ewlqpyk\\n\\nHosted by Cisco NetConnect PUP - Manila",
+          "LOCATION": "https://luma.com/event/evt-BBDyBgvj2hRuzVM",
+          "SEQUENCE": "217447122",
+          "STATUS": "TENTATIVE"
+        }
+      ],
+      "event_checks": [
+        {
+          "url": "https://luma.com/2ntq5ce1",
+          "discovered_from": "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7",
+          "status": "success",
+          "title": "Building Bridges, Powering Connections: Welcome to Cisco NetConnect PUP -Manila!",
+          "start": "2025-12-06T05:30:00.000Z",
+          "end": "2025-12-06T09:00:00.000Z",
+          "location_type": "offline",
+          "geo_country": "Philippines",
+          "registration_availability": "sold-out",
+          "calendar_api_id": "cal-eaknIQWG6bEHiP7",
+          "calendar_public": "public",
+          "calendar_owner": "usr-OUyBQc4tiwLnxED",
+          "parser_accepted": false,
+          "parser_reason": "No actual cybersecurity CTF evidence in title and description"
+        },
+        {
+          "url": "https://luma.com/t7skbpny",
+          "discovered_from": "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7",
+          "status": "success",
+          "title": "The Connected Chronicles: A 3-Day Adventure Through Network Escapades",
+          "start": "2026-01-27T04:00:00.000Z",
+          "end": "2026-01-29T10:00:00.000Z",
+          "location_type": "meet",
+          "geo_country": null,
+          "registration_availability": "open",
+          "calendar_api_id": "cal-eaknIQWG6bEHiP7",
+          "calendar_public": "public",
+          "calendar_owner": "usr-OUyBQc4tiwLnxED",
+          "parser_accepted": false,
+          "parser_reason": "No actual cybersecurity CTF evidence in title and description"
+        },
+        {
+          "url": "https://luma.com/0y01bxh0",
+          "discovered_from": "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7",
+          "status": "success",
+          "title": "AI & Data Science: The New Oil",
+          "start": "2026-01-30T06:00:00.000Z",
+          "end": "2026-01-30T08:00:00.000Z",
+          "location_type": "offline",
+          "geo_country": null,
+          "registration_availability": "open",
+          "calendar_api_id": "cal-eaknIQWG6bEHiP7",
+          "calendar_public": "public",
+          "calendar_owner": "usr-OUyBQc4tiwLnxED",
+          "parser_accepted": false,
+          "parser_reason": "No actual cybersecurity CTF evidence in title and description"
+        },
+        {
+          "url": "https://luma.com/y00p9xxc",
+          "discovered_from": "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7",
+          "status": "success",
+          "title": "Connected Chronicles: A 5-Day Adventure Through Networking Escapades in NexusCloud IT Solutions",
+          "start": "2026-02-02T01:00:00.000Z",
+          "end": "2026-02-02T09:00:00.000Z",
+          "location_type": "offline",
+          "geo_country": "Philippines",
+          "registration_availability": "sold-out",
+          "calendar_api_id": "cal-eaknIQWG6bEHiP7",
+          "calendar_public": "public",
+          "calendar_owner": "usr-OUyBQc4tiwLnxED",
+          "parser_accepted": false,
+          "parser_reason": "No actual cybersecurity CTF evidence in title and description"
+        },
+        {
+          "url": "https://luma.com/t1d4p20p",
+          "discovered_from": "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7",
+          "status": "success",
+          "title": "Cybersecurity and Security Operations Center (SOC) Foundations",
+          "start": "2026-02-22T08:00:00.000Z",
+          "end": "2026-02-22T10:00:00.000Z",
+          "location_type": "meet",
+          "geo_country": null,
+          "registration_availability": "open",
+          "calendar_api_id": "cal-eaknIQWG6bEHiP7",
+          "calendar_public": "public",
+          "calendar_owner": "usr-OUyBQc4tiwLnxED",
+          "parser_accepted": false,
+          "parser_reason": "No actual cybersecurity CTF evidence in title and description"
+        },
+        {
+          "url": "https://luma.com/t64hlmbq",
+          "discovered_from": "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7",
+          "status": "success",
+          "title": "The Wand Chooses the Wizard - Programming Fundamentals and Concepts",
+          "start": "2026-02-22T08:00:00.000Z",
+          "end": "2026-02-22T10:00:00.000Z",
+          "location_type": "meet",
+          "geo_country": null,
+          "registration_availability": "open",
+          "calendar_api_id": "cal-eaknIQWG6bEHiP7",
+          "calendar_public": "public",
+          "calendar_owner": "usr-OUyBQc4tiwLnxED",
+          "parser_accepted": false,
+          "parser_reason": "No actual cybersecurity CTF evidence in title and description"
+        },
+        {
+          "url": "https://luma.com/7vwyl9tc",
+          "discovered_from": "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7",
+          "status": "success",
+          "title": "Build It to Connect it: Hardware Assembly Workshop",
+          "start": "2026-02-28T04:00:00.000Z",
+          "end": "2026-02-28T09:00:00.000Z",
+          "location_type": "offline",
+          "geo_country": "Philippines",
+          "registration_availability": "open",
+          "calendar_api_id": "cal-eaknIQWG6bEHiP7",
+          "calendar_public": "public",
+          "calendar_owner": "usr-OUyBQc4tiwLnxED",
+          "parser_accepted": false,
+          "parser_reason": "No actual cybersecurity CTF evidence in title and description"
+        },
+        {
+          "url": "https://luma.com/ygdvvehp",
+          "discovered_from": "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7",
+          "status": "success",
+          "title": "Threat Intelligence and Indicator of Compromise (IOC) Investigation",
+          "start": "2026-03-15T08:00:00.000Z",
+          "end": "2026-03-15T10:00:00.000Z",
+          "location_type": "offline",
+          "geo_country": null,
+          "registration_availability": "sold-out",
+          "calendar_api_id": "cal-eaknIQWG6bEHiP7",
+          "calendar_public": "public",
+          "calendar_owner": "usr-OUyBQc4tiwLnxED",
+          "parser_accepted": false,
+          "parser_reason": "No actual cybersecurity CTF evidence in title and description"
+        },
+        {
+          "url": "https://luma.com/4ewlqpyk",
+          "discovered_from": "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7",
+          "status": "success",
+          "title": "NetLab 3: Log Analysis Fundamentals",
+          "start": "2026-05-17T08:00:00.000Z",
+          "end": "2026-05-17T10:00:00.000Z",
+          "location_type": "meet",
+          "geo_country": null,
+          "registration_availability": "open",
+          "calendar_api_id": "cal-eaknIQWG6bEHiP7",
+          "calendar_public": "public",
+          "calendar_owner": "usr-OUyBQc4tiwLnxED",
+          "parser_accepted": false,
+          "parser_reason": "No actual cybersecurity CTF evidence in title and description"
+        }
+      ],
+      "entry_count": 9,
+      "discovery_path": [
+        "Generic publisher-only web search: Cisco NetConnect PUP site:luma.com",
+        "https://luma.com/2ntq5ce1",
+        "Public event calendar.api_id = cal-eaknIQWG6bEHiP7; access_level public; personal_user_api_id usr-OUyBQc4tiwLnxED",
+        "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7"
+      ],
+      "ownership_check": "All nine returned event pages identify the same public calendar ID and account owner; profile account usr-OUyBQc4tiwLnxED is explicitly linked as the organizer. No automatic equivalence to the saved Facebook named account is asserted solely from display name.",
+      "current_ctf_count": 0,
+      "online_events": 4,
+      "future_events": 0,
+      "advance_ctf_invitation_verified": false,
+      "timely_ctf_discovery_verified": false,
+      "registration_interpretation": "Several past training items retain raw open flags. They are not CTFs and do not prove registration currently available or historical timely discovery.",
+      "coverage": "Working recurring organizer subscription returning online and in-person events; 12-hour refresh advertised. No complete-history guarantee established."
+    }
+  },
+  "additional_university_calendar": {
+    "discovery_path": [
+      "publisher-name web search",
+      "https://oneccisko.site/orgs/cisco-netconnect",
+      "https://oneccisko.site/calendar",
+      "https://oneccisko.site/calendar.ics"
+    ],
+    "publisher": "PUP CCIS Student Council / OneCCISko; separate from Cisco NetConnect",
+    "path_type": "Search-assisted publisher qualification followed by explicit ordinary public links",
+    "status": "success",
+    "url": "https://oneccisko.site/calendar.ics",
+    "bytes": 41390,
+    "vevents": 101,
+    "categories": {
+      "PUP academic dates": 79,
+      "Semesters": 3,
+      "Examinations and deadlines": 19
+    },
+    "unique_event_urls": [
+      "https://oneccisko.site/events"
+    ],
+    "ctf_or_cybersecurity_matches": 0,
+    "future_academic_entries": 79,
+    "actual_ctfs_confirmed": 0,
+    "advance_ctf_invitation_verified": false,
+    "registration_open_verified": false,
+    "structure": "Ordinary explicit Download the file and webcal links. iCal has per-item UID, SUMMARY, DESCRIPTION, date-only DTSTART/DTEND, CATEGORIES, DTSTAMP; all URL fields point to generic /events. DTSTAMP is export/change time, not an announcement posted timestamp.",
+    "decision": "Readable calendar proven, but current academic dates are not CTF invitations; no CTF-monitor qualification."
+  },
+  "outcomes": {
+    "qualified_active_ctf_monitors": 0,
+    "new_accepted_competitions": 0,
+    "verified_timely_ctfs": 0,
+    "raijin_evaluated_or_queried": false,
+    "production_modified": false,
+    "next_step": "WorkFlow remains unqualified. Cisco has a readable public organizer subscription including online events; no actual CTF or advance registration evidence in nine current items. Use only after explicit publisher qualification, with zero CTFs reported honestly. The separate PUP academic calendar is not competition evidence.",
+    "verified_recurring_publisher_calendars": 1
+  },
+  "updated_at": "2026-11-21T17:59:55.877755+00:00",
+  "qualification_refinement": {
+    "reason": "A teammate verified the documented public calendar iCal subscription constructor from Luma official help and public UI code. A profile with counts only can still own a public calendar whose ID is exposed by an independently located public event.",
+    "template_evidence": {
+      "url": "https://luma.com/_next/static/chunks/0u7i6g4x378q9.js",
+      "backend_status": "ok",
+      "bytes": 32055,
+      "public_enum_excerpt": "i.Calendar=\"calendar\",i.Discover=\"discover\"",
+      "public_constructor_excerpt": "API_URL.replace(/\\/$/,\"\")}/ics/get?${l.f.stringify(e)}",
+      "official_documentation": "https://help.luma.com/p/ical-syncing",
+      "interpretation": "Documented calendar subscription plus public UI constructor and Calendar enum establish entity=calendar. The calendar identifier is the public non-CTF webinar calendar.api_id, not a guessed private endpoint."
+    },
+    "constraint": "Only public calendar IDs from an independently found non-CTF event with the matching organizer account are eligible; no guessing IDs, event seeds, private endpoints, or known historical CTF fallback."
+  },
+  "non_ctf_workflow_ownership_check": {
+    "url": "https://luma.com/ajwrjd1i",
+    "checked_at": "2026-11-21T17:59:26.803235+00:00",
+    "origin": "Allowed publisher-only search WorkFlow PH site:luma.com; non-CTF event result",
+    "status": "success",
+    "title": "Agora Hackathon Philippines 2026 : Build Next Gen AI Sales Agent",
+    "calendar_id": "cal-MBz4g0CzV7LVqFv",
+    "calendar_access": "public",
+    "calendar_name": "Personal",
+    "calendar_owner_id": "usr-QHHGcEVMVXBfp3X",
+    "calendar_owner_name": "Hennessy Solis",
+    "matches_workflow_owner": false,
+    "subscription_tested": false,
+    "reason_not_tested": "The independently found public non-CTF event calendar belongs to a different named account, so it cannot be presented as WorkFlow PH owned. No calendar ID for WorkFlow PH was inferred from co-host status."
+  },
+  "excluded_exploratory_query": {
+    "query": "\"WorkFlow PH\" \"luma\" -\"Packet\" -\"Agora\"",
+    "status": "Excluded from all qualifying discovery evidence",
+    "reason": "This exploratory research query incorrectly included event-specific negative fragments; no results from it establish any publisher calendar path, no event was ingested from it, and it was never added to runtime configuration.",
+    "raijin_identifiers_used": false
+  },
+  "additional_allowed_query_batches": [
+    {
+      "queries": [
+        "site:luma.com \"Hosted by WorkFlow PH\"",
+        "site:luma.com \"WorkFlow PH\" event registration automation"
+      ],
+      "use": "No new independently owned WorkFlow calendar found; repeated public event leads only."
+    },
+    {
+      "queries": [
+        "\"WorkFlow PH\" site:lu.ma"
+      ],
+      "use": "No unique qualifying owned source; query batched with excluded exploration, so returned attribution not used for qualification."
+    }
+  ]
+}

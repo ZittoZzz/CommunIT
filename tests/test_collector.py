@@ -110,7 +110,7 @@ def test_failed_fetch_preserves_data_last_success_and_other_source_runs(db):
         raise FetchError('HTTP 403')
     second = {**SOURCE, 'id': 'second', 'kind': 'html'}
     report = collect(db, [SOURCE, second], adapters={'rss': fail, 'html': good}, now=datetime(2027, 1, 21, tzinfo=timezone.utc))
-    assert [x['status'] for x in report['sources']] == ['error', 'ok']
+    assert [x['status'] for x in report['sources']] == ['blocked', 'ok']
     assert len(events(db, NOW)) == 1
     assert source_states(db)[0]['last_success'] == before
 
@@ -136,7 +136,7 @@ def test_datetime_has_explicit_timezone():
 def test_registration_and_completion_are_independent():
     now = datetime(2027, 2, 21, tzinfo=timezone.utc)
     base = {'start': parse_moment('2027-02-20T01:00:00Z'), 'registration_state': 'closed'}
-    assert lifecycle(base, now) == ('end_unconfirmed', 'closed', 'upcoming')
+    assert lifecycle(base, now) == ('past_date', 'closed', 'past')
     assert lifecycle({**base, 'end': parse_moment('2027-02-20')}, now)[0] != 'finished'
     assert lifecycle({**base, 'end': parse_moment('2027-02-20T09:00:00Z')}, now)[0] == 'finished'
     assert lifecycle({'lifecycle': 'finished'}, now)[2] == 'finished'

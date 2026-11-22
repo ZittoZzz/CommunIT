@@ -8,7 +8,7 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone
 
-from .domain import instant
+from .domain import calendar_day_passed, expired, instant
 
 
 def _has_evidence(evidence, field):
@@ -39,6 +39,8 @@ def evaluate_registration_observation(facts, evidence, observed_at):
     end = instant(facts.get('end'))
     if observed is not None and end is not None and observed >= end:
         reasons.append('competition_ended_at_observation')
+    if observed is not None and calendar_day_passed(facts.get('competition_date'), observed):
+        reasons.append('announced_competition_date_passed_at_observation')
     if facts.get('registration_state') != 'open':
         reasons.append('registration_not_confirmed_open')
     if not _has_evidence(evidence, 'registration_state'):
@@ -61,6 +63,38 @@ def evaluate_registration_observation(facts, evidence, observed_at):
         if not _has_evidence(evidence, 'registration_opens'):
             reasons.append('registration_opening_evidence_missing')
     return reasons
+
+
+def evaluate_live_open_observation(facts, evidence, observed_at):
+    """A current registration control can establish openness without a deadline.
+
+    This is separate from the original deadline-based benchmark measurement.
+    Static announcement prose cannot supply the adapter's live-control marker.
+    Require a confirmed future/live competition time as well: old event pages
+    sometimes leave their registration control open after the event ends.
+    """
+    optional_deadline_reasons = {
+        'registration_deadline_missing', 'registration_deadline_evidence_missing',
+        'registration_deadline_time_or_timezone_unconfirmed',
+    }
+    reasons = [r for r in evaluate_registration_observation(facts, evidence, observed_at)
+               if r not in optional_deadline_reasons]
+    proof = evidence.get('registration_state') or {}
+    if not isinstance(proof, dict) or proof.get('basis') != 'live_registration_widget':
+        reasons.append('contemporary_registration_control_not_observed')
+    try:
+        observed = datetime.fromisoformat(observed_at.replace('Z', '+00:00'))
+        if observed.tzinfo is None:
+            raise ValueError
+    except (AttributeError, TypeError, ValueError):
+        return reasons
+    if not any(_has_evidence(evidence, field) and instant(facts.get(field)) is not None
+               and instant(facts[field]) > observed for field in ('start', 'end')):
+        reasons.append('future_or_live_competition_time_unconfirmed')
+    for field in ('end', 'deadline'):
+        if expired(facts.get(field), observed):
+            reasons.append(f'{field}_passed_at_observation')
+    return list(dict.fromkeys(reasons))
 
 
 def _known_event_blockers(rows, observed_at):
@@ -92,7 +126,7 @@ def _known_event_blockers(rows, observed_at):
         if value in ('cancelled', 'postponed', 'finished'):
             reasons.append(f'event_{value}_already_observed')
     for value in latest.get('registration_state', (None, set()))[1]:
-        if value in ('closed', 'not_yet_open'):
+        if value in ('closed', 'not_yet_open', 'waitlisted', 'approval_required'):
             reasons.append(f'registration_{value}_already_observed')
     return sorted(reasons)
 
@@ -120,6 +154,8 @@ def registration_observations(db):
             'announcement_id': None, 'revision_id': None, 'source_id': None,
             'url': None, 'registration_evidence': {}, 'registration_window': {},
             'observations_checked': 0, 'reasons': [],
+            'live_open_observation': None, 'first_seen_while_live_open': False,
+            'live_open_reasons': [],
         })
         if row['revision_id'] is None:
             if 'no_retained_revision' not in summary['reasons']:
@@ -128,6 +164,24 @@ def registration_observations(db):
         summary['observations_checked'] += 1
         facts = json.loads(row['facts_json'])
         evidence = json.loads(row['evidence_json'])
+        live_reasons = evaluate_live_open_observation(facts, evidence, row['observed_at'])
+        if not live_reasons:
+            live_reasons = _known_event_blockers(event_rows[row['event_id']], row['observed_at'])
+        if live_reasons:
+            summary['live_open_reasons'] = list(dict.fromkeys(summary['live_open_reasons'] + live_reasons))
+        else:
+            observed = datetime.fromisoformat(row['observed_at'].replace('Z', '+00:00')).astimezone(timezone.utc)
+            previous = summary['live_open_observation']
+            if previous is None or observed < datetime.fromisoformat(previous['observed_at']):
+                summary['live_open_observation'] = {
+                    'observed_at': observed.isoformat(), 'announcement_id': row['announcement_id'],
+                    'revision_id': row['revision_id'], 'source_id': row['source_id'], 'url': row['url'],
+                    'registration_state': 'open', 'deadline': facts.get('deadline'),
+                    'evidence': {field: evidence[field] for field in
+                                 ('registration_state', 'start', 'end', 'deadline') if field in evidence},
+                }
+                summary['first_seen_while_live_open'] = observed == datetime.fromisoformat(
+                    row['first_seen'].replace('Z', '+00:00'))
         reasons = evaluate_registration_observation(facts, evidence, row['observed_at'])
         if not reasons:
             reasons = _known_event_blockers(event_rows[row['event_id']], row['observed_at'])
@@ -148,6 +202,8 @@ def registration_observations(db):
                 ('registration_state', 'deadline', 'registration_opens')},
         })
     for summary in summaries.values():
+        if summary['live_open_observation'] is not None:
+            summary['live_open_reasons'] = []
         if summary['status'] == 'verified_timely':
             # Failed observations are not reasons to doubt the qualifying one.
             summary['reasons'] = []

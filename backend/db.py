@@ -8,6 +8,7 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import parse_qsl, urlsplit
 from .domain import canonical_url, event_key, lifecycle, norm, utcnow
+from .event_context import context_match
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -53,6 +54,7 @@ def connect(path=None):
             'publisher_name': 'TEXT', 'publisher_role': 'TEXT',
             'coverage': "TEXT NOT NULL DEFAULT '[]'", 'index_id': 'TEXT',
             'enabled': 'INTEGER NOT NULL DEFAULT 1', 'index_status': 'TEXT',
+            'next_retry_at': 'TEXT',
         },
         'revisions': {'evidence_json': "TEXT NOT NULL DEFAULT '{}'", 'source_id': 'TEXT'},
     }
@@ -74,7 +76,12 @@ def register_sources(db, sources):
           publisher_name=excluded.publisher_name,publisher_role=excluded.publisher_role,
           coverage=excluded.coverage,index_id=excluded.index_id,enabled=excluded.enabled,
           index_status=excluded.index_status,
+          last_success=CASE WHEN sources.url<>excluded.url OR sources.kind<>excluded.kind
+            THEN NULL ELSE sources.last_success END,
+          next_retry_at=CASE WHEN sources.url<>excluded.url OR sources.kind<>excluded.kind
+            THEN NULL ELSE sources.next_retry_at END,
           status=CASE WHEN excluded.enabled=0 THEN 'disabled'
+            WHEN sources.url<>excluded.url OR sources.kind<>excluded.kind THEN 'not_run'
             WHEN sources.status='disabled' THEN 'not_run' ELSE sources.status END,
           message=CASE WHEN excluded.enabled=0 THEN excluded.message
             WHEN sources.status='disabled' THEN '' ELSE sources.message END''',
@@ -185,6 +192,21 @@ def _linked_event(db, announcement):
     return matches[0] if len({row['event_id'] for row in matches}) == 1 else None
 
 
+def _context_linked_event(db, announcement):
+    if not announcement.get('event_context'):
+        return None
+    matches = []
+    for row in db.execute("SELECT a.* FROM announcements a WHERE a.withdrawn=0 ORDER BY a.id"):
+        proof = context_match(json.loads(row['payload']), announcement)
+        if proof:
+            matches.append((row, proof))
+    if len({row['event_id'] for row, proof in matches}) != 1:
+        return None
+    row, proof = matches[0]
+    identity = db.execute('SELECT identity_json FROM events WHERE id=?', (row['event_id'],)).fetchone()[0]
+    return row['event_id'], json.loads(identity), proof
+
+
 def ingest(db, source_id, announcement, now=None):
     now = now or utcnow()
     key = event_key(announcement['identity'])
@@ -209,6 +231,14 @@ def ingest(db, source_id, announcement, now=None):
         if linked is not None:
             key = linked['event_id']
             announcement['identity'] = json.loads(linked['identity_json'])
+            existing = db.execute('SELECT * FROM announcements WHERE event_id=? AND url=?',
+                                  (key, announcement['url'])).fetchone()
+    if not existing:
+        contextual = _context_linked_event(db, announcement)
+        if contextual is not None:
+            key, identity, match_evidence = contextual
+            announcement['identity'] = identity
+            announcement['event_match'] = match_evidence
             existing = db.execute('SELECT * FROM announcements WHERE event_id=? AND url=?',
                                   (key, announcement['url'])).fetchone()
     db.execute('INSERT OR IGNORE INTO events VALUES(?,?,?)',
@@ -292,7 +322,7 @@ def events(db, now=None):
         items.sort(key=observation_order)
         identity = json.loads(event['identity_json'])
         current = {'id': event['id'], **identity, 'first_seen': event['first_seen'],
-                   'start': None, 'end': None, 'deadline': None, 'registration_opens': None,
+                   'start': None, 'end': None, 'competition_date': None, 'deadline': None, 'registration_opens': None,
                    'eligibility': None, 'registration_url': None, 'summary': None,
                    'format': 'unknown', 'registration_state': 'unknown', 'field_evidence': {}}
         full = [item for item in items if item[1].get('access') != 'search_only']
@@ -301,7 +331,20 @@ def events(db, now=None):
         for row, payload in full or items:
             if payload.get('access') == 'search_only' and current.get('name'):
                 continue
+            # A date-only reminder can corroborate existing bounds. Keep their
+            # precision; only a different day replaces them as a reschedule.
+            new_day = payload['facts'].get('competition_date')
+            old_bound = current.get('start') or current.get('end')
+            same_day = bool(new_day and old_bound and old_bound.get('value')
+                            and old_bound['value'][:10] == new_day.get('value'))
+            reset = ('start', 'end') if new_day and not same_day else ('competition_date',) if payload['facts'].get('start') or payload['facts'].get('end') else ()
+            for field in reset:
+                if not payload['facts'].get(field):
+                    current[field] = None
+                    current['field_evidence'].pop(field, None)
             for k, v in payload['facts'].items():
+                if k == 'competition_date' and same_day:
+                    continue  # The supporting date remains in announcement evidence.
                 if v is not None and (v != 'unknown' or k not in current):
                     current[k] = v
                     evidence = payload.get('field_evidence', {}).get(k)
@@ -312,9 +355,9 @@ def events(db, now=None):
                         # cannot substantiate a newer announcement's correction.
                         current['field_evidence'].pop(k, None)
             if payload['facts'].get('lifecycle') == 'postponed':
-                current['start'] = current['end'] = current['deadline'] = None
+                current['start'] = current['end'] = current['competition_date'] = current['deadline'] = None
                 current['registration_state'] = 'unknown'
-                for field in ('start', 'end', 'deadline', 'registration_state'):
+                for field in ('start', 'end', 'competition_date', 'deadline', 'registration_state'):
                     current['field_evidence'].pop(field, None)
         chronological = sorted(items, key=lambda x: observation_order(({**dict(x[0]), 'revision_count': 1}, x[1])))
         full_chronological = [item for item in chronological if item[1].get('access') != 'search_only']
@@ -345,6 +388,11 @@ def events(db, now=None):
             pass
         if all(p.get('access') == 'search_only' for _, p in items):
             current['notices'].append('Search result only. Full post was not accessed; confirm all details with the organizer.')
+            if current['status'] == 'schedule_tba':
+                current['status'] = 'undated_lead'
+                current['notices'].append('Undated search lead. An edition year is not a confirmed upcoming schedule or open registration.')
+        if current['status'] == 'past_date':
+            current['notices'].append('The announced competition date has passed. Completion is unconfirmed; this is historical coverage, not a current registration opportunity.')
         if current['status'] == 'end_unconfirmed':
             current['notices'].append('The start has passed, but no confirmed end or completion notice was found.')
         if current['status'] == 'schedule_tba':

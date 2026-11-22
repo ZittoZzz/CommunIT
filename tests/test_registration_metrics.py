@@ -7,7 +7,7 @@ from backend.adapters import Result
 from backend.collect import collect
 from backend.db import connect, ingest, register_sources, withdraw
 from backend.domain import parse_moment
-from backend.metrics import evaluate_registration_observation, registration_observations
+from backend.metrics import evaluate_registration_observation, evaluate_live_open_observation, registration_observations
 
 
 SOURCE = {'id': 'fictional', 'name': 'Fictional publisher', 'kind': 'rss',
@@ -230,3 +230,97 @@ def test_explicit_collection_time_stays_fixed_when_adapter_clock_advances(db, mo
     assert report['sources'][0]['observed_at'] == OBSERVED
     assert db.execute('SELECT observed_at FROM revisions').fetchone()[0] == OBSERVED
     assert report['verified_timely_count'] == 1
+
+
+def live_announcement():
+    ann = announcement()
+    ann['facts']['deadline'] = None
+    del ann['field_evidence']['deadline']
+    ann['facts']['start'] = parse_moment('2031-03-01T01:00:00Z')
+    ann['field_evidence']['start'] = {'url': ann['url'], 'quote': 'Competition starts 2031-03-01T01:00:00Z'}
+    ann['field_evidence']['registration_state']['basis'] = 'live_registration_widget'
+    return ann
+
+
+def test_current_registration_control_records_open_without_inventing_deadline(db):
+    ann = live_announcement()
+    ingest(db, SOURCE['id'], ann, OBSERVED)
+    result = registration_observations(db)[0]
+    assert result['status'] == 'not_verified'  # Original deadline-based metric is unchanged.
+    assert result['live_open_observation']['observed_at'] == OBSERVED
+    assert result['live_open_observation']['deadline'] is None
+    assert result['first_seen_while_live_open'] is True
+    assert result['live_open_reasons'] == []
+
+
+def test_old_register_now_prose_is_not_a_current_registration_control():
+    ann = live_announcement()
+    del ann['field_evidence']['registration_state']['basis']
+    assert 'contemporary_registration_control_not_observed' in evaluate_live_open_observation(
+        ann['facts'], ann['field_evidence'], OBSERVED)
+
+
+@pytest.mark.parametrize('state', ['approval_required', 'waitlisted', 'closed'])
+def test_approval_or_waitlist_is_not_unconditional_open_registration(state):
+    ann = live_announcement()
+    ann['facts']['registration_state'] = state
+    assert 'registration_not_confirmed_open' in evaluate_live_open_observation(
+        ann['facts'], ann['field_evidence'], OBSERVED)
+
+
+def test_stale_open_control_on_past_event_does_not_qualify():
+    ann = live_announcement()
+    ann['facts']['end'] = parse_moment('2031-01-01T01:00:00Z')
+    assert 'competition_ended_at_observation' in evaluate_live_open_observation(
+        ann['facts'], ann['field_evidence'], OBSERVED)
+
+
+def test_unconfirmed_event_time_does_not_prove_current_opportunity():
+    ann = live_announcement()
+    del ann['field_evidence']['start']
+    assert 'future_or_live_competition_time_unconfirmed' in evaluate_live_open_observation(
+        ann['facts'], ann['field_evidence'], OBSERVED)
+
+
+def test_later_live_open_observation_does_not_backdate_first_discovery(db):
+    ann = live_announcement()
+    teaser = deepcopy(ann)
+    teaser['facts']['registration_state'] = 'unknown'
+    ingest(db, SOURCE['id'], teaser, '2031-01-01T00:00:00+00:00')
+    ingest(db, SOURCE['id'], ann, OBSERVED)
+    result = registration_observations(db)[0]
+    assert result['live_open_observation']['observed_at'] == OBSERVED
+    assert result['first_seen_while_live_open'] is False
+
+
+def test_later_closure_retains_live_open_observation(db):
+    ann = live_announcement()
+    ingest(db, SOURCE['id'], ann, OBSERVED)
+    ann['facts']['registration_state'] = 'closed'
+    ingest(db, SOURCE['id'], ann, '2031-02-03T02:00:00+00:00')
+    result = registration_observations(db)[0]
+    assert result['first_seen_while_live_open'] is True
+    assert result['live_open_observation']['deadline'] is None
+
+
+def test_simultaneous_waitlist_blocks_live_open_claim(db):
+    ann = live_announcement()
+    ingest(db, SOURCE['id'], ann, OBSERVED)
+    ann['url'] += '?update=waitlist'
+    ann['facts']['registration_state'] = 'waitlisted'
+    ingest(db, SOURCE['id'], ann, OBSERVED)
+    result = registration_observations(db)[0]
+    assert result['live_open_observation'] is None
+    assert 'registration_waitlisted_already_observed' in result['live_open_reasons']
+
+
+def test_normal_report_counts_live_open_observations_separately(db):
+    from datetime import datetime
+    def adapter(*args):
+        result = Result()
+        result.announcements = [live_announcement()]
+        return result
+    report = collect(db, [SOURCE], adapters={'rss': adapter}, now=datetime.fromisoformat(OBSERVED))
+    assert report['verified_timely_count'] == 0
+    assert report['live_open_observation_count'] == 1
+    assert report['first_seen_live_open_count'] == 1

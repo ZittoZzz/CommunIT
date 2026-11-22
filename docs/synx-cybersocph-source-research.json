@@ -1,0 +1,133 @@
+{
+  "checked_at": "2026-11-21T17:57:40.545257+00:00",
+  "scope": "Read-only follow-up publisher qualification after CyberPH. No runtime mutations or collector runs.",
+  "publishers": [
+    {
+      "name": "SYNX",
+      "starting_candidate": {
+        "id": "7cc7538d426362b4ec1f0f33",
+        "name": "SYNX",
+        "public_url": "https://www.facebook.com/synx.network",
+        "status": "candidate",
+        "roles": [
+          "challenge-partner"
+        ],
+        "first_seen": "2026-11-21T17:42:36.873158+00:00"
+      },
+      "identity_access": "Facebook page not requested; stored public profile alone is not a readable recurring source.",
+      "queries": [
+        "\"SYNX\" \"synx.network\" cybersecurity Philippines events",
+        "\"SYNX\" Philippines cybersecurity community",
+        "\"synx.network\" -site:facebook.com",
+        "\"SYNX\" \"capture the flag\" Philippines"
+      ],
+      "search_findings": [
+        {
+          "url": "https://kakacomputer.com/curiosity-to-cybersecurity-open-community-and-opportunity-through-packet-capturing/",
+          "kind": "Previously monitored competition recap; names challenge partner, no new recurring publisher route"
+        },
+        {
+          "url": "https://ph.linkedin.com/in/christian-miel-gagolinan-8975b0427",
+          "kind": "Search-indexed personal recap; no owned feed or recurring invitation archive established"
+        },
+        {
+          "url": "https://synx.asia/company",
+          "kind": "Different enterprise-software publisher; no demonstrated same-organization link to saved SYNX profile"
+        },
+        {
+          "url": "https://linktr.ee/66synx",
+          "kind": "Unrelated creator profile; name match insufficient"
+        }
+      ],
+      "verified_recurring_url": null,
+      "advance_ctf_invitation_verified": false,
+      "recommendation": "Keep candidate. Searches found historical third-party mentions and unrelated namesakes, not a verified readable recurring invitation source. Do not infer synx.network as an owned website from a Facebook username."
+    },
+    {
+      "name": "CYBERSOCPH",
+      "starting_candidate": {
+        "id": "1646030ae4770d3d49cd8e28",
+        "name": "CYBERSOCPH",
+        "public_url": "https://www.facebook.com/cybersocph",
+        "status": "candidate",
+        "roles": [
+          "community-partner"
+        ],
+        "first_seen": "2026-11-21T17:42:42.138680+00:00"
+      },
+      "identity_access": "Facebook page not requested; stored public profile alone is not a readable recurring source.",
+      "queries": [
+        "\"CYBERSOCPH\" calendar events website"
+      ],
+      "search_findings": [
+        {
+          "url": "https://www.linkedin.com/company/cybersocph",
+          "kind": "Publisher-name search result supplies website cybersocph.org"
+        },
+        {
+          "url": "https://luma.com/9h52ot0k",
+          "kind": "Ordinary historical conference invitation; no CTF evidence"
+        }
+      ],
+      "backend_checks": [
+        {
+          "url": "https://cybersocph.org/",
+          "checked_at": "2026-11-21T17:54:29.148555+00:00",
+          "status": "error",
+          "error": "Cannot verify robots.txt: Redirect outside configured hosts"
+        },
+        {
+          "url": "https://cybersocph.org/",
+          "status_code": 301,
+          "location": "https://cybersocph.philit.solutions/PhilIT-CyberSocPh-1.0/"
+        },
+        {
+          "url": "https://cybersocph.philit.solutions/PhilIT-CyberSocPh-1.0/",
+          "checked_at": "2026-11-21T17:54:59.710123+00:00",
+          "status": "ok",
+          "bytes": 17498,
+          "title": "Login",
+          "links": [],
+          "feed_links": [],
+          "text": "Login You have to enable javascript in your browser to use this web site. PHILIT CYBERSOCPH Install"
+        }
+      ],
+      "luma_research": {
+        "url": "https://luma.com/9h52ot0k",
+        "status": "ok",
+        "checked_at": "2026-11-21T17:54:30.178088+00:00",
+        "kind": "event",
+        "event": {
+          "api_id": "evt-Uw0zhrXfdKyQ3a2",
+          "end_at": "2025-12-13T09:00:00.000Z",
+          "location_type": "offline",
+          "name": "CyberSocPH Conference 2025 & Year-End Gathering",
+          "start_at": "2025-12-13T05:00:00.000Z",
+          "timezone": "Asia/Manila",
+          "url": "9h52ot0k",
+          "visibility": "public"
+        },
+        "calendar": {
+          "api_id": "cal-OwrLvgAngsmT4Ez",
+          "name": "Personal",
+          "is_personal": true,
+          "personal_user_api_id": "usr-DhJghWGnhA2JPau",
+          "slug": null,
+          "access_level": "public"
+        },
+        "ctf": false,
+        "recurring_subscription_checked": false,
+        "note": "No competition evidence found; ordinary conference profile is not promoted as a CTF publisher monitor."
+      },
+      "verified_recurring_url": null,
+      "advance_ctf_invitation_verified": false,
+      "recommendation": "Keep candidate. The organization website redirects to a readable Login shell with no public links/feed. The search-discovered historical conference does not identify a CTF; no competition invitation route qualified."
+    }
+  ],
+  "access": {
+    "api_fees_php": 0,
+    "tavily_requests": 0,
+    "facebook_html_requests": 0,
+    "credentials_or_cookies": false
+  }
+}

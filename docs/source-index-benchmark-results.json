@@ -1,0 +1,243 @@
+{
+  "measured_at": "2026-11-21T17:00:48.873675+00:00",
+  "purpose": "Evaluation only, not loaded by the collector. Original ten-event selection remains frozen.",
+  "frozen_hashes": {
+    "docs/community-benchmark-research.json": "a06acebd1c15ab45302e0fff25f22549a99acbe2e9abb40cdf326143d37ae6f4",
+    "docs/community-benchmark-results.json": "0967266ea9788c29aff483c2e5c6bddc1005521bb7d4d041700c5f6bfae489cb"
+  },
+  "events": [
+    {
+      "id": "hexcore-learnpossible-2025",
+      "name": "LearnPossible: Hexcore Labs PH University Challenge — CTF tournament 2025",
+      "competition_discovered": true,
+      "original_facebook_discovered": null,
+      "original_facebook_identity": "unknown",
+      "timely_discovery_verified": false,
+      "raw_candidates": [],
+      "event_id": "9ce2881dabb3fb36b01fa057",
+      "first_seen": "2026-11-21T16:58:46.151481+00:00",
+      "announcement_urls": [
+        "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+      ],
+      "source_types": [
+        "university reshare invitation"
+      ],
+      "timeliness": "historical_backfill",
+      "miss_stage": null,
+      "registration_observation": {
+        "event_id": "9ce2881dabb3fb36b01fa057",
+        "first_seen": "2026-11-21T16:58:46.151481+00:00",
+        "status": "not_verified",
+        "earliest_verified_at": null,
+        "announcement_id": null,
+        "revision_id": null,
+        "source_id": null,
+        "url": null,
+        "registration_evidence": {},
+        "registration_window": {},
+        "observations_checked": 1,
+        "reasons": [
+          "registration_not_confirmed_open",
+          "registration_state_evidence_missing",
+          "registration_deadline_missing",
+          "registration_deadline_evidence_missing"
+        ]
+      }
+    },
+    {
+      "id": "rootcon-20-ctf-2026",
+      "name": "ROOTCON 20 Capture The Flag 2026",
+      "competition_discovered": true,
+      "original_facebook_discovered": null,
+      "original_facebook_identity": "unknown",
+      "timely_discovery_verified": false,
+      "raw_candidates": [],
+      "event_id": "775f475db77bea2c6cd288ec",
+      "first_seen": "2026-11-21T16:58:17.686487+00:00",
+      "announcement_urls": [
+        "https://www.crest-approved.org/event/rootcon-20-philippines-2026/",
+        "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mwprmced2e2h",
+        "https://bsky.app/profile/did:plc:ydimusmod455q2xhqngepksy/post/3mvccs3acfk2z"
+      ],
+      "source_types": [
+        "organizer announcement",
+        "organizer completion notice",
+        "partner reshare"
+      ],
+      "timeliness": "historical_backfill",
+      "miss_stage": null,
+      "registration_observation": {
+        "event_id": "775f475db77bea2c6cd288ec",
+        "first_seen": "2026-11-21T16:58:17.686487+00:00",
+        "status": "not_verified",
+        "earliest_verified_at": null,
+        "announcement_id": null,
+        "revision_id": null,
+        "source_id": null,
+        "url": null,
+        "registration_evidence": {},
+        "registration_window": {},
+        "observations_checked": 3,
+        "reasons": [
+          "event_finished_at_observation",
+          "registration_not_confirmed_open",
+          "registration_state_evidence_missing",
+          "registration_deadline_missing",
+          "registration_deadline_evidence_missing"
+        ]
+      }
+    },
+    {
+      "id": "packet-capture-2026",
+      "name": "Packet Capture: Beneath the Network 2026",
+      "competition_discovered": false,
+      "original_facebook_discovered": null,
+      "original_facebook_identity": "unknown",
+      "timely_discovery_verified": false,
+      "raw_candidates": [
+        {
+          "run": 1,
+          "query": "site:facebook.com Philippines cybersecurity CTF competition registration",
+          "url": "https://www.facebook.com/LearnCyberPH/posts/-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8%F0%9D%97%A5-%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%94%F0%9D%97%A0-%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A6-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%98%F0%9D%97%A1-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%97-%F0%9D%97%AA%F0%9D%97%9C%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8-%F0%9D%97%94%F0%9D%97%96%F0%9D%97%96%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A7-the-challenge-is-waiting-gather-y/122190342752805200",
+          "title": "Packet Capture CTF competition registration open - Facebook"
+        },
+        {
+          "run": 1,
+          "query": "Philippines capture the flag CTF competition registration",
+          "url": "https://www.facebook.com/LearnCyberPH/posts/-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8%F0%9D%97%A5-%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%94%F0%9D%97%A0-%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A6-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%98%F0%9D%97%A1-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%97-%F0%9D%97%AA%F0%9D%97%9C%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8-%F0%9D%97%94%F0%9D%97%96%F0%9D%97%96%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A7-the-challenge-is-waiting-gather-y/122190342752805200",
+          "title": "Packet Capture CTF competition registration open"
+        },
+        {
+          "run": 2,
+          "query": "site:facebook.com Philippines cybersecurity CTF competition registration",
+          "url": "https://www.facebook.com/LearnCyberPH/posts/-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8%F0%9D%97%A5-%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%94%F0%9D%97%A0-%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A6-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%98%F0%9D%97%A1-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%97-%F0%9D%97%AA%F0%9D%97%9C%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8-%F0%9D%97%94%F0%9D%97%96%F0%9D%97%96%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A7-the-challenge-is-waiting-gather-y/122190342752805200",
+          "title": "Packet Capture CTF competition registration open - Facebook"
+        },
+        {
+          "run": 2,
+          "query": "Philippines capture the flag CTF competition registration",
+          "url": "https://www.facebook.com/LearnCyberPH/posts/-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8%F0%9D%97%A5-%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%94%F0%9D%97%A0-%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A6-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%98%F0%9D%97%A1-%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%9F%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%97-%F0%9D%97%AA%F0%9D%97%9C%F0%9D%97%9F%F0%9D%97%9F-%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A8-%F0%9D%97%94%F0%9D%97%96%F0%9D%97%96%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A7-the-challenge-is-waiting-gather-y/122190342752805200",
+          "title": "Packet Capture CTF competition registration open"
+        }
+      ],
+      "event_id": null,
+      "first_seen": null,
+      "announcement_urls": [],
+      "source_types": [],
+      "timeliness": "not_discovered",
+      "miss_stage": "Raw candidate returned but not accepted; title lacks sufficient edition/CTF/scope evidence. See exact per-result decisions in verification report."
+    },
+    {
+      "id": "jissa-signal-lost-2026",
+      "name": "JISSA Capture The Flag 2026: Signal Lost",
+      "competition_discovered": false,
+      "original_facebook_discovered": null,
+      "original_facebook_identity": "unknown",
+      "timely_discovery_verified": false,
+      "raw_candidates": [],
+      "event_id": null,
+      "first_seen": null,
+      "announcement_urls": [],
+      "source_types": [],
+      "timeliness": "not_discovered",
+      "miss_stage": "No identifiable matching accepted announcement or retained title/URL candidate in these runs. Source coverage and search-return limitations prevent a narrower conclusion."
+    },
+    {
+      "id": "jissa-apc-resecurity-2026",
+      "name": "JISSA-APC and Resecurity CTF Showdown 2026",
+      "competition_discovered": false,
+      "original_facebook_discovered": null,
+      "original_facebook_identity": "unknown",
+      "timely_discovery_verified": false,
+      "raw_candidates": [],
+      "event_id": null,
+      "first_seen": null,
+      "announcement_urls": [],
+      "source_types": [],
+      "timeliness": "not_discovered",
+      "miss_stage": "No identifiable matching accepted announcement or retained title/URL candidate in these runs. Source coverage and search-return limitations prevent a narrower conclusion."
+    },
+    {
+      "id": "adu-hackademic-2025",
+      "name": "AdU CTF: Hackademic Showdown 2025",
+      "competition_discovered": false,
+      "original_facebook_discovered": null,
+      "original_facebook_identity": "unknown",
+      "timely_discovery_verified": false,
+      "raw_candidates": [],
+      "event_id": null,
+      "first_seen": null,
+      "announcement_urls": [],
+      "source_types": [],
+      "timeliness": "not_discovered",
+      "miss_stage": "No identifiable matching accepted announcement or retained title/URL candidate in these runs. Source coverage and search-return limitations prevent a narrower conclusion."
+    },
+    {
+      "id": "hackquest-iligan-2025",
+      "name": "HackQuest Iligan 2025: Capture the Flag",
+      "competition_discovered": false,
+      "original_facebook_discovered": null,
+      "original_facebook_identity": "unknown",
+      "timely_discovery_verified": false,
+      "raw_candidates": [],
+      "event_id": null,
+      "first_seen": null,
+      "announcement_urls": [],
+      "source_types": [],
+      "timeliness": "not_discovered",
+      "miss_stage": "No identifiable matching accepted announcement or retained title/URL candidate in these runs. Source coverage and search-return limitations prevent a narrower conclusion."
+    },
+    {
+      "id": "cyberconnect-misocc-2025",
+      "name": "CyberCONNECT: Capture the Flag Training and Challenge 2025",
+      "competition_discovered": false,
+      "original_facebook_discovered": null,
+      "original_facebook_identity": "unknown",
+      "timely_discovery_verified": false,
+      "raw_candidates": [],
+      "event_id": null,
+      "first_seen": null,
+      "announcement_urls": [],
+      "source_types": [],
+      "timeliness": "not_discovered",
+      "miss_stage": "No identifiable matching accepted announcement or retained title/URL candidate in these runs. Source coverage and search-return limitations prevent a narrower conclusion."
+    },
+    {
+      "id": "trend-uctf-2025-preliminary",
+      "name": "Trend University Capture the Flag 2025 — Preliminary Round",
+      "competition_discovered": false,
+      "original_facebook_discovered": null,
+      "original_facebook_identity": "unknown",
+      "timely_discovery_verified": false,
+      "raw_candidates": [],
+      "event_id": null,
+      "first_seen": null,
+      "announcement_urls": [],
+      "source_types": [],
+      "timeliness": "not_discovered",
+      "miss_stage": "No identifiable matching accepted announcement or retained title/URL candidate in these runs. Source coverage and search-return limitations prevent a narrower conclusion."
+    },
+    {
+      "id": "central-luzon-ctf-2026",
+      "name": "Central Luzon Capture The Flag 2026",
+      "competition_discovered": false,
+      "original_facebook_discovered": null,
+      "original_facebook_identity": "unknown",
+      "timely_discovery_verified": false,
+      "raw_candidates": [],
+      "event_id": null,
+      "first_seen": null,
+      "announcement_urls": [],
+      "source_types": [],
+      "timeliness": "not_discovered",
+      "miss_stage": "No identifiable matching accepted announcement or retained title/URL candidate in these runs. Source coverage and search-return limitations prevent a narrower conclusion."
+    }
+  ],
+  "summary": {
+    "competitions": 10,
+    "found": 2,
+    "prior_found": 1,
+    "verified_timely": 0,
+    "original_facebook_identities_known": 0
+  }
+}

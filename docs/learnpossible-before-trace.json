@@ -1,0 +1,473 @@
+{
+  "observed_at": "2026-11-21T18:24:39.702113+00:00",
+  "method": "Read retained verification reports and SQLite with mode=ro. Live anonymous project Client fetch of configured UP Manila generic feed, followed result article and linked organizer PDF. API called against a private SQLite backup, never production.",
+  "recurring_source": {
+    "id": "up-manila",
+    "name": "UP Manila · Competition invitations",
+    "kind": "rss",
+    "url": "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag",
+    "body_identity": true,
+    "follow_articles": true,
+    "allowed_hosts": [
+      "www.upm.edu.ph"
+    ],
+    "article_selector": ".featured-a-content",
+    "title_selector": "h3.text-black",
+    "max_items": 30,
+    "index_id": "up-manila",
+    "publisher_name": "UP Manila · Competition invitations",
+    "publisher_role": "resharer",
+    "coverage": [
+      "NCR",
+      "National university invitations"
+    ],
+    "enabled": true,
+    "index_status": "active",
+    "index_reason": ""
+  },
+  "live_source_result": {
+    "status": "ok",
+    "entries": 1,
+    "path": [
+      "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag",
+      "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+    ],
+    "article": {
+      "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/",
+      "title": "LearnPossible – The Hexcore Labs PH University Challenge",
+      "feed_published": "Tue, 02 Sep 2025 02:17:55 +0000",
+      "posted_html": "2025-09-02T02:17:55+00:00",
+      "article_html": "<div class=\"featured-a-content align-self-end d-flex flex-column justify-content-start\">\n<!--                     <div class=\"a-featured-img mb-4\">\n                        <img width=\"393\" height=\"368\" src=\"https://www.upm.edu.ph/wp-content/uploads/2025/09/MissionLearnPossible.jpg\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" alt=\"\" decoding=\"async\" fetchpriority=\"high\" />                    </div> -->\n<div class=\"a-heading mb-3\">\n<h3 class=\"text-black\">LearnPossible – The Hexcore Labs PH University Challenge</h3>\n</div>\n<div class=\"pt-2 sdg-icons d-flex overflow-auto\">\n<div class=\"mb-2\">\n<img src=\"https://www.upm.edu.ph/wp-content/themes/University%20of%20the%20Philippines%20Manila/SDG/images/sdg-icons/sdg-wheel.png\" width=\"30px\"/>\n</div>\n<div class=\"mx-1 mb-2 d-flex flex-wrap justify-content-start align-items-center\">\n<a class=\"text-white text-decoration-none\" href=\"https://www.upm.edu.ph/sdg-4\">\n<div class=\"sdg-no sdg_4\">\n<label class=\"cursor-pointer\">4</label>\n</div>\n</a>\n<a class=\"text-white text-decoration-none\" href=\"https://www.upm.edu.ph/sdg-8\">\n<div class=\"sdg-no sdg_8\">\n<label class=\"cursor-pointer\">8</label>\n</div>\n</a>\n<a class=\"text-white text-decoration-none\" href=\"https://www.upm.edu.ph/sdg-9\">\n<div class=\"sdg-no sdg_9\">\n<label class=\"cursor-pointer\">9</label>\n</div>\n</a>\n<a class=\"text-white text-decoration-none\" href=\"https://www.upm.edu.ph/sdg-17\">\n<div class=\"sdg-no sdg_17\">\n<label class=\"cursor-pointer\">17</label>\n</div>\n</a>\n</div>\n</div>\n<div class=\"meta-data author d-flex justify-content-start mb-4\">\n<div class=\"align-self-center d-flex\">\n<div class=\"align-self-center\">\n<img src=\"https://www.upm.edu.ph/wp-content/themes/University%20of%20the%20Philippines%20Manila/images/global/date.png\"/>\n</div>\n<div class=\"align-self-center\">\n<label class=\"date text-black\">September 02, 2025</label>\n</div>\n</div>\n</div>\n<div class=\"a-descriptions\">\n<p class=\"wp-block-paragraph\"><strong>Theme:</strong> <em>Your Mission Awaits : University of the Philippines</em></p>\n<p class=\"wp-block-paragraph\">This one-of-a-kind challenge will test the creativity, collaboration, and technical mastery of university students nationwide. The competition features two high-stakes tournaments:</p>\n<p class=\"wp-block-paragraph\"><strong>The Gamified Capture the Flag (CTF) Tournament</strong> – A thrilling gauntlet of realistic cybersecurity challenges where every second counts.</p>\n<p class=\"wp-block-paragraph\"><strong>The AI Hackathon</strong> – A showcase of innovation where teams will design and deploy AI-driven workflow automation solutions.</p>\n<p class=\"wp-block-paragraph\">To prepare participants, we are also hosting <strong>Pre-Tournament Workshops</strong> introducing the Hexcore Labs platform, covering both cybersecurity and AI tracks. These workshops will run <strong>September 16–18, 2025</strong>, virtually via Zoom, ensuring your students are well-equipped for the main event.</p>\n<h3 class=\"wp-block-heading\">Event Details:</h3>\n<p class=\"wp-block-paragraph\"><strong>Date:</strong> October 6, 2025</p>\n<p class=\"wp-block-paragraph\"><strong>Time:</strong> 9:00 AM – 6:00 PM</p>\n<p class=\"wp-block-paragraph\"><strong>Venue:</strong> Asian Institute of Management, Makati City</p>\n<p class=\"wp-block-paragraph\">We believe your bright and competitive students will rise to this challenge, representing your institution with excellence. This is more than a competition—it is an opportunity for them to gain hands-on experience, sharpen critical skills, and showcase their capabilities on a national stage.</p>\n<p class=\"wp-block-paragraph\">For your reference, we have attached <strong>detailed information about the competition tracks, workshop schedule, and event guidelines</strong>.</p>\n<p class=\"wp-block-paragraph\">We sincerely hope that  your u<em>niversity </em>will join us in this mission. The digital battlefield is set—the clock is ticking—and we look forward to seeing your champions take the stage.</p>\n<p class=\"wp-block-paragraph\">Should you require further information, please feel free to contact us at <a href=\"mailto:team.ph@hexcore-labs.com\">team.ph@hexcore-labs.com</a> or reply to this email.</p>\n<p class=\"wp-block-paragraph\">Thank you very much, and we look forward to your participation.</p>\n<p class=\"wp-block-paragraph\">Respectfully yours,</p>\n<p class=\"wp-block-paragraph\"><strong>The Hexcore Labs PH Team</strong></p>\n<div class=\"wp-block-file\" data-wp-interactive=\"core/file\"><object aria-label=\"Embed of 5555_1756429668_EXPERTSPRIME_HEXCORE_UNIVERSITY_INVITATION_V1_UP.\" class=\"wp-block-file__embed\" data=\"https://www.upm.edu.ph/wp-content/uploads/2025/09/5555_1756429668_EXPERTSPRIME_HEXCORE_UNIVERSITY_INVITATION_V1_UP.pdf\" data-wp-bind--hidden=\"!state.hasPdfPreview\" hidden=\"\" style=\"width:100%;height:600px\" type=\"application/pdf\"></object><a href=\"https://www.upm.edu.ph/wp-content/uploads/2025/09/5555_1756429668_EXPERTSPRIME_HEXCORE_UNIVERSITY_INVITATION_V1_UP.pdf\" id=\"wp-block-file--media-79616d39-a967-4d33-83e0-6ac05830ffcf\">5555_1756429668_EXPERTSPRIME_HEXCORE_UNIVERSITY_INVITATION_V1_UP</a><a aria-describedby=\"wp-block-file--media-79616d39-a967-4d33-83e0-6ac05830ffcf\" class=\"wp-block-file__button wp-element-button\" download=\"\" href=\"https://www.upm.edu.ph/wp-content/uploads/2025/09/5555_1756429668_EXPERTSPRIME_HEXCORE_UNIVERSITY_INVITATION_V1_UP.pdf\">Download</a></div>\n<p class=\"wp-block-paragraph\"></p>\n</div>\n</div>",
+      "article_text": "LearnPossible – The Hexcore Labs PH University Challenge\n4\n8\n9\n17\nSeptember 02, 2025\nTheme:\nYour Mission Awaits : University of the Philippines\nThis one-of-a-kind challenge will test the creativity, collaboration, and technical mastery of university students nationwide. The competition features two high-stakes tournaments:\nThe Gamified Capture the Flag (CTF) Tournament\n– A thrilling gauntlet of realistic cybersecurity challenges where every second counts.\nThe AI Hackathon\n– A showcase of innovation where teams will design and deploy AI-driven workflow automation solutions.\nTo prepare participants, we are also hosting\nPre-Tournament Workshops\nintroducing the Hexcore Labs platform, covering both cybersecurity and AI tracks. These workshops will run\nSeptember 16–18, 2025\n, virtually via Zoom, ensuring your students are well-equipped for the main event.\nEvent Details:\nDate:\nOctober 6, 2025\nTime:\n9:00 AM – 6:00 PM\nVenue:\nAsian Institute of Management, Makati City\nWe believe your bright and competitive students will rise to this challenge, representing your institution with excellence. This is more than a competition—it is an opportunity for them to gain hands-on experience, sharpen critical skills, and showcase their capabilities on a national stage.\nFor your reference, we have attached\ndetailed information about the competition tracks, workshop schedule, and event guidelines\n.\nWe sincerely hope that  your u\nniversity\nwill join us in this mission. The digital battlefield is set—the clock is ticking—and we look forward to seeing your champions take the stage.\nShould you require further information, please feel free to contact us at\nteam.ph@hexcore-labs.com\nor reply to this email.\nThank you very much, and we look forward to your participation.\nRespectfully yours,\nThe Hexcore Labs PH Team\n5555_1756429668_EXPERTSPRIME_HEXCORE_UNIVERSITY_INVITATION_V1_UP\nDownload",
+      "links": [
+        [
+          "4",
+          "https://www.upm.edu.ph/sdg-4"
+        ],
+        [
+          "8",
+          "https://www.upm.edu.ph/sdg-8"
+        ],
+        [
+          "9",
+          "https://www.upm.edu.ph/sdg-9"
+        ],
+        [
+          "17",
+          "https://www.upm.edu.ph/sdg-17"
+        ],
+        [
+          "team.ph@hexcore-labs.com",
+          "mailto:team.ph@hexcore-labs.com"
+        ],
+        [
+          "5555_1756429668_EXPERTSPRIME_HEXCORE_UNIVERSITY_INVITATION_V1_UP",
+          "https://www.upm.edu.ph/wp-content/uploads/2025/09/5555_1756429668_EXPERTSPRIME_HEXCORE_UNIVERSITY_INVITATION_V1_UP.pdf"
+        ],
+        [
+          "Download",
+          "https://www.upm.edu.ph/wp-content/uploads/2025/09/5555_1756429668_EXPERTSPRIME_HEXCORE_UNIVERSITY_INVITATION_V1_UP.pdf"
+        ]
+      ],
+      "article_html_sha256": "7cc6a37ca3f39165463743ee6261c8da13c49ebb675b1c8bdfbb43815bfe25b1"
+    }
+  },
+  "public_dates": {
+    "posted_at": "2025-09-02T02:17:55+00:00",
+    "displayed_publication_date": "September 02, 2025",
+    "workshops_as_page_says": "September 16–18, 2025",
+    "tournament_date": "2025-10-06",
+    "event_program_clock_text": "9:00 AM – 6:00 PM",
+    "clock_time_scope": "Parent event/program, not independently scoped CTF start/end",
+    "timezone_as_written": null,
+    "venue": "Asian Institute of Management, Makati City",
+    "registration_deadline": null,
+    "registration_url_on_article": null,
+    "publisher_lead_days_to_tournament": 34,
+    "outside_last_12_months": true
+  },
+  "linked_pdf_research": {
+    "url": "https://www.upm.edu.ph/wp-content/uploads/2025/09/5555_1756429668_EXPERTSPRIME_HEXCORE_UNIVERSITY_INVITATION_V1_UP.pdf",
+    "status": "ok",
+    "normal_collector_behavior": "Retains linked_only PDF provenance; does not parse PDF. This follow-up is research-assisted evidence, not another automatically extracted announcement.",
+    "tournament_date": "October 6, 2025",
+    "program_clock_text": "AIM Makati 9:00 AM–6:00 PM",
+    "ctf_schedule_text": [
+      "9:20–9:30 AM Official competition Start of Competition",
+      "3:30–4:00 PM CTF Finals continuation",
+      "4:30–5:00 PM Awarding Ceremony (CTF, AI, Special Awards)"
+    ],
+    "registration_text": "SCAN TO REGISTER",
+    "registration_deadline": null,
+    "registration_url_in_text": null,
+    "workshop_conflict": "PDF lists September 24–25 cybersecurity workshops and September 26 AI workshop, whereas article says September 16–18. No verified revision chronology resolves the conflict. Neither set is the tournament date."
+  },
+  "first_incorrect_step": {
+    "stage": "backend/extract.py extract: event-date extraction",
+    "explanation": "RSS and article fetches include the correct October 6, 2025 Event Details date. body_event_context uses it only as edition/summary provenance. The facts extractor recognizes Competition/CTF labels but not this Date field under Event Details; labels/values also occupy separate lines after HTML cleaning. It leaves start/end null. No date was mistakenly chosen from the workshops or publication date; the known tournament day was dropped.",
+    "conservative_fix": "Extract a bounded Event Details date only when the article establishes the actual competition and the field is scoped to the main tournament rather than a workshop. Retain date-only precision and raw program clock text; do not invent a midnight instant or promote parent schedule clocks to CTF hours. A confirmed bounded competition day may classify as past once that local calendar day passes, while undated/future teasers remain visible."
+  },
+  "latest_retained_sqlite": {
+    "database": "/tmp/ctfinder-publisher-verified-up_1_buq/events.sqlite3",
+    "read_only": true,
+    "rows": [
+      {
+        "id": 4,
+        "event_id": "9ce2881dabb3fb36b01fa057",
+        "source_id": "up-manila",
+        "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/",
+        "external_id": null,
+        "payload": {
+          "access": "full",
+          "discovery_path": [
+            "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag",
+            "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+          ],
+          "evidence": "The Gamified Capture the Flag (CTF) Tournament",
+          "external_id": null,
+          "facts": {
+            "deadline": null,
+            "eligibility": null,
+            "end": null,
+            "format": "unknown",
+            "lifecycle": null,
+            "name": "LearnPossible – The Hexcore Labs PH University Challenge · CTF 2025",
+            "organizer": "Hexcore Labs PH",
+            "region": "Unspecified",
+            "registration_opens": null,
+            "registration_state": null,
+            "registration_url": null,
+            "start": null,
+            "summary": "Publisher event context: Event Details: Date: October 6, 2025. CTF clock times and registration window are not confirmed."
+          },
+          "field_evidence": {
+            "edition": {
+              "quote": "Event Details:\nDate:\nOctober 6, 2025",
+              "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+            },
+            "name": {
+              "quote": "LearnPossible – The Hexcore Labs PH University Challenge | The Gamified Capture the Flag (CTF) Tournament",
+              "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+            },
+            "organizer": {
+              "quote": "Respectfully yours,\nThe Hexcore Labs PH Team",
+              "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+            },
+            "philippine_connection": {
+              "quote": "Venue:\nAsian Institute of Management, Makati City",
+              "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+            },
+            "posted_at": {
+              "quote": "Publisher publication metadata: 2025-09-02T02:17:55+00:00",
+              "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+            },
+            "summary": {
+              "quote": "Event Details:\nDate:\nOctober 6, 2025",
+              "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+            }
+          },
+          "identity": {
+            "edition": "2025",
+            "organizer_key": "hexcore-labs-ph",
+            "region": "Unspecified",
+            "series": "LearnPossible – The Hexcore Labs PH University Challenge · CTF",
+            "stage": "main"
+          },
+          "index_id": "up-manila",
+          "kind": "announcement",
+          "official": false,
+          "posted_at": "2025-09-02T02:17:55+00:00",
+          "publisher": {
+            "id": "up-manila",
+            "name": "UP Manila · Competition invitations",
+            "role": "resharer",
+            "url": "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag"
+          },
+          "publisher_leads": [],
+          "publisher_role": "resharer",
+          "related_links": [
+            {
+              "access": "linked_only",
+              "discovered_on": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/",
+              "label": "Download",
+              "url": "https://www.upm.edu.ph/wp-content/uploads/2025/09/5555_1756429668_EXPERTSPRIME_HEXCORE_UNIVERSITY_INVITATION_V1_UP.pdf"
+            }
+          ],
+          "relationship": "reshare",
+          "scope_evidence": {
+            "quote": "Venue:\nAsian Institute of Management, Makati City",
+            "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+          },
+          "title": "LearnPossible – The Hexcore Labs PH University Challenge",
+          "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+        },
+        "first_seen": "2026-11-21T18:05:18.990121+00:00",
+        "last_seen": "2026-11-21T18:07:37.586904+00:00",
+        "changed_at": "2026-11-21T18:05:18.990121+00:00",
+        "revision_count": 1,
+        "withdrawn": 0,
+        "event_first_seen": "2026-11-21T18:05:18.990121+00:00",
+        "identity_json": {
+          "organizer_key": "hexcore-labs-ph",
+          "series": "LearnPossible – The Hexcore Labs PH University Challenge · CTF",
+          "edition": "2025",
+          "region": "Unspecified",
+          "stage": "main"
+        },
+        "event_first_seen_manila": "2026-11-22T02:05:18.990121+08:00"
+      }
+    ],
+    "source_health": [
+      {
+        "id": "up-manila",
+        "name": "UP Manila · Competition invitations",
+        "url": "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag",
+        "kind": "rss",
+        "status": "ok",
+        "last_success": "2026-11-21T18:07:37.586904+00:00",
+        "last_attempt": "2026-11-21T18:07:36.317561+00:00",
+        "message": "Public RSS/Atom feed scanned; 1 new or retained article URLs rechecked.",
+        "discovered": 1,
+        "accepted": 1,
+        "publisher_name": "UP Manila · Competition invitations",
+        "publisher_role": "resharer",
+        "coverage": "[\"NCR\", \"National university invitations\"]",
+        "index_id": "up-manila",
+        "enabled": 1,
+        "index_status": "active",
+        "next_retry_at": null
+      }
+    ]
+  },
+  "api_before_fix": {
+    "checked_at": "2026-11-21T18:23:53.393828+00:00",
+    "database_copy": "/tmp/ctfinder-learnpossible-before-api-ukkshi5l/events.sqlite3",
+    "http_status": 200,
+    "event": {
+      "announcement_label": "Announcement · verify source",
+      "announcement_url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/",
+      "announcements": [
+        {
+          "access": "full",
+          "discovery_path": [
+            "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag",
+            "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+          ],
+          "discovery_queries": [],
+          "discovery_query": null,
+          "evidence": "The Gamified Capture the Flag (CTF) Tournament",
+          "field_evidence": {
+            "edition": {
+              "quote": "Event Details:\nDate:\nOctober 6, 2025",
+              "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+            },
+            "name": {
+              "quote": "LearnPossible – The Hexcore Labs PH University Challenge | The Gamified Capture the Flag (CTF) Tournament",
+              "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+            },
+            "organizer": {
+              "quote": "Respectfully yours,\nThe Hexcore Labs PH Team",
+              "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+            },
+            "philippine_connection": {
+              "quote": "Venue:\nAsian Institute of Management, Makati City",
+              "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+            },
+            "posted_at": {
+              "quote": "Publisher publication metadata: 2025-09-02T02:17:55+00:00",
+              "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+            },
+            "summary": {
+              "quote": "Event Details:\nDate:\nOctober 6, 2025",
+              "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+            }
+          },
+          "first_seen": "2026-11-21T18:05:18.990121+00:00",
+          "index_id": "up-manila",
+          "kind": "announcement",
+          "last_seen": "2026-11-21T18:07:37.586904+00:00",
+          "posted_at": "2025-09-02T02:17:55+00:00",
+          "publisher": {
+            "id": "up-manila",
+            "name": "UP Manila · Competition invitations",
+            "role": "resharer",
+            "url": "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag"
+          },
+          "publisher_role": "resharer",
+          "related_links": [
+            {
+              "access": "linked_only",
+              "discovered_on": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/",
+              "label": "Download",
+              "url": "https://www.upm.edu.ph/wp-content/uploads/2025/09/5555_1756429668_EXPERTSPRIME_HEXCORE_UNIVERSITY_INVITATION_V1_UP.pdf"
+            }
+          ],
+          "revision_count": 1,
+          "source_name": "UP Manila · Competition invitations",
+          "title": "LearnPossible – The Hexcore Labs PH University Challenge",
+          "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+        }
+      ],
+      "deadline": null,
+      "edition": "2025",
+      "eligibility": null,
+      "end": null,
+      "field_evidence": {
+        "name": {
+          "quote": "LearnPossible – The Hexcore Labs PH University Challenge | The Gamified Capture the Flag (CTF) Tournament",
+          "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+        },
+        "organizer": {
+          "quote": "Respectfully yours,\nThe Hexcore Labs PH Team",
+          "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+        },
+        "posted_at": {
+          "quote": "Publisher publication metadata: 2025-09-02T02:17:55+00:00",
+          "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+        },
+        "summary": {
+          "quote": "Event Details:\nDate:\nOctober 6, 2025",
+          "url": "https://www.upm.edu.ph/cpt_announcements/learnpossible-the-hexcore-labs-ph-university-challenge/"
+        }
+      },
+      "first_seen": "2026-11-21T18:05:18.990121+00:00",
+      "format": "unknown",
+      "id": "9ce2881dabb3fb36b01fa057",
+      "last_checked": "2026-11-21T18:07:37.586904+00:00",
+      "name": "LearnPossible – The Hexcore Labs PH University Challenge · CTF 2025",
+      "notices": [
+        "The latest dated announcement is over 45 days old. Current participation and completion are unconfirmed.",
+        "Schedule TBA. This listing does not confirm that registration is open."
+      ],
+      "organizer": "Hexcore Labs PH",
+      "organizer_key": "hexcore-labs-ph",
+      "posted_at": "2025-09-02T02:17:55+00:00",
+      "region": "Unspecified",
+      "registration_opens": null,
+      "registration_state": "unknown",
+      "registration_status": "unknown",
+      "registration_url": null,
+      "section": "upcoming",
+      "series": "LearnPossible – The Hexcore Labs PH University Challenge · CTF",
+      "stage": "main",
+      "start": null,
+      "status": "schedule_tba",
+      "summary": "Publisher event context: Event Details: Date: October 6, 2025. CTF clock times and registration window are not confirmed."
+    }
+  },
+  "frontend_before_fix": {
+    "file": "frontend/src/App.tsx",
+    "rule": "events.filter(e => e.section === section ...)",
+    "default_section": "upcoming",
+    "reason": "Frontend trusts API section; API returned section upcoming and status schedule_tba because start/end facts were null. The visible old date existed only in name/summary and publication display, not lifecycle input.",
+    "registration_status": "unknown; not the cause of section choice"
+  },
+  "earliest_retained_first_seen": {
+    "database": "/tmp/ctfinder-index-live-yxdz5msd/events.sqlite3",
+    "first_seen_utc": "2026-11-21T16:45:02.551200+00:00",
+    "first_seen_manila": "2026-11-22T00:45:02.551200+08:00",
+    "last_seen_utc": "2026-11-21T16:46:19.663721+00:00",
+    "timestamp_precision": "legacy_run_start",
+    "run_started_at": "2026-11-21T16:45:02.551200+00:00",
+    "run_finished_at": "2026-11-21T16:46:18.242304+00:00",
+    "source_observed_at": null,
+    "caveat": "Historical collector stored one job-start time for all sources. Actual fetch occurred within this run interval; the original first_seen is preserved, not an exact response instant."
+  },
+  "observations": [
+    {
+      "database": "/tmp/ctfinder-index-live-yxdz5msd/events.sqlite3",
+      "first_seen_utc": "2026-11-21T16:45:02.551200+00:00",
+      "first_seen_manila": "2026-11-22T00:45:02.551200+08:00",
+      "last_seen_utc": "2026-11-21T16:46:19.663721+00:00",
+      "timestamp_precision": "legacy_run_start",
+      "run_started_at": "2026-11-21T16:45:02.551200+00:00",
+      "run_finished_at": "2026-11-21T16:46:18.242304+00:00",
+      "source_observed_at": null,
+      "caveat": "Historical collector stored one job-start time for all sources. Actual fetch occurred within this run interval; the original first_seen is preserved, not an exact response instant."
+    },
+    {
+      "database": "/tmp/ctfinder-index-final-2_f0_maq/events.sqlite3",
+      "first_seen_utc": "2026-11-21T16:50:19.441718+00:00",
+      "first_seen_manila": "2026-11-22T00:50:19.441718+08:00",
+      "last_seen_utc": "2026-11-21T16:51:21.927249+00:00",
+      "timestamp_precision": "legacy_run_start",
+      "run_started_at": "2026-11-21T16:50:19.441718+00:00",
+      "run_finished_at": "2026-11-21T16:51:20.632434+00:00",
+      "source_observed_at": null,
+      "caveat": "Historical collector stored one job-start time for all sources. Actual fetch occurred within this run interval; the original first_seen is preserved, not an exact response instant."
+    },
+    {
+      "database": "/tmp/ctfinder-index-verified-cifqvzty/events.sqlite3",
+      "first_seen_utc": "2026-11-21T16:58:46.151481+00:00",
+      "first_seen_manila": "2026-11-22T00:58:46.151481+08:00",
+      "last_seen_utc": "2026-11-21T17:00:08.525815+00:00",
+      "timestamp_precision": "source_response_receipt",
+      "run_started_at": "2026-11-21T16:58:16.808703+00:00",
+      "run_finished_at": "2026-11-21T16:59:22.985167+00:00",
+      "source_observed_at": "2026-11-21T16:58:46.151481+00:00",
+      "caveat": "Stored first_seen is the receipt timestamp for this source response."
+    },
+    {
+      "database": "/tmp/ctfinder-luma-verified-nram3nm4/events.sqlite3",
+      "first_seen_utc": "2026-11-21T17:35:00.791256+00:00",
+      "first_seen_manila": "2026-11-22T01:35:00.791256+08:00",
+      "last_seen_utc": "2026-11-21T17:37:55.525329+00:00",
+      "timestamp_precision": "source_response_receipt",
+      "run_started_at": "2026-11-21T17:34:21.494414+00:00",
+      "run_finished_at": "2026-11-21T17:35:50.562168+00:00",
+      "source_observed_at": "2026-11-21T17:35:00.791256+00:00",
+      "caveat": "Stored first_seen is the receipt timestamp for this source response."
+    },
+    {
+      "database": "/tmp/ctfinder-luma-verified-030i423s/events.sqlite3",
+      "first_seen_utc": "2026-11-21T17:41:53.683722+00:00",
+      "first_seen_manila": "2026-11-22T01:41:53.683722+08:00",
+      "last_seen_utc": "2026-11-21T17:43:34.362282+00:00",
+      "timestamp_precision": "source_response_receipt",
+      "run_started_at": "2026-11-21T17:41:18.076117+00:00",
+      "run_finished_at": "2026-11-21T17:42:47.383410+00:00",
+      "source_observed_at": "2026-11-21T17:41:53.683722+00:00",
+      "caveat": "Stored first_seen is the receipt timestamp for this source response."
+    },
+    {
+      "database": "/tmp/ctfinder-publisher-verified-up_1_buq/events.sqlite3",
+      "first_seen_utc": "2026-11-21T18:05:18.990121+00:00",
+      "first_seen_manila": "2026-11-22T02:05:18.990121+08:00",
+      "last_seen_utc": "2026-11-21T18:07:37.586904+00:00",
+      "timestamp_precision": "source_response_receipt",
+      "run_started_at": "2026-11-21T18:04:25.036664+00:00",
+      "run_finished_at": "2026-11-21T18:06:26.117428+00:00",
+      "source_observed_at": "2026-11-21T18:05:18.990121+00:00",
+      "caveat": "Stored first_seen is the receipt timestamp for this source response."
+    }
+  ],
+  "probe_not_first_seen": {
+    "file": "docs/source-index-adapter-probe.json",
+    "probe_started_at": "2026-11-21T16:41:47.911432+00:00",
+    "meaning": "Read-only adapter probe returned invitation earlier than retained database rows; no database first_seen recorded, so do not substitute probe time for persisted discovery."
+  },
+  "production_read_only": {
+    "database": "/home/miguel/Documents/GitHub/ctfinder_ph/data/ctfinder.sqlite3",
+    "learnpossible_announcements": 0,
+    "meaning": "This date classification case was visible in temporary verification data, not this retained production database."
+  },
+  "timeliness": {
+    "publisher_lead_days": 34,
+    "earliest_retained_collector_days_after_tournament": 412,
+    "verified_while_registration_open": false,
+    "registration_deadline": null,
+    "reason": "The earliest persisted first_seen is November 22, 2026 00:45:02 Manila, a legacy whole-run start timestamp. Actual receipt is bounded by 00:45:02–00:46:18 Manila, still 412 days after the tournament. The later verified source receipt was 00:58:46 Manila. No registration-window observation supports timely discovery. Historical coverage only; original timestamps are preserved and none are backdated.",
+    "first_seen_precision": "legacy_run_start; source was received between 2026-11-21T16:45:02.551200+00:00 and 2026-11-21T16:46:18.242304+00:00"
+  },
+  "earliest_retained_source_receipt": {
+    "database": "/tmp/ctfinder-index-verified-cifqvzty/events.sqlite3",
+    "first_seen_utc": "2026-11-21T16:58:46.151481+00:00",
+    "first_seen_manila": "2026-11-22T00:58:46.151481+08:00",
+    "last_seen_utc": "2026-11-21T17:00:08.525815+00:00",
+    "timestamp_precision": "source_response_receipt",
+    "run_started_at": "2026-11-21T16:58:16.808703+00:00",
+    "run_finished_at": "2026-11-21T16:59:22.985167+00:00",
+    "source_observed_at": "2026-11-21T16:58:46.151481+00:00",
+    "caveat": "Stored first_seen is the receipt timestamp for this source response."
+  }
+}

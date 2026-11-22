@@ -1,0 +1,288 @@
+{
+  "checked_at": "2026-11-21T17:52:26.751797+00:00",
+  "evaluation_only": true,
+  "url": "https://luma.com/akv0l0o1",
+  "access": "Anonymous project Client.public_page; robots checked; no credentials/cookies/paid API",
+  "fetch_status": "ok",
+  "source_title": "HCDG PH x Packet Capture: Beneath the Network",
+  "description": "Packet Capture, a Networking x Security Capture-the-Flag (CTF), is a hands-on, gamified technical event designed to simulate real-world networking and cybersecurity environments. The event provides participants with progressive, scenario-based challenges that integrate fundamental networking setup, system configuration, and security operations.\nCo-organizers:\nCyberPH\nHuawei Cloud Developer Groups Philippines\nWorkFlow PH\nMQ CyberSec Australia\nICPEP Student Edition PUP Manila\nCisco NetConnect PUP Manila\nSYNX\nA1SBERG\nSponsors:\nTutorials Dojo\nAppkademiya\nProsple",
+  "links": [],
+  "before": {
+    "accepted": false,
+    "reason": "CTF topic or workshop without competition evidence"
+  },
+  "calendar": {
+    "start_at": "2026-10-04T00:00:00.000Z",
+    "end_at": "2026-10-04T09:00:00.000Z",
+    "timezone": "Asia/Manila",
+    "location_type": "offline",
+    "geo_address_info": {
+      "city": "Taguig",
+      "type": "google",
+      "region": "Metro Manila",
+      "address": "Milestone at Fourth Avenue",
+      "country": "Philippines",
+      "place_id": "ChIJM07CTuHJlzMRNh74Mdvia1M",
+      "localized": {
+        "fil": {
+          "city": "Taguig",
+          "region": "Metro Manila",
+          "address": "Milestone at Fourth Avenue",
+          "country": "Pilipinas",
+          "city_state": "Taguig, Pilipinas",
+          "sublocality": null,
+          "full_address": "Milestone at Fourth Avenue, BGC, 4th Ave, Taguig, Metro Manila, Pilipinas",
+          "region_short": "NCR",
+          "short_address": "BGC, 4th Ave, Taguig"
+        }
+      },
+      "city_state": "Taguig, Philippines",
+      "description": "",
+      "sublocality": null,
+      "country_code": "PH",
+      "full_address": "Milestone at Fourth Avenue, BGC, 4th Ave, Taguig, Metro Manila, Philippines",
+      "region_short": "NCR",
+      "short_address": "BGC, 4th Ave, Taguig",
+      "place_coordinate": {
+        "latitude": 14.548614699999998,
+        "longitude": 121.04604400000001
+      },
+      "apple_maps_place_id": "I851C9B2DF4DFCBEA",
+      "mode": "shown"
+    }
+  },
+  "registration_availability": "open",
+  "discovery_claim": false,
+  "after": {
+    "accepted": true,
+    "reason": "Accepted cybersecurity competition with Philippine scope evidence",
+    "recognition": "declared_ctf_activity",
+    "announcement_title": "HCDG PH x Packet Capture: Beneath the Network",
+    "facts": {
+      "name": "HCDG PH x Packet Capture: Beneath the Network · CTF 2026",
+      "organizer": "CyberPH, WorkFlow PH",
+      "region": "NCR",
+      "format": "in_person",
+      "eligibility": null,
+      "registration_url": null,
+      "start": null,
+      "end": null,
+      "deadline": null,
+      "registration_opens": null,
+      "summary": "The announcement identifies a CTF activity. Its complete competition schedule and registration window are not confirmed.",
+      "lifecycle": null,
+      "registration_state": "unknown"
+    },
+    "field_evidence": {
+      "name": {
+        "url": "https://luma.com/akv0l0o1",
+        "quote": "HCDG PH x Packet Capture: Beneath the Network | Packet Capture, a Networking x Security Capture-the-Flag (CTF), is a hands-on, gamified technical event designed to simulate real-world networking and cybersecurity environments. The event provides participants with progressive, scenario-based challenges that integrate fundamental networking setup, system configuration, and security operations."
+      },
+      "organizer": {
+        "url": "https://luma.com/akv0l0o1",
+        "quote": "Luma public hosts: CyberPH (usr-Xf0H4hjDiw6f0tp); Luma public hosts: WorkFlow PH (usr-eL9qAMoNyJQl2iV)"
+      },
+      "region": {
+        "url": "https://luma.com/akv0l0o1",
+        "quote": "NCR"
+      },
+      "competition": {
+        "url": "https://luma.com/akv0l0o1",
+        "quote": "Packet Capture, a Networking x Security Capture-the-Flag (CTF), is a hands-on, gamified technical event designed to simulate real-world networking and cybersecurity environments | participants with progressive, scenario-based challenges"
+      },
+      "philippine_connection": {
+        "url": "https://luma.com/akv0l0o1",
+        "quote": "{\"city\": \"Taguig\", \"type\": \"google\", \"region\": \"Metro Manila\", \"address\": \"Milestone at Fourth Avenue\", \"country\": \"Philippines\", \"place_id\": \"ChIJM07CTuHJlzMRNh74Mdvia1M\", \"localized\": {\"fil\": {\"city\": \"Taguig\", \"region\": \"Metro Manila\", \"address\": \"Milestone at Fourth Avenue\", \"country\": \"Pilipinas\", \"city_state\": \"Taguig, Pilipinas\", \"sublocality\": null, \"full_address\": \"Milestone at Fourth Avenue, BGC, 4th Ave, Taguig, Metro Manila, Pilipinas\", \"region_short\": \"NCR\", \"short_address\": \"BGC, 4th Ave, Taguig\"}}, \"city_state\": \"Taguig, Philippines\", \"description\": \"\", \"sublocality\": null, \"cou"
+      },
+      "edition": {
+        "url": "https://luma.com/akv0l0o1",
+        "quote": "Luma start_at=2026-10-04T00:00:00.000Z; timezone=Asia/Manila; calendar date=2026-10-04"
+      },
+      "format": {
+        "url": "https://luma.com/akv0l0o1",
+        "quote": "Luma location_type=offline"
+      },
+      "summary": {
+        "url": "https://luma.com/akv0l0o1",
+        "quote": "HCDG PH x Packet Capture: Beneath the Network | Packet Capture, a Networking x Security Capture-the-Flag (CTF), is a hands-on, gamified technical event designed to simulate real-world networking and cybersecurity environments | participants with progressive, scenario-based challenges"
+      }
+    },
+    "publisher_leads": [
+      {
+        "name": "CyberPH",
+        "role": "host",
+        "url": "https://luma.com/user/usr-Xf0H4hjDiw6f0tp",
+        "account_id": "luma:usr-Xf0H4hjDiw6f0tp",
+        "evidence": {
+          "url": "https://luma.com/akv0l0o1",
+          "quote": "Luma public hosts: CyberPH (usr-Xf0H4hjDiw6f0tp)"
+        }
+      },
+      {
+        "name": "WorkFlow PH",
+        "role": "host",
+        "url": "https://luma.com/user/usr-eL9qAMoNyJQl2iV",
+        "account_id": "luma:usr-eL9qAMoNyJQl2iV",
+        "evidence": {
+          "url": "https://luma.com/akv0l0o1",
+          "quote": "Luma public hosts: WorkFlow PH (usr-eL9qAMoNyJQl2iV)"
+        }
+      },
+      {
+        "name": "CyberPH",
+        "role": "co-organizer",
+        "evidence": {
+          "url": "https://luma.com/akv0l0o1",
+          "quote": "co-organizer: CyberPH"
+        },
+        "url": "https://luma.com/user/usr-Xf0H4hjDiw6f0tp",
+        "account_id": "luma:usr-Xf0H4hjDiw6f0tp"
+      },
+      {
+        "name": "Huawei Cloud Developer Groups Philippines",
+        "role": "co-organizer",
+        "evidence": {
+          "url": "https://luma.com/akv0l0o1",
+          "quote": "co-organizer: Huawei Cloud Developer Groups Philippines"
+        }
+      },
+      {
+        "name": "WorkFlow PH",
+        "role": "co-organizer",
+        "evidence": {
+          "url": "https://luma.com/akv0l0o1",
+          "quote": "co-organizer: WorkFlow PH"
+        },
+        "url": "https://luma.com/user/usr-eL9qAMoNyJQl2iV",
+        "account_id": "luma:usr-eL9qAMoNyJQl2iV"
+      },
+      {
+        "name": "MQ CyberSec Australia",
+        "role": "co-organizer",
+        "evidence": {
+          "url": "https://luma.com/akv0l0o1",
+          "quote": "co-organizer: MQ CyberSec Australia"
+        }
+      },
+      {
+        "name": "ICPEP Student Edition PUP Manila",
+        "role": "co-organizer",
+        "evidence": {
+          "url": "https://luma.com/akv0l0o1",
+          "quote": "co-organizer: ICPEP Student Edition PUP Manila"
+        }
+      },
+      {
+        "name": "Cisco NetConnect PUP Manila",
+        "role": "co-organizer",
+        "evidence": {
+          "url": "https://luma.com/akv0l0o1",
+          "quote": "co-organizer: Cisco NetConnect PUP Manila"
+        }
+      },
+      {
+        "name": "SYNX",
+        "role": "co-organizer",
+        "evidence": {
+          "url": "https://luma.com/akv0l0o1",
+          "quote": "co-organizer: SYNX"
+        }
+      },
+      {
+        "name": "A1SBERG",
+        "role": "co-organizer",
+        "evidence": {
+          "url": "https://luma.com/akv0l0o1",
+          "quote": "co-organizer: A1SBERG"
+        }
+      },
+      {
+        "name": "Tutorials Dojo",
+        "role": "sponsor",
+        "evidence": {
+          "url": "https://luma.com/akv0l0o1",
+          "quote": "sponsor: Tutorials Dojo"
+        }
+      },
+      {
+        "name": "Appkademiya",
+        "role": "sponsor",
+        "evidence": {
+          "url": "https://luma.com/akv0l0o1",
+          "quote": "sponsor: Appkademiya"
+        }
+      },
+      {
+        "name": "Prosple",
+        "role": "sponsor",
+        "evidence": {
+          "url": "https://luma.com/akv0l0o1",
+          "quote": "sponsor: Prosple"
+        }
+      }
+    ]
+  },
+  "failure_stage": "Recognition: the previous Luma gate required competition/tournament/contest or explicit scoring/prize cues near CTF; the full description was readable but rejected before publication or publisher harvesting. The generic extractor also required CTF in the title or an explicit contest noun in the body.",
+  "change": "Accept an explicit declaration of a cybersecurity Capture the Flag activity when the narrative describes participant challenge play and contains no teaching-only framing. Keep the original publisher title and actual source evidence. Derive the CTF listing label from the body. Such recognition alone does not promote the parent calendar slot or ticket widget into a confirmed competition window.",
+  "false_positive_guards": [
+    "CTF teaching workshops/tutorials/labs and competition-technique lessons remain rejected",
+    "Explicit separate competitions alongside training may qualify, while parent dates and registration remain unknown",
+    "Security terms appearing only in sponsors or organizer lists cannot qualify an otherwise non-cyber event",
+    "Negated competition declarations are rejected",
+    "Philippine venue/organizer scope evidence remains required"
+  ],
+  "verification": {
+    "test_command": ".venv/bin/python -m pytest -q tests/test_luma.py",
+    "tests_passed": 46,
+    "fixtures": "Unrelated synthetic events only; acceptance name, publishers, IDs, URL and distinctive caption wording excluded",
+    "normal_collector_run": false,
+    "discovery_claim": false,
+    "production_modified": false,
+    "files_modified": [
+      "backend/luma.py",
+      "tests/test_luma.py",
+      "docs/publisher-luma-recognition.json"
+    ]
+  },
+  "context_join_validation": {
+    "status": "Implemented and verified against cached live-source bodies; this validation made no new network requests and is not a discovery claim.",
+    "rule": "An article must explicitly name one highlighted program adjacent to a kickoff/opening relation in its lead paragraphs and provide one exact kickoff date. A calendar title must contain that entire subject at a delimiter boundary and the same organizer-local calendar date. Editions and stages must agree; known region or venue conflicts veto the join; multiple matching existing events prevent any merge.",
+    "actual_match_basis": [
+      "Exact program subject in the recap lead paragraph and calendar title",
+      "Same 2026-10-04 kickoff calendar date",
+      "Same normalized specific venue: Milestone Fourth Avenue"
+    ],
+    "cross_source_permalink": "Neither source linked directly to the other or shared a registration form; this rule therefore retains the separate subject/date/venue evidence that establishes the association.",
+    "result": {
+      "events": 1,
+      "announcements": 2,
+      "revisions_after_repeat": 2,
+      "first_seen_stable": true,
+      "lifecycle": "finished",
+      "registration_state": "closed",
+      "supporting_announcement_links_preserved": true
+    },
+    "new_regression_tests": 19,
+    "focused_command": ".venv/bin/python -m pytest -q tests/test_program_context_identity.py tests/test_shared_link_identity.py tests/test_rss_publishers.py tests/test_luma.py",
+    "focused_passed": 99,
+    "negative_cases": [
+      "Different editions",
+      "Qualifier versus final/main or other stages",
+      "Conflicting confirmed regions",
+      "Different kickoff dates",
+      "Different specific venues",
+      "Missing source evidence",
+      "Search-only evidence",
+      "Generic subjects without geography",
+      "Multiple bold subjects or kickoff dates",
+      "Multiple already-existing candidate events"
+    ],
+    "implementation_files": [
+      "backend/event_context.py",
+      "backend/adapters.py",
+      "backend/db.py",
+      "tests/test_program_context_identity.py"
+    ],
+    "evaluation_identifiers_in_runtime_or_fixtures": false
+  }
+}

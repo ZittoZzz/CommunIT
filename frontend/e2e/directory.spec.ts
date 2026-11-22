@@ -25,11 +25,13 @@ test('real collected listings, filters, history, and source health', async ({ pa
   await page.getByRole('combobox', { name: 'Registration', exact: true }).selectOption('open');
   await expect(page.locator('.event-card')).toHaveCount(upcoming.filter((e: {registration_status: string}) => e.registration_status === 'open').length);
   await page.getByRole('combobox', { name: 'Registration', exact: true }).selectOption('');
-  await page.getByRole('tab', { name: /Finished/ }).click();
-  await expect(page.locator('.event-card')).toHaveCount(data.events.filter((e: {section: string}) => e.section === 'finished').length);
+  await page.getByRole('tab', { name: /Past & finished/ }).click();
+  await expect(page.locator('.event-card')).toHaveCount(data.events.filter((e: {section: string}) => ['past', 'finished'].includes(e.section)).length);
   await page.getByRole('link', { name: 'Our sources' }).click();
   await expect(page.locator('.source-row')).toHaveCount(data.sources.length);
-  await expect(page.getByText('Needs credentials', { exact: true })).toBeVisible();
+  for (const status of new Set(data.sources.map((source: {status: string}) => source.status))) {
+    await expect(page.locator(`.source-row .health-${status}`)).toHaveCount(data.sources.filter((source: {status: string}) => source.status === status).length);
+  }
   expect(errors).toEqual([]);
 });
 
@@ -84,7 +86,7 @@ test('mobile layout fits viewport and tabs work from keyboard', async ({ page })
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
   await page.getByRole('tab', {name:/Upcoming & live/}).focus();
   await page.keyboard.press('ArrowRight');
-  await expect(page.getByRole('tab',{name:/Finished/})).toHaveAttribute('aria-selected','true');
+  await expect(page.getByRole('tab',{name:/Past & finished/})).toHaveAttribute('aria-selected','true');
   await page.getByRole('link',{name:'Our sources'}).click();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
 });
@@ -107,4 +109,48 @@ test('date precision, cancellation, and error recovery render correctly (browser
   await expect(dates).toContainText('9:00');
   await expect(dates).toContainText('PHT');
   await expect(dates).not.toContainText('12:00');
+});
+
+test('past dates, future teasers, and undated search leads stay distinct (browser-only fixture)', async ({ page }) => {
+  const article = 'https://university.example/announcements/security-tournament';
+  const base = {
+    id:'classification-fixture', name:'TEST FIXTURE • Campus Security Tournament', organizer:'Example university',
+    region:'NCR', format:'online', eligibility:null, announcement_url:article, registration_url:null,
+    registration_status:'unknown', status:'past_date', section:'past',
+    competition_date:{raw:'February 14, 2024',value:'2024-02-14',precision:'date',timezone:null},
+    start:null, end:null, deadline:null, registration_opens:null, posted_at:'2024-01-03',
+    first_seen:'2026-11-22T00:00:00Z', last_checked:'2026-11-22T00:00:00Z', summary:null,
+    stage:'main', edition:'2024', notices:[], announcements:[],
+  };
+  const events = [base,
+    {...base,id:'teaser-fixture',name:'TEST FIXTURE • Future teaser',status:'schedule_tba',section:'upcoming',
+      competition_date:null,posted_at:'2026-11-22',edition:'2027'},
+    {...base,id:'undated-fixture',name:'TEST FIXTURE • Undated lead',status:'undated_lead',section:'upcoming',
+      competition_date:null,posted_at:null,edition:'',announcement_label:'Search result · verify source'},
+    {...base,id:'completed-fixture',name:'TEST FIXTURE • Completed tournament',status:'finished',section:'finished',
+      registration_status:'closed'},
+  ];
+  await page.route('**/api/events', route => route.fulfill({json:{events,sources:[],generated_at:'2026-11-22T00:00:00Z'}}));
+  await page.setViewportSize({width:390,height:844});
+  await page.goto('/');
+  await expect(page.locator('.event-card')).toHaveCount(2);
+  await expect(page.getByRole('heading',{name:base.name})).toHaveCount(0);
+  await expect(page.locator('.state-schedule_tba')).toHaveText('Schedule TBA');
+  await expect(page.locator('.state-undated_lead')).toHaveText('Undated search lead');
+  await expect(page.locator('.event-undated_lead .dates')).toContainText('Not confirmed');
+  await expect(page.locator('.event-undated_lead .dates')).not.toContainText('Schedule TBA');
+  await page.getByRole('tab',{name:/Past & finished/}).click();
+  await expect(page.locator('.event-card')).toHaveCount(2);
+  const past = page.locator('.event-past_date');
+  await expect(past.locator('.badge')).toHaveText('Past date · completion unconfirmed');
+  await expect(past.locator('.registration > strong')).toHaveText('Registration unconfirmed');
+  await expect(past.locator('.dates')).toContainText('Tournament date');
+  await expect(past.locator('.dates')).toContainText('February 14, 2024');
+  await expect(past.locator('.dates')).not.toContainText('12:00');
+  await expect(past.locator('.dates')).not.toContainText('Competition starts');
+  await expect(page.locator('.event-finished .badge')).toHaveText('Finished');
+  await page.getByRole('combobox',{name:'Registration',exact:true}).selectOption('unknown');
+  await expect(page.locator('.event-card')).toHaveCount(1);
+  await expect(page.locator('.event-past_date')).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
 });

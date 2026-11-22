@@ -1,0 +1,150 @@
+{
+  "checked_at": "2026-11-21T17:29:19.665508+00:00",
+  "cost": "PHP 0 API fees; anonymous public GET only",
+  "official_documentation": [
+    {
+      "url": "https://help.luma.com/p/ical-syncing",
+      "finding": "City subscriptions include upcoming approved events, refreshed by the subscriber."
+    },
+    {
+      "url": "https://help.luma.com/p/searching-for-events",
+      "finding": "City discovery excludes private and online events and does not promise all public events."
+    },
+    {
+      "url": "https://help.luma.com/p/luma-api",
+      "finding": "Authenticated management API requires Luma Plus; not used."
+    }
+  ],
+  "public_subscription_link_provenance": {
+    "starting_url": "https://luma.com/manila",
+    "control": "Add iCal Subscription",
+    "public_javascript": "https://luma.com/_next/static/chunks/0u7i6g4x378q9.js",
+    "config_javascript": "https://luma.com/_next/static/chunks/2tz-oh_l8mggm.js",
+    "template": "https://api.luma.com/ics/get?entity=discover&id=<city public api_id>",
+    "city_public_id": "discplace-XeAvnK62YmCW54R",
+    "subscription_url": "https://api.luma.com/ics/get?entity=discover&id=discplace-XeAvnK62YmCW54R",
+    "not_used": "Undocumented event/page pagination JSON endpoints"
+  },
+  "route_checks": [
+    {
+      "url": "https://luma.com/manila",
+      "status": "ok",
+      "bytes": 170548,
+      "rendered_event_links": 6,
+      "advertised_event_count": 7,
+      "limit": "6 rendered links of 7 advertised; no supported public pagination verified"
+    },
+    {
+      "url": "https://api.luma.com/ics/get?entity=discover&id=discplace-XeAvnK62YmCW54R",
+      "status": "ok",
+      "bytes": 7210,
+      "events": 6,
+      "refresh_interval": "PT12H",
+      "description_limit": "Descriptions can be truncated; full detail pages required"
+    }
+  ],
+  "live_adapter": {
+    "checked_at": "2026-11-21T17:28:26.398118+00:00",
+    "source": {
+      "id": "luma-manila",
+      "name": "Luma Manila",
+      "url": "https://luma.com/manila",
+      "ical_url": "https://api.luma.com/ics/get?entity=discover&id=discplace-XeAvnK62YmCW54R",
+      "max_items": 60
+    },
+    "result": {
+      "announcements": [],
+      "discovered": 6,
+      "warnings": [],
+      "deleted": [],
+      "message": "Public Luma ical returned 6 event links; read descriptions before competition filtering. No login, cookies, or paid API.",
+      "decisions": [
+        {
+          "url": "https://luma.com/frrzkej9",
+          "title": "AMIHAN Festival: Community Sundown x Longevity Labs",
+          "decision": "rejected",
+          "reason": "No actual cybersecurity CTF evidence in title and description"
+        },
+        {
+          "url": "https://luma.com/wg80zcep",
+          "title": "FL Demo Day 2026",
+          "decision": "rejected",
+          "reason": "No actual cybersecurity CTF evidence in title and description"
+        },
+        {
+          "url": "https://luma.com/gr584o3s",
+          "title": "ClaudePH Community Launch",
+          "decision": "rejected",
+          "reason": "No actual cybersecurity CTF evidence in title and description"
+        },
+        {
+          "url": "https://luma.com/4hbe9akr",
+          "title": "Build with AI: Coding Workshops for SMEs (Manila)",
+          "decision": "rejected",
+          "reason": "No actual cybersecurity CTF evidence in title and description"
+        },
+        {
+          "url": "https://luma.com/t9omwvnr",
+          "title": "U.S.-ASEAN Futures Fair",
+          "decision": "rejected",
+          "reason": "No actual cybersecurity CTF evidence in title and description"
+        },
+        {
+          "url": "https://luma.com/68naipgp",
+          "title": "Slow Sunday Brunch",
+          "decision": "rejected",
+          "reason": "No actual cybersecurity CTF evidence in title and description"
+        }
+      ],
+      "route_checks": [
+        {
+          "route": "ical",
+          "url": "https://api.luma.com/ics/get?entity=discover&id=discplace-XeAvnK62YmCW54R",
+          "status": "ok",
+          "entries": 6,
+          "event_links": 6
+        }
+      ],
+      "publisher_leads": []
+    }
+  },
+  "historical_evaluation_only": {
+    "url": "https://luma.com/akv0l0o1",
+    "discovery_claim": false,
+    "reason": "Loaded from frozen benchmark only after city discovery experiment; upcoming city subscription returned none of this historical event. No code/config/query seeds use this URL or host names.",
+    "status": "public page read succeeded",
+    "hosts": [
+      {
+        "name": "CyberPH",
+        "account_id": "luma:usr-Xf0H4hjDiw6f0tp",
+        "public_url": "https://luma.com/user/usr-Xf0H4hjDiw6f0tp"
+      },
+      {
+        "name": "WorkFlow PH",
+        "account_id": "luma:usr-eL9qAMoNyJQl2iV",
+        "public_url": "https://luma.com/user/usr-eL9qAMoNyJQl2iV"
+      }
+    ],
+    "sponsors": [
+      "Tutorials Dojo",
+      "Appkademiya",
+      "Prosple"
+    ],
+    "sponsor_public_links": [],
+    "calendar_context": "October 4 calendar item is kickoff context per frozen benchmark, not independently confirmed complete CTF window. Current raw registration_availability=open is stale for this past item and does not establish timely registration.",
+    "publication_timestamp": null,
+    "parser_result": {
+      "accepted": false,
+      "reason": "CTF topic or workshop without competition evidence",
+      "interpretation": "Technical CTF description lacks explicit competition/tournament/contest/compete/scoreboard/leaderboard/prize cue required by the conservative new Luma adapter. A separate recap may establish the actual past competition. This historical direct opening is not collector discovery."
+    }
+  },
+  "conclusions": {
+    "city_monitor_working": true,
+    "actual_ctfs_found": 0,
+    "new_publisher_candidates_from_city": 0,
+    "timely_ctf_discovery": false,
+    "blocked_or_rate_limited_checks_this_probe": 0,
+    "no_match_interpretation": "Six ordinary events successfully inspected; no current CTF in this observed slice. Does not prove Luma has no CTFs."
+  }
+}

@@ -27,7 +27,7 @@ def publisher_context(source, text):
     source['organizer_key'] = norm(source['organizer']) if match else 'unconfirmed'
     source['_organizer_quote'] = match[0] if match else None
     venue = next((m for m in PH_VENUE.finditer(text) if PH_PLACES.search(m[0])), None)
-    source['_scope_quote'] = venue[0] if venue else None
+    source['_scope_quote'] = venue[0] if venue else source.get('_relationship_scope_quote')
     # A generic invitation shared by a Philippine school is insufficient. A
     # local venue or separately verified organizer relationship is required.
     if not source['_scope_quote'] and not source.get('scope_pattern'):
@@ -36,7 +36,7 @@ def publisher_context(source, text):
 
 
 def body_event_context(text):
-    return re.search(r'(?:Event Details\s*:?\s*Date|Competition dates?|CTF dates?|Event date)[ \t]*:[ \t]*(?:\n[ \t]*)?[^\n]+|\bHappening on\s+[A-Za-z]+\s+\d{1,2},?\s+20\d{2}', text, re.I)
+    return re.search(r'(?:Event Details\s*:?\s*Date|Tournament dates?|Competition dates?|CTF dates?|Event date)[ \t]*:[ \t]*(?:\n[ \t]*)?[^\n]+|\bHappening on\s+[A-Za-z]+\s+\d{1,2},?\s+20\d{2}', text, re.I)
 
 
 def body_event_year(title, text):
@@ -47,6 +47,32 @@ def body_event_year(title, text):
     # borrow the posting date, workshop date, or a footer's copyright year.
     detail = body_event_context(text)
     return re.search(r'\b20\d{2}\b', detail[0]) if detail else None
+
+
+def tournament_day(title, text):
+    """Retain a calendar day without manufacturing start/end clock times.
+
+    A standalone tournament invitation may put Date under Event Details, with
+    HTML splitting the label from its value. Parent conference and teaching
+    agendas do not establish the date of a CTF track merely by mentioning one.
+    """
+    explicit = re.search(r'(?im)^\s*(?:Tournament|Competition|CTF) date\s*:[ \t]*(?:\n[ \t]*)?([^\n]+)', text)
+    if explicit:
+        value = parse_moment(explicit[1])
+        if value['precision'] == 'date':
+            return value, explicit[0].strip()
+    if not CONTEST.search(text):
+        return None
+    if re.search(r'\b(?:conference|summit|festival|meetup)\b', title + '\n' + text, re.I):
+        return None
+    if re.search(r'\b(?:hackathon|workshop|training|seminar|webinar|bootcamp|course)\b', title, re.I):
+        return None
+    block = re.search(r'(?im)^[ \t]*Event Details[ \t]*:[ \t]*\n[ \t]*Date[ \t]*:[ \t]*(?:\n[ \t]*)?([^\n]+)', text)
+    if block:
+        value = parse_moment(block[1])
+        if value['precision'] == 'date':
+            return value, block[0].strip()
+    return None
 
 
 def clean_html(html):
@@ -131,7 +157,7 @@ def extract(title, text, url, source, *, posted_at=None, links=None, access='ful
     key, name = identity
     facts = {'name': name, 'organizer': source['organizer'], 'region': key['region'],
              'format': 'unknown', 'eligibility': None, 'registration_url': None,
-             'start': None, 'end': None, 'deadline': None, 'registration_opens': None,
+             'start': None, 'end': None, 'competition_date': None, 'deadline': None, 'registration_opens': None,
              'summary': None, 'lifecycle': None, 'registration_state': None}
     announcement = {'url': publisher_url(url, source.get('url_normalization')), 'title': title[:240], 'posted_at': posted_at,
                     'access': access, 'kind': 'announcement', 'external_id': external_id,
@@ -165,11 +191,12 @@ def extract(title, text, url, source, *, posted_at=None, links=None, access='ful
             r'\b(?:if|unless|not|never|may|might|could|whether)\b', sentence, re.I)
             for sentence in re.split(r'[.!?\n]', combined))
 
+    completion_pattern = r'\b(?:successfully concluded|has concluded|competition concluded|competition has ended|CTF has ended|(?:event|competition|CTF) closed with (?:the )?(?:awarding|award|closing))\b'
     if asserted_status(r'\b(?:cancelled|canceled)\b'):
         facts['lifecycle'], announcement['kind'] = 'cancelled', 'cancellation'
     elif asserted_status(r'\bpostponed\b'):
         facts['lifecycle'], announcement['kind'] = 'postponed', 'postponement'
-    elif asserted_status(r'\b(?:successfully concluded|has concluded|competition concluded|competition has ended|CTF has ended)\b') or (re.search(r'\bCTF (?:champions?|crown)\b', combined, re.I) and re.search(r'\b(?:congratulations|winning team|taking the CTF crown)\b', combined, re.I)):
+    elif asserted_status(completion_pattern) or (re.search(r'\bCTF (?:champions?|crown)\b', combined, re.I) and re.search(r'\b(?:congratulations|winning team|taking the CTF crown)\b', combined, re.I)):
         facts['lifecycle'], announcement['kind'] = 'finished', 'completion'
     elif re.search(r'\brescheduled\b', combined, re.I):
         facts['lifecycle'], announcement['kind'] = 'scheduled', 'reschedule'
@@ -185,6 +212,20 @@ def extract(title, text, url, source, *, posted_at=None, links=None, access='ful
         facts['registration_state'], announcement['kind'] = 'open', 'registration'
     elif re.search(r'\bregistration\s+(?:opens?|opening)\s+(?:soon|on)\b', combined, re.I):
         facts['registration_state'] = 'not_yet_open'
+    if facts['lifecycle'] == 'finished':
+        # A retrospective completion notice cannot advertise stale registration.
+        facts['registration_state'] = 'closed'
+        # Quote the assertion itself. Earlier workshop prose containing "ended"
+        # must not consume the excerpt budget and hide the completion evidence.
+        for sentence in re.split(r'[.!?\n]', combined):
+            match = re.search(completion_pattern, sentence, re.I)
+            if match and not re.search(r'\b(?:if|unless|not|never|may|might|could|whether)\b', sentence, re.I):
+                quote = sentence[max(0, match.start() - 100):match.end() + 400].strip()
+                cite('lifecycle', quote)
+                cite('registration_state', quote)
+                break
+        if source.get('publisher_role') in ('resharer', 'both'):
+            announcement['kind'] = 'recap'
     if re.search(r'\binvite[- ]only\b|\binvitation only\b', combined, re.I):
         facts['eligibility'] = 'Invitation only. See the organizer’s announcement for selection rules.'
     elif re.search(r'\bcampus[- ]only\b', combined, re.I):
@@ -210,6 +251,10 @@ def extract(title, text, url, source, *, posted_at=None, links=None, access='ful
             cite('start', dates[0].strip())
             if facts['end']:
                 cite('end', dates[0].strip())
+    day = tournament_day(title, text)
+    if day and not facts['start'] and not facts['end']:
+        facts['competition_date'], quote = day
+        cite('competition_date', quote)
     eligible = re.search(r'(?:^|\n)\s*(?:Eligibility|Eligible participants|Open to)\s*:\s*([^\n]+)', text, re.I)
     if eligible:
         facts['eligibility'] = eligible[1][:600]
@@ -243,8 +288,8 @@ def extract(title, text, url, source, *, posted_at=None, links=None, access='ful
     # it. Unknown values receive no supporting claim.
     patterns = {'format': r'\bonline\b|\b(?:in.person|onsite|hybrid)\b',
                 'eligibility': r'invite|invitation|campus.only',
-                'registration_state': r'registr|register',
-                'lifecycle': r'cancel|postpon|conclud|ended|champion|crown|rescheduled'}
+                'registration_state': r'registr|register|closed with.*award|has ended|concluded',
+                'lifecycle': r'cancel|postpon|conclud|ended|champion|crown|rescheduled|closed with.*award'}
     for field, pattern in patterns.items():
         if facts.get(field) not in (None, 'unknown') and field not in proof:
             line = ' '.join(line.strip() for line in combined.splitlines() if re.search(pattern, line, re.I))
@@ -266,4 +311,5 @@ def extract(title, text, url, source, *, posted_at=None, links=None, access='ful
         cite('posted_at', f'Publisher publication metadata: {posted_at}')
     if source.get('_scope_quote'):
         announcement['scope_evidence'] = {'url': announcement['url'], 'quote': source['_scope_quote'][:600]}
+        proof['philippine_connection'] = announcement['scope_evidence']
     return announcement
