@@ -229,7 +229,7 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 }, { name: 
     const topic = page.getByRole('combobox', { name: 'Topic', exact: true });
     await expect(topic).toHaveValue('');
     await expect(topic.locator('option')).toHaveText([
-      'All topics', 'Cybersecurity', 'AI & Data', 'Cloud & DevOps',
+      'All topics', 'Cybersecurity', 'AI & Data', 'Cloud', 'DevOps',
       'Software Development', 'Networking & Systems', 'Community', 'General IT',
     ]);
 
@@ -594,6 +594,8 @@ test('conflicting dates stay visible outside Upcoming and Past (browser-only fix
   await page.getByRole('tab',{name:/Date unconfirmed/}).focus();
   await page.keyboard.press('ArrowRight');
   await expect(page.getByRole('tab',{name:/Watchlist/})).toHaveAttribute('aria-selected','true');
+  await page.keyboard.press('ArrowRight');
+  await expect(page.getByRole('tab',{name:/Archived leads/})).toHaveAttribute('aria-selected','true');
   await page.keyboard.press('ArrowRight');
   await expect(page.getByRole('tab',{name:/Upcoming & live/})).toHaveAttribute('aria-selected','true');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();

@@ -92,7 +92,9 @@ def collect(db, sources, *, client=None, adapters=None, now=None):
                         added += int(created)
                         discoveries.append({'event_id': event_id, 'url': announcement['url'],
                                             'path': announcement.get('discovery_path', [source['url'], announcement['url']]),
-                                            'related_links': announcement.get('related_links', [])})
+                                            'related_links': announcement.get('related_links', []),
+                                            'parsed_fields': announcement.get('facts', {}),
+                                            'field_evidence': announcement.get('field_evidence', {})})
                     for external_id in result.deleted:
                         storage.withdraw(db, sid, external_id, observed_stamp)
                     leads = [{**lead, 'evidence': {**lead.get('evidence', {}),

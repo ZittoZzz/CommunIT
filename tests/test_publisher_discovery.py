@@ -103,7 +103,9 @@ def test_complete_feed_rechecks_edits_and_retains_first_seen_without_duplicate()
     client.pages[FEED] = FetchError('HTTP 503')
     failed = collect(db, [SOURCE], client=client, now=NOW)
     assert failed['sources'][0]['status'] == 'error'
-    assert events(db, NOW)[0] == record
+    after = events(db, NOW)[0]
+    assert after['review']['required']
+    assert {k: v for k, v in after.items() if k != 'review'} == {k: v for k, v in record.items() if k != 'review'}
     db.close()
 
 

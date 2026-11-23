@@ -26,7 +26,7 @@ def _validate_source(source, supported):
         raise SourceConfigurationError(f"Source {source['id']}: enabled must be boolean")
 
 
-def load_sources(config_path, *, supported_adapters=None):
+def load_sources(config_path, *, supported_adapters=None, _parents=()):
     """Merge legacy sources with enabled and disabled publisher index records.
 
     An index entry references one legacy source using ``source_id``, or defines
@@ -38,11 +38,24 @@ def load_sources(config_path, *, supported_adapters=None):
         from .adapters import ADAPTERS
         supported_adapters = ADAPTERS
     supported = set(supported_adapters) | {'restricted'}
-    config_path = Path(config_path)
+    config_path = Path(config_path).resolve()
+    if config_path in _parents:
+        raise SourceConfigurationError('Source configuration inheritance cycle')
     config = json.loads(config_path.read_text())
     if not isinstance(config.get('sources'), list):
         raise SourceConfigurationError('Configuration requires a sources list')
     sources = deepcopy(config['sources'])
+    if config.get('extends'):
+        if not isinstance(config['extends'], str):
+            raise SourceConfigurationError('extends must be a configuration path')
+        parent = load_sources(config_path.parent / config['extends'], supported_adapters=supported,
+                              _parents=(*_parents, config_path))
+        excluded = config.get('exclude_sources', [])
+        if not isinstance(excluded, list) or not all(isinstance(s, str) for s in excluded):
+            raise SourceConfigurationError('exclude_sources must be a list of source IDs')
+        if set(excluded) - {s['id'] for s in parent}:
+            raise SourceConfigurationError('exclude_sources contains an unknown source ID')
+        sources = [s for s in parent if s['id'] not in excluded] + sources
     by_id = {}
     for source in sources:
         _validate_source(source, supported)
@@ -51,7 +64,8 @@ def load_sources(config_path, *, supported_adapters=None):
         by_id[source['id']] = source
     index_name = config.get('publisher_index')
     if not index_name:
-        return sources
+        return sorted(sources, key=lambda source: 2 if source['kind'] in ('tavily', 'brave') else
+                      1 if source['kind'] == 'opportunity_search' else 0)
     if not isinstance(index_name, str):
         raise SourceConfigurationError('publisher_index must be a file path')
     index_path = config_path.parent / index_name
@@ -101,4 +115,4 @@ def load_sources(config_path, *, supported_adapters=None):
         })
     # Direct recurring publishers run before supplemental search, including
     # when monitors were appended from the index.
-    return sorted(sources, key=lambda source: source['kind'] in ('tavily', 'brave'))
+    return sorted(sources, key=lambda source: source['kind'] in ('tavily', 'brave', 'opportunity_search'))

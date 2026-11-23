@@ -12,7 +12,7 @@ from urllib.parse import parse_qs, urljoin, urlsplit
 
 from bs4 import BeautifulSoup, NavigableString, Tag
 
-from .domain import canonical_url, instant, manila_day, region_from
+from .domain import canonical_url, instant, manila_day, norm, parse_moment, region_from
 from .event_text import audience_statements, retain_description
 from .luma import (LUMA_HOSTS, community_topic, event_url, manila_moment,
                    page_data, parse_community_event, public_host, worldwide_participation)
@@ -42,13 +42,14 @@ def primary_event_url(url):
         found = re.fullmatch(r'/events/details/([^/]+)(?:/cohost-[^/]+)?/?', p.path)
         if found:
             return 'https://gdg.community.dev/events/details/' + found[1] + '/'
-    if p.hostname and p.hostname.endswith('.devpost.com') and p.hostname != 'www.devpost.com':
+    if p.hostname and p.hostname.endswith('.devpost.com') and p.hostname not in (
+            'www.devpost.com', 'info.devpost.com', 'help.devpost.com', 'blog.devpost.com', 'secure.devpost.com'):
         if p.path in ('/', '/overview', '/rules', '/details'):
             return 'https://' + p.hostname + '/'
     return None
 
 
-def page_event_links(raw, url):
+def page_event_links(raw, url, *, external_pages=False):
     """Only actual hub links; event detail recommendations are not discovery."""
     soup = BeautifulSoup(raw, 'html.parser')
     host = urlsplit(url).hostname
@@ -58,6 +59,16 @@ def page_event_links(raw, url):
             page_data(raw, 'event')
             return []
         except FetchError:
+            pass
+        # Current category/city pages have a separate public Next.js shape.
+        script = soup.select_one('script#__NEXT_DATA__')
+        try:
+            props = json.loads(script.string or script.get_text())['props']['pageProps']
+            if props.get('place') and props.get('categoryPage') and isinstance(props.get('initialEvents'), dict):
+                entries = props['initialEvents'].get('entries', [])
+                return list(dict.fromkeys(event_url(e.get('event', {}).get('url')) for e in entries
+                                          if event_url(e.get('event', {}).get('url'))))
+        except (TypeError, ValueError, KeyError, AttributeError):
             pass
         for kind in ('calendar', 'discover-place'):
             try:
@@ -75,10 +86,26 @@ def page_event_links(raw, url):
         return list(dict.fromkeys(item for item in embedded if item))
     elif primary_event_url(url):
         return []
+    # A primary standalone event may link to tickets or speakers. Those are
+    # not a calendar and must not suppress verification of the event itself.
+    elif external_pages:
+        nodes = list(_events(soup))
+        own = [n for n in nodes if canonical_url(n.get('url', '')) == canonical_url(url)]
+        if own and any(urlsplit((n.get('organizer') or {}).get('url', '')).hostname == host
+                       for n in own if isinstance(n.get('organizer'), dict)):
+            return []
     linked = []
     for node in soup.select('a[href]'):
+        if node.find_parent(['nav', 'header', 'footer', 'aside']):
+            continue
         try:
-            linked.append(primary_event_url(urljoin(url, node['href'])))
+            target = canonical_url(urljoin(url, node['href']))
+            primary = primary_event_url(target)
+            if (not primary and external_pages and target
+                    and (node.select_one('time[datetime]') or re.search(r'\b(?:conference|hackathon|meetup|workshop|summit|community day)\b', node.get_text(' ', strip=True), re.I))
+                    and not urlsplit(target).path.lower().endswith(('.pdf', '.jpg', '.png'))):
+                primary = target
+            linked.append(primary)
         except ValueError:
             continue
     return list(dict.fromkeys(item for item in linked + embedded if item and item != primary_event_url(url)))
@@ -90,7 +117,28 @@ def _plain(value):
 
 def _description(soup, node):
     """Read the publisher's event section, excluding recommendations/footers."""
+    url = primary_event_url(node.get('url'))
+    if url and urlsplit(url).hostname == 'www.meetup.com':
+        # JSON-LD descriptions are often truncated, while rendered inline tags
+        # split a single eligibility sentence over many text nodes. The matched
+        # public Event record retains the full description without either loss.
+        script = soup.select_one('script#__NEXT_DATA__')
+        try:
+            props = json.loads(script.string or script.get_text())['props']['pageProps']
+            event_id = urlsplit(url).path.strip('/').split('/')[-1]
+            event = props.get('event') or {}
+            if str(event.get('id')) == event_id and isinstance(event.get('description'), str) and event['description'].strip():
+                return _plain(event['description'])
+        except (AttributeError, KeyError, TypeError, ValueError):
+            pass
     parts = [_plain(node.get('description'))]
+    for control in soup.select('button[aria-controls]'):
+        if control.get_text(' ', strip=True).lower() in ('about the conference', 'about this event'):
+            panel = soup.find(id=control['aria-controls'])
+            if panel:
+                # Introductory event paragraphs, excluding speaker biographies,
+                # talk recommendations and global subscription/footer forms.
+                parts.extend(p.get_text(' ', strip=True) for p in panel.select('p')[:1])
     heading = next((h for h in soup.select('h2,h3') if h.get_text(' ', strip=True).lower() in ('details', 'about this event')), None)
     if heading:
         strings = []
@@ -196,6 +244,30 @@ def _typed_deadlines(description):
     return fields
 
 
+def _meetup_group_scope(soup, url, node):
+    """An event's own PH group can host online; unrelated cache entries cannot."""
+    script = soup.select_one('script#__NEXT_DATA__')
+    try:
+        props = json.loads(script.string or script.get_text())['props']['pageProps']
+        identifier = urlsplit(url).path.strip('/').split('/')[-1]
+        direct = props.get('event') or {}
+        cache = props.get('__APOLLO_STATE__') or {}
+        event = cache.get('Event:' + identifier) or {}
+        if str(direct.get('id')) != identifier or str(event.get('id')) != identifier:
+            return None
+        reference = (event.get('group') or {}).get('__ref')
+        group = cache.get(reference) or {}
+        organizer = node.get('organizer') or {}
+        expected = canonical_url(organizer.get('url', '')).rstrip('/')
+        actual = canonical_url(group.get('link', '')).rstrip('/')
+        if (not reference or reference != 'Group:' + str(group.get('id')) or actual != expected
+                or str(group.get('country', '')).lower() not in ('ph', 'phl', 'philippines')):
+            return None
+        return f'Meetup Event:{identifier} group={reference}; link={actual}; country={group["country"]}; city={group.get("city", "")}'
+    except (TypeError, ValueError, KeyError, AttributeError):
+        return None
+
+
 def _meetup_state(soup, url, now, controls):
     """Capacity must refer to YES RSVPs, not the unrelated WAITLIST count."""
     script = soup.select_one('script#__NEXT_DATA__')
@@ -247,14 +319,19 @@ def _meetup_state(soup, url, now, controls):
 def _price(description):
     # Platform offer price=0 is often a default, even for paid/waitlist events.
     paid = re.search(r'\b(?:paid (?:ticketed )?event|paid tickets?|(?:registration fee|ticket price)\s*:?\s*(?:PHP|USD|EUR|GBP|₱|\$)\s*[1-9][\d,.]*|tickets? (?:cost|priced at))[^\n!?]*', description, re.I)
-    free = re.search(r'\b(?:free (?:admission|registration|tickets?|entry|event)|(?:admission|registration|tickets?|entry) (?:is|are) free|no (?:registration|admission|entry) fee|free of charge)\b', description, re.I)
+    free_pattern = re.compile(r'\b(?:free (?:admission|registration|tickets?|entry|event|(?:online )?(?:conference|meetup|workshop))|(?:admission|registration|tickets?|entry) (?:is|are) free|(?:this |the )?(?:event|meetup|workshop|conference) (?:is|will be) (?:totally |completely |100% )?free|no (?:registration|admission|entry) fee|free of charge)\b', re.I)
     if paid and not re.search(r'\b(?:no|not a|not|without)\s*$', description[max(0, paid.start() - 15):paid.start()], re.I):
         return {'kind': 'paid'}, paid[0]
-    if free:
-        sentence = re.split(r'[.!?\n]', description[free.start():], maxsplit=1)[0]
-        if re.search(r'\b(?:only|members?|students?|fellows?|eligible|limited to|subject to|with (?:a|an|the) (?:membership|code))\b', sentence, re.I):
-            return {'kind': 'unknown'}, None
-        return {'kind': 'free', 'amount': 0}, free[0]
+    for statement in re.finditer(r'([^.!?\n]+)([.!?]?)', description):
+        sentence = statement[1]
+        free = free_pattern.search(sentence)
+        if not free or statement[2] == '?':
+            continue
+        # Qualifiers before the matched phrase matter too: "Only members:
+        # this event is free" and "not a free conference" are not free entry.
+        if re.search(r"\b(?:not|never|isn['’]t|aren['’]t|wasn['’]t|won['’]t|if|unless|except|only|members?|students?|fellows?|sponsors?|eligible|limited to|subject to|with (?:a|an|the) (?:membership|code))\b", sentence, re.I):
+            continue
+        return {'kind': 'free', 'amount': 0}, sentence.strip()
     return {'kind': 'unknown'}, None
 
 
@@ -268,7 +345,9 @@ def _structured_event(raw, url, source, now):
     nodes = list(_events(soup))
     if not nodes:
         raise FetchError('Primary Event structured metadata unavailable; page may require JavaScript')
-    matching = [node for node in nodes if primary_event_url(node.get('url', url)) == url]
+    external = source.get('allow_external_pages') and not primary_event_url(url)
+    identity_url = canonical_url if external else primary_event_url
+    matching = [node for node in nodes if identity_url(node.get('url', url)) == url]
     if len(matching) > 1:
         raise FetchError('Ambiguous primary Event records match this URL')
     if not matching:
@@ -277,6 +356,8 @@ def _structured_event(raw, url, source, now):
     title = _plain(node.get('name'))
     if not title:
         raise FetchError('Primary Event name is unavailable')
+    if external and norm(title) not in {norm(h.get_text(' ', strip=True)) for h in soup.select('h1')}:
+        return None, 'Standalone Event metadata is not corroborated by the primary visible heading'
     if not node.get('url'):
         headings = {_plain(h.get_text(' ', strip=True)).casefold() for h in soup.select('h1')}
         if title.casefold() not in headings:
@@ -286,9 +367,21 @@ def _structured_event(raw, url, source, now):
     if not topic:
         return None, 'No supported AI, cybersecurity or general IT topic in the primary event text'
     geography, mode, scope_quote = _scope(node, description)
+    public_broadcast = None
+    if external and mode == 'online' and re.search(r'\bfree online conference\b', description, re.I):
+        broadcast = re.search(r'All talks premiere on YouTube[^.]*', description, re.I)
+        watch = next((a for a in soup.select('a[href]') if urlsplit(a['href']).hostname in ('www.youtube.com', 'youtube.com')
+                      and re.fullmatch(r'Watch (?:all )?talks', a.get_text(' ', strip=True), re.I)), None)
+        if broadcast and watch and not re.search(r'\b(?:restricted|members only|residents only)\b', description, re.I):
+            public_broadcast = (watch['href'], broadcast[0])
+            geography, scope_quote = 'international_online', broadcast[0] + '; public viewing link: ' + watch['href']
+    if mode == 'online' and urlsplit(url).hostname == 'www.meetup.com':
+        group_scope = _meetup_group_scope(soup, url, node)
+        if group_scope:
+            geography, scope_quote = 'PH', group_scope
     if not geography:
         return None, 'No Philippine physical venue or explicitly worldwide online participation'
-    if geography == 'PH' and topic == 'cybersecurity':
+    if geography == 'PH' and topic == 'cybersecurity' and urlsplit(url).hostname != 'www.meetup.com':
         return None, 'Philippine cybersecurity events require the separate competition verifier'
     organizer = node.get('organizer') or {}
     if isinstance(organizer, list):
@@ -297,6 +390,8 @@ def _structured_event(raw, url, source, now):
     organizer_url = canonical_url(organizer.get('url') or '') if isinstance(organizer, dict) else None
     if not name or not organizer_url:
         return None, 'Primary event organizer identity is unavailable'
+    if external and urlsplit(organizer_url).hostname.removeprefix('www.') != urlsplit(url).hostname.removeprefix('www.'):
+        return None, 'Standalone event publisher is not corroborated as its organizer; follow the primary organizer link'
     start = manila_moment(node.get('startDate') if isinstance(node.get('startDate'), str) else None)
     end = manila_moment(node.get('endDate') if isinstance(node.get('endDate'), str) else None)
     if not start.get('value'):
@@ -344,6 +439,9 @@ def _structured_event(raw, url, source, now):
              'registration_state': state, 'registration_url': url if controls else None,
              'organizer_event_url': url, 'eligibility': None, 'price': price,
              'account_required': None, 'summary': None, 'lifecycle': None}
+    if public_broadcast:
+        facts['summary'] = 'Free online premiere. Public YouTube viewing link: ' + public_broadcast[0]
+        facts['registration_url'] = public_broadcast[0]
     proof = {}
     def cite(field, quote):
         proof[field] = {'url': url, 'quote': quote[:600]}
@@ -368,6 +466,9 @@ def _structured_event(raw, url, source, now):
             proof['registration_state']['basis'] = 'live_registration_widget'
     if controls:
         cite('registration_url', 'Public event action: ' + '; '.join(label + (' [enabled]' if enabled else ' [disabled]') for _, label, enabled in controls))
+    if public_broadcast:
+        cite('registration_url', public_broadcast[1] + '; Watch all talks: ' + public_broadcast[0])
+        cite('summary', public_broadcast[1])
     if price_quote:
         cite('price', price_quote)
     eligibility = _audience(description)
@@ -378,10 +479,27 @@ def _structured_event(raw, url, source, now):
     if status in ('EventCancelled', 'EventPostponed'):
         facts['lifecycle'] = 'cancelled' if status == 'EventCancelled' else 'postponed'
         cite('lifecycle', 'Schema.org eventStatus=' + status)
-    platform = 'meetup' if host == 'www.meetup.com' else 'gdg'
-    event_id = urlsplit(url).path.strip('/').split('/')[-1]
+    if host == 'www.meetup.com':
+        # This is the whole Meetup event. Do not label its agenda bounds as a
+        # separate CTF's schedule or use a CTF track date as a reschedule.
+        from .extract import conflicting_dates
+        claims = [{'field': 'start', 'date': start, 'quote': proof['start']['quote']}]
+        for match in re.finditer(
+                r'(?im)^[ \t*]*(?:Happening on\s+|Event date[ \t*]*:[ \t*]*)([A-Za-z]+\s+\d{1,2},?\s+20\d{2}|20\d{2}-\d{2}-\d{2})[^\n]*', description):
+            claims.append({'field': 'start', 'date': parse_moment(match[1]), 'quote': match[0].strip()})
+        conflicts = conflicting_dates(claims)
+        facts['date_conflicts'] = conflicts
+        if conflicts:
+            facts['start'] = facts['end'] = facts['competition_date'] = None
+            facts['registration_state'] = 'unknown'
+            state = 'unknown'
+            for field in ('start', 'end', 'competition_date', 'registration_state'):
+                proof.pop(field, None)
+            cite('date_conflicts', '\n'.join(c['quote'] for c in conflicts))
+    platform = 'meetup' if host == 'www.meetup.com' else 'web' if external else 'gdg'
+    event_id = url if external else urlsplit(url).path.strip('/').split('/')[-1]
     return {'url': url, 'external_id': platform + ':' + event_id, 'title': title,
-            'posted_at': None, 'access': 'full', 'official': True,
+            'posted_at': None, 'access': 'full', 'official': True, 'verification_method': 'event_page',
             'kind': 'registration' if state in ('open', 'approval_required') else 'announcement',
             'identity': {'organizer_key': platform + ':' + organizer_url, 'series': platform + ' event',
                          'edition': event_id, 'region': 'Philippines' if geography == 'PH' else 'International online', 'stage': 'main'},
@@ -466,6 +584,12 @@ def verify_page(raw, url, source, client, now):
 
 def _verify_page(raw, url, source, client, now):
     normalized = primary_event_url(url)
+    if not normalized and source.get('allow_external_pages'):
+        from .standalone_event import parse_event as standalone
+        announcement, reason = standalone(raw, canonical_url(url), source, now)
+        if announcement:
+            return announcement, reason
+        return _structured_event(raw, canonical_url(url), source, now)
     if not normalized:
         return None, 'Not a supported primary event URL'
     host = urlsplit(normalized).hostname
@@ -485,5 +609,9 @@ def _verify_page(raw, url, source, client, now):
         return _structured_event(raw, normalized, source, now)
     if host and host.endswith('.devpost.com'):
         from .devpost import parse_event
-        return parse_event(raw, normalized, source, now)
+        soup = BeautifulSoup(raw, 'html.parser')
+        rules_url = normalized.rstrip('/') + '/rules'
+        linked = any(canonical_url(urljoin(normalized, a['href'])) == rules_url for a in soup.select('a[href]'))
+        rules_raw = client.public_page(rules_url, allowed_hosts=[host]) if linked and client else None
+        return parse_event(raw, normalized, source, now, rules_raw=rules_raw)
     return None, 'Devpost primary format is unsupported; eligibility, dates and signup are unverified'

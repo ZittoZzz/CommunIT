@@ -12,7 +12,8 @@ PROGRAM = re.compile(
     r'bring(?:s|ing)?\b[^.!?]{0,100}\btogether|meet (?:fellow |other )?(?:peers|developers))\b', re.I)
 REQUIREMENT = re.compile(
     r'\b(?:must|requires?|required|restricted to|limited to|students? only|members? only|'
-    r'only (?:students?|members?)|at least \d+|aged? \d+|minimum age)\b', re.I)
+    r'only (?:(?:currently )?enrolled )?(?:students?|members?)|exclusively for|'
+    r'at least \d+|aged? \d+|minimum age)\b', re.I)
 AUDIENCE = re.compile(
     r'\b(?:open to|designed for|aimed at|welcomes?|equip|empower)\s+'
     r'(?P<audience>(?:(?:all|aspiring|young|the|next generation of)\s+)?'
@@ -42,6 +43,8 @@ def audience_statements(text):
             else:
                 values.append((sentence, sentence))
         elif re.search(r'\bwhether you(?:\x27re| are)\b', sentence, re.I) and not program_sentence(sentence):
+            values.append((sentence, sentence))
+        elif re.search(r'^(?:please )?bring (?:your |an? )?(?:laptop|ID|identification)\b', sentence, re.I):
             values.append((sentence, sentence))
     return list(dict.fromkeys(values))
 

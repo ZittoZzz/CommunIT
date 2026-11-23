@@ -32,7 +32,7 @@ def announcement(quote, *, name='Community workshop', **overrides):
     ('Participants will build AI apps in this hands-on workshop.', ['ai_data', 'software_development']),
     ('AI app-building workshop.', ['ai_data', 'software_development']),
     ('Data science and data analytics workshop.', ['ai_data']),
-    ('Learn cloud computing, DevOps and Kubernetes.', ['cloud_devops']),
+    ('Learn cloud computing, DevOps and Kubernetes.', ['cloud', 'devops']),
     ('Software development and web development workshop.', ['software_development']),
     ('Computer networks, TCP/IP and system administration.', ['networking_systems']),
     ('A technology conference covering a broad range of tech topics.', ['general_it']),
@@ -229,8 +229,8 @@ def test_ai_workshop_with_explicit_community_showcase_matches_each_once():
 
 
 @pytest.mark.parametrize(('text', 'expected'), [
-    ('Cloud computing workshop with a networking break.', ['cloud_devops']),
-    ('Cloud computing workshop. Networking break: meet fellow developers and share projects.', ['cloud_devops']),
+    ('Cloud computing workshop with a networking break.', ['cloud']),
+    ('Cloud computing workshop. Networking break: meet fellow developers and share projects.', ['cloud']),
     ('We bring developers together at our recruitment-only job fair.', []),
     ('This is a job fair. Bring developers together to meet peers and share projects.', []),
     ('Meet local developers and employers to discuss job opportunities.', []),
@@ -284,7 +284,7 @@ def test_saved_program_fields_support_multiple_technical_subjects(field):
     facts, proof = project_content(payload)
     assert facts['description'] == text
     assert proof['description']['quote'] == text
-    assert project_topics([payload])[0] == ['ai_data', 'cloud_devops', 'software_development']
+    assert project_topics([payload])[0] == ['ai_data', 'cloud', 'software_development']
     if field == 'eligibility':
         assert facts['eligibility'] == 'Intended audience: student builders.'
         assert proof['eligibility']['quote'] == text
@@ -297,7 +297,7 @@ def test_legacy_program_recovery_keeps_real_requirements_without_writing_payload
     facts, _ = project_content(payload)
     assert facts['description'] == 'Learn AWS in hands-on workshops.'
     assert facts['eligibility'] == 'Students only.\nAttendees must bring a laptop.'
-    assert project_topics([payload])[0] == ['cloud_devops']
+    assert project_topics([payload])[0] == ['cloud']
     assert payload == original
 
 
@@ -319,7 +319,7 @@ def test_saved_legacy_program_recovery_through_normal_api_preserves_storage(tmp_
     before = conn.execute('SELECT payload, first_seen FROM announcements').fetchone()
     conn.close()
     row = create_app(path).test_client().get('/api/events').json['events'][0]
-    assert row['topics'] == ['ai_data', 'cloud_devops', 'software_development']
+    assert row['topics'] == ['ai_data', 'cloud', 'software_development']
     assert row['description'] == payload['facts']['eligibility']
     assert row['eligibility'] == 'Intended audience: student builders.'
     conn = sqlite3.connect(f'file:{path}?mode=ro', uri=True)
@@ -340,7 +340,7 @@ def test_later_program_only_announcement_does_not_erase_known_admission_requirem
     assert row['eligibility'] == 'Students only.'
     assert row['field_evidence']['eligibility']['quote'] == 'Students only.'
     assert row['description'] == 'Learn AWS in hands-on workshops.'
-    assert row['topics'] == ['cloud_devops']
+    assert row['topics'] == ['cloud']
     conn.close()
 
 
@@ -355,7 +355,7 @@ def test_legacy_conference_agenda_heading_does_not_classify_whole_conference():
     assert payload == original
     # Supported program evidence can still supply topics; the organizer alone cannot.
     payload['field_evidence']['description'] = {'url': URL, 'quote': 'Learn cloud computing in hands-on workshops.'}
-    assert project_topics([payload])[0] == ['cloud_devops']
+    assert project_topics([payload])[0] == ['cloud']
 
 
 @pytest.mark.parametrize('series_name', ['HackForGov', 'Hack4Gov', 'Hack for Gov'])

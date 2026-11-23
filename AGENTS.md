@@ -5,6 +5,7 @@
 - Read [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) before making changes. It records the latest verified state, completed work, limitations, and evidence paths.
 - Use [RUN_LOCAL.md](RUN_LOCAL.md) for preview startup and shutdown. Some README examples use the main database and installed services; do not run those as routine development setup.
 - Inspect the current code, `git status`, and relevant configuration. This checkout contains substantial uncommitted work; preserve changes unrelated to the user's task.
+- Use `sources.community.json` for broad community collection tests; it excludes the legacy individual AWS seed. Deployment defaults remain separate. Keep benchmark scoring inputs outside runtime discovery.
 - Treat the handoff as a dated checkpoint. Verify current files, database selection, and running processes before acting; do not assume recorded counts or process IDs are still current.
 
 ## Scope and data boundaries
@@ -25,6 +26,8 @@
 - HackForGov/Hack4Gov series identity may establish Cybersecurity from a retained matching title citation, including a search-only lead. This does **not** verify its schedule, price, eligibility, organizer identity, or signup.
 - A bare CTF agenda heading does not establish a separate competition or make an entire conference a cybersecurity event. Preserve official titles and distinguish conference tickets from competition entry.
 - Keep unknown price, deadlines, eligibility, and signup facts unknown. Distinguish blocked/unreadable sources from successful checks with zero matches.
+- Review flags are public notes, not an admin system or a reason to hide a listing. Unresolved undated leads expire after 45 days from first discovery into Archived leads, still accessible through All events; expiry never asserts completion. Search rediscovery must not renew verification or the expiry clock.
+- Keep Cloud and DevOps separate and evidence-backed; a tool or organizer name alone does not establish either topic. Use the stable numeric Meetup event ID for revisions and duplicate display reconciliation. Preserve original rows/history, and retain conflicting source dates for review instead of choosing a convenient date.
 
 ## Verification and handoff maintenance
 

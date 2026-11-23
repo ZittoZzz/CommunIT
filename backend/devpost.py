@@ -149,6 +149,12 @@ def _eligibility(soup, body):
                 if re.search(r'\bPhilippines\b', countries, re.I):
                     return None, 'Primary eligibility excludes the Philippines: ' + text + ' (' + countries + ')'
             worldwide = True
+        elif re.search(r'^Specific\s+countries/territories excluded', text, re.I):
+            if not countries:
+                raise FetchError('Devpost country exceptions are not readable; Philippine eligibility is unverified')
+            if re.search(r'\bPhilippines\b', countries, re.I):
+                return None, 'Primary eligibility excludes the Philippines: ' + text + ' (' + countries + ')'
+            worldwide = True
         elif re.search(r'Only specific.*countries/territories included', text, re.I):
             philippines = bool(re.search(r'\bPhilippines\b', countries, re.I))
         items.append(text + (' (' + countries + ')' if countries else ''))
@@ -167,8 +173,8 @@ def _eligibility(soup, body):
     if not worldwide and not philippines:
         return None, 'Primary country eligibility does not establish participation from the Philippines'
     terms = [line.strip() for line in body.splitlines() if re.search(
-        r'\b(?:event|hackathon|competition|participation) (?:is )?(?:open to|for|designed for)|'
-        r'^\s*(?:open to|only .+ (?:may|can) participate|(?:all )?(?:participants?|applicants?|entrants?) must (?:be|reside|live|attend|have reached))', line, re.I)]
+        r'^\s*(?:the )?(?:event|hackathon|competition|participation) (?:is )?(?:open to|for|designed for)|'
+        r'^\s*(?:open to|individuals who are at least \d+|only .+ (?:may|can) participate|(?:all )?(?:participants?|applicants?|entrants?) must (?:be|reside|live|attend|have reached))', line, re.I)]
     # Keep platform and body audience conditions together. A contradictory
     # minimum age cannot be silently resolved in favour of either source.
     platform = '; '.join(items)
@@ -181,7 +187,7 @@ def _eligibility(soup, body):
     return '; '.join(dict.fromkeys([*items, *terms])), None
 
 
-def parse_event(raw, url, source, now):
+def parse_event(raw, url, source, now, *, rules_raw=None):
     """Return the normal announcement contract; window filtering stays upstream."""
     url = _root(url)
     if not url:
@@ -214,6 +220,17 @@ def parse_event(raw, url, source, now):
     body = '\n'.join(n.get_text(' ', strip=True) for article in articles for n in article.select('p,li,h2,h3,h4'))
     if not body:
         body = '\n'.join(n.get_text(' ', strip=True) for n in articles)
+    overview_body = body
+    rules_body = ''
+    if rules_raw:
+        rules = BeautifulSoup(rules_raw, 'html.parser')
+        section = rules.select_one('#challenge-rules, body.action-rules section#main')
+        if not section:
+            raise FetchError('Linked Devpost rules section is unreadable')
+        if not any(norm(title) in norm(h.get_text(' ', strip=True)) for h in rules.select('h1,h2,h3,h4,h5')):
+            raise FetchError('Linked Devpost rules do not identify the matching event')
+        rules_body = '\n'.join(n.get_text(' ', strip=True) for n in section.select('p,li,h2,h3,h4'))
+        body += '\n' + rules_body
     eligibility, reason = _eligibility(soup, body)
     if not eligibility:
         return None, reason
@@ -239,6 +256,18 @@ def parse_event(raw, url, source, now):
     if sidebar_date and not _same_date(sidebar_date, end):
         return None, 'Conflicting primary Devpost sidebar and Event end: ' + sidebar.get_text(' ', strip=True) + ' | endDate=' + str(data.get('endDate'))
     typed = _typed_dates(body, {'start': start, 'submission_deadline': sidebar_date})
+    # A labelled joint period explicitly establishes both cutoffs. A generic
+    # sidebar "Deadline" or Event end alone still establishes neither.
+    for match in re.finditer(r'Registration and Submission Period\s*:\s*([^\n]+)', rules_body, re.I):
+        period = re.split(r'\s+[–—-]\s+', match[1], maxsplit=1)
+        if len(period) != 2:
+            raise FetchError('Joint registration/submission period is unreadable')
+        final = re.sub(r'(?<=[\d])\s*\(', ' ', period[1]).replace(')', '')
+        cutoff, _ = _named_date(final, sidebar_date)
+        if not cutoff or not instant(cutoff) or not sidebar_date or not _same_date(cutoff, sidebar_date):
+            raise FetchError('Joint registration/submission period conflicts with the primary deadline or lacks timezone')
+        for field in ('deadline', 'submission_deadline'):
+            typed.setdefault(field, []).append((cutoff, match[0]))
     dates, date_proof = {}, {}
     for field, entries in typed.items():
         anchor = start if field == 'start' else sidebar_date if field == 'submission_deadline' else None
@@ -286,6 +315,9 @@ def parse_event(raw, url, source, now):
     if state == 'open' and (waitlist or approval):
         state, state_quote = ('waitlisted', waitlist[0]) if waitlist else ('approval_required', approval[0])
     price, price_quote = {'kind': 'unknown'}, None
+    no_purchase = re.search(r'\bNO PURCHASE OR PAYMENT NECESSARY TO ENTER(?: OR WIN)?\b', rules_body, re.I)
+    if no_purchase:
+        price, price_quote = {'kind': 'free', 'amount': 0}, no_purchase[0]
     for statement in re.finditer(r'([^.!?\n]+)([.!?]?)', body):
         sentence = statement[1]
         # Keep the terminator until after classification: a FAQ question such
@@ -313,7 +345,7 @@ def parse_event(raw, url, source, now):
             if currency in ('USD', 'PHP', 'EUR', 'GBP'):
                 price['currency'] = currency
         price_quote = ' | '.join(dict.fromkeys(line for _, line in fees))
-    account = re.search(r'[^\n.!?]*(?:must (?:have|create) (?:a )?Devpost account|Devpost account (?:is )?required|log in to (?:join|register))[^\n.!?]*', body, re.I)
+    account = re.search(r'[^\n.!?]*(?:must (?:have|create) (?:a )?Devpost account|Devpost account (?:is )?required|log in to (?:join|register)|to complete registration, sign up to create a free Devpost account)[^\n.!?]*', body, re.I)
     if account and re.search(r'\b(?:not|no|unless|if)\b', account[0], re.I):
         account = None
     facts = {'name': title, 'organizer': name, 'geography': 'international_online', 'region': 'International online',
@@ -337,7 +369,7 @@ def parse_event(raw, url, source, now):
     cite('format', 'Primary Event eventAttendanceMode=' + mode)
     cite('attendance_options', 'Primary Event eventAttendanceMode=' + mode)
     cite('topic', topic_quote)
-    retain_description(facts, proof, body, url)
+    retain_description(facts, proof, overview_body, url)
     cite('start', 'Primary Event startDate=' + str(data.get('startDate')))
     cite('end', 'Primary Event endDate=' + str(data.get('endDate')))
     for field, quote in date_proof.items():
@@ -350,6 +382,15 @@ def parse_event(raw, url, source, now):
         cite('price', price_quote)
     if account:
         cite('account_required', account[0])
+    if rules_body:
+        for field, evidence in proof.items():
+            if field in ('deadline', 'submission_deadline', 'price', 'account_required') and (
+                    evidence['quote'] in rules_body or 'Registration and Submission Period' in evidence['quote']):
+                evidence['url'] = url.rstrip('/') + '/rules'
+        if eligibility and any('individuals who are at least' in line.lower() for line in rules_body.splitlines()):
+            proof['eligibility']['sources'] = [{'url': url.rstrip('/') + '/rules',
+                                               'quote': line} for line in rules_body.splitlines()
+                                              if 'individuals who are at least' in line.lower()]
     lifecycle = str(data.get('eventStatus', '')).rsplit('/', 1)[-1]
     if lifecycle in ('EventCancelled', 'EventPostponed'):
         facts['lifecycle'] = 'cancelled' if lifecycle == 'EventCancelled' else 'postponed'

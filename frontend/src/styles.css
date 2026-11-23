@@ -36,3 +36,7 @@ main{padding-bottom:32px}.controls{position:relative;margin-top:-27px;background
 /* Manual fetching is available only in the enabled local preview. */
 .result-tools{flex-wrap:wrap;justify-content:flex-end}.fetch-events{min-height:40px;padding:8px 11px;font-size:14px;white-space:nowrap}.collection-status{margin:-5px 0 22px;padding:12px 15px;background:#eef5ed;border:1px solid #dbe7d8;border-radius:8px;color:#49634e;font-size:14px;line-height:1.6}.collection-status p+p{margin-top:4px}.collection-status .text-button{padding:5px 0}.collection-status [role=alert]{color:#7c4d32}.collection-status:empty{display:none}
 @media(max-width:600px){.results-heading{align-items:flex-start;flex-wrap:wrap;gap:12px}.result-tools{gap:10px;flex-wrap:wrap;justify-content:flex-start}.collection-status{font-size:13px}}
+
+.review-flag{background:#fff3dc;color:#795b22}.date-context{font-size:10px;line-height:1.2}.parent-schedule{margin:12px 0;color:#526b62}.parent-schedule>p{font-size:13px}.checked p{margin:5px 0}
+
+.review-note{background:#fff8eb;color:#795b22;padding:12px 14px;border-radius:7px;margin-top:16px;font-size:13px;line-height:1.5}.review-note p{display:flex;gap:7px;margin:5px 0}

@@ -14,6 +14,7 @@ from .domain import canonical_url, facebook_post, norm, parse_moment, region_fro
 from .extract import CTF, clean_html, extract
 from .network import FetchError, RateLimited
 from .event_context import attach_article_context
+from .verification import meetup_id
 
 
 class Result:
@@ -321,6 +322,7 @@ def rss(source, client, known, now):
         context, leads = publisher_context_from_content(source, soup, url)
         ann = extract(entry.get('title', ''), text, url, context, posted_at=posted, links=links)
         if ann:
+            ann['verification_method'] = 'feed'
             ann['publisher_leads'] = leads
             attach_article_context(ann, soup)
         elif source.get('publisher_news'):
@@ -331,18 +333,32 @@ def rss(source, client, known, now):
                                  'stage': 'feed_body', 'reason': 'Identified CTF announcement' if ann else 'Body/title does not establish an in-scope competition and edition'})
         # A feed often contains only a teaser or "read more". Follow new entries,
         # not just previously accepted articles. No individual URL configuration.
-        if source.get('follow_articles') and urlsplit(url).hostname in allowed:
+        if (source.get('follow_articles') or meetup_id(url)) and urlsplit(url).hostname in allowed:
             recheck[url] = (entry.get('title', ''), posted)
     # Re-fetch retained article pages even after an item leaves the feed.
     for row in known:
         if urlsplit(row['url']).hostname in allowed:
-            if source.get('content_complete') and row['url'] in paths:
+            if source.get('content_complete') and row['url'] in paths and not meetup_id(row['url']):
                 continue
             payload = json.loads(row['payload'])
             recheck.setdefault(row['url'], (payload['title'], payload.get('posted_at')))
             paths.setdefault(row['url'], payload.get('discovery_path', [source['url'], row['url']]))
     for url, (fallback_title, fallback_posted) in recheck.items():
         try:
+            if meetup_id(url):
+                from .opportunity_pages import primary_event_url, verify_page
+                # A failed read must not replace an already checked page with
+                # an older feed excerpt or advance its successful-read clock.
+                if url in retained_urls:
+                    result.announcements = [a for a in result.announcements if a['url'] != url]
+                ann, reason = verify_page(client.public_page(url, allowed), primary_event_url(url), source, client, now)
+                result.decisions.append({'url': url, 'title': ann['title'] if ann else fallback_title,
+                                         'accepted': bool(ann), 'stage': 'event_page', 'reason': reason})
+                if ann:
+                    ann['posted_at'] = fallback_posted
+                    result.announcements = [a for a in result.announcements if a['url'] != url]
+                    result.announcements.append(attach_discovery(ann, [], paths[url]))
+                continue
             soup, title, text, links = article_parts(client.public_page(url, allowed), url, source)
             article = soup.select_one(source['article_selector']) if source.get('article_selector') else soup.find('article') or soup.find('main') or soup
             context, leads = publisher_context_from_content(source, article, url)
@@ -487,4 +503,4 @@ from .luma import luma
 from .mlh import mlh
 from .opportunity_search import opportunity_search
 
-ADAPTERS = {'bluesky': bluesky, 'html': html, 'rss': rss, 'ctftime': ctftime, 'brave': brave, 'tavily': tavily, 'luma': luma, 'mlh': mlh, 'opportunity_search': opportunity_search}
+ADAPTERS = {'bluesky': bluesky, 'html': html, 'rss': rss, 'ctftime': ctftime, 'brave': brave, 'tavily': tavily, 'luma': luma, 'mlh': mlh, 'opportunity_search': opportunity_search, 'opportunity_calendar': opportunity_search}

@@ -13,7 +13,7 @@ from .event_text import project_content, title_quote, verified_organizer, legacy
 
 
 TOPICS = (
-    'cybersecurity', 'ai_data', 'cloud_devops', 'software_development',
+    'cybersecurity', 'ai_data', 'cloud', 'devops', 'software_development',
     'networking_systems', 'community', 'general_it',
 )
 
@@ -26,14 +26,18 @@ PATTERNS = {
         r'\b(?:AI|artificial intelligence|machine learning|deep learning|'
         r'large language models?|LLMs?|data science|data analytics|data engineering|'
         r'data analysis|data visualization)\b', re.I),
-    'cloud_devops': re.compile(
+    'cloud': re.compile(
         r'\b(?:cloud (?:computing|infrastructure|native|development|engineering|'
-        r'platforms?|deployment|services?|architecture)|AWS (?:cloud|training|skills|workshops?|labs?)|'
-        r'(?:learn(?:ing)?|train(?:ing)? on|train(?:ing)? in)\s+(?:about\s+)?AWS|DevOps|Kubernetes|Docker|'
-        r'infrastructure as code|CI/CD|continuous integration|continuous deployment)\b', re.I),
+        r'platforms?|deployment|services?|architecture|technology)|AWS (?:cloud|training|skills|workshops?|labs?)|'
+        r'(?:learn(?:ing)?|train(?:ing)? on|train(?:ing)? in|deploy(?:ing)? (?:to|on))\s+(?:about\s+)?(?:AWS|Azure|Google Cloud)|'
+        r'(?:AWS|Azure|Google Cloud) (?:services?|architecture|deployment|fundamentals)|serverless computing)\b', re.I),
+    'devops': re.compile(
+        r'\b(?:DevOps|infrastructure as code|CI/CD|continuous integration|continuous (?:deployment|delivery)|'
+        r'GitHub Actions|deployment (?:automation|pipelines?)|chaos engineering|site reliability engineering)\b', re.I),
     'software_development': re.compile(
         r'\b(?:(?:software|web|app|application|mobile) (?:development|engineering)|'
-        r'computer programming|(?:app|application|software|website)[ -]building|'
+        r'computer programming|Git (?:basics|fundamentals)|pull requests?|version control|'
+        r'(?:app|application|software|website)[ -]building|'
         r'(?:coding|programming) (?:workshop|tutorial|course)|'
         r'open[ -]source (?:software|development|contributions?)|'
         r'(?:websites?|mobile apps?|software applications?)\b[^.!?\n]{0,140}\b'
@@ -155,6 +159,9 @@ def project_topics(payloads):
         for quote, url, field in snippets:
             if not isinstance(url, str) or not url.startswith(('https://', 'http://')):
                 continue
+            # This decision belongs to the whole quote. Re-normalizing a long
+            # description for each sentence made listing projection quadratic.
+            community_candidate = field not in ('name', 'summary') and not title_quote(payload, quote)
             for original, sentence in _sentences(quote, payload):
                 if not verified:
                     # This exception is intentionally narrow. A fetched article
@@ -169,7 +176,7 @@ def project_topics(payloads):
                 # Community is an organizer-described purpose/program, not a
                 # title, organizer identity, recruiting pitch or routine break.
                 community_program = COMMUNITY_PROGRAM.search(sentence)
-                if (field not in ('name', 'summary') and not title_quote(payload, quote) and not RECRUITING.search(sentence)
+                if (community_candidate and not RECRUITING.search(sentence)
                         and (not recruiting_context or community_program)
                         and (not ROUTINE_BREAK.search(sentence) or community_program)):
                     if next(_positive(COMMUNITY, sentence), None):

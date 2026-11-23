@@ -2,12 +2,14 @@ import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } fro
 import './styles.css';
 
 type Moment = { raw: string; value: string | null; precision: 'datetime' | 'date' | 'text'; timezone: string | null };
-type Price = { kind: 'free' | 'paid' | 'unknown'; amount?: number; currency?: string };
+type Price = { kind: 'free' | 'paid' | 'unknown'; amount?: number; minimum_amount?: number; currency?: string };
 type TicketOption = { name: string; access: 'public' | 'restricted' | 'unknown'; eligibility: string | null; attendance: 'onsite' | 'online' | null; registration_state: string; price: Price; deadline: Moment | null };
 type FieldEvidence = Record<string, { url: string; quote: string }>;
 type RelatedLink = { url: string; label: string; access: 'linked_only'; discovered_on: string };
 type Announcement = { url: string; title: string; kind: string; posted_at: string | null; first_seen: string; last_seen: string; access: 'full' | 'search_only'; source_name: string; evidence: string | null; revision_count: number; related_links?: RelatedLink[]; discovery_path?: string[]; discovery_query?: string | null; discovery_queries?: string[]; field_evidence?: FieldEvidence };
-type Competition = { id: string; name: string; organizer: string; region: string; format: string; eligibility: string | null; announcement_url: string; announcement_label?: string; registration_url: string | null; registration_status: string; status: string; section: 'upcoming' | 'past' | 'finished' | 'unconfirmed' | 'watchlist'; competition_date?: Moment | null; start: Moment | null; end: Moment | null; deadline: Moment | null; registration_opens: Moment | null; posted_at: string | null; first_seen: string; last_checked: string; summary: string | null; description?: string | null; stage: string; edition: string; notices: string[]; announcements: Announcement[]; field_evidence?: FieldEvidence; geography?: string; topic?: string; topics?: string[]; price?: Price; account_required?: boolean | null; submission_deadline?: Moment | null; attendance_options?: string[]; ticket_options?: TicketOption[] };
+type Review = { required: boolean; reasons: string[]; expired: boolean; expires_at: string | null };
+type Verification = { last_observed_at: string; last_content_fetched_at: string | null; last_event_page_checked_at: string | null; basis: string };
+type Competition = { review?: Review; verification?: Verification; parent_event_start?: Moment | null; parent_event_end?: Moment | null; id: string; name: string; organizer: string; region: string; format: string; eligibility: string | null; announcement_url: string; announcement_label?: string; registration_url: string | null; registration_status: string; status: string; section: 'upcoming' | 'past' | 'finished' | 'unconfirmed' | 'watchlist' | 'archived'; competition_date?: Moment | null; start: Moment | null; end: Moment | null; deadline: Moment | null; registration_opens: Moment | null; posted_at: string | null; first_seen: string; last_checked: string; summary: string | null; description?: string | null; stage: string; edition: string; notices: string[]; announcements: Announcement[]; field_evidence?: FieldEvidence; geography?: string; topic?: string; topics?: string[]; price?: Price; account_required?: boolean | null; submission_deadline?: Moment | null; attendance_options?: string[]; ticket_options?: TicketOption[] };
 type Source = { id: string; name: string; url: string; kind: string; status: string; last_success: string | null; last_attempt: string | null; message: string; discovered: number; accepted: number };
 type Directory = { events: Competition[]; sources: Source[]; generated_at: string; manual_collection?: { enabled: boolean; token?: string } };
 type CollectionStatus = { enabled: boolean; state: 'idle' | 'running' | 'completed' | 'failed'; started_at: string | null; finished_at: string | null; completed_sources: number; total_sources: number; events?: number; announcements?: number; warning_count?: number; message: string };
@@ -102,15 +104,15 @@ function Icon({ name, size = 18 }: { name: string; size?: number }) {
   };
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name] || paths.info}</svg>;
 }
-const sections = ['upcoming', 'all', 'finished', 'unconfirmed', 'watchlist'] as const;
+const sections = ['upcoming', 'all', 'finished', 'unconfirmed', 'watchlist', 'archived'] as const;
 type Section = typeof sections[number];
-const sectionLabels = { upcoming: 'Upcoming & live', all: 'All events', finished: 'Past & finished', unconfirmed: 'Date unconfirmed', watchlist: 'Watchlist' };
+const sectionLabels = { upcoming: 'Upcoming & live', all: 'All events', finished: 'Past & finished', unconfirmed: 'Date unconfirmed', watchlist: 'Watchlist', archived: 'Archived leads' };
 function inSection(event: Competition, section: Section) {
   return section === 'all' || (section === 'finished' ? ['past', 'finished'].includes(event.section) : event.section === section);
 }
 const states: Record<string, string> = { date_conflict: 'Conflicting dates', scheduled: 'Upcoming', live: 'Live now', finished: 'Finished', cancelled: 'Cancelled', postponed: 'Postponed', schedule_tba: 'Schedule TBA', end_unconfirmed: 'End unconfirmed', past_date: 'Past date · completion unconfirmed', undated_lead: 'Undated search lead' };
 const formats: Record<string, string> = { online: 'Online', in_person: 'In person', hybrid: 'Hybrid', unknown: 'Format unconfirmed' };
-const topics: Record<string, string> = { cybersecurity: 'Cybersecurity', ai_data: 'AI & Data', cloud_devops: 'Cloud & DevOps', software_development: 'Software Development', networking_systems: 'Networking & Systems', community: 'Community', general_it: 'General IT' };
+const topics: Record<string, string> = { cybersecurity: 'Cybersecurity', ai_data: 'AI & Data', cloud: 'Cloud', devops: 'DevOps', software_development: 'Software Development', networking_systems: 'Networking & Systems', community: 'Community', general_it: 'General IT' };
 const registrations: Record<string, string> = { open: 'Registration open', approval_required: 'Approval required', waitlisted: 'Waitlisted', closed: 'Registration closed', not_yet_open: 'Not open yet', unknown: 'Registration unconfirmed' };
 const health: Record<string, string> = { ok: 'Working', partial: 'Partial coverage', error: 'Fetch failed', blocked: 'Access blocked', rate_limited: 'Rate limited', disabled: 'Disabled', needs_credentials: 'Needs credentials', policy_restricted: 'Policy restricted', not_run: 'Not checked yet' };
 const evidenceLabels: Record<string, string> = { name: 'Event name', organizer: 'Organizer', region: 'Region', format: 'Format', eligibility: 'Who can join', date_conflicts: 'Conflicting date evidence', competition_date: 'Tournament date', start: 'Starts', end: 'Ends', deadline: 'Registration deadline', registration_opens: 'Registration opens', registration_url: 'Registration link', registration_state: 'Organizer registration statement', lifecycle: 'Organizer event status', posted_at: 'Announcement posted', summary: 'Summary', description: 'Description' };
@@ -136,6 +138,7 @@ function title(value: string) { return value.replaceAll('_', ' ').replaceAll('-'
 function priceLabel(price?: Price) {
   if (price?.kind === 'free') return 'Free';
   if (price?.kind !== 'paid') return 'Unknown';
+  if (typeof price.minimum_amount === 'number' && price.currency) return `From ${price.currency} ${price.minimum_amount.toLocaleString('en-PH')}`;
   return typeof price.amount === 'number' && price.currency ? `${price.currency} ${price.amount.toLocaleString('en-PH')}` : 'Paid · amount not announced';
 }
 function communityRegistration(state: string) {
@@ -176,11 +179,11 @@ function calendarDay(value?: Moment | null): string | null {
   return `${part('year')}-${part('month')}-${part('day')}`;
 }
 function EventDate({ event }: { event: Competition }) {
-  const day = event.status === 'date_conflict' ? null : calendarDay(event.start || event.competition_date);
-  if (!day) return <span className="event-date date-unconfirmed"><Icon name="clock" size={19}/><span>Date unconfirmed</span></span>;
+  const day = event.status === 'date_conflict' ? null : calendarDay(event.start || event.competition_date || event.parent_event_start);
+  if (!day) return <span className="event-date date-unconfirmed"><Icon name="clock" size={19}/><span>{event.status === 'finished' ? 'Finished · dates unconfirmed' : 'Date unconfirmed'}</span></span>;
   const month = new Intl.DateTimeFormat('en-PH', {month:'short',timeZone:'Asia/Manila'}).format(new Date(day));
-  return <time className="event-date" dateTime={day} aria-label={`Starts ${recorded(day)} (Asia/Manila)`}>
-    <span className="date-month">{month}</span><strong className="date-day">{Number(day.slice(8,10))}</strong><span className="date-year">{day.slice(0,4)}</span>
+  return <time className="event-date" dateTime={day} aria-label={`${!event.start && !event.competition_date && event.parent_event_start ? 'Parent event date' : 'Starts'} ${recorded(day)} (Asia/Manila)`}>
+    {!event.start && !event.competition_date && event.parent_event_start && <span className="date-context">Event date</span>}<span className="date-month">{month}</span><strong className="date-day">{Number(day.slice(8,10))}</strong><span className="date-year">{day.slice(0,4)}</span>
   </time>;
 }
 function EventCard({ event }: { event: Competition }) {
@@ -198,9 +201,11 @@ function EventCard({ event }: { event: Competition }) {
         <p className="event-location"><Icon name={event.format === 'online' ? 'globe' : 'pin'} size={15}/><span>{event.region} · {formats[event.format]}{!!event.attendance_options?.length && ` · ${event.attendance_options.join(' / ')}`}</span></p>
         {supportedTopics.length > 0 && <div className="event-topics" aria-label="Topics">{supportedTopics.map(topic => <span className="topic-tag" key={topic}>{topics[topic]}</span>)}</div>}
         <div className="preview-facts">
+          {event.review?.required && <span className="badge review-flag">Flagged for review</span>}
+          {event.review?.expired && <span className="badge review-flag">Verification expired</span>}
           {previewState && <span className={`badge state-${event.status}`}>{previewState}</span>}
           {event.price?.kind === 'free' && <span className="badge price-fact price-free">Free</span>}
-          {event.price?.kind === 'paid' && <span className="badge price-fact">Paid{typeof event.price.amount === 'number' && event.price.currency ? ` · ${priceLabel(event.price)}` : ''}</span>}
+          {event.price?.kind === 'paid' && <span className="badge price-fact">Paid{(typeof event.price.amount === 'number' || typeof event.price.minimum_amount === 'number') && event.price.currency ? ` · ${priceLabel(event.price)}` : ''}</span>}
           {event.registration_status !== 'unknown' && registrations[event.registration_status] && <span className={`badge signup-fact registration-${event.registration_status}`}>{communityRegistration(event.registration_status)}</span>}
           {event.account_required === true && <span className="join-fact">Account required</span>}
           {registerBy && <span className="join-fact deadline-fact">Register by <time dateTime={registerBy}>{recorded(registerBy)}</time></span>}
@@ -211,10 +216,12 @@ function EventCard({ event }: { event: Competition }) {
     <details className="event-details"><summary><span>Details<span className="sr-only"> for {event.name}</span></span><Icon name="chevron" size={16}/></summary>
       <div className="event-detail-body">
         <section className="event-description"><h4>Description</h4><p>{description || 'Description not announced.'}</p></section>
-        <dl className="dates"><div><dt>Starts</dt><dd>{moment(event.start || event.competition_date || null, 'Not confirmed')}</dd></div><div><dt>Ends</dt><dd>{moment(event.end, 'Not confirmed')}</dd></div></dl>
+        <dl className="dates"><div><dt>{event.parent_event_start ? 'CTF starts' : 'Starts'}</dt><dd>{moment(event.start || event.competition_date || null, 'Not confirmed')}</dd></div><div><dt>{event.parent_event_start ? 'CTF ends' : 'Ends'}</dt><dd>{moment(event.end, 'Not confirmed')}</dd></div></dl>
+        {event.parent_event_start && <div className="parent-schedule"><p>Parent event schedule · these dates do not establish the complete CTF schedule.</p><dl className="dates"><div><dt>Event date / start</dt><dd>{moment(event.parent_event_start)}</dd></div><div><dt>Event end</dt><dd>{moment(event.parent_event_end || null, 'Not confirmed')}</dd></div></dl></div>}
         <dl className="facts"><div><dt><Icon name="pin" size={17}/> Location</dt><dd>{event.region} · {formats[event.format]}</dd></div>{!!event.attendance_options?.length && <div><dt>Attendance</dt><dd>{event.attendance_options.join(' · ')}</dd></div>}<div><dt><Icon name="users" size={17}/> Who can join</dt><dd>{event.eligibility || 'Eligibility not announced. Check with the organizer.'}</dd></div><div><dt>Price</dt><dd>{priceLabel(event.price)}</dd></div><div><dt>Account</dt><dd>{event.account_required === true ? 'Required to register' : event.account_required === false ? 'Not required' : 'Unknown'}</dd></div></dl>
         <div className={`registration registration-${event.registration_status}`}><strong>{communityRegistration(event.registration_status)}</strong><dl><div><dt>Registration deadline</dt><dd>{moment(event.deadline, 'Unknown')}</dd></div><div><dt>Submission deadline</dt><dd>{moment(event.submission_deadline || null, 'Unknown')}</dd></div>{event.registration_opens && <div><dt>Registration opens</dt><dd>{moment(event.registration_opens)}</dd></div>}</dl></div>
         {!!event.ticket_options?.length && <TicketOptions tickets={event.ticket_options}/>}
+        {event.review?.required && <div className="review-note"><p><Icon name="flag" size={16}/><strong>Flagged for review</strong></p>{event.review.reasons.map(reason => <p key={reason}>{reason}</p>)}<p>This listing remains visible while these details are unresolved.</p></div>}
         {event.notices.length > 0 && <div className="notices">{event.notices.map(n => <p key={n}><Icon name="info" size={16}/><span>{n}</span></p>)}</div>}
         <div className="actions"><Link href={event.announcement_url} className="button primary"><Icon name="link"/>{event.announcement_label || 'Official announcement'}</Link>{event.registration_url && <Link href={event.registration_url} className="button secondary">Registration</Link>}</div>
         <div className="provenance"><span>Posted <b>{recorded(event.posted_at)}</b></span><span>First seen <b>{recorded(event.first_seen)}</b></span></div>
@@ -226,7 +233,7 @@ function EventCard({ event }: { event: Competition }) {
       {a.field_evidence?.philippine_connection && <div className="field-evidence"><h4>Philippine connection · source evidence</h4><p><Link href={a.field_evidence.philippine_connection.url}>Source</Link></p><blockquote>{a.field_evidence.philippine_connection.quote}</blockquote></div>}
       {!!a.related_links?.length && <div className="related-links"><p><strong>Links found in this announcement</strong></p>{a.related_links.map(link => <div key={link.url}><Link href={link.url} className="history-link">{link.label || link.url}</Link><p>Linked only · Full post not accessed</p><p>Found on <Link href={link.discovered_on}>the source page</Link></p></div>)}</div>}
       <DiscoveryTrace announcement={a}/>
-    </li>)}</ol><p className="checked">Last checked {recorded(event.last_checked, true)}</p></details>
+    </li>)}</ol><div className="checked"><p>Last observed {recorded(event.verification?.last_observed_at || event.last_checked, true)}</p><p>Last content fetch {recorded(event.verification?.last_content_fetched_at || null, true)}</p><p>Last event-page check {recorded(event.verification?.last_event_page_checked_at || null, true)}</p><p>Search observations do not verify an event’s schedule or registration.</p></div></details>
       </div>
     </details>
   </article>;
@@ -270,7 +277,7 @@ export default function App() {
     (!format || e.format === format) && (!registration || e.registration_status === registration) &&
     [e.name, e.organizer, e.eligibility, e.region, e.summary, e.description].join(' ').toLowerCase().includes(query.trim().toLowerCase())
   ), [data, topic, format, registration, query]);
-  const counts = { all: matching.length, upcoming: matching.filter(e => e.section === 'upcoming').length, finished: matching.filter(e => ['past', 'finished'].includes(e.section)).length, unconfirmed: matching.filter(e => e.section === 'unconfirmed').length, watchlist: matching.filter(e => e.section === 'watchlist').length };
+  const counts = { all: matching.length, upcoming: matching.filter(e => e.section === 'upcoming').length, finished: matching.filter(e => ['past', 'finished'].includes(e.section)).length, unconfirmed: matching.filter(e => e.section === 'unconfirmed').length, watchlist: matching.filter(e => e.section === 'watchlist').length, archived: matching.filter(e => e.section === 'archived').length };
   const filtered = useMemo(() => matching.filter(e => inSection(e, section)).sort((a, b) => {
     const priority = (e: Competition) => ['open', 'approval_required'].includes(e.registration_status) ? 0 : e.status === 'live' ? 1 : e.status === 'cancelled' ? 4 : e.status === 'postponed' ? 3 : 2;
     const freeFirst = priority(a) === 0 && priority(b) === 0
@@ -294,7 +301,7 @@ export default function App() {
         {!!collection.status.warning_count && <p>{collection.status.warning_count} source {collection.status.warning_count === 1 ? 'warning' : 'warnings'}. See source coverage below.</p>}
       </>}
     </div>}
-    {loading && !data ? <div className="empty" role="status">Loading verified announcements…</div> : data && filtered.length ? <>{local.length > 0 && <section className="opportunity-group" aria-labelledby="ph-opportunities-title"><h3 id="ph-opportunities-title">PH opportunities</h3><div className="event-grid">{local.map(e => <EventCard event={e} key={e.id}/>)}</div></section>}{international.length > 0 && <section className="opportunity-group" aria-labelledby="international-online-title"><h3 id="international-online-title">International online opportunities</h3><div className="event-grid">{international.map(e => <EventCard event={e} key={e.id}/>)}</div></section>}</> : data ? <div className="empty"><span className="empty-icon"><Icon name={hasFilters ? 'search' : 'flag'} size={30}/></span><h3>{hasFilters ? 'No matches for these filters.' : section === 'all' ? 'No events recorded yet.' : `No ${section === 'finished' ? 'past or finished' : section === 'unconfirmed' ? 'date-unconfirmed' : section === 'watchlist' ? 'watchlist' : 'upcoming'} events recorded yet.`}</h3><p>{hasFilters ? 'Try another topic, format, registration status, or search term.' : 'Only collected announcements appear here. Check source coverage below to see what has been verified.'}</p>{hasFilters && <button onClick={clear} className="button primary">Clear filters</button>}</div> : null}
+    {loading && !data ? <div className="empty" role="status">Loading verified announcements…</div> : data && filtered.length ? <>{local.length > 0 && <section className="opportunity-group" aria-labelledby="ph-opportunities-title"><h3 id="ph-opportunities-title">PH opportunities</h3><div className="event-grid">{local.map(e => <EventCard event={e} key={e.id}/>)}</div></section>}{international.length > 0 && <section className="opportunity-group" aria-labelledby="international-online-title"><h3 id="international-online-title">International online opportunities</h3><div className="event-grid">{international.map(e => <EventCard event={e} key={e.id}/>)}</div></section>}</> : data ? <div className="empty"><span className="empty-icon"><Icon name={hasFilters ? 'search' : 'flag'} size={30}/></span><h3>{hasFilters ? 'No matches for these filters.' : section === 'all' ? 'No events recorded yet.' : `No ${section === 'finished' ? 'past or finished' : section === 'unconfirmed' ? 'date-unconfirmed' : section === 'watchlist' ? 'watchlist' : section === 'archived' ? 'archived' : 'upcoming'} events recorded yet.`}</h3><p>{hasFilters ? 'Try another topic, format, registration status, or search term.' : 'Only collected announcements appear here. Check source coverage below to see what has been verified.'}</p>{hasFilters && <button onClick={clear} className="button primary">Clear filters</button>}</div> : null}
     <p className="date-note"><Icon name="clock" size={16}/> Confirmed times use Manila time. Ambiguous dates stay as the organizer wrote them.</p></section>
     <SourcePanel sources={data?.sources || []}/><p className="directory-time">{data && `Directory loaded ${recorded(data.generated_at, true)}. Source check times are shown above.`}</p>
     </main><footer className="shell"><span><Icon name="flag" size={19}/> Built for the Philippine tech community.</span><a href="#top">Back to top</a></footer></>;

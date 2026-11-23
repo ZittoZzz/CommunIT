@@ -26,7 +26,7 @@ TEACHING = re.compile(r'\b(?:workshops?|training|tutorials?|lessons?|learn(?:ing
 CTF_DECLARATION = re.compile(r'\b(?:a|an|is|presents?|includes?|features?|featuring|hosts?)\s+(?:[\w&+/-]+\s+){0,7}(?:capture[\s-]+the[\s-]+flag|CTF)\b', re.I)
 PARTICIPATION = re.compile(r'\b(?:participants?|players?|teams?|competitors?|attendees?)\b[^.!?\n]{0,180}\b(?:challenges?|flags?|puzzles?)\b', re.I)
 AI_TOPIC = re.compile(r'\bAI\b|artificial intelligence|machine learning|large language models?|\bLLMs?\b', re.I)
-IT_TOPIC = re.compile(r'\b(?:software (?:development|engineering)|web development|cloud computing|computer programming|information technology|developer conference|technology conference|DevFest|Google I/O|AWS|Google Cloud|Kubernetes|DevOps|Python|JavaScript)\b', re.I)
+IT_TOPIC = re.compile(r'\b(?:software (?:development|engineering)|web development|cloud computing|computer programming|information technology|developer conference|technology conference|DevFest|Google I/O|AWS|Google Cloud|Kubernetes|DevOps|Python|JavaScript|Ruby|Rails|PHP|Magento|agile|scrum|open source|embedded systems|operating systems|chaos engineering|site reliability engineering|data engineering)\b', re.I)
 WORLDWIDE = re.compile(r'\b(?:(?:open|available|accessible)\s+(?:to\s+(?:\w+\s+){0,5})?(?:worldwide|all countries|any country)|(?:participants?|students?|developers?|builders?|attendees?|teams?|people|anyone|everyone)\s+(?:from\s+)?(?:worldwide|all countries|any country|around the world|anywhere(?: in the world)?)|(?:join|participate|attend|register|compete)\s+(?:online\s+)?from\s+(?:anywhere(?: in the world)?|any country))\b', re.I)
 
 
@@ -341,7 +341,7 @@ def parse_community_event(raw, data, url, source, now):
         cite('deadline', 'All public ticket sales end_at=' + deadline['raw'])
     hosts = [lead for host in data.get('hosts', []) if (lead := public_host(host, url))]
     return {'url': url, 'external_id': event['api_id'], 'title': title, 'posted_at': None,
-            'access': 'full', 'official': True, 'kind': 'registration' if state in ('open', 'approval_required') else 'announcement',
+            'access': 'full', 'official': True, 'verification_method': 'event_page', 'kind': 'registration' if state in ('open', 'approval_required') else 'announcement',
             'identity': {'organizer_key': 'luma:' + calendar_id, 'series': 'Luma event',
                          'edition': event['api_id'], 'region': 'Philippines' if ph_venue else 'International online', 'stage': 'main'},
             'facts': facts, 'field_evidence': proof, 'publisher_leads': hosts,
@@ -468,6 +468,11 @@ def parse_event(raw, url, source, now):
     else:
         # Generic Start/End labels in a parent agenda can refer to its doors,
         # keynote or workshop. Keep only explicitly competition-labeled dates.
+        for field, key in (('parent_event_start', 'start_at'), ('parent_event_end', 'end_at')):
+            value = parse_moment(event.get(key) or '')
+            if value.get('precision') in ('datetime', 'date'):
+                facts[field] = value
+                proof[field] = {'url': url, 'quote': f'Luma {key}={event[key]}; parent event schedule, not complete CTF schedule'}
         for key in ('start', 'end'):
             if not re.search(r'\b(?:CTF|Competition)\s+(?:start|end|date)', proof.get(key, {}).get('quote', ''), re.I):
                 facts[key] = None
@@ -481,6 +486,7 @@ def parse_event(raw, url, source, now):
                             'CTF is part of this event. The parent event ticket and schedule do not confirm CTF entry or competition times.')
         proof['summary'] = {'url': url, 'quote': (title + ' | ' + competitive)[:600]}
     ann['publisher_leads'] = hosts
+    ann['verification_method'] = 'event_page'
     # Public rich-text role lists can name organizations without linking them.
     # Such leads retain evidence-scoped identity; never invent a website.
     role = None
