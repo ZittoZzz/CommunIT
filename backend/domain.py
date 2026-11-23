@@ -4,7 +4,7 @@ from __future__ import annotations
 import hashlib
 import re
 import unicodedata
-from datetime import datetime, timezone, timedelta, date
+from datetime import datetime, timezone, date, timedelta
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 from zoneinfo import ZoneInfo
 
@@ -79,6 +79,17 @@ def moment(raw, value=None, precision='text', tz=None):
     return {'raw': raw.strip(), 'value': value, 'precision': precision, 'timezone': tz}
 
 
+def in_window(value, now, days):
+    """Pilot window shared by organizer calendars; date-only boundaries are unresolved."""
+    end = now + timedelta(days=days)
+    dt = instant(value)
+    if dt:
+        return now <= dt < end
+    if value and value['precision'] == 'date':
+        return now.astimezone(MANILA).date().isoformat() < value['value'] < end.astimezone(MANILA).date().isoformat()
+    return False
+
+
 def parse_moment(raw):
     """Only convert explicit ISO or unambiguous named-month dates; never infer year/zone."""
     raw = raw.strip()
@@ -148,31 +159,29 @@ def expired(value, now):
     if dt:
         return now > dt
     if value and value.get('precision') == 'date' and value.get('timezone'):
-        try:
-            return now.astimezone(ZoneInfo(value['timezone'])).date().isoformat() > value['value']
-        except (ValueError, KeyError):
-            return False
+        return calendar_day_passed(value, now)
     return False
 
 
-def calendar_day_passed(value, now):
-    """Classify a past date without assigning an absent clock time/timezone.
-
-    With no confirmed timezone, wait until the stated day has passed even in
-    UTC-12. This is a date comparison only; no midnight instant is stored.
-    """
+def manila_day(value):
+    """The listing's calendar day; a date-only fact stays a date, not an instant."""
     if not value:
-        return False
+        return None
     dt = instant(value)
     if dt:
-        return now.astimezone(dt.tzinfo).date() > dt.date()
+        return dt.astimezone(MANILA).date()
     if value.get('precision') != 'date':
-        return False
+        return None
     try:
-        zone = ZoneInfo(value['timezone']) if value.get('timezone') else timezone(timedelta(hours=-12))
-        return now.astimezone(zone).date() > date.fromisoformat(value['value'])
+        return date.fromisoformat(value['value'])
     except (ValueError, TypeError, KeyError):
-        return False
+        return None
+
+
+def calendar_day_passed(value, now):
+    """Expire calendar-day placement at the next Manila day, without a start time."""
+    day = manila_day(value)
+    return day is not None and now.astimezone(MANILA).date() > day
 
 
 def lifecycle(event, now=None):
@@ -180,7 +189,11 @@ def lifecycle(event, now=None):
     state = event.get('lifecycle', 'scheduled')
     if state in ('cancelled', 'postponed'):
         status = state
-    elif state == 'finished' or expired(event.get('end'), now):
+    elif state == 'finished':
+        status = 'finished'
+    elif event.get('date_conflicts'):
+        status = 'date_conflict'
+    elif expired(event.get('end'), now):
         status = 'finished'
     elif instant(event.get('end')) and instant(event.get('start')) and instant(event['start']) <= now:
         status = 'live'
@@ -195,12 +208,13 @@ def lifecycle(event, now=None):
         reg = 'closed'
     elif status == 'postponed':
         reg = 'unknown'
-    elif status == 'past_date' and reg in ('open', 'approval_required', 'waitlisted', 'not_yet_open'):
-        # An old invitation does not establish current entry, nor prove closure.
+    elif status in ('past_date', 'date_conflict') and reg in ('open', 'approval_required', 'waitlisted', 'not_yet_open'):
+        # Old or conflicting schedules do not establish current entry or closure.
         reg = 'unknown'
     elif instant(event.get('registration_opens')) and instant(event['registration_opens']) > now:
         reg = 'not_yet_open'
-    return status, reg, 'finished' if status == 'finished' else 'past' if status == 'past_date' else 'upcoming'
+    section = {'finished': 'finished', 'past_date': 'past', 'date_conflict': 'unconfirmed'}.get(status, 'upcoming')
+    return status, reg, section
 
 
 REGIONS = {

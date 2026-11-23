@@ -153,10 +153,6 @@ def article_parts(raw, url, source):
         if len(candidates) == 1:
             title = candidates[0]
     links = content_links(cleaned, url)
-    if source.get('ctf_component_heading') and re.search(r'\b20\d{2}\b', title):
-        headings = [h.get_text(' ', strip=True) for h in cleaned.select('h2,h3,h4')]
-        if any(re.fullmatch(r'(?:Capture[ -]the[ -]Flag|CTF)', h, re.I) for h in headings):
-            title += ' · CTF'
     return soup, title, text, links
 
 
@@ -206,6 +202,10 @@ def publisher_context_from_content(source, content, url):
 
 
 def html(source, client, known, now):
+    # Preserve the publisher's title. Conference components use the shared
+    # explicit-contest body check; an agenda heading alone cannot name a CTF.
+    if source.get('ctf_component_heading'):
+        source = {**source, 'body_identity': True}
     result = Result()
     allowed = source.get('allowed_hosts', [urlsplit(source['url']).hostname])
     limit = source.get('max_pages', 12)
@@ -371,13 +371,29 @@ def rss(source, client, known, now):
 
 def ctftime(source, client, known, now):
     result = Result()
+    international = source.get('include_international_online', False)
+    international_pool = {}
+    if international:
+        from .ctftime_primary import append_international, read_directory, failure_status
+        result.route_checks = []
     start = now - timedelta(days=source.get('lookback_days', 180))
     finish = now + timedelta(days=source.get('future_days', 365))
     pool = {}
     # Small windows avoid silently losing events to the API's result cap.
     while start < finish:
         end = min(start + timedelta(days=31), finish)
-        data = json.loads(client.read(source['url'], params={'limit': 100, 'start': int(start.timestamp()), 'finish': int(end.timestamp())}))
+        params = {'limit': 100, 'start': int(start.timestamp()), 'finish': int(end.timestamp())}
+        if international:
+            try:
+                data = read_directory(client, source['url'], result, params)
+            except FetchError as exc:
+                result.failed, result.failure_status = True, failure_status(exc)
+                result.message = 'CTFtime directory fetch failed; candidate count is unverified.'
+                if isinstance(exc, RateLimited):
+                    result.retry_after = exc.retry_after
+                return result
+        else:
+            data = json.loads(client.read(source['url'], params=params))
         if not isinstance(data, list):
             raise FetchError('Unexpected CTFtime response')
         if len(data) >= 100:
@@ -388,7 +404,8 @@ def ctftime(source, client, known, now):
         external_id = row['external_id']
         if external_id and external_id not in pool:
             try:
-                pool[external_id] = json.loads(client.read(source['url'] + external_id + '/'))
+                event_url = source['url'] + external_id + '/'
+                pool[external_id] = read_directory(client, event_url, result) if international else json.loads(client.read(event_url))
             except (FetchError, ValueError):
                 result.warnings.append(f'CTFtime event {external_id} recheck failed')
     result.discovered = len(pool)
@@ -399,6 +416,8 @@ def ctftime(source, client, known, now):
         ph_org = any(norm(o.get('name', '')) in names or o.get('id') in ids for o in organizers)
         ph_location = e.get('onsite') and re.search(r'\b(?:Philippines|Manila|Cebu|Davao|Baguio|Pampanga|Tuguegarao)\b', e.get('location', ''), re.I)
         if not (ph_org or ph_location):
+            if international:
+                international_pool[eid] = e
             continue
         organizer = ', '.join(o['name'] for o in organizers) or 'Organizer not specified by CTFtime'
         config = {'organizer': organizer, 'organizer_key': norm(organizer), 'kind': 'ctftime'}
@@ -419,6 +438,10 @@ def ctftime(source, client, known, now):
         ann['facts']['summary'] = 'Listed by CTFtime; follow the linked listing to the organizer. Registration deadline was not supplied.'
         result.announcements.append(ann)
     result.message = 'Supplementary event metadata only. Included Philippine venues or explicitly configured Philippine organizers; global events open to everyone are excluded.'
+    if international:
+        append_international(source, client, known, now, result, international_pool)
+        result.message = ('CTFtime directory scanned; Philippine metadata retained and international online discoveries checked against organizer pages. '
+                          'Directory schedules alone do not verify international editions; unverified primary pages are reported separately.')
     return result
 
 
@@ -461,5 +484,7 @@ class CredentialsRequired(Exception):
 
 from .tavily import tavily
 from .luma import luma
+from .mlh import mlh
+from .opportunity_search import opportunity_search
 
-ADAPTERS = {'bluesky': bluesky, 'html': html, 'rss': rss, 'ctftime': ctftime, 'brave': brave, 'tavily': tavily, 'luma': luma}
+ADAPTERS = {'bluesky': bluesky, 'html': html, 'rss': rss, 'ctftime': ctftime, 'brave': brave, 'tavily': tavily, 'luma': luma, 'mlh': mlh, 'opportunity_search': opportunity_search}

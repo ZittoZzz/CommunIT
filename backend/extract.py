@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import re
 from bs4 import BeautifulSoup
-from .domain import canonical_url, norm, parse_date_range, parse_moment, publisher_url, region_from
+from .domain import canonical_url, instant, manila_day, norm, parse_date_range, parse_moment, publisher_url, region_from
 
 CTF = re.compile(r'\bCTF\b|capture[\s-]+the[\s-]+flag|hack\s*(?:for|4)\s*gov|haxxor', re.I)
 CONTEST = re.compile(r'(?:capture[\s-]+the[\s-]+flag|\bCTF\b)[^.!?\n]{0,45}\b(?:competition|tournament|contest|challenge)\b|\b(?:competition|tournament|contest)\b[^.!?\n]{0,45}(?:capture[\s-]+the[\s-]+flag|\bCTF\b)', re.I)
@@ -49,30 +49,70 @@ def body_event_year(title, text):
     return re.search(r'\b20\d{2}\b', detail[0]) if detail else None
 
 
-def tournament_day(title, text):
+def tournament_days(title, text):
     """Retain a calendar day without manufacturing start/end clock times.
 
     A standalone tournament invitation may put Date under Event Details, with
     HTML splitting the label from its value. Parent conference and teaching
     agendas do not establish the date of a CTF track merely by mentioning one.
     """
-    explicit = re.search(r'(?im)^\s*(?:Tournament|Competition|CTF) date\s*:[ \t]*(?:\n[ \t]*)?([^\n]+)', text)
-    if explicit:
+    days = []
+    for explicit in re.finditer(r'(?im)^\s*(?:Tournament|Competition|CTF) date\s*:[ \t]*(?:\n[ \t]*)?([^\n]+)', text):
         value = parse_moment(explicit[1])
         if value['precision'] == 'date':
-            return value, explicit[0].strip()
+            days.append((value, explicit[0].strip()))
+    # A parent event date alone is insufficient. This sentence explicitly ties
+    # the dated event to its CTF competition; retain the day, never agenda clocks.
+    for sentence in re.finditer(r'\bHappening on\s+([A-Za-z]+\s+\d{1,2},?\s+20\d{2})[^.!?\n]*', text, re.I):
+        feature = re.search(r'\b(?:the event|we)\s+will\s+(?:feature|host|hold|include)\b(.+)', sentence[0], re.I)
+        value = parse_moment(sentence[1])
+        direct_contest = feature and re.search(
+            r'(?:^|[,;]|\b(?:alongside|and))\s*(?:(?:a|an|the)\s+)?(?:hands-on\s+)?(?:cybersecurity\s+)?(?:' + CONTEST.pattern + ')',
+            feature[1], re.I)
+        if direct_contest and value['precision'] == 'date':
+            days.append((value, sentence[0].strip()))
     if not CONTEST.search(text):
-        return None
+        return days
     if re.search(r'\b(?:conference|summit|festival|meetup)\b', title + '\n' + text, re.I):
-        return None
+        return days
     if re.search(r'\b(?:hackathon|workshop|training|seminar|webinar|bootcamp|course)\b', title, re.I):
-        return None
-    block = re.search(r'(?im)^[ \t]*Event Details[ \t]*:[ \t]*\n[ \t]*Date[ \t]*:[ \t]*(?:\n[ \t]*)?([^\n]+)', text)
-    if block:
+        return days
+    for block in re.finditer(r'(?im)^[ \t]*Event Details[ \t]*:[ \t]*\n[ \t]*Date[ \t]*:[ \t]*(?:\n[ \t]*)?([^\n]+)', text):
         value = parse_moment(block[1])
         if value['precision'] == 'date':
-            return value, block[0].strip()
-    return None
+            days.append((value, block[0].strip()))
+    return days
+
+
+def conflicting_dates(candidates):
+    """Compare claims of the same role, allowing day/time corroboration.
+
+    Start and end are separate roles: a legitimate multiday range is not a
+    conflict. A single competition day also claims the start's calendar day.
+    """
+    conflicts = []
+    for fields in (('competition_date', 'start'), ('end',)):
+        claims = [c for c in candidates if c['field'] in fields and manila_day(c['date'])]
+        for i, left in enumerate(claims):
+            for right in claims[i + 1:]:
+                a, b = left['date'], right['date']
+                disagree = instant(a) != instant(b) if instant(a) and instant(b) else manila_day(a) != manila_day(b)
+                if disagree:
+                    for claim in (left, right):
+                        if claim not in conflicts:
+                            conflicts.append(claim)
+    # Distinct roles may span days, but cannot put the end before the start.
+    starts = [c for c in candidates if c['field'] == 'start' and manila_day(c['date'])]
+    ends = [c for c in candidates if c['field'] == 'end' and manila_day(c['date'])]
+    for start in starts:
+        for end in ends:
+            a, b = start['date'], end['date']
+            reversed_bounds = instant(b) < instant(a) if instant(a) and instant(b) else manila_day(b) < manila_day(a)
+            if reversed_bounds:
+                for claim in (start, end):
+                    if claim not in conflicts:
+                        conflicts.append(claim)
+    return conflicts
 
 
 def clean_html(html):
@@ -238,23 +278,38 @@ def extract(title, text, url, source, *, posted_at=None, links=None, access='ful
         'deadline': r'(?:Registration deadline|Deadline (?:of|for) registration|Register by)',
         'registration_opens': r'(?:Registration opens|Registration start)',
     }
+    candidates = []
     for field, label in labels.items():
-        m = re.search(r'(?:^|\n)\s*' + label + r'\s*:\s*([^\n]+)', text, re.I)
-        if m:
-            facts[field] = parse_moment(m[1])
-            cite(field, m[0].strip())
-    dates = re.search(r'(?:^|\n)\s*(?:Competition dates?|CTF dates?)\s*:\s*([^\n]+)', text, re.I)
-    if dates:
+        for m in re.finditer(r'(?:^|\n)\s*' + label + r'\s*:\s*([^\n]+)', text, re.I):
+            value, quote = parse_moment(m[1]), m[0].strip()
+            if field in ('start', 'end'):
+                candidates.append({'field': field, 'date': value, 'quote': quote})
+            if facts[field] is None or (field in ('start', 'end') and instant(value)):
+                facts[field] = value
+                cite(field, quote)
+    for dates in re.finditer(r'(?:^|\n)\s*(?:Competition dates?|CTF dates?)\s*:\s*([^\n]+)', text, re.I):
         date_range = parse_date_range(dates[1])
         if date_range:
             facts['start'], facts['end'] = date_range
             cite('start', dates[0].strip())
+            candidates.append({'field': 'start', 'date': date_range[0], 'quote': dates[0].strip()})
             if facts['end']:
                 cite('end', dates[0].strip())
-    day = tournament_day(title, text)
-    if day and not facts['start'] and not facts['end']:
-        facts['competition_date'], quote = day
+                candidates.append({'field': 'end', 'date': date_range[1], 'quote': dates[0].strip()})
+    days = tournament_days(title, text)
+    candidates.extend({'field': 'competition_date', 'date': value, 'quote': quote} for value, quote in days)
+    if days and not facts['start'] and not facts['end']:
+        facts['competition_date'], quote = days[0]
         cite('competition_date', quote)
+    conflicts = conflicting_dates(candidates)
+    if conflicts:
+        facts['date_conflicts'] = conflicts
+        for field in ('start', 'end', 'competition_date'):
+            facts[field] = None
+            proof.pop(field, None)
+        cite('date_conflicts', '\n'.join(c['quote'] for c in conflicts))
+        facts['summary'] = 'Conflicting competition dates in the source. Schedule unconfirmed.'
+        cite('summary', proof['date_conflicts']['quote'])
     eligible = re.search(r'(?:^|\n)\s*(?:Eligibility|Eligible participants|Open to)\s*:\s*([^\n]+)', text, re.I)
     if eligible:
         facts['eligibility'] = eligible[1][:600]

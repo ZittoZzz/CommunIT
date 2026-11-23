@@ -174,6 +174,10 @@ def main():
         if missing:
             parser.error('Unknown source IDs: ' + ', '.join(sorted(missing)))
         sources = [s for s in sources if s['id'] in args.source]
+    # Manual collection passes the resolved preview path. CLI invocations using
+    # a symlink must acquire that same lock before opening the same database.
+    if args.database != ':memory:':
+        args.database = str(Path(args.database).resolve())
     Path(args.database).parent.mkdir(parents=True, exist_ok=True)
     # Scheduling and manual invocation share a lock; overlapping jobs do not run.
     with open(args.database + '.lock', 'w') as lock:

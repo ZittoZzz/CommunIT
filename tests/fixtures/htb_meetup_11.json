@@ -1,0 +1,37 @@
+{
+  "provenance": {
+    "captured_at": "2026-11-22T13:21:14.672792+00:00",
+    "feed_sha256": "c5290b00683de8bd1b0734159d56c3cb76811a8a46a435808e97fa1420bf16d3",
+    "source_artifact": "independent-primary-checks.json / meetup-calendar",
+    "note": "Saved Nov 22 evidence; offline regression only. No discovery fetch."
+  },
+  "source": {
+    "id": "htb-meetup-ph",
+    "name": "Hack The Box Meetup Manila · Community feed",
+    "kind": "rss",
+    "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/rss/",
+    "body_identity": true,
+    "feed_text_format": "markdown",
+    "content_complete": true,
+    "allowed_hosts": [
+      "www.meetup.com"
+    ],
+    "max_items": 40,
+    "index_id": "htb-meetup-ph",
+    "publisher_name": "Hack The Box Meetup Manila · Community feed",
+    "publisher_role": "both",
+    "coverage": [
+      "NCR",
+      "Philippine cybersecurity community"
+    ],
+    "enabled": true,
+    "index_status": "active",
+    "index_reason": ""
+  },
+  "entry": {
+    "title": "Hack The Box Meetup #11",
+    "link": "https://www.meetup.com/hack-the-box-meetup-ph/events/317031526/",
+    "published": "Sun, 18 Oct 2026 06:45:09 GMT",
+    "description": "**NOTE:**\n**THIS EVENT IS EXCLUSIVELY FOR QCU STUDENTS**\n\n* *Only currently enrolled students of the* Quezon City University *are allowed to attend. Non-QCU students will not be accommodated.*\n\n**CyberSecureU 2026: Break. Defend. Secure. – HTB Meetup #11** is a cybersecurity awareness and hands-on learning event organized by the AWS Student Builder Group – QCU and JPCS – QCU in celebration of National Cybersecurity Awareness Month.\n\nHappening on November 4, 2026, at Quezon City University, the event will feature interactive cybersecurity talks, demonstrations, and activities, alongside a hands-on Capture the Flag (CTF) competition. As the 10th HTB Meetup hosted by the community, the event aims to promote cybersecurity awareness, strengthen practical security skills, and bring students together to explore ethical hacking and cybersecurity through collaborative learning and real-world challenges."
+  }
+}

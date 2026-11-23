@@ -2,12 +2,14 @@
 
 ## Current configuration
 
-The index now contains **15 records: ten enabled monitors and five disabled candidates**. The public site remains an event directory; this iteration changes only the backend collector and reports. The [publisher and registration-opportunity report](publisher-opportunity-report.md) records the latest verification. The original pilot measurements below remain a historical checkpoint, and the existing benchmark is unchanged.
+The index now contains **17 records: twelve enabled monitors and five disabled candidates**. The public site remains an event directory; MLH adds one international online general IT source through the existing collector, storage and listing paths. The [publisher and registration-opportunity report](publisher-opportunity-report.md) records the latest verification. The original pilot measurements below remain a historical checkpoint, and the existing benchmark is unchanged.
 
 The five original active monitors below are joined by:
 
 | Added monitor | Recurring source | Qualification and limits |
 |---|---|---|
+| Safe AI Philippines | [Public organizer calendar](https://luma.com/safeaiph?k=c), shared `luma` adapter | Calendar → public event page. Opt-in AI scope, verified PH venue, 45-day Manila window; hybrid attendance and public versus restricted tickets stay distinct. No individual event seed or organizer-specific adapter. |
+| MLH Global Hack Week | [Organizer calendar](https://ghw.mlh.com/), `mlh` adapter | Calendar → edition → organizer-designated signup. A 45-day start/cutoff window; price, eligibility, account requirement and signup state have separate evidence. Existing CTF filters are unchanged. |
 | Luma Manila | [Public city calendar](https://luma.com/manila), documented city iCal then public-page fallback | Initial check exposed six links while the page advertised seven, with no qualifying CTF. The city calendar excludes online/private events. |
 | KakaComputer | [CTF RSS](https://kakacomputer.com/tag/ctf/feed/) | Historical recap can corroborate a competition and identify publishers; it cannot establish open registration. |
 | Cyber404 | [Blog RSS](https://cyber404.net/blog/feed.xml) | Partnership news yields publisher leads; a competition requires its own announcement. |

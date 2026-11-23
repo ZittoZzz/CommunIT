@@ -3,6 +3,43 @@
   "description": "Recurring publisher monitors. Historical examples and qualification evidence are in docs/source-index.md, never collector inputs.",
   "publishers": [
     {
+      "id": "safeai-luma-calendar",
+      "name": "Safe AI Philippines · Public Luma calendar",
+      "role": "organizer",
+      "coverage": ["Philippines", "AI community events"],
+      "enabled": true,
+      "status": "active",
+      "reason": "",
+      "monitor": {
+        "id": "safeai-luma-calendar",
+        "name": "Safe AI Philippines · Public Luma calendar",
+        "kind": "luma",
+        "url": "https://luma.com/safeaiph?k=c",
+        "page_kind": "calendar",
+        "event_scope": "community",
+        "topic": "ai",
+        "window_days": 45,
+        "max_items": 60
+      }
+    },
+    {
+      "id": "mlh-global-hack-week",
+      "name": "Major League Hacking · Global Hack Week",
+      "role": "organizer",
+      "coverage": ["International online", "General IT", "Students"],
+      "enabled": true,
+      "status": "active",
+      "reason": "",
+      "monitor": {
+        "id": "mlh-global-hack-week",
+        "name": "Major League Hacking · Global Hack Week",
+        "kind": "mlh",
+        "url": "https://ghw.mlh.com/",
+        "window_days": 45,
+        "max_items": 40
+      }
+    },
+    {
       "id": "up-manila",
       "name": "UP Manila · Competition invitations",
       "role": "resharer",

@@ -71,10 +71,10 @@ def test_future_dated_competition_and_genuine_future_teaser_remain_upcoming():
     assert lifecycle(teaser['facts'], NOW) == ('schedule_tba', 'unknown', 'upcoming')
 
 
-def test_unknown_timezone_day_is_not_archived_while_that_day_exists_somewhere():
-    day = parse_moment('2032-11-21')
-    assert not calendar_day_passed(day, datetime(2032, 11, 22, 0, tzinfo=timezone.utc))
-    assert calendar_day_passed(day, datetime(2032, 11, 22, 13, tzinfo=timezone.utc))
+def test_date_only_day_expires_at_next_manila_calendar_day():
+    day = parse_moment('2026-11-22')
+    assert not calendar_day_passed(day, datetime(2026, 11, 22, 15, 59, 59, tzinfo=timezone.utc))
+    assert calendar_day_passed(day, datetime(2026, 11, 22, 16, tzinfo=timezone.utc))
     assert day['timezone'] is None and day['precision'] == 'date'
     assert 'T' not in day['value']
 

@@ -153,7 +153,12 @@ def test_conference_ctf_component_does_not_inherit_tickets_registration_status()
     <main><h1>Student Conference 2032</h1><time datetime="2032-05-16">May 16</time>
     <h3>Capture The Flag</h3><p>12:00–15:00</p>
     <a href="https://tickets.example/conference">Conference tickets</a></main>'''
+    # A bare agenda heading cannot turn the whole conference into a CTF.
+    assert html(source, Pages({PAGE: raw}), [], NOW).announcements == []
+    raw = raw.replace('<p>12:00–15:00</p>',
+                      '<p>A Capture the Flag competition for teams. 12:00–15:00</p>')
     ann = html(source, Pages({PAGE: raw}), [], NOW).announcements[0]
+    assert ann['title'] == 'Student Conference 2032'
     assert ann['posted_at'] is None
     assert ann['facts']['registration_state'] is ann['facts']['registration_url'] is None
     assert ann['facts']['start'] is ann['facts']['end'] is None

@@ -7,8 +7,10 @@ import sqlite3
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import parse_qsl, urlsplit
-from .domain import canonical_url, event_key, lifecycle, norm, utcnow
+from .domain import canonical_url, event_key, lifecycle, manila_day, norm, utcnow
 from .event_context import context_match
+from .topics import project_topics
+from .event_text import project_content
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -309,7 +311,7 @@ def observation_order(item):
     return row['first_seen']
 
 
-def events(db, now=None):
+def events(db, now=None, window_days=None):
     output = []
     for event in db.execute('SELECT * FROM events ORDER BY first_seen DESC'):
         rows = db.execute('''SELECT a.*,s.name AS source_name FROM announcements a
@@ -323,31 +325,38 @@ def events(db, now=None):
         identity = json.loads(event['identity_json'])
         current = {'id': event['id'], **identity, 'first_seen': event['first_seen'],
                    'start': None, 'end': None, 'competition_date': None, 'deadline': None, 'registration_opens': None,
-                   'eligibility': None, 'registration_url': None, 'summary': None,
-                   'format': 'unknown', 'registration_state': 'unknown', 'field_evidence': {}}
+                   'eligibility': None, 'description': None, 'registration_url': None, 'summary': None,
+                   'format': 'unknown', 'registration_state': 'unknown', 'date_conflicts': [], 'field_evidence': {}}
         full = [item for item in items if item[1].get('access') != 'search_only']
         # Search titles are discovery evidence, never corrections to a fetched
         # announcement, even when the search result has an earlier timestamp.
         for row, payload in full or items:
             if payload.get('access') == 'search_only' and current.get('name'):
                 continue
+            # Old collectors sometimes stored program descriptions in the
+            # audience field. Correct the read projection, preserving payloads.
+            facts, field_evidence = project_content(payload)
             # A date-only reminder can corroborate existing bounds. Keep their
             # precision; only a different day replaces them as a reschedule.
             new_day = payload['facts'].get('competition_date')
             old_bound = current.get('start') or current.get('end')
-            same_day = bool(new_day and old_bound and old_bound.get('value')
-                            and old_bound['value'][:10] == new_day.get('value'))
+            same_day = bool(new_day and manila_day(new_day) and manila_day(old_bound) == manila_day(new_day))
             reset = ('start', 'end') if new_day and not same_day else ('competition_date',) if payload['facts'].get('start') or payload['facts'].get('end') else ()
+            if payload['facts'].get('date_conflicts'):
+                reset = ('start', 'end', 'competition_date')
+            elif any(manila_day(payload['facts'].get(field)) for field in ('start', 'end', 'competition_date')):
+                current['date_conflicts'] = []
+                current['field_evidence'].pop('date_conflicts', None)
             for field in reset:
                 if not payload['facts'].get(field):
                     current[field] = None
                     current['field_evidence'].pop(field, None)
-            for k, v in payload['facts'].items():
+            for k, v in facts.items():
                 if k == 'competition_date' and same_day:
                     continue  # The supporting date remains in announcement evidence.
                 if v is not None and (v != 'unknown' or k not in current):
                     current[k] = v
-                    evidence = payload.get('field_evidence', {}).get(k)
+                    evidence = field_evidence.get(k)
                     if evidence:
                         current['field_evidence'][k] = evidence
                     else:
@@ -356,18 +365,23 @@ def events(db, now=None):
                         current['field_evidence'].pop(k, None)
             if payload['facts'].get('lifecycle') == 'postponed':
                 current['start'] = current['end'] = current['competition_date'] = current['deadline'] = None
+                current['date_conflicts'] = []
                 current['registration_state'] = 'unknown'
-                for field in ('start', 'end', 'competition_date', 'deadline', 'registration_state'):
+                for field in ('start', 'end', 'competition_date', 'deadline', 'registration_state', 'date_conflicts'):
                     current['field_evidence'].pop(field, None)
         chronological = sorted(items, key=lambda x: observation_order(({**dict(x[0]), 'revision_count': 1}, x[1])))
         full_chronological = [item for item in chronological if item[1].get('access') != 'search_only']
-        official = [item for item in full_chronological if item[0]['source_id'] != 'ctftime' and item[1].get('official') is not False]
+        def primary(item):
+            return (item[1].get('official') is not False and
+                    (item[0]['source_id'] != 'ctftime' or
+                     item[1].get('official') is True and item[1].get('directory_provenance')))
+        official = [item for item in full_chronological if primary(item)]
         unverified = [item for item in full_chronological if item[0]['source_id'] != 'ctftime']
         original = (official or unverified or full_chronological or chronological)[0]
         current['announcement_url'] = original[1]['url']
         if original[1].get('access') == 'search_only':
             current['announcement_label'] = 'Search result · verify source'
-        elif original[0]['source_id'] == 'ctftime':
+        elif original[0]['source_id'] == 'ctftime' and not primary(original):
             current['announcement_label'] = 'CTFtime listing'
         elif original[1].get('official') is False:
             current['announcement_label'] = 'Announcement · verify source'
@@ -392,7 +406,10 @@ def events(db, now=None):
                 current['status'] = 'undated_lead'
                 current['notices'].append('Undated search lead. An edition year is not a confirmed upcoming schedule or open registration.')
         if current['status'] == 'past_date':
-            current['notices'].append('The announced competition date has passed. Completion is unconfirmed; this is historical coverage, not a current registration opportunity.')
+            current['notices'].append('The announced event date has passed. Completion is unconfirmed; this is historical coverage, not a current registration opportunity.')
+        if current['status'] == 'date_conflict':
+            dates = ', '.join(dict.fromkeys(c['date']['raw'] for c in current['date_conflicts']))
+            current['notices'].append(f'Conflicting event dates: {dates}. The schedule is unconfirmed; verify with the organizer.')
         if current['status'] == 'end_unconfirmed':
             current['notices'].append('The start has passed, but no confirmed end or completion notice was found.')
         if current['status'] == 'schedule_tba':
@@ -409,6 +426,24 @@ def events(db, now=None):
                 'discovery_query': payload.get('discovery_query'),
                 'discovery_queries': discovery_queries(payload),
                 'field_evidence': payload.get('field_evidence', {})})
+        if window_days and current['section'] == 'upcoming':
+            from .domain import in_window, MANILA
+            at = now or datetime.now(timezone.utc)
+            qualifying = any(in_window(current.get(field), at, window_days)
+                             for field in ('start', 'competition_date', 'deadline', 'submission_deadline'))
+            # Existing date-only records remain eligible throughout today;
+            # displaying them does not invent a midnight start timestamp.
+            today = any(current.get(field) and current[field].get('precision') == 'date'
+                        and manila_day(current[field]) == at.astimezone(MANILA).date()
+                        for field in ('start', 'competition_date', 'deadline', 'submission_deadline'))
+            if not (qualifying or today) or (current.get('recurring') and current['registration_status'] not in ('open', 'approval_required')):
+                current['section'] = 'watchlist'
+                current['notices'].append('Watchlist: no confirmed start or cutoff in the next '
+                                          + str(window_days) + ' days, or recurring signup is unverified.')
+        # Project from the saved source evidence at read time, so legacy rows
+        # gain supported tags without a collector run or a data migration.
+        current['topics'], current['topic_evidence'] = project_topics(
+            payload for _, payload in reversed(items))
         output.append(current)
     return output
 
