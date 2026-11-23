@@ -41,7 +41,7 @@ for (const width of [1280, 390]) {
     await page.getByRole('tab', {name:/Watchlist/}).click();
     await expect(page.locator('.event-card')).toHaveCount(1);
     await expect(page.locator('.preview-facts')).toContainText('Flagged for review');
-    await page.locator('.event-details>summary').click();
+    await page.locator('.notice-select').click();
     await expect(page.locator('.review-note')).toContainText('remains visible');
     await page.locator('.history>summary').click();
     await expect(page.locator('.checked')).toContainText('Last observed');
@@ -51,12 +51,12 @@ for (const width of [1280, 390]) {
     await expect(page.locator('.event-card')).toHaveCount(1);
     await expect(page.locator('.preview-facts')).toContainText('Verification expired');
     await expect(page.locator('.preview-facts')).not.toContainText('Finished');
-    await page.locator('.event-details>summary').click();
+    await page.locator('.notice-select').click();
     await expect(page.locator('.review-note')).toContainText('does not confirm the event ended');
     await page.getByRole('tab', {name:/Past & finished/}).click();
     await expect(page.locator('.event-date')).toContainText('Event date');
     await expect(page.locator('.event-date')).toHaveAttribute('datetime','2034-10-04');
-    await page.locator('.event-details>summary').click();
+    await page.locator('.notice-select').click();
     await expect(page.locator('.parent-schedule')).toContainText('do not establish the complete CTF schedule');
     await expect(page.locator('.event-detail-body>.dates')).toContainText('CTF starts');
     await page.getByRole('tab', {name:/All events/}).click();

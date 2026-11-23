@@ -83,11 +83,31 @@ Open **http://127.0.0.1:5173**. Vite forwards `/api` requests to the backend on 
 
 **Stop the frontend:** press **Ctrl+C** in this terminal. Stop both terminals when finished; stopping one does not stop the other.
 
+## Campus Bulletin branch preview (no collection)
+
+The frontend work is on `feat/campus-bulletin`. Its verification copy of saved events is `data/campus-bulletin/preview.sqlite3`; the original production and local-preview databases were preserved. The copy and its empty-source, 45-day configuration are local ignored artifacts. These commands reuse that prepared copy; they do not run discovery. If it is missing in another checkout, prepare an isolated copy of a populated saved database before starting the backend.
+
+From the repository root, run in separate terminals:
+
+```bash
+CTF_DATABASE="$PWD/data/campus-bulletin/preview.sqlite3" \
+CTF_SOURCES="$PWD/data/campus-bulletin/sources.json" \
+CTF_ENABLE_MANUAL_FETCH=0 PORT=5002 \
+.venv/bin/python -m backend.app
+```
+
+```bash
+PATH="$PWD/.tools/bin:$PATH" VITE_API_TARGET=http://127.0.0.1:5002 \
+npm --prefix frontend run dev -- --port 5174 --strictPort
+```
+
+Open **http://127.0.0.1:5174**. Stop each process with **Ctrl+C** in its terminal; do not kill another service occupying these ports. No installed service or deployment build is changed. The existing commands on ports 5001/5173 also show the new frontend when run from this branch.
+
 ## Fetch events manually
 
-Click **Fetch events** beside the refresh icon. It runs the existing collector using `CTF_SOURCES` and writes only to the configured preview database. Progress appears in the directory, and the saved event list reloads when collection finishes. Your filters stay selected. Sources can take several minutes; the button prevents overlapping runs, and collection has a 20-minute limit.
+Click **Fetch events** in **Directory updates** at the bottom of the page, below source coverage. It runs the existing collector using `CTF_SOURCES` and writes only to the configured preview database. Progress and completion messages appear in the same panel, and the saved event list reloads when collection finishes. Your filters stay selected. Sources can take several minutes; the button prevents overlapping runs, and collection has a 20-minute limit.
 
-The refresh icon only reloads saved listings. **Fetch events** contacts the configured public sources and may add or update events. Current results can differ from earlier snapshots. Blocked or failed sources appear in source coverage; a successful fetch does not guarantee new events. Existing first-seen times and deduplication use the normal collector behavior.
+**Refresh saved listings** only reloads saved listings. **Fetch events** contacts the configured public sources and may add or update events. Current results can differ from earlier snapshots. Blocked or failed sources appear in source coverage; a successful fetch does not guarantee new events. Existing first-seen times and deduplication use the normal collector behavior.
 
 Keep the backend running until the fetch finishes. Reports, logs, and final status are saved in `data/manual-fetch/`; events stay in `data/local-preview.sqlite3`. This button does not change the main database or run a collection schedule.
 

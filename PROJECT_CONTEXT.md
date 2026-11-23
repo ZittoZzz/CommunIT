@@ -6,7 +6,7 @@ This is the current project handoff for a new agent/chat working in the same rep
 
 ## Project and architecture
 
-Current checkout: `/home/miguel/Documents/GitHub/IT_Community_PH`. Repository/package configuration has not been renamed; the student-facing brand is **IT_Community_PH**.
+Current checkout: `/home/miguel/Documents/GitHub/IT_Community_PH`. Repository/package configuration has not been renamed; the public-facing brand is **CommunITy PH**.
 
 The site lists tech meetups, competitions, workshops, and conferences in the Philippines, plus international online opportunities available to Filipinos. It began as a CTF directory, and several default discovery routes still focus on CTFs.
 
@@ -44,8 +44,8 @@ The last topic-fix session restarted the preview backend in the background. `dat
 
 ## Implemented student-facing behavior
 
-- Header and browser title use **IT_Community_PH**. Headline: **Find your next tech event.** Generic wording uses “Events”; actual event/competition titles remain specific.
-- Compact event rows expand for details, retained evidence, announcement history, and registration information. Existing desktop/mobile styling is preserved.
+- Navbar brand: **CommunITy PH**. H1: **The Tech Board**. Subtitle: **Your next tech meetup, hackathon, or conference might be right here.** Browser title: **The Tech Board | CommunITy PH**. No student-only label above the headline. Generic wording uses “Events”; actual event/competition titles remain specific.
+- Campus Bulletin uses a cork board with compact date-first selectable cards and a pinned paper containing the existing event details, retained evidence, announcement history, and registration information. Desktop selection preserves the list; mobile Back restores filters, scroll position, and focus. See the latest frontend checkpoint below.
 - Section tabs: **Upcoming & live**, **All events**, **Past & finished**, **Date unconfirmed**, **Watchlist**, **Archived leads**. Upcoming remains the default. All events includes every section once and preserves active filters and the existing sorting/grouping.
 - Filters compose: Topic, Format, Registration, and text search. Counts and empty states reflect the filtered rows. The current UI has no separate Region selector; geography is shown through PH/international groups and event locations.
 - Topic choices: Cybersecurity, AI & Data, Cloud, DevOps, Software Development, Networking & Systems, Community, General IT, plus All topics. Cloud and DevOps are separate evidence-backed topics. An event can have multiple supported topics and appears once in each filtered result set.
@@ -63,7 +63,7 @@ The earlier empty-page problem came from reusing an existing preview DB with zer
 - Starts the existing collector CLI asynchronously through `POST /api/collection`; `GET /api/collection` reports progress. Requests cannot choose database or source paths.
 - Prevents overlapping jobs; CLI symlink paths resolve to the same database lock. Times out after 20 minutes and cleans up its own child on normal backend shutdown.
 - Saves source warnings, logs, and reports. The UI reloads saved results after completion or partial failure while preserving filters. Uncertain network failures require checking job status before retrying.
-- The refresh icon only reloads stored listings. It does not collect. The fetch feature is disabled by default; omit its environment flag for deployment.
+- **Refresh saved listings** only reloads stored listings. It does not collect. Fetch/Refresh and collection status live in **Directory updates** below source coverage. The fetch feature is disabled by default; omit its environment flag for deployment.
 
 Do not assume the UI still shows the prior job's progress after a backend restart; persistent reports remain under `data/manual-fetch/`.
 
@@ -154,6 +154,78 @@ Verification: **800 pytest tests passed**; **31 browser checks passed: the 29 ex
 Evidence: `data/review-verification/{backend-tests-final.log,frontend-build-final.log,browser-tests.log,review-browser-tests.log,browser-proof.json,final-api.json,known-recheck.json,preview-repair.json}` and desktop/mobile screenshots. `known-recheck.json` distinguishes original fetch timestamps from later offline reparsing. No full collector/discovery run or benchmark re-evaluation was performed. Frozen benchmark artifacts/scores, the production DB, deployment assets/services and schedules were preserved. Restart an existing preview backend to load the changed Python code; UI development mode updates through Vite. The temporary verification servers use ports 5002/5174 and are stopped after checks.
 
 Remaining limits: the organizer must resolve the Meetup date contradiction; Facebook search-only leads still cannot establish current schedules/signup; historical page-check timestamps without retained proof remain unknown; public notes provide no manual moderation workflow. No automatic inference of attendance availability was added.
+
+## Campus Bulletin frontend — November 23, 2026, 20:42 PHT
+
+Implemented on **`feat/campus-bulletin`** from the approved `/home/miguel/Downloads/Campus-Bulletin.html` visual/interaction reference. The prototype was not copied into production; its demo events and finish switch are absent. No merge or deployment was performed.
+
+- `frontend/src/App.tsx` reuses `EventCard`, `EventDate`, ticket/evidence/source components and the normal `/api/events` data. Existing details now render in `EventPaper`. The cork-only CSS is in `frontend/src/styles.css`; the brand remains IT_Community_PH and the headline is The Campus Board.
+- Compact date-first cards stay on the left. Desktop selection updates a bounded, sticky paper without remounting, moving or resetting the list. Native buttons support Enter/Space. On mobile (through 760px), the full-width paper replaces the visible list; the list stays mounted. Back/Escape restores the captured scroll position and selected-card focus, with filters intact. Editing a filter while reading returns to results without stealing filter focus. Resizing back to desktop preserves selection.
+- Retained search, all topic choices including Community and separate Cloud/DevOps, format/registration filters, all section tabs, PH/international-online groups, location/format, lifecycle/review notes, unknown facts, distinct registration/submission deadlines, restricted ticket distinctions, and real organizer links. Important facts and source links precede long descriptions. Existing filter/sort/ranking logic is unchanged.
+- Updated `frontend/e2e/directory.spec.ts` and `review.spec.ts` to inspect the selected paper instead of row expansion; added six navigation/filter regression checks in `campus-board.spec.ts`. **37 Playwright Chromium tests passed**, including keyboard selection, identical desktop list DOM/geometry/scroll, mobile Back at 390/760px, focus, resize, and filters. **TypeScript + Vite build passed**, output isolated under `data/campus-bulletin/build/`; `git diff --check` passed. Earlier runs exposed test locators that assumed details remained inside cards; those scopes were corrected without dropping field checks.
+- Real normal-API browser proof used an isolated SQLite backup of saved preview data: **41 events**, zero browser errors, zero collection POSTs, no mobile horizontal overflow. No discovery or collector ran. Hash checks confirm **38 protected backend/configuration/existing-database/benchmark files unchanged**. The production and original preview databases, deployment assets/services/schedules, frozen benchmark reports and ranking were untouched.
+
+Local evidence: `data/campus-bulletin/{browser-suite-final.log,build-final.log,live-api.json,live-proof.json,protected-check.json,verification.json}`. Screenshots: `desktop.png`, `mobile-board.png`, `mobile-paper.png` (plus full mobile board). The isolated preview copy and empty-source 45-day configuration remain in this directory. Temporary ports **5002/5174** are stopped after verification; start/stop commands are in RUN_LOCAL.md. AGENTS.md records the durable navigation/design requirements.
+
+Limits: browser checks used desktop Chromium with mobile viewport emulation, not physical-device Safari/Firefox testing. Saved source uncertainties remain unchanged; this frontend task does not reverify organizers or seat availability. No outstanding implementation blocker.
+
+## Attached board sections and prominent notes — November 23, 2026, 20:56 PHT
+
+Follow-up on `feat/campus-bulletin`, frontend only:
+
+- Section tabs now attach directly to the top edge of the cork board, below search/topic/format/registration controls. After the 21:12 PHT correction, only the selected tab uses its section accent: **green Upcoming**, **blue All**, **red Past/finished**, **orange Date unconfirmed**, **gray Watchlist**, **muted purple Archived**. Unselected tabs are white with subdued text and borders. The board keeps its original wood-colored frame; the heading stamp, selected card/date and paper eyebrow retain fixed colors. Cork texture, filters, ranking, keyboard tab navigation and mobile Back behavior remain intact. Mobile tabs scroll horizontally without widening the page.
+- Review reasons and source notices now appear in an expanded **Important notes** callout near the paper title, before schedule/eligibility/signup facts. Strong orange border, heading, icons and larger text make them visible without relying on color alone. Cards with source notices but no review flag show **Notes to check**; review badges have stronger contrast. Facts and note wording still come from the existing API.
+- Changed `frontend/src/App.tsx`, `styles.css`, and `e2e/campus-board.spec.ts`; AGENTS.md records the durable placement/color rules. Startup commands in RUN_LOCAL.md are unchanged.
+- Verification: **41 individual Chromium checks passed**: 39 passed in the full run, and the two new desktop/mobile accent checks passed on rerun after fixing CSS specificity. The new checks cover attached placement, six distinct matching accents, keyboard selection, and notes visible ahead of facts on desktop/mobile. **TypeScript/Vite build and `git diff --check` passed**. Real saved-event screenshots have no browser errors, POST requests or mobile horizontal overflow. Protected backend/configuration/existing-database/benchmark hashes are unchanged; no collector ran.
+- Evidence: `data/board-sections/{browser-tests.log,tabs-recheck.log,build-final.log,browser-proof.json,verification.json}`; screenshots `upcoming-desktop.png`, `finished-desktop.png`, `unconfirmed-desktop.png`, `watchlist-desktop.png`, `archived-desktop.png`, `notes-mobile.png`, `board-mobile.png`. Verification used an isolated copy of the saved preview with collection disabled; temporary ports 5002/5174 are stopped afterward. No merge/deployment or source-data change. Physical mobile-device testing remains outside this Chromium viewport check.
+
+### Selected-tab-only color correction — November 23, 2026, 21:12 PHT
+
+Updated `frontend/src/styles.css` to restrict section colors to the active tab, restoring the original wood frame and fixed card/paper colors. White inactive tabs use subtle neutral text/borders and a neutral hover. Important notes remain prominent. Updated the two existing section-style checks in `frontend/e2e/campus-board.spec.ts` and the durable rule in AGENTS.md.
+
+New verification: **2 targeted desktop/mobile Chromium checks passed**, exercising all six selections, white inactive tabs, keyboard navigation and unchanged frame colors; **TypeScript/Vite build and `git diff --check` passed**. Logs: `data/quiet-tabs/{browser-tests.log,build.log}`. No full-suite rerun for this CSS-only correction; the preceding 41-check result belongs to the earlier checkpoint. Browser fixtures required only temporary Vite, stopped after verification. No backend, collector or database was started or changed; no merge/deployment.
+
+### Bottom directory controls — November 23, 2026, 21:24 PHT
+
+Removed the redundant section heading stamp and count row inside the board; section tabs retain visible labels/counts, and filtered counts remain announced to screen readers. This supersedes the heading-stamp reference above. Moved Fetch, the now-labelled **Refresh saved listings** button, collection progress/completion/warnings, and loaded timestamp into **Directory updates** below source coverage. Refresh failures appear beside these controls while preserving saved results; initial load errors remain above the board. Clear filters stays with the search/filter controls. Existing fetch authorization, polling and retry behavior are unchanged.
+
+Affected paths: `frontend/src/{App.tsx,styles.css}`, `frontend/e2e/directory.spec.ts`; durable guidance and UI instructions updated in AGENTS.md and RUN_LOCAL.md. **18 targeted Chromium browser checks passed**, covering desktop/mobile placement, completion messages, refresh failures, fetch polling/retries, filtering, keyboard selection, tab colors and mobile Back. **TypeScript/Vite build and `git diff --check` passed**. Evidence: `data/directory-controls/{build.log,browser-tests.log}` and desktop/mobile `directory-updates.png` screenshots under `browser-results/` (mock API fixtures, not live listings).
+
+Verification used temporary Vite only; no backend, collector, database, ranking or benchmark changes. The full browser suite and physical-device testing were not rerun for this layout change. No merge or deployment. Startup commands are unchanged.
+
+### Header timezone placement — November 23, 2026, Asia/Manila
+
+Moved **Asia/Manila · PHT** to the right of **The student tech noticeboard** in a shared header row (`frontend/src/App.tsx`, `styles.css`). Removed the empty filter-footer space when no filters are active; Clear filters remains with the controls. TypeScript/Vite build, four existing desktop/mobile browser checks and `git diff --check` passed. Additional mocked-API layout checks at 1366, 390 and 320px confirmed aligned row centers and no horizontal overflow. Evidence and header screenshots: `data/hero-timezone/`. Browser verification used Chromium viewport emulation, not physical devices. No backend/database changes or collector run; temporary Vite stopped afterward. No merge/deployment; startup instructions unchanged.
+
+### Shorter inactive tabs and simpler header — November 23, 2026, Asia/Manila
+
+Removed the “Find a tech event. Pin it open to see the details.” subtitle and its unused styles. Selected section tabs keep their original 52px desktop / 48px mobile height; inactive tabs are 20px shorter with aligned bottoms, so their tops sit lower. Existing active-only colors, white inactive tabs and board frame are unchanged. Affected: `frontend/src/{App.tsx,styles.css}`; AGENTS.md records the final height rule.
+
+TypeScript/Vite build, four existing desktop/mobile Chromium checks and `git diff --check` passed. Additional mocked-API geometry checks verified original selected heights and the 20px difference for all six sections at 1366/390px. Logs, geometry results and screenshots: `data/raised-tabs/` (final screenshots show shortened inactive tabs, not enlarged selected tabs). No full-suite or physical-device run. No backend/database/collector changes, merge or deployment; temporary Vite stopped after verification.
+
+### Chronological event listings — November 23, 2026, Asia/Manila
+
+At the user's request, frontend listing order now follows the Manila calendar date displayed on each card, earliest first within the separate PH / international-online groups, across section tabs. Signup status and free pricing no longer take precedence. Shared `eventDay()` in `frontend/src/App.tsx` keeps sorting consistent with card dates (start, competition date, or labelled parent-event date). Unknown/conflicting dates go last; deadline-only listings remain undated. Same-day ties retain input order without inventing times for date-only facts. This supersedes earlier checkpoints describing the original sorting as unchanged; backend ranking/data are untouched.
+
+Updated the two old signup/price priority tests in `frontend/e2e/directory.spec.ts` to assert chronological order with self-contained fixtures; added desktop/mobile date regressions in `campus-board.spec.ts` covering shuffled input, Manila rollover, parent/competition dates, undated/conflicting entries, geography groups and filtering. **10 individual Chromium checks passed**: eight initially, plus the two new sorting checks after narrowing their date locator to exclude deadline labels. TypeScript/Vite build and `git diff --check` passed. Evidence: `data/date-order/{build.log,browser-tests.log,sorting-recheck.log}`. Checks used mocked API data, not a full live-API or physical-device run. AGENTS.md updated. Temporary Vite stopped; no backend, collector, database, benchmark, merge or deployment changes. Startup instructions unchanged.
+
+### Visible listings update time — November 23, 2026, Asia/Manila
+
+Added **Listings last updated** immediately below The Campus Board title, visible on arrival on desktop/mobile, as requested for event-data freshness. `frontend/src/App.tsx` selects the latest valid, timezone-qualified `sources[].last_success` and displays its date/time in PHT with a semantic `<time>`. Page reloads/Refresh, newer failed attempts and API `generated_at` do not advance it. Missing/invalid timestamps show **Not recorded yet**; initial loading/failure use Checking/Unavailable. The timestamp means latest successful source fetch, not website code revision or a guarantee all sources are fresh; its tooltip explains this and source coverage retains individual checks. Existing Directory loaded remains separate. Styling is in `frontend/src/styles.css`; no login system was added.
+
+TypeScript/Vite build and `git diff --check` passed. **Six individual Chromium browser checks passed**: four existing desktop/mobile rendering/control checks initially, plus two freshness checks after fixing their initial-request count for React development mounting. Coverage includes visibility on arrival, offset comparison, PHT conversion, stable time on refresh/failed attempts, advancement for newer success, and missing/invalid timestamps. Evidence and mocked-data screenshots: `data/listings-updated/{build.log,browser-tests.log,freshness-recheck.log,browser-results/}`. No full-suite/live-source/physical-device check. AGENTS.md updated; backend, collector, database and benchmark untouched. Temporary Vite stopped; no merge/deployment or startup-command changes.
+
+### Public homepage copy — November 23, 2026, Asia/Manila
+
+Updated navbar/H1/subtitle to the exact copy recorded above in `frontend/src/App.tsx`; removed the student-only eyebrow without replacement. Timezone placement was subsequently tightened as recorded below; freshness stays visible below the new subtitle. `frontend/index.html` has the exact browser title. `frontend/src/styles.css` adds modest subtitle spacing/responsive type and removes the fixed 320px body minimum that clipped the header beside a reserved scrollbar at 320px. Existing narrow-screen navigation wrapping handles that width. Board, paper, colors, filters, navigation destinations and event-data behavior are unchanged. No repository/package/URL rename.
+
+Updated existing header expectations in `frontend/e2e/directory.spec.ts`; **four desktop/mobile Chromium checks passed**, including exact brand/title/subtitle, absent eyebrow and retained timezone/freshness. **TypeScript/Vite build and `git diff --check` passed**. Additional screenshot/geometry review at **1366, 760, 390 and 320px** found no overlap or horizontal overflow; subtitle wraps to two lines on narrow mobile, and navigation wraps cleanly at 320px. Evidence: `data/public-header/{build.log,browser-tests.log,layout.json,header-1366.png,header-760.png,header-390.png,header-320.png}`. Mocked API/Chromium viewport verification only; no physical-device/full-suite run. AGENTS.md and this handoff updated; RUN_LOCAL.md commands unchanged. Temporary Vite stopped; no backend/collector/database changes, commit, push or deployment.
+
+### Title-aligned timezone — November 23, 2026, Asia/Manila
+
+`frontend/src/App.tsx` and `styles.css` remove the separate timezone row above the H1. The hero uses a shared grid row with timezone top-aligned to the right of The Tech Board, eliminating the extra top space. At 600px and below, timezone follows the freshness line on the right to keep the full title/subtitle readable. Exact copy, navigation, freshness semantics and board behavior are retained.
+
+TypeScript/Vite build, four existing desktop/mobile header/freshness checks and `git diff --check` passed. Geometry checks and screenshots at 1366/760/390/320px confirm wide-screen top alignment and no overlap/overflow. Evidence: `data/title-timezone/{build.log,browser-tests.log,layout.json,header-1366.png,header-760.png,header-390.png,header-320.png}`. Chromium/mocked API only; no physical-device/full-suite run. Handoff updated; temporary Vite stopped. No backend/data/collector changes, commit, push or deployment.
 
 ## Keeping this handoff current
 

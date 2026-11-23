@@ -10,8 +10,8 @@
 
 ## Scope and data boundaries
 
-- Keep the student-facing brand **IT_Community_PH**. Keep repository/package names unchanged unless the user requests otherwise.
-- Reuse the existing collector, storage, normal API, and student listing paths. Preserve existing CTF behavior and the current visual style.
+- Public navbar brand: **CommunITy PH**. Homepage H1: **The Tech Board**. Subtitle directly below it: **Your next tech meetup, hackathon, or conference might be right here.** Browser title: **The Tech Board | CommunITy PH**. Do not restore the student-only eyebrow label. Keep repository/package names and URLs unchanged.
+- Reuse the existing collector, storage, normal API, and student listing paths. Preserve existing CTF behavior. The approved frontend uses the Campus Bulletin cork finish, compact date-first cards, and one pinned detail paper.
 - Use an explicit preview/test database for development. Protect `data/ctfinder.sqlite3` (the main/production database); do not modify it, deployment services, or schedules without user authorization for that action.
 - Starting the backend can initialize schema and register source metadata. Set `CTF_DATABASE` explicitly before starting it, even for UI checks.
 - Do not run discovery merely to test display changes. When collection is requested, use the authorized public-source workflow and an isolated database. No paid APIs or logged-in Facebook scraping.
@@ -20,11 +20,16 @@
 
 ## Event behavior
 
+- Sort listings by the Manila calendar date displayed on each card, earliest first within each geography group; unknown/conflicting dates go last. Signup status and price do not affect order. Preserve stable order for same-day ties and keep deadlines distinct from event dates.
 - Preserve date-only precision. Use Asia/Manila calendar days; do not invent start times or deadlines. Keep conflicting dates unresolved.
 - Keep the preview's 45-day listing window and separate PH opportunities from international online opportunities. Unverified recurring signups and undated leads belong in Watchlist under that view.
 - Classify topics from supported event evidence. An organizer name alone does not prove Cloud, and “hackathon” alone does not prove Software Development. Events without supported topics stay visible under All topics.
 - HackForGov/Hack4Gov series identity may establish Cybersecurity from a retained matching title citation, including a search-only lead. This does **not** verify its schedule, price, eligibility, organizer identity, or signup.
 - A bare CTF agenda heading does not establish a separate competition or make an entire conference a cybersecurity event. Preserve official titles and distinguish conference tickets from competition entry.
+- Section tabs attach directly above the cork board. Keep the selected tab at its original height (52px desktop, 48px mobile) and make unselected tabs 20px shorter, with aligned bottoms. Unselected tabs stay white and subdued; only the selected tab uses its section color: green Upcoming, blue All, red Past/finished, orange Date unconfirmed, gray Watchlist, muted purple Archived. Keep the original wood-colored board frame and fixed card/paper accents. Important source/review notes appear near the top of the paper, before dates and signup facts; do not rely on color alone.
+- Show listings freshness below the page title on arrival, in Manila time. Use the latest recorded successful source fetch (`last_success`), never the page-load timestamp or a failed attempt; missing evidence stays unknown. This is not a claim that every source was refreshed.
+- Use the section tabs for section labels/counts; do not repeat a heading stamp inside the board. Keep Fetch, Refresh and collection progress/completion in Directory updates below source coverage. Clear filters stays beside the search/filter controls.
+- Desktop card selection must preserve the list position; mobile Back to the board must restore filters, scroll, and selected-card focus. Prototype demo records and finish toggles do not belong in the live UI.
 - Keep unknown price, deadlines, eligibility, and signup facts unknown. Distinguish blocked/unreadable sources from successful checks with zero matches.
 - Review flags are public notes, not an admin system or a reason to hide a listing. Unresolved undated leads expire after 45 days from first discovery into Archived leads, still accessible through All events; expiry never asserts completion. Search rediscovery must not renew verification or the expiry clock.
 - Keep Cloud and DevOps separate and evidence-backed; a tool or organizer name alone does not establish either topic. Use the stable numeric Meetup event ID for revisions and duplicate display reconciliation. Preserve original rows/history, and retain conflicting source dates for review instead of choosing a convenient date.

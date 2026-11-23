@@ -1,9 +1,14 @@
 import { test, expect, type Locator } from '@playwright/test';
 
-async function expandDetails(card: Locator) {
-  const details = card.locator('.event-details');
-  if (await details.getAttribute('open') === null) await details.locator(':scope > summary').click();
-  await expect(details).toHaveAttribute('open', '');
+async function selectPaper(card: Locator) {
+  const page = card.page();
+  const back = page.getByRole('button', { name: 'Back to the board' });
+  if (await back.isVisible()) await back.click();
+  const name = await card.locator('h3').textContent() || '';
+  await card.locator('.notice-select').click();
+  await expect(page.locator('.notice-select[aria-pressed=true]')).toHaveText(name);
+  await expect(page.locator('#paper-title')).toHaveText(name);
+  await expect(page.locator('.paper')).toBeVisible();
 }
 
 // These are API display fixtures, not collector inputs or benchmark editions.
@@ -134,10 +139,10 @@ test('failed collection remains retryable and reloads saved partial results', as
   await page.getByRole('button', { name: 'Fetch events', exact: true }).click();
   await expect(page.locator('.collection-status [role=alert]')).toContainText('Public sources could not be reached.');
   await expect(page.locator('.collection-status [role=alert]')).toContainText('Saved events are still shown.');
-  for (const event of data.events) await expect(page.getByRole('heading', { name: event.name, exact: true })).toBeVisible();
+  for (const event of data.events) await expect(page.locator('.event-card').getByRole('heading', { name: event.name, exact: true })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Fetch events', exact: true })).toBeEnabled();
   await expect(page.locator('.event-card')).toHaveCount(6);
-  await expect(page.getByRole('heading', { name: partial.name, exact: true })).toBeVisible();
+  await expect(page.locator('.event-card').getByRole('heading', { name: partial.name, exact: true })).toBeVisible();
   expect(eventReads).toBe(initialReads + 1);
 });
 
@@ -220,12 +225,15 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 }, { name: 
     await page.route('**/api/events', route => route.fulfill({ json: data }));
     await page.setViewportSize(viewport);
     await page.goto('/');
-    await expect(page).toHaveTitle(/IT_Community_PH/);
-    await expect(page.locator('header .brand')).toHaveText('IT_Community_PH');
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Find your next tech event.');
+    await expect(page).toHaveTitle('The Tech Board | CommunITy PH');
+    await expect(page.locator('header .brand')).toHaveText('CommunITy PH');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('The Tech Board');
+    await expect(page.locator('.hero h1 + .hero-description')).toHaveText('Your next tech meetup, hackathon, or conference might be right here.');
+    await expect(page.locator('.hero .eyebrow')).toHaveCount(0);
+    await expect(page.locator('.hero .timezone')).toHaveText('Asia/Manila · PHT');
     await expect(page.getByRole('link', { name: 'Events', exact: true })).toBeVisible();
     await expect(page.getByRole('searchbox', { name: 'Search events', exact: true })).toBeVisible();
-    await expect(page.locator('.results-heading p')).toHaveText('5 events');
+    await expect(page.locator('.results-count')).toHaveText('5 events');
     const topic = page.getByRole('combobox', { name: 'Topic', exact: true });
     await expect(topic).toHaveValue('');
     await expect(topic.locator('option')).toHaveText([
@@ -233,22 +241,23 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 }, { name: 
       'Software Development', 'Networking & Systems', 'Community', 'General IT',
     ]);
 
-    const meetup = page.locator('.event-card').filter({ has: page.getByRole('heading', { name: data.events[1].name, exact: true }) });
+    const meetup = page.locator('.event-card').filter({ has: page.getByRole('heading', { includeHidden: true, name: data.events[1].name, exact: true }) });
     await expect(meetup).toBeVisible();
-    await expect(meetup.locator('.event-details')).not.toHaveAttribute('open', '');
+    await expect(meetup.locator('.notice-select')).toBeEnabled();
     await expect(meetup.locator('.event-date')).toContainText('2037');
-    await expandDetails(meetup);
-    await expect(meetup.locator('.dates dt')).toHaveText(['Starts', 'Ends']);
+    await selectPaper(meetup);
+    await expect(page.locator('.paper .dates dt')).toHaveText(['Starts', 'Ends']);
     await expect(meetup.locator('.event-topics')).toContainText('AI & Data');
     await expect(meetup.locator('.event-topics')).toContainText('Software Development');
-    await expect(meetup.locator('.dates')).not.toContainText('Competition');
-    const legacy = page.locator('.event-card').filter({ has: page.getByRole('heading', { name: data.events[3].name, exact: true }) });
+    await expect(page.locator('.paper .dates')).not.toContainText('Competition');
+    if (viewport.width <= 760) await page.getByRole('button', {name:'Back to the board'}).click();
+    const legacy = page.locator('.event-card').filter({ has: page.getByRole('heading', { includeHidden: true, name: data.events[3].name, exact: true }) });
     await expect(legacy).toBeVisible();
     await expect(legacy.locator('.event-topics')).toHaveCount(0);
 
     await topic.selectOption('community');
     await expect(page.locator('.event-card h3')).toHaveText([data.events[1].name, data.events[4].name]);
-    await expect(page.getByRole('heading', { name: data.events[1].name, exact: true })).toHaveCount(1);
+    await expect(page.locator('.event-card').getByRole('heading', { name: data.events[1].name, exact: true })).toHaveCount(1);
     for (const tags of await page.locator('.event-topics').all()) {
       await expect(tags).toContainText('Community');
       await expect(tags).not.toContainText('Careers');
@@ -256,13 +265,13 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 }, { name: 
     await topic.selectOption('cybersecurity');
     await expect(page.locator('.event-card h3')).toHaveText([data.events[0].name]);
     await expect(page.locator('.event-topics')).toContainText('Cybersecurity');
-    await expect(page.locator('.results-heading p')).toHaveText('1 event matching your filters');
+    await expect(page.locator('.results-count')).toHaveText('1 event matching your filters');
     await topic.selectOption('ai_data');
     await expect(page.locator('.event-card')).toHaveCount(2);
-    await expect(page.getByRole('heading', { name: data.events[1].name, exact: true })).toHaveCount(1);
+    await expect(page.locator('.event-card').getByRole('heading', { name: data.events[1].name, exact: true })).toHaveCount(1);
     await topic.selectOption('software_development');
     await expect(page.locator('.event-card h3')).toHaveText([data.events[1].name]);
-    await expect(page.getByRole('heading', { name: data.events[1].name, exact: true })).toHaveCount(1);
+    await expect(page.locator('.event-card').getByRole('heading', { name: data.events[1].name, exact: true })).toHaveCount(1);
     await expect(page.locator('.event-topics')).toContainText('AI & Data');
     await expect(page.locator('.event-topics')).toContainText('Software Development');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
@@ -281,10 +290,10 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 }, { name: 
     await topic.selectOption('ai_data');
     await format.selectOption('in_person');
     await expect(page.locator('.event-card h3')).toHaveText([data.events[1].name]);
-    await expect(page.getByRole('heading', { name: data.events[2].name, exact: true })).toHaveCount(0);
+    await expect(page.locator('.event-card').getByRole('heading', { name: data.events[2].name, exact: true })).toHaveCount(0);
     await registration.selectOption('open');
     await search.fill('Community');
-    await expect(page.locator('.results-heading p')).toHaveText('1 event matching your filters');
+    await expect(page.locator('.results-count')).toHaveText('1 event matching your filters');
     await expect(page.getByRole('tab', { name: /Upcoming & live/ }).locator('span')).toHaveText('1');
     await registration.selectOption('unknown');
     await expect(page.locator('.event-card')).toHaveCount(0);
@@ -299,26 +308,26 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 }, { name: 
     await expect(registration).toHaveValue('open');
     await expect(search).toHaveValue('Community');
     await expect(page.locator('.event-card h3')).toHaveText([data.events[1].name, data.events[3].name]);
-    await expect(page.locator('.results-heading p')).toHaveText('2 events matching your filters');
+    await expect(page.locator('.results-count')).toHaveText('2 events matching your filters');
     await expect(page.getByRole('tab', { name: /Upcoming & live/ }).locator('span')).toHaveText('2');
     await topic.selectOption('cybersecurity');
     await expect(page.locator('.event-card')).toHaveCount(0);
-    await expect(page.locator('.results-heading p')).toHaveText('0 events matching your filters');
+    await expect(page.locator('.results-count')).toHaveText('0 events matching your filters');
     await expect(page.getByRole('heading', { name: 'No matches for these filters.' })).toBeVisible();
     await expect(page.locator('.empty')).toContainText(/topic/i);
     await page.getByRole('button', { name: 'Clear filters', exact: true }).first().click();
     for (const filter of [topic, format, registration, search]) await expect(filter).toHaveValue('');
     await expect(page.locator('.event-card')).toHaveCount(5);
-    await expect(page.locator('.results-heading p')).toHaveText('5 events');
+    await expect(page.locator('.results-count')).toHaveText('5 events');
     await page.getByRole('tab', { name: /Watchlist/ }).click();
-    await expect(page.locator('.results-heading p')).toHaveText('0 events');
+    await expect(page.locator('.results-count')).toHaveText('0 events');
     await expect(page.getByRole('heading', { name: 'No watchlist events recorded yet.' })).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
   });
 }
 
 for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 }, { name: 'mobile', width: 390, height: 844 }]) {
-  test(`compact rows expose decisions and expand from the keyboard on ${viewport.name}`, async ({ page }) => {
+  test(`compact rows expose decisions and select from the keyboard on ${viewport.name}`, async ({ page }) => {
     const data = topicDirectory();
     const base = data.events[1];
     const moment = (value: string) => ({ raw: value, value, precision: 'datetime', timezone: 'UTC' });
@@ -341,10 +350,10 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 }, { name: 
     await page.goto('/');
     const cards = page.locator('.event-card');
     await expect(cards).toHaveCount(4);
-    await expect(page.locator('.event-details[open]')).toHaveCount(0);
+    await expect(page.locator('.event-card .event-detail-body')).toHaveCount(0);
     await expect(page.locator('.event-card .state-scheduled')).toHaveCount(0);
     await expect(page.getByRole('combobox', { name: 'Region', exact: true })).toHaveCount(0);
-    const byName = (name: string) => cards.filter({ has: page.getByRole('heading', { name, exact: true }) });
+    const byName = (name: string) => cards.filter({ has: page.getByRole('heading', { includeHidden: true, name, exact: true }) });
     const paid = byName(events[0].name);
     const preview = paid.locator('.event-preview');
     await expect(preview).toContainText(events[0].name);
@@ -358,8 +367,8 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 }, { name: 
     // 16:30 UTC on May 10 is already May 11 in Manila. The preview keeps date precision.
     await expect(paid.locator('.event-date')).toHaveAttribute('aria-label', /Starts May 11, 2037 \(Asia\/Manila\)/);
     await expect(paid.locator('.event-date')).not.toContainText(/\d:\d|PHT/);
-    await expect(paid.locator('.dates')).not.toBeVisible();
-    await expect(paid.locator('.actions')).not.toBeVisible();
+    await expect(paid.locator('.dates')).toHaveCount(0);
+    await expect(paid.locator('.actions')).toHaveCount(0);
 
     const unknown = byName(events[1].name);
     await expect(unknown.locator('.event-date')).toHaveText('Date unconfirmed');
@@ -385,23 +394,21 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 }, { name: 
     expect(boxes.filter(box => box.y >= 0 && box.y + box.height <= viewport.height).length).toBeGreaterThanOrEqual(2);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
 
-    const control = paid.locator('.event-details > summary');
-    await expect(control).toHaveAccessibleName(new RegExp(`^Details`));
+    const control = paid.locator('.notice-select');
+    await expect(control).toHaveAccessibleName(events[0].name);
     await control.focus();
     await page.keyboard.press('Enter');
-    await expect(paid.locator('.event-details')).toHaveAttribute('open', '');
-    await expect(paid.locator('.dates')).toBeVisible();
-    await expect(paid.locator('.dates')).toContainText(/12:30\s*am PHT/i);
-    await expect(paid.locator('.event-details')).toContainText('Description');
-    await expect(paid.locator('.event-details')).toContainText(events[0].description);
-    await expect(paid.locator('.event-details')).toContainText('Open to students.');
-    await expect(paid.locator('.event-details .actions a').first()).toBeVisible();
-    await control.focus();
+    await expect(control).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.locator('.paper .dates')).toContainText(/12:30\s*am PHT/i);
+    await expect(page.locator('.paper')).toContainText(events[0].description);
+    await expect(page.locator('.paper')).toContainText('Open to students.');
+    await expect(page.locator('.paper .actions a').first()).toBeVisible();
+    if (viewport.width <= 760) await page.getByRole('button', {name:'Back to the board'}).click();
+    await unknown.locator('.notice-select').focus();
     await page.keyboard.press('Space');
-    await expect(paid.locator('.event-details')).not.toHaveAttribute('open', '');
-    await expandDetails(unknown);
-    await expect(unknown.locator('.event-details')).toContainText('Registration unconfirmed');
-    await expect(unknown.locator('.event-details')).toContainText('Unknown');
+    await expect(unknown.locator('.notice-select')).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.locator('.paper')).toContainText('Registration unconfirmed');
+    await expect(page.locator('.paper .facts')).toContainText('Unknown');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
   });
 }
@@ -413,15 +420,15 @@ test('real collected listings, filters, history, and source health', async ({ pa
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: /Find your next/ })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /The Tech Board/ })).toBeVisible();
   const upcoming = data.events.filter((e: {section: string}) => e.section === 'upcoming');
   await expect(page.locator('.event-card')).toHaveCount(upcoming.length);
   if (upcoming.length) {
     const card = page.locator('.event-card').first();
-    await expandDetails(card);
-    await expect(card.locator('.actions a').first()).toHaveAttribute('href', /^https?:\/\//);
-    await card.locator('.history > summary').click();
-    await expect(card.locator('.history-link').first()).toBeVisible();
+    await selectPaper(card);
+    await expect(page.locator('.paper .actions a').first()).toHaveAttribute('href', /^https?:\/\//);
+    await page.locator('.paper .history > summary').click();
+    await expect(page.locator('.paper .history-link').first()).toBeVisible();
   }
   await page.getByRole('searchbox').fill('not-a-real-event-abcdef');
   await expect(page.getByRole('heading', { name: 'No matches for these filters.' })).toBeVisible();
@@ -455,7 +462,7 @@ test('linked post discovery stays separate from fetched evidence (browser-only f
   await page.route('**/api/events', route => route.fulfill({json:{...live,events:[event]}}));
   await page.setViewportSize({width:390,height:844});
   await page.goto('/');
-  await expandDetails(page.locator('.event-card').first());
+  await selectPaper(page.locator('.event-card').first());
   await page.locator('.history > summary').click();
   await expect(page.getByText('Linked only · Full post not accessed')).toBeVisible();
   await expect(page.locator('.related-links .history-link')).toHaveAttribute('href',post);
@@ -478,9 +485,9 @@ test('search discovery labels and original queries are visible (browser-only fix
   await page.route('**/api/events', route => route.fulfill({json:{...live,events:[event]}}));
   await page.setViewportSize({width:390,height:844});
   await page.goto('/');
-  await expandDetails(page.locator('.event-card').first());
+  await selectPaper(page.locator('.event-card').first());
   await expect(page.locator('.actions .primary')).toContainText('Search result · verify source');
-  await expect(page.locator('.organizer')).toHaveText('Organizer unconfirmed');
+  await expect(page.locator('.paper > .organizer')).toHaveText('Organizer unconfirmed');
   await page.locator('.history > summary').click();
   await expect(page.getByText('Search result only', {exact:true})).toBeVisible();
   await page.getByText('How this announcement was found').click();
@@ -514,8 +521,8 @@ test('date precision, cancellation, and error recovery render correctly (browser
   await expect(page.getByRole('alert')).toBeVisible();
   fails = false;
   await page.getByRole('button',{name:'Try again'}).click();
-  await expect(page.getByText('Cancelled',{exact:true})).toBeVisible();
-  await expandDetails(page.locator('.event-card').first());
+  await expect(page.locator('.event-card').getByText('Cancelled',{exact:true})).toBeVisible();
+  await selectPaper(page.locator('.event-card').first());
   const dates = page.locator('.dates');
   await expect(dates).toContainText('November 21, 2026');
   await expect(dates).toContainText('9:00');
@@ -546,21 +553,21 @@ test('past dates, future teasers, and undated search leads stay distinct (browse
   await page.setViewportSize({width:390,height:844});
   await page.goto('/');
   await expect(page.locator('.event-card')).toHaveCount(2);
-  await expect(page.getByRole('heading',{name:base.name})).toHaveCount(0);
+  await expect(page.locator('.event-card').getByRole('heading', { name: base.name})).toHaveCount(0);
   await expect(page.locator('.event-schedule_tba .event-date')).toHaveText('Date unconfirmed');
   await expect(page.locator('.event-undated_lead .event-date')).toHaveText('Date unconfirmed');
-  await expandDetails(page.locator('.event-undated_lead'));
-  await expect(page.locator('.event-undated_lead .dates')).toContainText('Not confirmed');
-  await expect(page.locator('.event-undated_lead .dates')).not.toContainText('Schedule TBA');
+  await selectPaper(page.locator('.event-undated_lead'));
+  await expect(page.locator('.paper .dates')).toContainText('Not confirmed');
+  await expect(page.locator('.paper .dates')).not.toContainText('Schedule TBA');
   await page.getByRole('tab',{name:/Past & finished/}).click();
   await expect(page.locator('.event-card')).toHaveCount(2);
   const past = page.locator('.event-past_date');
-  await expandDetails(past);
+  await selectPaper(past);
   await expect(past.locator('.badge')).toHaveText('Past date · completion unconfirmed');
-  await expect(past.locator('.registration > strong')).toHaveText('Registration unconfirmed');
-  await expect(past.locator('.dates dt')).toHaveText(['Starts', 'Ends']);
-  await expect(past.locator('.dates')).toContainText('February 14, 2024');
-  await expect(past.locator('.dates')).not.toContainText('12:00');
+  await expect(page.locator('.paper .registration > strong')).toHaveText('Registration unconfirmed');
+  await expect(page.locator('.paper .dates dt')).toHaveText(['Starts', 'Ends']);
+  await expect(page.locator('.paper .dates')).toContainText('February 14, 2024');
+  await expect(page.locator('.paper .dates')).not.toContainText('12:00');
   await expect(page.locator('.event-finished .state-finished')).toHaveText('Finished');
   await page.getByRole('combobox',{name:'Registration',exact:true}).selectOption('unknown');
   await expect(page.locator('.event-card')).toHaveCount(1);
@@ -586,7 +593,7 @@ test('conflicting dates stay visible outside Upcoming and Past (browser-only fix
   await page.getByRole('tab',{name:/Date unconfirmed/}).click();
   await expect(page.locator('.event-card')).toHaveCount(1);
   await expect(page.locator('.state-date_conflict')).toHaveText('Conflicting dates');
-  await expandDetails(page.locator('.event-card').first());
+  await selectPaper(page.locator('.event-card').first());
   await expect(page.locator('.notices')).toContainText('November 4, 2026, December 4, 2026');
   await expect(page.locator('.dates')).not.toContainText('December 4');
   await page.locator('.history > summary').click();
@@ -613,7 +620,7 @@ test('watchlisted leads are absent from Upcoming and remain inspectable', async 
   await expect(page.locator('.event-card')).toHaveCount(0);
   await page.getByRole('tab',{name:/Watchlist/}).click();
   await expect(page.locator('.event-card')).toHaveCount(1);
-  await expandDetails(page.locator('.event-card').first());
+  await selectPaper(page.locator('.event-card').first());
   await expect(page.locator('.notices')).toContainText('no confirmed start or cutoff');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
 });
@@ -645,24 +652,24 @@ test('general IT editions have an international group and separate participation
   await expect(card).toHaveCount(1);
   await expect(card.getByRole('heading',{name:international.name})).toBeVisible();
   await expect(card.locator('.event-preview')).toContainText('General IT');
-  await expandDetails(card);
-  await expect(card.locator('.facts')).toContainText('Free');
-  await expect(card.locator('.facts')).toContainText('Required to register');
-  await expect(card.locator('.facts')).toContainText(international.eligibility);
-  await expect(card.locator('.registration > strong')).toHaveText('Registration open');
-  await expect(card.locator('.registration dl > div').filter({hasText:'Registration deadline'})).toHaveText('Registration deadlineUnknown');
-  await expect(card.locator('.registration dl > div').filter({hasText:'Submission deadline'})).toHaveText('Submission deadlineUnknown');
-  await expect(card.locator('.dates')).toContainText('Starts');
-  await expect(card.locator('.dates')).toContainText('Ends');
-  await expect(card.locator('.dates')).toContainText('Dec 10, 2032');
-  await expect(card.locator('.dates')).toContainText(/2:00\s*am PHT/i);
-  await expect(card.locator('.dates')).not.toContainText('Competition');
-  await expect(card.getByRole('link',{name:'Registration',exact:false})).toHaveAttribute('href',international.registration_url);
-  const ctf = page.locator('.event-card').filter({has:page.getByRole('heading',{name:base.name})});
-  await expandDetails(ctf);
-  await expect(ctf.locator('.dates')).toContainText('Starts');
-  await expect(ctf.locator('.registration dl > div').filter({hasText:'Submission deadline'})).toHaveText('Submission deadlineUnknown');
-  await expect(ctf.locator('.facts > div').filter({hasText:'Price'})).toHaveText('PriceUnknown');
+  await selectPaper(card);
+  await expect(page.locator('.paper .facts')).toContainText('Free');
+  await expect(page.locator('.paper .facts')).toContainText('Required to register');
+  await expect(page.locator('.paper .facts')).toContainText(international.eligibility);
+  await expect(page.locator('.paper .registration > strong')).toHaveText('Registration open');
+  await expect(page.locator('.paper .registration dl > div').filter({hasText:'Registration deadline'})).toHaveText('Registration deadlineUnknown');
+  await expect(page.locator('.paper .registration dl > div').filter({hasText:'Submission deadline'})).toHaveText('Submission deadlineUnknown');
+  await expect(page.locator('.paper .dates')).toContainText('Starts');
+  await expect(page.locator('.paper .dates')).toContainText('Ends');
+  await expect(page.locator('.paper .dates')).toContainText('Dec 10, 2032');
+  await expect(page.locator('.paper .dates')).toContainText(/2:00\s*am PHT/i);
+  await expect(page.locator('.paper .dates')).not.toContainText('Competition');
+  await expect(page.locator('.paper').getByRole('link',{name:'Registration',exact:false})).toHaveAttribute('href',international.registration_url);
+  const ctf = page.locator('.event-card').filter({has:page.getByRole('heading', { includeHidden: true, name: base.name})});
+  await selectPaper(ctf);
+  await expect(page.locator('.paper .dates')).toContainText('Starts');
+  await expect(page.locator('.paper .registration dl > div').filter({hasText:'Submission deadline'})).toHaveText('Submission deadlineUnknown');
+  await expect(page.locator('.paper .facts > div').filter({hasText:'Price'})).toHaveText('PriceUnknown');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
 });
 
@@ -695,28 +702,28 @@ test('a PH hybrid AI event keeps public applications separate from restricted ti
   await expect(card.locator('.event-preview')).toContainText('Hybrid');
   await expect(card.locator('.event-preview')).toContainText(/approval required/i);
   await expect(card.locator('.event-preview')).toContainText('AI & Data');
-  await expandDetails(card);
-  await expect(card.locator('.registration > strong')).toHaveText('Applications open · approval required');
-  await expect(card.locator('.registration dl > div').filter({hasText:'Registration deadline'})).toHaveText('Registration deadlineUnknown');
-  await expect(card.locator('.facts > div').filter({hasText:'Attendance'})).toHaveText('AttendanceOnsite — Quezon City · Online');
-  await expect(card.locator('.facts > div').filter({hasText:'Price'})).toHaveText('PriceUnknown');
-  await expect(card.locator('.facts > div').filter({hasText:'Account'})).toHaveText('AccountUnknown');
-  await expect(card.locator('.dates')).toContainText('Starts');
-  await expect(card.locator('.dates')).not.toContainText('Competition');
-  const publicTickets = card.locator('.ticket-options > div').filter({has:page.getByRole('heading',{name:'Standard public tickets'})});
-  const restrictedTickets = card.locator('.ticket-options > div').filter({has:page.getByRole('heading',{name:'Restricted tickets',exact:true})});
+  await selectPaper(card);
+  await expect(page.locator('.paper .registration > strong')).toHaveText('Applications open · approval required');
+  await expect(page.locator('.paper .registration dl > div').filter({hasText:'Registration deadline'})).toHaveText('Registration deadlineUnknown');
+  await expect(page.locator('.paper .facts > div').filter({hasText:'Attendance'})).toHaveText('AttendanceOnsite — Quezon City · Online');
+  await expect(page.locator('.paper .facts > div').filter({hasText:'Price'})).toHaveText('PriceUnknown');
+  await expect(page.locator('.paper .facts > div').filter({hasText:'Account'})).toHaveText('AccountUnknown');
+  await expect(page.locator('.paper .dates')).toContainText('Starts');
+  await expect(page.locator('.paper .dates')).not.toContainText('Competition');
+  const publicTickets = page.locator('.paper .ticket-options > div').filter({has:page.getByRole('heading',{includeHidden:true,name:'Standard public tickets'})});
+  const restrictedTickets = page.locator('.paper .ticket-options > div').filter({has:page.getByRole('heading',{includeHidden:true,name:'Restricted tickets',exact:true})});
   await expect(publicTickets.locator('li')).toHaveCount(2);
   await expect(publicTickets).toContainText('Standard - Onsite');
   await expect(publicTickets).toContainText('Standard - Online');
   await expect(publicTickets).not.toContainText('completed the training');
   await expect(restrictedTickets.locator('li')).toHaveCount(1);
   await expect(restrictedTickets).toContainText('Only for fellows who completed the training.');
-  await expect(card.getByRole('link',{name:'Registration',exact:false})).toHaveAttribute('href',event.registration_url);
+  await expect(page.locator('.paper').getByRole('link',{name:'Registration',exact:false})).toHaveAttribute('href',event.registration_url);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
 });
 
-test('public approval applications sort with open registration before unconfirmed schedules', async ({ page, request }) => {
-  const live = await (await request.get('/api/events')).json();
+test('event dates precede registration status in listing order', async ({ page }) => {
+  const live = topicDirectory();
   const base = {...live.events[0], section:'upcoming', geography:'PH', status:'scheduled', notices:[]};
   const day = (value:string) => ({raw:value,value,precision:'date',timezone:null});
   const events = [
@@ -726,13 +733,13 @@ test('public approval applications sort with open registration before unconfirme
   ];
   await page.route('**/api/events', route => route.fulfill({json:{...live,events}}));
   await page.goto('/');
-  await expect(page.locator('.event-card h3')).toHaveText([events[1].name,events[2].name,events[0].name]);
-  await expandDetails(page.locator('.event-card').first());
-  await expect(page.locator('.event-card').first().locator('.registration > strong')).toHaveText('Applications open · approval required');
+  await expect(page.locator('.event-card h3')).toHaveText([events[0].name,events[1].name,events[2].name]);
+  await selectPaper(page.locator('.event-card').nth(1));
+  await expect(page.locator('.paper .registration > strong')).toHaveText('Applications open · approval required');
 });
 
-test('verified free current actions precede current actions with an unknown fee', async ({ page, request }) => {
-  const live = await (await request.get('/api/events')).json();
+test('event dates precede free pricing in listing order', async ({ page }) => {
+  const live = topicDirectory();
   const base = {...live.events[0], section:'upcoming', geography:'international_online', status:'scheduled', registration_status:'open', notices:[]};
   const day = (value:string) => ({raw:value,value,precision:'date',timezone:null});
   const events = [
@@ -741,7 +748,7 @@ test('verified free current actions precede current actions with an unknown fee'
   ];
   await page.route('**/api/events', route => route.fulfill({json:{...live,events}}));
   await page.goto('/');
-  await expect(page.locator('.event-card h3')).toHaveText([events[1].name,events[0].name]);
+  await expect(page.locator('.event-card h3')).toHaveText([events[0].name,events[1].name]);
 });
 
 test('AI and cybersecurity cards show submission cutoffs separately from registration and event end', async ({ page, request }) => {
@@ -755,15 +762,15 @@ test('AI and cybersecurity cards show submission cutoffs separately from registr
   await page.route('**/api/events', route => route.fulfill({json:{...live,events}}));
   await page.goto('/');
   for (const event of events) {
-    const card = page.locator('.event-card').filter({has:page.getByRole('heading',{name:event.name})});
+    const card = page.locator('.event-card').filter({has:page.getByRole('heading', { includeHidden: true, name: event.name})});
     await expect(card.locator('.event-preview')).toContainText('Submit by');
     await expect(card.locator('.event-preview')).not.toContainText('Register by');
-    await expandDetails(card);
-    await expect(card.locator('.registration dl > div').filter({hasText:'Registration deadline'})).toHaveText('Registration deadlineUnknown');
-    const cutoff = card.locator('.registration dl > div').filter({hasText:'Submission deadline'});
+    await selectPaper(card);
+    await expect(page.locator('.paper .registration dl > div').filter({hasText:'Registration deadline'})).toHaveText('Registration deadlineUnknown');
+    const cutoff = page.locator('.paper .registration dl > div').filter({hasText:'Submission deadline'});
     await expect(cutoff).toContainText('Dec 2, 2035');
     await expect(cutoff).toContainText(/12:00\s*am PHT/i);
-    await expect(card.locator('.dates')).toContainText('Dec 3, 2035');
+    await expect(page.locator('.paper .dates')).toContainText('Dec 3, 2035');
   }
 });
 
@@ -784,7 +791,7 @@ for (const [layout, width] of [['desktop', 1366], ['mobile', 390]] as const) {
     await all.click();
     await expect(page.locator('.event-card')).toHaveCount(8);
     expect(new Set(await page.locator('.event-card h3').allTextContents()).size).toBe(8);
-    await expect(page.locator('.results-heading')).toContainText('8 events');
+    await expect(page.locator('.results-count')).toContainText('8 events');
     await page.getByRole('combobox', { name: 'Topic', exact: true }).selectOption('cybersecurity');
     await expect(page.locator('.event-card')).toHaveCount(3);
     await expect(all).toContainText('3');
@@ -794,7 +801,7 @@ for (const [layout, width] of [['desktop', 1366], ['mobile', 390]] as const) {
     await page.getByRole('combobox', { name: 'Registration', exact: true }).selectOption('open');
     await expect(page.locator('.event-card')).toHaveCount(0);
     await expect(page.getByRole('heading', { name: 'No matches for these filters.' })).toBeVisible();
-    await expect(page.locator('.results-heading')).toContainText('0 events matching your filters');
+    await expect(page.locator('.results-count')).toContainText('0 events matching your filters');
     await page.getByRole('combobox', { name: 'Topic', exact: true }).selectOption('');
     await expect(page.getByRole('combobox', { name: 'Format', exact: true })).toHaveValue('in_person');
     await expect(page.getByRole('combobox', { name: 'Registration', exact: true })).toHaveValue('open');
@@ -815,5 +822,76 @@ test('All events has a truthful empty-directory message', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('tab', { name: /All events/ }).click();
   await expect(page.getByRole('heading', { name: 'No events recorded yet.', exact: true })).toBeVisible();
-  await expect(page.locator('.results-heading')).toContainText('0 events');
+  await expect(page.locator('.results-count')).toContainText('0 events');
 });
+
+for (const width of [1366, 390]) {
+  test(`directory controls and completion messages stay below the board at ${width}px`, async ({page}) => {
+    const data = topicDirectory();
+    let reads = 0;
+    let failRefresh = false;
+    let posts = 0;
+    await page.route('**/api/events', route => {
+      reads++;
+      return failRefresh ? route.fulfill({status:503,body:'unavailable'}) : route.fulfill({json:{...data,manual_collection:{enabled:true,token:'fixture-token'}}});
+    });
+    await page.route('**/api/collection', route => {
+      if (route.request().method() === 'POST') posts++;
+      return route.fulfill({json:{...collectionFixture('completed',3,'Saved the latest public events.'),warning_count:1}});
+    });
+    await page.setViewportSize({width,height:900});
+    await page.goto('/');
+    const panel = page.getByRole('region',{name:'Directory updates'});
+    await expect(panel.locator('.collection-status')).toContainText('Fetch complete');
+    await expect(panel.getByRole('button',{name:'Fetch events',exact:true})).toBeEnabled();
+    await expect(page.locator('.board .results-heading, .board .result-tools, .board .collection-status')).toHaveCount(0);
+    await expect(page.locator('.board').getByRole('heading',{name:'Upcoming & live',exact:true})).toHaveCount(0);
+    await expect(page.getByRole('tab',{name:/Upcoming & live/})).toContainText('5');
+    const coverageBox = await page.locator('.coverage').boundingBox();
+    const panelBox = await panel.boundingBox();
+    expect(panelBox!.y).toBeGreaterThanOrEqual(coverageBox!.y + coverageBox!.height);
+    await panel.scrollIntoViewIfNeeded();
+    await page.screenshot({path:test.info().outputPath('directory-updates.png')});
+    const before = reads;
+    await panel.getByRole('button',{name:'Refresh saved listings'}).click();
+    await expect.poll(() => reads).toBe(before + 1);
+    expect(posts).toBe(0);
+    failRefresh = true;
+    await panel.getByRole('button',{name:'Refresh saved listings'}).click();
+    await expect(panel.getByRole('alert')).toContainText('Previous results are still shown');
+    await expect(page.locator('.event-card')).toHaveCount(5);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
+  });
+}
+
+for (const width of [1366, 390]) {
+  test(`listing freshness is visible on arrival and uses source success time at ${width}px`, async ({page}) => {
+    const data = topicDirectory();
+    const source = {id:'latest',name:'Example source',url:'https://organizer.example',kind:'website',status:'error',last_success:'2026-11-23T13:07:00Z',last_attempt:'2026-11-24T02:00:00Z',message:'Fetch failed',discovered:0,accepted:0};
+    let successes: (string | null)[] = [source.last_success,'2026-11-23T20:00:00+08:00',null];
+    let reads = 0;
+    await page.route('**/api/events', route => {
+      reads++;
+      return route.fulfill({json:{...data,generated_at:`2037-05-0${reads}T00:00:00Z`,sources:successes.map((last_success,index)=>({...source,id:`source-${index}`,last_success}))}});
+    });
+    await page.setViewportSize({width,height:900});
+    await page.goto('/');
+    const stamp = page.locator('.directory-updated');
+    await expect(stamp).toBeInViewport();
+    await expect(stamp).toContainText('Nov 23, 2026, 9:07 PM PHT');
+    await expect(stamp.locator('time')).toHaveAttribute('datetime',source.last_success);
+    await page.screenshot({path:test.info().outputPath('last-updated.png')});
+    const initialReads = reads;
+    await page.getByRole('button',{name:'Refresh saved listings',exact:true}).click();
+    await expect.poll(()=>reads).toBe(initialReads + 1);
+    await expect(stamp).toContainText('Nov 23, 2026, 9:07 PM PHT');
+    successes = ['2026-11-24T01:00:00Z'];
+    await page.getByRole('button',{name:'Refresh saved listings',exact:true}).click();
+    await expect(stamp).toContainText('Nov 24, 2026, 9:00 AM PHT');
+    successes = [null,'invalid','2026-11-24'];
+    await page.getByRole('button',{name:'Refresh saved listings',exact:true}).click();
+    await expect(stamp).toContainText('Not recorded yet');
+    await expect(stamp.locator('time')).toHaveCount(0);
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
+  });
+}
