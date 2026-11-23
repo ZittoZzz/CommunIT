@@ -6,11 +6,12 @@ from generic public-web searches. It is not a permanent event seed source.
 from __future__ import annotations
 
 import json
+from datetime import timedelta
 from collections import deque
 from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
-from .domain import canonical_url, in_window
+from .domain import MANILA, canonical_url, in_window
 from .network import FetchError, RateLimited
 from .tavily import ENDPOINT, SearchResult, search_queries
 
@@ -26,8 +27,9 @@ class PageBudgetExceeded(FetchError):
 
 class PublicPages:
     """Share one page budget/cache with verifiers' ownership-link checks."""
-    def __init__(self, client, maximum, route_checks):
+    def __init__(self, client, maximum, route_checks, *, external_pages=False):
         self.client, self.maximum, self.route_checks = client, maximum, route_checks
+        self.external_pages = external_pages
         self.cache, self.count, self.current_url = {}, 0, None
 
     def __getattr__(self, name):
@@ -40,7 +42,8 @@ class PublicPages:
             raise PageBudgetExceeded('Shared public-page budget reached; ownership or event verification incomplete')
         self.count += 1
         try:
-            raw = self.client.public_page(url, allowed_hosts=allowed_hosts)
+            fetch = self.client.discovered_page if self.external_pages else self.client.public_page
+            raw = fetch(url, allowed_hosts=allowed_hosts)
         except FetchError as exc:
             if url != self.current_url:
                 status = ('rate_limited' if isinstance(exc, RateLimited) else
@@ -56,7 +59,7 @@ class PublicPages:
         return raw
 
 
-def supported_url(value):
+def supported_url(value, *, external_pages=False):
     """Restrict search-controlled fetches to supported public event platforms."""
     if not isinstance(value, str):
         return None
@@ -71,8 +74,13 @@ def supported_url(value):
     if urlsplit(url).path.lower().endswith('.pdf'):
         return None
     if host in ('meetup.com', 'www.meetup.com') and '/find' in urlsplit(url).path.lower():
+        # Public city/topic pages contain actual edition links. Their search
+        # cards remain discovery evidence only, never event facts.
+        if not urlsplit(url).path.startswith('/find/ph--'):
+            return None
+    if host not in HOSTS and not host.endswith('.devpost.com') and not external_pages:
         return None
-    if host not in HOSTS and not host.endswith('.devpost.com'):
+    if host in ('facebook.com', 'www.facebook.com', 'm.facebook.com', 'rootcon.org', 'www.rootcon.org'):
         return None
     # Keep explicit Luma calendar navigation; normalize primary event aliases
     # using the same platform rules as the verifier, never a guessed slug.
@@ -88,9 +96,9 @@ def verify_page(raw, url, source, client, now):
     return verify(raw, url, source, client, now)
 
 
-def page_event_links(raw, url):
+def page_event_links(raw, url, *, external_pages=False):
     from .opportunity_pages import page_event_links as links
-    return links(raw, url)
+    return links(raw, url, external_pages=external_pages)
 
 
 def round_robin_urls(queries_by_url, searches):
@@ -146,10 +154,27 @@ def opportunity_search(source, client, known, now):
     result = SearchResult()
     result.route_checks, result.publisher_leads = [], []
     external = bool(source.get('search_results_path'))
-    if external:
+    external_pages = bool(source.get('allow_external_pages'))
+    calendar = source.get('kind') == 'opportunity_calendar'
+    if calendar:
+        provider = 'Public calendars'
+        roots = source.get('calendar_urls') or [source['url']]
+        result.searches = [{'query': url, 'provider': provider, 'mode': 'public_calendar',
+                            'status': 'ok', 'results': [{'url': url, 'title': ''}]} for url in roots]
+        hits = [({'url': url, 'title': ''}, url) for url in roots]
+    elif external:
         hits, result.searches, result.warnings, provider = manifest_searches(source['search_results_path'])
     else:
-        hits, result.searches, result.warnings = search_queries({**source, 'url': source.get('url', ENDPOINT)}, client)
+        queries = source.get('queries')
+        if source.get('query_templates'):
+            start = now.astimezone(MANILA).date()
+            end = start + timedelta(days=source.get('window_days', 45))
+            months = list(dict.fromkeys((start + timedelta(days=i)).strftime('%B %Y')
+                                       for i in range((end - start).days + 1)))
+            queries = [{'query': template.format(months=' '.join(months))}
+                       for template in source['query_templates']]
+        hits, result.searches, result.warnings = search_queries({**source, 'queries': queries,
+                                                                'url': source.get('url', ENDPOINT)}, client)
         provider = 'Tavily keyless'
         for audit in result.searches:
             audit.update(provider=provider, mode='keyless_api')
@@ -165,7 +190,7 @@ def opportunity_search(source, client, known, now):
     queries_by_url, titles = {}, {}
     for hit, query in hits:
         raw_url = hit.get('url', '')
-        url = supported_url(raw_url)
+        url = supported_url(raw_url, external_pages=external_pages)
         if url is None:
             result.decisions.append({'url': raw_url, 'title': hit.get('title', '')[:500],
                                      'accepted': False, 'decision': 'unsupported',
@@ -177,7 +202,7 @@ def opportunity_search(source, client, known, now):
     # Refresh stored public evidence even if search no longer returns the page.
     retained = {}
     for row in known:
-        url = supported_url(row['url'])
+        url = supported_url(row['url'], external_pages=external_pages)
         if not url:
             continue
         try:
@@ -197,13 +222,23 @@ def opportunity_search(source, client, known, now):
             paths[url] = payload['discovery_path']
     depths = {url: 0 for url in paths}
     maximum = min(80, max(1, int(source.get('max_pages', 40))))
-    pages = PublicPages(client, maximum, result.route_checks)
+    pages = PublicPages(client, maximum, result.route_checks, external_pages=external_pages)
     accepted, seen = {}, set()
     prefer_link = False
     stopped_by_limit = False
+    last_link_root = None
     while (roots or linked or refresh) and len(seen) < maximum:
         queue = (linked if linked and (prefer_link or not roots) else roots) if roots or linked else refresh
+        if queue is linked and last_link_root:
+            # A large first calendar must not consume every later calendar's
+            # event budget. Rotate to another actual discovery root if possible.
+            for _ in range(len(linked)):
+                if paths[linked[0]][0] != last_link_root:
+                    break
+                linked.rotate(-1)
         url = queue.popleft()
+        if queue is linked:
+            last_link_root = paths[url][0]
         prefer_link = queue is roots
         if url in seen:
             continue
@@ -216,14 +251,16 @@ def opportunity_search(source, client, known, now):
             raw = pages.public_page(url, allowed_hosts=[urlsplit(url).hostname])
             result.route_checks.append({'route': 'public_page', 'url': url, 'status': 'ok',
                                         'depth': depth, 'path': path})
-            children = page_event_links(raw, url) if depth == 0 else []
+            from .opportunity_pages import primary_event_url
+            follow_directory = depth == 0 or (external_pages and depth < 2 and not primary_event_url(url))
+            children = page_event_links(raw, url, external_pages=external_pages) if follow_directory else []
             for child in children:
-                child = supported_url(child)
+                child = supported_url(child, external_pages=external_pages)
                 if not child or child == url:
                     continue
                 queries_by_url.setdefault(child, set()).update(queries_by_url.get(url, set()))
                 if child not in paths:
-                    paths[child], depths[child] = path + [child], 1
+                    paths[child], depths[child] = path + [child], depth + 1
                     linked.append(child)
                 elif child not in seen and depths[child] == 0:
                     # A directly returned event also has this proven calendar
@@ -234,14 +271,18 @@ def opportunity_search(source, client, known, now):
             page_source = {**source, 'url': url}
             ann, reason = ((None, 'Public organizer calendar links discovered for verification') if children else
                            verify_page(raw, url, page_source, pages, now))
-            if ann and url not in retained and not any(
+            parsed_fields = ann.get('facts') if ann else None
+            conflict_in_window = bool(ann and any(
+                in_window(claim.get('date'), now, source.get('window_days', 45))
+                for claim in ann.get('facts', {}).get('date_conflicts', [])))
+            if ann and url not in retained and not conflict_in_window and not any(
                     in_window(ann.get('facts', {}).get(field), now, source.get('window_days', 45))
                     for field in ('start', 'deadline', 'submission_deadline')):
                 ann, reason = None, 'No confirmed start or cutoff inside the 45-day Manila window (date-only boundaries unresolved)'
             result.decisions.append({'url': url, 'title': titles.get(url, ''),
                                      'accepted': bool(ann), 'decision': 'accepted' if ann else 'rejected',
                                      'queries': sorted(queries_by_url.get(url, [])), 'reason': reason,
-                                     'depth': depth, 'path': path})
+                                     'depth': depth, 'path': path, 'parsed_fields': parsed_fields})
             if not ann:
                 continue
             old = retained.get(url, {})
@@ -253,7 +294,7 @@ def opportunity_search(source, client, known, now):
                 ann['discovery_queries'] = sorted(queries)
                 ann['discovery_query'] = ann['discovery_queries'][0]
             ann['discovery_provider'] = provider
-            prefix = [] if external else [ENDPOINT]
+            prefix = [] if external or calendar else [ENDPOINT]
             verified_path = ann.get('discovery_path') or [url]
             ann['discovery_path'] = list(dict.fromkeys(prefix + path + verified_path))
             key = ann.get('url') or url
@@ -293,6 +334,7 @@ def opportunity_search(source, client, known, now):
     result.message = (f'{provider}: {len(hits)} search hits; {pages.count} public page checks; '
                       f'{len(result.announcements)} verified or retained opportunities. '
                       'Search output supplies discovery only; public pages supply event facts. '
-                      + ('External public-search manifest used for this experiment; Tavily was not called.'
+                      + ('Public calendar links fetched directly; no search provider was called.' if calendar else
+                         'External public-search manifest used for this experiment; Tavily was not called.'
                          if external else 'Free keyless access; no API key or paid fallback.'))
     return result

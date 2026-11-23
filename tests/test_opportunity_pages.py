@@ -115,6 +115,74 @@ def test_ph_event_preserves_dates_and_primary_evidence():
         assert ann['field_evidence'][field]['quote']
 
 
+def test_online_event_uses_its_own_ph_group_and_keeps_signup_unknown():
+    node = schema()
+    node.update(eventAttendanceMode='https://schema.org/OnlineEventAttendanceMode',
+                location={'@type': 'VirtualLocation', 'url': 'https://example.org/live'})
+    metadata = meetup_state()
+    cache = metadata['props']['pageProps']['__APOLLO_STATE__']
+    cache['Event:1234567']['group'] = {'__ref': 'Group:42'}
+    cache['Group:42'] = {'id': '42', 'country': 'ph', 'city': 'Manila',
+                         'link': node['organizer']['url']}
+    ann, reason = verify(page(node, metadata=metadata))
+    assert ann, reason
+    assert ann['facts']['geography'] == 'PH'
+    assert ann['facts']['format'] == 'online'
+    assert ann['facts']['registration_state'] == 'unknown'
+    assert 'Group:42' in ann['field_evidence']['geography']['quote']
+    cache['Group:99'] = dict(cache['Group:42'], id='99')
+    for value in ('us', ''):
+        cache['Group:42']['country'] = value
+        assert verify(page(node, metadata=metadata))[0] is None
+
+
+def test_online_event_rejects_wrong_event_or_organizer_group_identity():
+    node = schema()
+    node.update(eventAttendanceMode='https://schema.org/OnlineEventAttendanceMode',
+                location={'@type': 'VirtualLocation'})
+    metadata = meetup_state()
+    cache = metadata['props']['pageProps']['__APOLLO_STATE__']
+    cache['Event:1234567']['group'] = {'__ref': 'Group:42'}
+    cache['Group:42'] = {'id': '42', 'country': 'ph', 'city': 'Manila',
+                         'link': 'https://www.meetup.com/unrelated/'}
+    assert verify(page(node, metadata=metadata))[0] is None
+    cache['Group:42']['link'] = node['organizer']['url']
+    metadata['props']['pageProps']['event']['id'] = '7654321'
+    assert verify(page(node, metadata=metadata))[0] is None
+
+
+@pytest.mark.parametrize('body,kind', [
+    ('This event is totally FREE. No one will ask for an attendance fee.', 'free'),
+    ('This meetup is FREE.', 'free'),
+    ('This event is totally FREE!', 'free'),
+    ('A free online conference featuring software engineering talks.', 'free'),
+    ('This meetup is free for members; guests pay PHP 200.', 'unknown'),
+    ('This meetup is not free.', 'unknown'),
+    ('This is not a free conference.', 'unknown'),
+    ('This is not a free workshop.', 'unknown'),
+    ('If you are a sponsor, the event is free.', 'unknown'),
+    ('Only members qualify: this conference is free.', 'unknown'),
+    ('This is not a free meetup.', 'unknown'),
+    ('Is this a free online conference?', 'unknown'),
+    ("This isn't a free workshop.", 'unknown'),
+    ('We provide free food, parking and drinks.', 'unknown'),
+])
+def test_explicit_event_price_does_not_use_free_extras(body, kind):
+    ann, reason = verify(page(body=body))
+    assert ann, reason
+    assert ann['facts']['price']['kind'] == kind
+
+
+def test_secondary_registration_requirement_and_equipment_are_retained():
+    body = ('Bring your laptop. All attendees who register must also complete the '
+            'organizer form to finalize their seat reservation.')
+    ann, reason = verify(page(body=body, control='<button>RSVP</button>'))
+    assert ann, reason
+    assert 'Bring your laptop' in ann['facts']['eligibility']
+    assert 'organizer form' in ann['facts']['eligibility']
+    assert ann['facts']['registration_state'] == 'unknown'
+
+
 def test_date_only_is_not_upgraded_to_midnight_or_cutoff():
     node = schema(); node.update(startDate='2035-11-29', endDate='2035-11-30')
     ann, _ = verify(page(node))
@@ -146,9 +214,12 @@ def test_online_requires_explicit_worldwide_participation():
     assert ann['facts']['format'] == 'online'
 
 
-def test_worldwide_cybersecurity_is_supported_but_ph_requires_competition_adapter():
+def test_meetup_cybersecurity_is_supported_as_a_whole_event():
     node = schema(); node.update(name='Cybersecurity Workshop', description='Practice ethical hacking.')
-    assert verify(page(node))[0] is None
+    ann, _ = verify(page(node))
+    assert ann['facts']['name'] == 'Cybersecurity Workshop'
+    assert ann['facts']['start']['value']
+    assert ann['facts']['competition_date'] is None
     node['location'] = {'@type': 'VirtualLocation', 'url': MEETUP}
     node['eventAttendanceMode'] = 'https://schema.org/OnlineEventAttendanceMode'
     ann, _ = verify(page(node, body='Open to participants worldwide.'))

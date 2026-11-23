@@ -1,0 +1,1083 @@
+{
+  "evaluation": "Known-reference improvement, not a blind evaluation",
+  "reference_timestamp": "2026-11-23T17:07:00+08:00",
+  "reference_window": "2026-11-23 through 2027-01-07, Asia/Manila",
+  "runtime_input": "sources.community.json; recurring calendars and generic queries; no individual reference URLs or replay fixtures",
+  "baseline": {
+    "run": "baseline-live",
+    "started_at": "2026-11-23T10:19:23.498176+00:00",
+    "finished_at": "2026-11-23T10:21:04.191850+00:00",
+    "event_matches": 1,
+    "reference_url_matches": 1,
+    "references": [
+      {
+        "reference": "120th Agile Philippines Meetup",
+        "reference_url": "https://www.meetup.com/agilephilippines/events/317188117/",
+        "recovered": false
+      },
+      {
+        "reference": "PhRUG: Czech Mate!",
+        "reference_url": "https://www.meetup.com/ruby-phil/events/317362935/",
+        "recovered": false
+      },
+      {
+        "reference": "Hands-on with Foundry Agents and Foundry IQ",
+        "reference_url": "https://www.meetup.com/globalaiphilippines/events/317284119/",
+        "recovered": false
+      },
+      {
+        "reference": "AWS Student Community Day Mindanao",
+        "reference_url": "https://awsscd-mindanao.org/",
+        "recovered": false
+      },
+      {
+        "reference": "Cafe Compute Meetup: Manila",
+        "reference_url": "https://luma.com/yneq6wv7",
+        "recovered": false
+      },
+      {
+        "reference": "Manila DevOps User Group Event 07",
+        "reference_url": "https://www.meetup.com/manila-devops-user-group/events/317321759/",
+        "recovered": false
+      },
+      {
+        "reference": "AI Unwrapped: Agents, Data & Intelligence",
+        "reference_url": "https://www.meetup.com/globalaiphilippines/events/317510987/",
+        "recovered": false
+      },
+      {
+        "reference": "Conf42: Chaos Engineering",
+        "reference_url": "https://www.conf42.com/chaos2026",
+        "recovered": false
+      },
+      {
+        "reference": "MLH Global Hack Week: Open Source Week",
+        "reference_url": "https://events.mlh.com/events/15199-global-hack-week-open-source-week",
+        "recovered": true,
+        "source_id": "mlh-global-hack-week",
+        "source_status": "ok",
+        "provider": "Direct public publisher adapter",
+        "search_or_feed": "https://ghw.mlh.com/",
+        "event_url": "https://events.mlh.com/events/15199-global-hack-week-open-source-week",
+        "event_id": "943b0e0f713bf14145eea408",
+        "discovery_path": [
+          "https://ghw.mlh.com/",
+          "https://ghw.mlh.com/events/open-source-copy",
+          "https://events.mlh.com/events/15199-global-hack-week-open-source-week"
+        ],
+        "fetched_pages": [
+          {
+            "url": "https://ghw.mlh.com/",
+            "status": "ok",
+            "sha256": "c5a38c6b0d027e0d21fa00f63951a6f7bb4d6abf17ed599a1a8705deff996a85",
+            "path": "data/benchmark-2026-11-23/baseline-live/captures/00061.bin"
+          },
+          {
+            "url": "https://ghw.mlh.com/events/open-source-copy",
+            "status": "ok",
+            "sha256": "bb6a532ac693edf61270965a9f6aadba276011b2208f15d1965601a5b5f6fcf5",
+            "path": "data/benchmark-2026-11-23/baseline-live/captures/00069.bin"
+          },
+          {
+            "url": "https://events.mlh.com/events/15199-global-hack-week-open-source-week",
+            "status": "ok",
+            "sha256": "0166a93e22c83d6c8aca8c4470a5f16063dc885222b7c1b353723ab55e7f9a2f",
+            "path": "data/benchmark-2026-11-23/baseline-live/captures/00071.bin"
+          }
+        ],
+        "decision": "accepted",
+        "reference_url_match": true,
+        "parsed_fields": {},
+        "field_evidence": {}
+      },
+      {
+        "reference": "QNX Global Hackathon",
+        "reference_url": "https://qnx.devpost.com/",
+        "recovered": false
+      }
+    ]
+  },
+  "final": {
+    "run": "final-live",
+    "started_at": "2026-11-23T10:45:06.436543+00:00",
+    "finished_at": "2026-11-23T10:48:05.179167+00:00",
+    "event_matches": 10,
+    "reference_url_matches": 9,
+    "references": [
+      {
+        "reference": "120th Agile Philippines Meetup",
+        "reference_url": "https://www.meetup.com/agilephilippines/events/317188117/",
+        "recovered": true,
+        "source_id": "meetup-tech-ph",
+        "source_status": "ok",
+        "provider": "Public calendars",
+        "search_or_feed": "https://www.meetup.com/find/ph--cebu/technology/",
+        "event_url": "https://www.meetup.com/agilephilippines/events/317188117/",
+        "event_id": "1d194859beeb2acc1590cb26",
+        "discovery_path": [
+          "https://www.meetup.com/find/ph--cebu/technology/",
+          "https://www.meetup.com/agilephilippines/events/317188117/"
+        ],
+        "fetched_pages": [
+          {
+            "url": "https://www.meetup.com/find/ph--cebu/technology/",
+            "status": "ok",
+            "sha256": "eb8c04d8c40a0104f6b0fbffff8fc6e2d6c1a2ea0f967d766caaa4e007a862ab",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00208.bin"
+          },
+          {
+            "url": "https://www.meetup.com/agilephilippines/events/317188117/",
+            "status": "ok",
+            "sha256": "bddb3d76593369ecb01dd9a399317fd68b2112170cc5fef28262e394f2761559",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00238.bin"
+          }
+        ],
+        "decision": "accepted",
+        "reference_url_match": true,
+        "parsed_fields": {
+          "name": "120th Agile Philippines Meetup (Online)",
+          "organizer": "Agile Philippines",
+          "geography": "PH",
+          "topic": "general_it",
+          "region": "Philippines",
+          "format": "online",
+          "attendance_options": [
+            "Online"
+          ],
+          "ticket_options": [],
+          "start": {
+            "raw": "2026-11-25T18:00:00+08:00",
+            "value": "2026-11-25T18:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "end": {
+            "raw": "2026-11-25T21:00:00+08:00",
+            "value": "2026-11-25T21:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "competition_date": null,
+          "deadline": null,
+          "submission_deadline": null,
+          "registration_opens": null,
+          "registration_state": "unknown",
+          "registration_url": null,
+          "organizer_event_url": "https://www.meetup.com/agilephilippines/events/317188117/",
+          "eligibility": null,
+          "price": {
+            "kind": "unknown"
+          },
+          "account_required": null,
+          "summary": null,
+          "lifecycle": null
+        },
+        "field_evidence": {
+          "geography": {
+            "url": "https://www.meetup.com/agilephilippines/events/317188117/",
+            "quote": "Meetup Event:317188117 group=Group:18217862; link=https://www.meetup.com/agilephilippines; country=ph; city=Manila"
+          },
+          "start": {
+            "url": "https://www.meetup.com/agilephilippines/events/317188117/",
+            "quote": "Schema.org Event startDate=2026-11-25T18:00:00+08:00"
+          },
+          "end": {
+            "url": "https://www.meetup.com/agilephilippines/events/317188117/",
+            "quote": "Schema.org Event endDate=2026-11-25T21:00:00+08:00"
+          }
+        },
+        "api_visible": true,
+        "api_section": "upcoming",
+        "api_topics": []
+      },
+      {
+        "reference": "PhRUG: Czech Mate!",
+        "reference_url": "https://www.meetup.com/ruby-phil/events/317362935/",
+        "recovered": true,
+        "source_id": "meetup-tech-ph",
+        "source_status": "ok",
+        "provider": "Public calendars",
+        "search_or_feed": "https://www.meetup.com/find/ph--manila/technology/",
+        "event_url": "https://www.meetup.com/ruby-phil/events/317362935/",
+        "event_id": "4fa75854b646af64d077d772",
+        "discovery_path": [
+          "https://www.meetup.com/find/ph--manila/technology/",
+          "https://www.meetup.com/ruby-phil/events/317362935/"
+        ],
+        "fetched_pages": [
+          {
+            "url": "https://www.meetup.com/find/ph--manila/technology/",
+            "status": "ok",
+            "sha256": "1127c97bca1c5c9cd3e04913ea371dc0938874102a30ddd506a1e5a964b27ae2",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00204.bin"
+          },
+          {
+            "url": "https://www.meetup.com/ruby-phil/events/317362935/",
+            "status": "ok",
+            "sha256": "c7e3a53bd78e84de056483f49009fb0c2aed094bc5d098f26262d1f0f973b2cd",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00252.bin"
+          }
+        ],
+        "decision": "accepted",
+        "reference_url_match": true,
+        "parsed_fields": {
+          "name": "PhRUG - Czech Mate!",
+          "organizer": "Philippine Ruby Users Group",
+          "geography": "PH",
+          "topic": "ai",
+          "region": "NCR",
+          "format": "in_person",
+          "attendance_options": [
+            "Onsite"
+          ],
+          "ticket_options": [],
+          "start": {
+            "raw": "2026-11-26T18:00:00+08:00",
+            "value": "2026-11-26T18:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "end": {
+            "raw": "2026-11-26T21:00:00+08:00",
+            "value": "2026-11-26T21:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "competition_date": null,
+          "deadline": null,
+          "submission_deadline": null,
+          "registration_opens": null,
+          "registration_state": "unknown",
+          "registration_url": null,
+          "organizer_event_url": "https://www.meetup.com/ruby-phil/events/317362935/",
+          "eligibility": "Please bring your ID.",
+          "price": {
+            "kind": "unknown"
+          },
+          "account_required": null,
+          "summary": null,
+          "lifecycle": null
+        },
+        "field_evidence": {
+          "geography": {
+            "url": "https://www.meetup.com/ruby-phil/events/317362935/",
+            "quote": "{\"@type\": \"PostalAddress\", \"addressLocality\": \"Makati City\", \"addressRegion\": \"\", \"addressCountry\": \"ph\", \"streetAddress\": \"6819 Ayala Ave, Makati City, 1227 Metro Manila, Philippines, Makati City\"}"
+          },
+          "start": {
+            "url": "https://www.meetup.com/ruby-phil/events/317362935/",
+            "quote": "Schema.org Event startDate=2026-11-26T18:00:00+08:00"
+          },
+          "end": {
+            "url": "https://www.meetup.com/ruby-phil/events/317362935/",
+            "quote": "Schema.org Event endDate=2026-11-26T21:00:00+08:00"
+          }
+        },
+        "api_visible": true,
+        "api_section": "upcoming",
+        "api_topics": [
+          "ai_data"
+        ]
+      },
+      {
+        "reference": "Hands-on with Foundry Agents and Foundry IQ",
+        "reference_url": "https://www.meetup.com/globalaiphilippines/events/317284119/",
+        "recovered": true,
+        "source_id": "meetup-tech-ph",
+        "source_status": "ok",
+        "provider": "Public calendars",
+        "search_or_feed": "https://www.meetup.com/find/ph--manila/technology/",
+        "event_url": "https://www.meetup.com/globalaiphilippines/events/317284119/",
+        "event_id": "d7a35ea5eec75270b7a1b959",
+        "discovery_path": [
+          "https://www.meetup.com/find/ph--manila/technology/",
+          "https://www.meetup.com/globalaiphilippines/events/317284119/"
+        ],
+        "fetched_pages": [
+          {
+            "url": "https://www.meetup.com/find/ph--manila/technology/",
+            "status": "ok",
+            "sha256": "1127c97bca1c5c9cd3e04913ea371dc0938874102a30ddd506a1e5a964b27ae2",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00204.bin"
+          },
+          {
+            "url": "https://www.meetup.com/globalaiphilippines/events/317284119/",
+            "status": "ok",
+            "sha256": "292f580ca58970d408218ef4a5c96e295468633cb5f45993abc3c31ddd2b8b64",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00206.bin"
+          }
+        ],
+        "decision": "accepted",
+        "reference_url_match": true,
+        "parsed_fields": {
+          "name": "Hands-on with Foundry Agents and Foundry IQ",
+          "organizer": "Global AI Manila",
+          "geography": "PH",
+          "topic": "ai",
+          "region": "Philippines",
+          "format": "hybrid",
+          "attendance_options": [
+            "Onsite",
+            "Online"
+          ],
+          "ticket_options": [],
+          "start": {
+            "raw": "2026-11-27T14:30:00+08:00",
+            "value": "2026-11-27T14:30:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "end": {
+            "raw": "2026-11-27T17:30:00+08:00",
+            "value": "2026-11-27T17:30:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "competition_date": null,
+          "deadline": null,
+          "submission_deadline": null,
+          "registration_opens": null,
+          "registration_state": "unknown",
+          "registration_url": null,
+          "organizer_event_url": "https://www.meetup.com/globalaiphilippines/events/317284119/",
+          "eligibility": "Whether you're a developer, AI practitioner, IT professional, or simply exploring agentic AI, you'll leave with practical experience and a better understanding of how Microsoft Foundry can help you move from AI experimentation to working agent solutions.\nBring your laptop.\nAll attendees who register via Meetup must also complete the Microsoft registration form to be sent to your inbox least 3 days before the event to secure building access and finalize their seat reservation.",
+          "price": {
+            "kind": "unknown"
+          },
+          "account_required": null,
+          "summary": null,
+          "lifecycle": null
+        },
+        "field_evidence": {
+          "geography": {
+            "url": "https://www.meetup.com/globalaiphilippines/events/317284119/",
+            "quote": "{}; {\"@type\": \"PostalAddress\", \"addressLocality\": \"Makati\", \"addressRegion\": \"al\", \"addressCountry\": \"ph\", \"streetAddress\": \"11F One Ayala West Tower, Ayala Avenue cor East Street, Makati, al\"}"
+          },
+          "start": {
+            "url": "https://www.meetup.com/globalaiphilippines/events/317284119/",
+            "quote": "Schema.org Event startDate=2026-11-27T14:30:00+08:00"
+          },
+          "end": {
+            "url": "https://www.meetup.com/globalaiphilippines/events/317284119/",
+            "quote": "Schema.org Event endDate=2026-11-27T17:30:00+08:00"
+          },
+          "registration_state": {
+            "url": "https://www.meetup.com/globalaiphilippines/events/317284119/",
+            "quote": "Meetup event 317284119: status=ACTIVE; maxTickets=150; YES RSVP totalCount=164; waitlistMode=OFF; capacity does not establish a current registration route"
+          }
+        },
+        "api_visible": true,
+        "api_section": "upcoming",
+        "api_topics": [
+          "ai_data",
+          "software_development"
+        ]
+      },
+      {
+        "reference": "AWS Student Community Day Mindanao",
+        "reference_url": "https://awsscd-mindanao.org/",
+        "recovered": true,
+        "source_id": "meetup-tech-ph",
+        "source_status": "ok",
+        "provider": "Public calendars",
+        "search_or_feed": "https://www.meetup.com/aws-sbg-at-university-of-the-philippines-mindanao-campus/",
+        "event_url": "https://www.meetup.com/aws-sbg-at-university-of-the-philippines-mindanao-campus/events/316992979/",
+        "event_id": "9db77584b3e72cebc6f33497",
+        "discovery_path": [
+          "https://www.meetup.com/aws-sbg-at-university-of-the-philippines-mindanao-campus/",
+          "https://www.meetup.com/aws-sbg-at-university-of-the-philippines-mindanao-campus/events/316992979/"
+        ],
+        "fetched_pages": [
+          {
+            "url": "https://www.meetup.com/aws-sbg-at-university-of-the-philippines-mindanao-campus/",
+            "status": "ok",
+            "sha256": "d12ddeb901ee823289e20eea7119b87ddf572945a3d2c4168531669d18f5f693",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00212.bin"
+          },
+          {
+            "url": "https://www.meetup.com/aws-sbg-at-university-of-the-philippines-mindanao-campus/events/316992979/",
+            "status": "ok",
+            "sha256": "aca83ca9c78f7b8393b41565b3d032dd572bb3a2a12a920fef7a11bf182fbb27",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00216.bin"
+          }
+        ],
+        "decision": "accepted",
+        "reference_url_match": false,
+        "parsed_fields": {
+          "name": "AWS Student Community Day Davao",
+          "organizer": "AWS SBG at University of the Philippines - Mindanao Campus",
+          "geography": "PH",
+          "topic": "general_it",
+          "region": "Region XI — Davao",
+          "format": "in_person",
+          "attendance_options": [
+            "Onsite"
+          ],
+          "ticket_options": [],
+          "start": {
+            "raw": "2026-11-28T09:00:00+08:00",
+            "value": "2026-11-28T09:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "end": {
+            "raw": "2026-11-28T17:00:00+08:00",
+            "value": "2026-11-28T17:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "competition_date": null,
+          "deadline": null,
+          "submission_deadline": null,
+          "registration_opens": null,
+          "registration_state": "unknown",
+          "registration_url": null,
+          "organizer_event_url": "https://www.meetup.com/aws-sbg-at-university-of-the-philippines-mindanao-campus/events/316992979/",
+          "eligibility": "Intended audience: student builders.",
+          "price": {
+            "kind": "unknown"
+          },
+          "account_required": null,
+          "summary": null,
+          "lifecycle": null
+        },
+        "field_evidence": {
+          "geography": {
+            "url": "https://www.meetup.com/aws-sbg-at-university-of-the-philippines-mindanao-campus/events/316992979/",
+            "quote": "{\"@type\": \"PostalAddress\", \"addressLocality\": \"Davao City\", \"addressRegion\": \"\", \"addressCountry\": \"ph\", \"streetAddress\": \"6/F Community Center of the First Companions, Ateneo de Davao University, M. Roxas Ave, Poblacion District, Davao City, 8000 Dav, Davao City\"}"
+          },
+          "start": {
+            "url": "https://www.meetup.com/aws-sbg-at-university-of-the-philippines-mindanao-campus/events/316992979/",
+            "quote": "Schema.org Event startDate=2026-11-28T09:00:00+08:00"
+          },
+          "end": {
+            "url": "https://www.meetup.com/aws-sbg-at-university-of-the-philippines-mindanao-campus/events/316992979/",
+            "quote": "Schema.org Event endDate=2026-11-28T17:00:00+08:00"
+          }
+        },
+        "api_visible": true,
+        "api_section": "upcoming",
+        "api_topics": [
+          "ai_data",
+          "cloud_devops",
+          "software_development"
+        ]
+      },
+      {
+        "reference": "Cafe Compute Meetup: Manila",
+        "reference_url": "https://luma.com/yneq6wv7",
+        "recovered": true,
+        "source_id": "luma-tech-community",
+        "source_status": "ok",
+        "provider": "Public calendars",
+        "search_or_feed": "https://luma.com/cerebras",
+        "event_url": "https://luma.com/yneq6wv7",
+        "event_id": "6bd31249b69fe8ba454bb77c",
+        "discovery_path": [
+          "https://luma.com/cerebras",
+          "https://luma.com/yneq6wv7",
+          "https://luma.com/cerebras?k=c"
+        ],
+        "fetched_pages": [
+          {
+            "url": "https://luma.com/cerebras",
+            "status": "ok",
+            "sha256": "82c3f99a65e3c18affc13144be1eefb6ebe9930c0fe70dad6e9bb44d4dee7c3b",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00258.bin"
+          },
+          {
+            "url": "https://luma.com/yneq6wv7",
+            "status": "ok",
+            "sha256": "249bec9d0a15a3b32b6acd00bffdb19d177a8fc4e4bf4dc1a6314af60170cba8",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00266.bin"
+          },
+          {
+            "url": "https://luma.com/cerebras?k=c",
+            "status": "ok",
+            "sha256": "842f24cf0cda06b58ae11892e28bf80eb66e1cdd81824965a168fe489af0a22e",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00268.bin"
+          }
+        ],
+        "decision": "accepted",
+        "reference_url_match": true,
+        "parsed_fields": {
+          "name": "Cafe Compute Meetup: Manila",
+          "organizer": "Cerebras",
+          "geography": "PH",
+          "topic": "ai",
+          "region": "NCR",
+          "format": "in_person",
+          "attendance_options": [],
+          "ticket_options": [
+            {
+              "name": "Standard",
+              "access": "public",
+              "attendance": null,
+              "eligibility": null,
+              "registration_state": "approval_required",
+              "price": {
+                "kind": "unknown"
+              },
+              "deadline": null
+            }
+          ],
+          "start": {
+            "raw": "2026-11-30T10:00:00.000Z",
+            "value": "2026-11-30T18:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "end": {
+            "raw": "2026-11-30T12:00:00.000Z",
+            "value": "2026-11-30T20:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "competition_date": null,
+          "deadline": null,
+          "submission_deadline": null,
+          "registration_opens": null,
+          "registration_state": "approval_required",
+          "registration_url": "https://luma.com/yneq6wv7",
+          "organizer_event_url": "https://luma.com/yneq6wv7",
+          "eligibility": "Standard public tickets are available; organizer approval required.",
+          "price": {
+            "kind": "unknown"
+          },
+          "account_required": null,
+          "summary": null,
+          "lifecycle": null
+        },
+        "field_evidence": {
+          "geography": {
+            "url": "https://luma.com/yneq6wv7",
+            "quote": "{\"mode\": \"obfuscated\", \"city\": \"Taguig\", \"city_state\": \"Taguig, Philippines\", \"sublocality\": null, \"country\": \"Philippines\", \"country_code\": \"PH\", \"region\": \"Metro Manila\", \"region_short\": \"NCR\"}"
+          },
+          "start": {
+            "url": "https://luma.com/yneq6wv7",
+            "quote": "Luma event.start_at=2026-11-30T10:00:00.000Z; timezone=Asia/Manila"
+          },
+          "end": {
+            "url": "https://luma.com/yneq6wv7",
+            "quote": "Luma event.end_at=2026-11-30T12:00:00.000Z; timezone=Asia/Manila"
+          },
+          "price": {
+            "url": "https://luma.com/yneq6wv7",
+            "quote": "Public ticket cents: [{\"name\": \"Standard\", \"cents\": null, \"currency\": null}]"
+          },
+          "registration_state": {
+            "url": "https://luma.com/yneq6wv7",
+            "quote": "Luma registration_availability=open; public tickets: Standard: approval_required",
+            "basis": "live_registration_widget"
+          }
+        },
+        "api_visible": true,
+        "api_section": "upcoming",
+        "api_topics": [
+          "ai_data"
+        ]
+      },
+      {
+        "reference": "Manila DevOps User Group Event 07",
+        "reference_url": "https://www.meetup.com/manila-devops-user-group/events/317321759/",
+        "recovered": true,
+        "source_id": "meetup-tech-ph",
+        "source_status": "ok",
+        "provider": "Public calendars",
+        "search_or_feed": "https://www.meetup.com/find/ph--manila/technology/",
+        "event_url": "https://www.meetup.com/manila-devops-user-group/events/317321759/",
+        "event_id": "4945ea1a614f503b361606a6",
+        "discovery_path": [
+          "https://www.meetup.com/find/ph--manila/technology/",
+          "https://www.meetup.com/manila-devops-user-group/events/317321759/"
+        ],
+        "fetched_pages": [
+          {
+            "url": "https://www.meetup.com/find/ph--manila/technology/",
+            "status": "ok",
+            "sha256": "1127c97bca1c5c9cd3e04913ea371dc0938874102a30ddd506a1e5a964b27ae2",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00204.bin"
+          },
+          {
+            "url": "https://www.meetup.com/manila-devops-user-group/events/317321759/",
+            "status": "ok",
+            "sha256": "dad888902cb9bb90f54ef90969c4f15c03766deda1e672e41ada85d3c7aae51d",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00226.bin"
+          }
+        ],
+        "decision": "accepted",
+        "reference_url_match": true,
+        "parsed_fields": {
+          "name": "DevOps User Group Event 07 Supported by Wankuma Allicance@Cafe Lyon",
+          "organizer": "Manila DevOps User Group (PSUGMNL)",
+          "geography": "PH",
+          "topic": "general_it",
+          "region": "Philippines",
+          "format": "in_person",
+          "attendance_options": [
+            "Onsite"
+          ],
+          "ticket_options": [],
+          "start": {
+            "raw": "2026-12-06T12:00:00+08:00",
+            "value": "2026-12-06T12:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "end": {
+            "raw": "2026-12-06T15:00:00+08:00",
+            "value": "2026-12-06T15:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "competition_date": null,
+          "deadline": null,
+          "submission_deadline": null,
+          "registration_opens": null,
+          "registration_state": "unknown",
+          "registration_url": null,
+          "organizer_event_url": "https://www.meetup.com/manila-devops-user-group/events/317321759/",
+          "eligibility": null,
+          "price": {
+            "kind": "free",
+            "amount": 0
+          },
+          "account_required": null,
+          "summary": null,
+          "lifecycle": null
+        },
+        "field_evidence": {
+          "geography": {
+            "url": "https://www.meetup.com/manila-devops-user-group/events/317321759/",
+            "quote": "{\"@type\": \"PostalAddress\", \"addressLocality\": \"Mandaluyong\", \"addressRegion\": \"\", \"addressCountry\": \"ph\", \"streetAddress\": \"549 Epifanio de los Santos Ave, Ortigas Center, Mandaluyong City, Mandaluyong\"}"
+          },
+          "start": {
+            "url": "https://www.meetup.com/manila-devops-user-group/events/317321759/",
+            "quote": "Schema.org Event startDate=2026-12-06T12:00:00+08:00"
+          },
+          "end": {
+            "url": "https://www.meetup.com/manila-devops-user-group/events/317321759/",
+            "quote": "Schema.org Event endDate=2026-12-06T15:00:00+08:00"
+          },
+          "price": {
+            "url": "https://www.meetup.com/manila-devops-user-group/events/317321759/",
+            "quote": "This event is totally FREE"
+          }
+        },
+        "api_visible": true,
+        "api_section": "upcoming",
+        "api_topics": [
+          "cloud_devops"
+        ]
+      },
+      {
+        "reference": "AI Unwrapped: Agents, Data & Intelligence",
+        "reference_url": "https://www.meetup.com/globalaiphilippines/events/317510987/",
+        "recovered": true,
+        "source_id": "meetup-tech-ph",
+        "source_status": "ok",
+        "provider": "Public calendars",
+        "search_or_feed": "https://www.meetup.com/find/ph--manila/technology/",
+        "event_url": "https://www.meetup.com/globalaiphilippines/events/317510987/",
+        "event_id": "5efab59be55a5e573f6d8f1a",
+        "discovery_path": [
+          "https://www.meetup.com/find/ph--manila/technology/",
+          "https://www.meetup.com/globalaiphilippines/events/317510987/"
+        ],
+        "fetched_pages": [
+          {
+            "url": "https://www.meetup.com/find/ph--manila/technology/",
+            "status": "ok",
+            "sha256": "1127c97bca1c5c9cd3e04913ea371dc0938874102a30ddd506a1e5a964b27ae2",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00204.bin"
+          },
+          {
+            "url": "https://www.meetup.com/globalaiphilippines/events/317510987/",
+            "status": "ok",
+            "sha256": "c866a293deab077d65dfb9d59369869d4734be53f42a1052038b0628bde8cada",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00214.bin"
+          }
+        ],
+        "decision": "accepted",
+        "reference_url_match": true,
+        "parsed_fields": {
+          "name": "AI Unwrapped: Agents, Data & Intelligence",
+          "organizer": "Global AI Manila",
+          "geography": "PH",
+          "topic": "ai",
+          "region": "NCR",
+          "format": "hybrid",
+          "attendance_options": [
+            "Onsite",
+            "Online"
+          ],
+          "ticket_options": [],
+          "start": {
+            "raw": "2026-12-10T13:00:00+08:00",
+            "value": "2026-12-10T13:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "end": {
+            "raw": "2026-12-10T17:00:00+08:00",
+            "value": "2026-12-10T17:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "competition_date": null,
+          "deadline": null,
+          "submission_deadline": null,
+          "registration_opens": null,
+          "registration_state": "unknown",
+          "registration_url": null,
+          "organizer_event_url": "https://www.meetup.com/globalaiphilippines/events/317510987/",
+          "eligibility": "Whether you're building AI solutions today or simply want to understand where agents, data and enterprise AI are heading, this is a chance to",
+          "price": {
+            "kind": "unknown"
+          },
+          "account_required": null,
+          "summary": null,
+          "lifecycle": null
+        },
+        "field_evidence": {
+          "geography": {
+            "url": "https://www.meetup.com/globalaiphilippines/events/317510987/",
+            "quote": "{}; {\"@type\": \"PostalAddress\", \"addressLocality\": \"Makati City\", \"addressRegion\": \"\", \"addressCountry\": \"ph\", \"streetAddress\": \"11F, One Ayala West Tower, Ayala Avenue, corner Edsa, Makati City, 1223 Metro Manila, Philippines, Makati City\"}"
+          },
+          "start": {
+            "url": "https://www.meetup.com/globalaiphilippines/events/317510987/",
+            "quote": "Schema.org Event startDate=2026-12-10T13:00:00+08:00"
+          },
+          "end": {
+            "url": "https://www.meetup.com/globalaiphilippines/events/317510987/",
+            "quote": "Schema.org Event endDate=2026-12-10T17:00:00+08:00"
+          }
+        },
+        "api_visible": true,
+        "api_section": "upcoming",
+        "api_topics": [
+          "ai_data"
+        ]
+      },
+      {
+        "reference": "Conf42: Chaos Engineering",
+        "reference_url": "https://www.conf42.com/chaos2026",
+        "recovered": true,
+        "source_id": "online-tech-conferences",
+        "source_status": "partial",
+        "provider": "Public calendars",
+        "search_or_feed": "https://www.conf42.com/",
+        "event_url": "https://www.conf42.com/chaos2026",
+        "event_id": "7ccc5f4c51d7c22d3e454237",
+        "discovery_path": [
+          "https://www.conf42.com/",
+          "https://www.conf42.com/chaos2026"
+        ],
+        "fetched_pages": [
+          {
+            "url": "https://www.conf42.com/",
+            "status": "ok",
+            "sha256": "9ac375f1a0896c02bb2f8c709e3ec3c25806da9647aa142a155657e4b379cd17",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00316.bin"
+          },
+          {
+            "url": "https://www.conf42.com/chaos2026",
+            "status": "ok",
+            "sha256": "3e5b6dad7d69e1809360c3279abbacb988e88e5bce4cf6622c6432bac92a87fb",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00321.bin"
+          }
+        ],
+        "decision": "accepted",
+        "reference_url_match": true,
+        "parsed_fields": {
+          "name": "Conf42: Chaos Engineering 2026",
+          "organizer": "Conf42",
+          "geography": "international_online",
+          "topic": "general_it",
+          "region": "International online",
+          "format": "online",
+          "attendance_options": [
+            "Online"
+          ],
+          "ticket_options": [],
+          "start": {
+            "raw": "2026-12-03T17:00:00Z",
+            "value": "2026-12-04T01:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "end": {
+            "raw": "2026-12-03T23:00:00Z",
+            "value": "2026-12-04T07:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "competition_date": null,
+          "deadline": null,
+          "submission_deadline": null,
+          "registration_opens": null,
+          "registration_state": "unknown",
+          "registration_url": "https://www.youtube.com/playlist?list=PLIuxSyKxlQrD3rHj4XmA0vJIcCPfUoupu",
+          "organizer_event_url": "https://www.conf42.com/chaos2026",
+          "eligibility": null,
+          "price": {
+            "kind": "free",
+            "amount": 0
+          },
+          "account_required": null,
+          "summary": "Free online premiere. Public YouTube viewing link: https://www.youtube.com/playlist?list=PLIuxSyKxlQrD3rHj4XmA0vJIcCPfUoupu",
+          "lifecycle": null
+        },
+        "field_evidence": {
+          "geography": {
+            "url": "https://www.conf42.com/chaos2026",
+            "quote": "All talks premiere on YouTube on the event day and stay available on demand, so you can watch them at your own pace; public viewing link: https://www.youtube.com/playlist?list=PLIuxSyKxlQrD3rHj4XmA0vJIcCPfUoupu"
+          },
+          "start": {
+            "url": "https://www.conf42.com/chaos2026",
+            "quote": "Schema.org Event startDate=2026-12-03T17:00:00Z"
+          },
+          "end": {
+            "url": "https://www.conf42.com/chaos2026",
+            "quote": "Schema.org Event endDate=2026-12-03T23:00:00Z"
+          },
+          "price": {
+            "url": "https://www.conf42.com/chaos2026",
+            "quote": "Conf42 Chaos Engineering 2026 is a free online conference for engineers and practitioners"
+          }
+        },
+        "api_visible": true,
+        "api_section": "upcoming",
+        "api_topics": [
+          "cloud_devops"
+        ]
+      },
+      {
+        "reference": "MLH Global Hack Week: Open Source Week",
+        "reference_url": "https://events.mlh.com/events/15199-global-hack-week-open-source-week",
+        "recovered": true,
+        "source_id": "mlh-global-hack-week",
+        "source_status": "ok",
+        "provider": "Direct public publisher adapter",
+        "search_or_feed": "https://ghw.mlh.com/",
+        "event_url": "https://events.mlh.com/events/15199-global-hack-week-open-source-week",
+        "event_id": "943b0e0f713bf14145eea408",
+        "discovery_path": [
+          "https://ghw.mlh.com/",
+          "https://ghw.mlh.com/events/open-source-copy",
+          "https://events.mlh.com/events/15199-global-hack-week-open-source-week"
+        ],
+        "fetched_pages": [
+          {
+            "url": "https://ghw.mlh.com/",
+            "status": "ok",
+            "sha256": "c5a38c6b0d027e0d21fa00f63951a6f7bb4d6abf17ed599a1a8705deff996a85",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00122.bin"
+          },
+          {
+            "url": "https://ghw.mlh.com/events/open-source-copy",
+            "status": "ok",
+            "sha256": "bb6a532ac693edf61270965a9f6aadba276011b2208f15d1965601a5b5f6fcf5",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00130.bin"
+          },
+          {
+            "url": "https://events.mlh.com/events/15199-global-hack-week-open-source-week",
+            "status": "ok",
+            "sha256": "c468fbc34f5fd6c83a75e76a107ad885166b71527e68158c10e8567b6be580a6",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00132.bin"
+          }
+        ],
+        "decision": "accepted",
+        "reference_url_match": true,
+        "parsed_fields": {
+          "name": "Global Hack Week: Open Source Week",
+          "organizer": "Major League Hacking",
+          "region": "Worldwide",
+          "geography": "international_online",
+          "topic": "general_it",
+          "format": "online",
+          "start": {
+            "raw": "2026-12-04 15:00:00 UTC",
+            "value": "2026-12-04T23:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "end": {
+            "raw": "2026-12-10 18:00:00 UTC",
+            "value": "2026-12-11T02:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "competition_date": null,
+          "deadline": null,
+          "submission_deadline": null,
+          "registration_opens": null,
+          "eligibility": "Worldwide, including the Philippines. Minors (Between 13-18); Working Professionals; Students - University; Students - Secondary/High School; Students - Other. Under 18s need a parent’s permission.",
+          "price": {
+            "kind": "free",
+            "amount": 0
+          },
+          "account_required": true,
+          "registration_url": "https://events.mlh.com/events/15199-global-hack-week-open-source-week",
+          "registration_state": "open",
+          "organizer_event_url": "https://ghw.mlh.com/events/open-source-copy",
+          "summary": null,
+          "lifecycle": null
+        },
+        "field_evidence": {
+          "geography": {
+            "url": "https://ghw.mlh.com/events/open-source-copy",
+            "quote": "for anyone, anywhere"
+          },
+          "start": {
+            "url": "https://events.mlh.com/events/15199-global-hack-week-open-source-week",
+            "quote": "startDate: 2026-12-04 15:00:00 UTC"
+          },
+          "end": {
+            "url": "https://events.mlh.com/events/15199-global-hack-week-open-source-week",
+            "quote": "endDate: 2026-12-10 18:00:00 UTC"
+          },
+          "price": {
+            "url": "https://ghw.mlh.com/events/open-source-copy",
+            "quote": "Global Hack Week is a 100% free event for anyone, anywhere!"
+          },
+          "registration_state": {
+            "url": "https://events.mlh.com/events/15199-global-hack-week-open-source-week",
+            "quote": "Log In & Register",
+            "basis": "live_registration_widget"
+          }
+        },
+        "api_visible": true,
+        "api_section": "upcoming",
+        "api_topics": []
+      },
+      {
+        "reference": "QNX Global Hackathon",
+        "reference_url": "https://qnx.devpost.com/",
+        "recovered": true,
+        "source_id": "devpost-public-hackathons",
+        "source_status": "partial",
+        "provider": "Public calendars",
+        "search_or_feed": "https://devpost.com/c/artificial-intelligence",
+        "event_url": "https://qnx.devpost.com/",
+        "event_id": "78891c514dc5fe5e23cd8b4a",
+        "discovery_path": [
+          "https://devpost.com/c/artificial-intelligence",
+          "https://qnx.devpost.com/"
+        ],
+        "fetched_pages": [
+          {
+            "url": "https://devpost.com/c/artificial-intelligence",
+            "status": "ok",
+            "sha256": "d62724feb2fc3798992ab0b79b727969b8df2dba90dbb10ec10f54f514dc22db",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00333.bin"
+          },
+          {
+            "url": "https://qnx.devpost.com/",
+            "status": "ok",
+            "sha256": "1adf5fb57a9fc44cfa9e210cea263e936fa8ca6fcc0a783f93d50b2e5170048d",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00431.bin"
+          },
+          {
+            "url": "https://qnx.devpost.com/rules",
+            "status": "ok",
+            "sha256": "658cc5344792bc8c0e1129101221bd1a6853c438863b7bcd69c2f9286319b5f8",
+            "path": "data/benchmark-2026-11-23/final-live/captures/00434.bin"
+          }
+        ],
+        "decision": "accepted",
+        "reference_url_match": true,
+        "parsed_fields": {
+          "name": "QNX Global Hackathon",
+          "organizer": "QNX",
+          "geography": "international_online",
+          "region": "International online",
+          "topic": "general_it",
+          "format": "online",
+          "attendance_options": [
+            "Online"
+          ],
+          "start": {
+            "raw": "2026-11-02T11:00:00.000-05:00",
+            "value": "2026-11-03T00:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "end": {
+            "raw": "2026-12-15T14:00:00.000-05:00",
+            "value": "2026-12-16T03:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "competition_date": null,
+          "deadline": {
+            "raw": "December 15, 2026 2:00 pm Eastern Time",
+            "value": "2026-12-16T03:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "submission_deadline": {
+            "raw": "2026-12-15T14:00:00-05:00",
+            "value": "2026-12-16T03:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "registration_opens": null,
+          "eligibility": "Above legal age of majority in country of residence; Specific countries/territories excluded (Brazil, Crimea, Cuba, Iran Islamic Republic of, Korea Democratic People's Republic of, Russia); The Hackathon IS open to:; Individuals who are at least 18 years or older at the time of entry (“Eligible Individuals”);",
+          "price": {
+            "kind": "free",
+            "amount": 0
+          },
+          "registration_state": "open",
+          "registration_url": "https://qnx.devpost.com/register?flow%5Bdata%5D%5Bchallenge_id%5D=31083&flow%5Bname%5D=register_for_challenge",
+          "account_required": true,
+          "organizer_event_url": "https://qnx.devpost.com/",
+          "summary": null,
+          "lifecycle": null
+        },
+        "field_evidence": {
+          "geography": {
+            "url": "https://qnx.devpost.com/",
+            "quote": "Above legal age of majority in country of residence; Specific countries/territories excluded (Brazil, Crimea, Cuba, Iran Islamic Republic of, Korea Democratic People's Republic of, Russia); The Hackathon IS open to:; Individuals who are at least 18 years or older at the time of entry (“Eligible Individuals”);"
+          },
+          "start": {
+            "url": "https://qnx.devpost.com/",
+            "quote": "Primary Event startDate=2026-11-02T11:00:00.000-05:00"
+          },
+          "end": {
+            "url": "https://qnx.devpost.com/",
+            "quote": "Primary Event endDate=2026-12-15T14:00:00.000-05:00"
+          },
+          "deadline": {
+            "url": "https://qnx.devpost.com/rules",
+            "quote": "Registration and Submission Period : November 2, 2026 (11:00 am Eastern Time) – December 15, 2026 (2:00 pm Eastern Time) (“Registration and Submission Period”)."
+          },
+          "submission_deadline": {
+            "url": "https://qnx.devpost.com/rules",
+            "quote": "Registration and Submission Period : November 2, 2026 (11:00 am Eastern Time) – December 15, 2026 (2:00 pm Eastern Time) (“Registration and Submission Period”). | Deadline: Dec 15, 2026 @  2:00pm EST; data-iso-date=2026-12-15T14:00:00-05:00"
+          },
+          "registration_state": {
+            "url": "https://qnx.devpost.com/",
+            "quote": "Enabled event Join hackathon control",
+            "basis": "live_registration_widget"
+          },
+          "price": {
+            "url": "https://qnx.devpost.com/rules",
+            "quote": "NO PURCHASE OR PAYMENT NECESSARY TO ENTER OR WIN"
+          }
+        },
+        "api_visible": true,
+        "api_section": "upcoming",
+        "api_topics": [
+          "software_development",
+          "networking_systems"
+        ]
+      }
+    ]
+  },
+  "caveats": [
+    "The AWS match is a co-organizer Meetup listing with a different official title. Same date, venue, Mindanao edition and organizer establish the match; its price is unknown.",
+    "The AWS website and advertised PHP 199 minimum were verified separately from complete generic public-search output; that assisted run is not part of the autonomous score.",
+    "Meetup signup URLs/availability and Conf42 no-registration-required wording were not established in fetched HTML. Unknown facts remain unknown.",
+    "Tavily keyless was rate-limited; calendar matches do not prove search coverage or completeness."
+  ]
+}

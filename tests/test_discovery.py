@@ -135,7 +135,11 @@ def test_failed_feed_keeps_records_and_last_success(db):
     client.pages[FEED] = FetchError('HTTP 503')
     report = collect(db, [SOURCE], client=client, now=NOW)
     assert report['sources'][0]['status'] == 'error'
-    assert events(db, NOW) == before
+    after = events(db, NOW)
+    assert after[0]['review']['required']
+    assert 'source checks could not complete' in ' '.join(after[0]['review']['reasons'])
+    assert [{k: v for k, v in event.items() if k != 'review'} for event in after] == [
+        {k: v for k, v in event.items() if k != 'review'} for event in before]
     assert source_states(db)[0]['last_success'] == last_success
 
 

@@ -1,0 +1,60 @@
+{
+  "extends": "sources.json",
+  "exclude_sources": ["aws-mindanao"],
+  "listing_window_days": 45,
+  "description": "Community preview profile. Recurring calendars and generic queries only; no individual event seeds. The legacy individual conference source is excluded from independent discovery.",
+  "sources": [
+    {
+      "id": "meetup-tech-ph",
+      "name": "Meetup · Philippine technology and chapter calendars",
+      "kind": "opportunity_calendar",
+      "url": "https://www.meetup.com/find/ph--manila/technology/",
+      "calendar_urls": ["https://www.meetup.com/find/ph--manila/technology/", "https://www.meetup.com/find/ph--cebu/technology/", "https://www.meetup.com/aws-sbg-at-university-of-the-philippines-mindanao-campus/"],
+      "window_days": 45,
+      "max_pages": 60
+    },
+    {
+      "id": "luma-tech-community",
+      "name": "Luma · Technology community calendars",
+      "kind": "opportunity_calendar",
+      "url": "https://luma.com/cerebras",
+      "calendar_urls": ["https://luma.com/cerebras", "https://luma.com/manila"],
+      "window_days": 45,
+      "max_pages": 50
+    },
+    {
+      "id": "online-tech-conferences",
+      "name": "Conf42 · Online conference calendar",
+      "kind": "opportunity_calendar",
+      "url": "https://www.conf42.com/",
+      "allow_external_pages": true,
+      "window_days": 45,
+      "max_pages": 8
+    },
+    {
+      "id": "devpost-public-hackathons",
+      "name": "Devpost · Public hackathon categories",
+      "kind": "opportunity_calendar",
+      "url": "https://devpost.com/c/artificial-intelligence",
+      "window_days": 45,
+      "max_pages": 50
+    },
+    {
+      "id": "community-opportunity-search",
+      "name": "Tavily · Public technology opportunity discovery",
+      "kind": "opportunity_search",
+      "url": "https://api.tavily.com/search",
+      "query_templates": [
+        "Philippines cloud software engineering community conferences {months}",
+        "site:meetup.com Philippines developer community events {months}",
+        "site:luma.com Philippines AI technology meetups {months}",
+        "online embedded systems hackathons {months}",
+        "online software developer conferences {months}"
+      ],
+      "allow_external_pages": true,
+      "window_days": 45,
+      "max_pages": 80,
+      "max_results": 20
+    }
+  ]
+}

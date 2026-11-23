@@ -75,7 +75,7 @@ def verify(monkeypatch, value=None):
         calls.append((raw, url, deepcopy(source)))
         return deepcopy(value if value is not None else announcement(url)), 'Verified synthetic public page'
     monkeypatch.setattr(search, 'verify_page', parser)
-    monkeypatch.setattr(search, 'page_event_links', lambda raw, url: [])
+    monkeypatch.setattr(search, 'page_event_links', lambda raw, url, **kwargs: [])
     return calls
 
 
@@ -256,7 +256,7 @@ def test_bounded_cold_and_warm_replay_keep_identical_query_and_calendar_traversa
     ])
     source['max_pages'] = 3
     verify(monkeypatch)
-    monkeypatch.setattr(search, 'page_event_links', lambda raw, url: [URL] if url == calendar else [])
+    monkeypatch.setattr(search, 'page_event_links', lambda raw, url, **kwargs: [URL] if url == calendar else [])
     saved_pages = {url: b'same saved page' for url in [calendar, URL, later, deferred]}
     cold_client = Client(pages=deepcopy(saved_pages))
     cold = search.opportunity_search(source, cold_client, [], NOW)
@@ -277,7 +277,7 @@ def test_retained_only_refresh_follows_discovered_calendar_children_when_budget_
     source = manifest(tmp_path, [{'query': QUERY, 'status': 'ok', 'results': [{'url': calendar, 'title': 'Calendar'}]}])
     source['max_pages'] = maximum
     verify(monkeypatch)
-    monkeypatch.setattr(search, 'page_event_links', lambda raw, url: [URL] if url == calendar else [])
+    monkeypatch.setattr(search, 'page_event_links', lambda raw, url, **kwargs: [URL] if url == calendar else [])
     old = announcement(retained_url)
     known = [{'url': retained_url, 'payload': json.dumps(old)}]
     client = Client(pages={url: b'saved page' for url in [calendar, URL, retained_url]})
@@ -294,7 +294,7 @@ def test_calendar_link_is_followed_once_with_depth_and_actual_discovery_path(tmp
     root = 'https://globalai.community/communities/'
     source = manifest(tmp_path, [{'query': QUERY, 'status': 'ok', 'results': [{'url': root, 'title': 'Communities'}]}])
     verify(monkeypatch)
-    monkeypatch.setattr(search, 'page_event_links', lambda raw, url: [URL] if url == root else [])
+    monkeypatch.setattr(search, 'page_event_links', lambda raw, url, **kwargs: [URL] if url == root else [])
     client = Client(pages={root: b'calendar with event link', URL: b'public event'})
     result = search.opportunity_search(source, client, [], NOW)
     assert [url for url, _ in client.requests] == [root, URL]
@@ -308,7 +308,7 @@ def test_depth_one_event_cannot_expand_into_more_related_events(tmp_path, monkey
     extra = 'https://luma.com/unrelated-recommendation'
     source = manifest(tmp_path, [{'query': QUERY, 'status': 'ok', 'results': [{'url': root, 'title': 'Communities'}]}])
     verify(monkeypatch)
-    monkeypatch.setattr(search, 'page_event_links', lambda raw, url: [URL] if url == root else [extra])
+    monkeypatch.setattr(search, 'page_event_links', lambda raw, url, **kwargs: [URL] if url == root else [extra])
     client = Client(pages={root: b'calendar', URL: b'event'})
     result = search.opportunity_search(source, client, [], NOW)
     assert [url for url, _ in client.requests] == [root, URL]

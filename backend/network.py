@@ -1,6 +1,8 @@
 """Bounded, identified public reads. Never solve access challenges or scrape Facebook."""
 import json
 import math
+import ipaddress
+import socket
 import time
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
@@ -46,6 +48,19 @@ class Client:
         self.last_request = {}
         self.delays = {}
         self.rate_limits = {}
+
+    def discovered_page(self, url, allowed_hosts=None):
+        """Public search/directory targets cannot address private services."""
+        host = urlsplit(url).hostname
+        if not host or host in ('rootcon.org', 'www.rootcon.org'):
+            raise FetchError('Publisher policy excludes automated page reads')
+        try:
+            addresses = socket.getaddrinfo(host, 443, type=socket.SOCK_STREAM)
+        except OSError:
+            raise FetchError('Public target DNS lookup failed') from None
+        if not addresses or any(not ipaddress.ip_address(a[4][0]).is_global for a in addresses):
+            raise FetchError('Discovered URL must resolve only to public addresses')
+        return self.public_page(url, allowed_hosts=allowed_hosts)
 
     def _check_cooldown(self, host):
         remaining = self.rate_limits.get(host, 0) - time.monotonic()

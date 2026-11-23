@@ -11,6 +11,7 @@ from .domain import canonical_url, event_key, lifecycle, manila_day, norm, utcno
 from .event_context import context_match
 from .topics import project_topics
 from .event_text import project_content
+from .verification import event_page_verified, meetup_id, parent_schedule, review_listing
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -52,6 +53,7 @@ def connect(path=None):
     # Old revisions have no retained evidence; do not manufacture it from the
     # current announcement, which may have been edited since that observation.
     migrations = {
+        'announcements': {'last_observed_at': 'TEXT'},
         'sources': {
             'publisher_name': 'TEXT', 'publisher_role': 'TEXT',
             'coverage': "TEXT NOT NULL DEFAULT '[]'", 'index_id': 'TEXT',
@@ -215,6 +217,17 @@ def ingest(db, source_id, announcement, now=None):
     announcement = dict(announcement)
     existing = db.execute('SELECT * FROM announcements WHERE event_id=? AND url=?',
                           (key, announcement['url'])).fetchone()
+    platform_id = meetup_id(announcement['url'])
+    if platform_id:
+        announcement['external_id'] = platform_id
+        candidates = db.execute('''SELECT a.*,e.identity_json FROM announcements a
+          JOIN events e ON e.id=a.event_id ORDER BY a.first_seen,a.id''').fetchall()
+        # Platform identity wins over an editable title/organizer/date. Existing
+        # duplicate rows remain available as history; the read view folds them.
+        existing = next((row for row in candidates if meetup_id(row['url']) == platform_id), None)
+        if existing:
+            key = existing['event_id']
+            announcement['identity'] = json.loads(existing['identity_json'])
     external_id = announcement.get('external_id') or ''
     numeric_facebook_id = external_id.startswith('facebook:post:') and external_id.removeprefix('facebook:post:').isdigit()
     if not existing and numeric_facebook_id:
@@ -256,9 +269,9 @@ def ingest(db, source_id, announcement, now=None):
                 preserved['discovery_query'], preserved['discovery_queries'] = queries[0], queries
             if not preserved.get('discovery_path') and announcement.get('discovery_path'):
                 preserved['discovery_path'] = announcement['discovery_path']
-            db.execute('UPDATE announcements SET payload=?,external_id=COALESCE(external_id,?) WHERE id=?',
+            db.execute('UPDATE announcements SET payload=?,external_id=COALESCE(external_id,?),last_observed_at=? WHERE id=?',
                        (json.dumps(preserved, sort_keys=True, ensure_ascii=False),
-                        external_id if numeric_facebook_id else None, existing['id']))
+                        external_id if numeric_facebook_id else None, now, existing['id']))
             return key, False
         if queries:
             announcement['discovery_query'], announcement['discovery_queries'] = queries[0], queries
@@ -283,6 +296,7 @@ def ingest(db, source_id, announcement, now=None):
         db.execute('INSERT INTO revisions(announcement_id,observed_at,facts_json,evidence_json,source_id) VALUES(?,?,?,?,?)',
                    (aid, now, json.dumps(announcement['facts'], ensure_ascii=False),
                     json.dumps(announcement.get('field_evidence', {}), ensure_ascii=False), source_id))
+    db.execute('UPDATE announcements SET last_observed_at=? WHERE id=?', (now, aid))
     return key, existing is None
 
 
@@ -313,29 +327,50 @@ def observation_order(item):
 
 def events(db, now=None, window_days=None):
     output = []
-    for event in db.execute('SELECT * FROM events ORDER BY first_seen DESC'):
-        rows = db.execute('''SELECT a.*,s.name AS source_name FROM announcements a
+    records = list(db.execute('SELECT * FROM events ORDER BY first_seen,id'))
+    groups, platform_groups = {}, {}
+    for event in records:
+        rows = db.execute('''SELECT a.*,s.name AS source_name,s.status AS source_status FROM announcements a
           JOIN sources s ON a.source_id=s.id WHERE a.event_id=? AND a.withdrawn=0''', (event['id'],)).fetchall()
+        platform_ids = {meetup_id(row['url']) for row in rows} - {None}
+        group = next((platform_groups[p] for p in platform_ids if p in platform_groups), event['id'])
+        groups.setdefault(group, (event, []))[1].extend(rows)
+        for platform_id in platform_ids:
+            platform_groups[platform_id] = group
+    for event, rows in reversed(list(groups.values())):
         if not rows:
             continue
         items = [(row, json.loads(row['payload'])) for row in rows]
         # Posted timestamps order different announcements. Actual revisions use
         # observation time so an edited old announcement can correct newer facts.
         items.sort(key=observation_order)
+        # Prefer the latest verified event-page version over an RSS excerpt;
+        # older duplicate titles remain history, never competing event cards.
+        if any(meetup_id(row['url']) for row in rows):
+            items.sort(key=lambda item: (event_page_verified(item[1]), item[0]['last_seen'], item[0]['id']))
         identity = json.loads(event['identity_json'])
         current = {'id': event['id'], **identity, 'first_seen': event['first_seen'],
                    'start': None, 'end': None, 'competition_date': None, 'deadline': None, 'registration_opens': None,
                    'eligibility': None, 'description': None, 'registration_url': None, 'summary': None,
                    'format': 'unknown', 'registration_state': 'unknown', 'date_conflicts': [], 'field_evidence': {}}
         full = [item for item in items if item[1].get('access') != 'search_only']
+        fact_items = full or items
+        if any(meetup_id(row['url']) for row in rows):
+            latest = {}
+            for item in fact_items:
+                latest[meetup_id(item[0]['url']) or item[0]['url']] = item
+            fact_items = list(latest.values())
         # Search titles are discovery evidence, never corrections to a fetched
         # announcement, even when the search result has an earlier timestamp.
-        for row, payload in full or items:
+        for row, payload in fact_items:
             if payload.get('access') == 'search_only' and current.get('name'):
                 continue
             # Old collectors sometimes stored program descriptions in the
             # audience field. Correct the read projection, preserving payloads.
             facts, field_evidence = project_content(payload)
+            context_facts, context_proof = parent_schedule(payload)
+            facts = {**context_facts, **facts}
+            field_evidence = {**context_proof, **field_evidence}
             # A date-only reminder can corroborate existing bounds. Keep their
             # precision; only a different day replaces them as a reschedule.
             new_day = payload['facts'].get('competition_date')
@@ -404,6 +439,7 @@ def events(db, now=None, window_days=None):
             current['notices'].append('Search result only. Full post was not accessed; confirm all details with the organizer.')
             if current['status'] == 'schedule_tba':
                 current['status'] = 'undated_lead'
+                current['section'] = 'watchlist'
                 current['notices'].append('Undated search lead. An edition year is not a confirmed upcoming schedule or open registration.')
         if current['status'] == 'past_date':
             current['notices'].append('The announced event date has passed. Completion is unconfirmed; this is historical coverage, not a current registration opportunity.')
@@ -444,6 +480,7 @@ def events(db, now=None, window_days=None):
         # gain supported tags without a collector run or a data migration.
         current['topics'], current['topic_evidence'] = project_topics(
             payload for _, payload in reversed(items))
+        review_listing(current, items, now)
         output.append(current)
     return output
 

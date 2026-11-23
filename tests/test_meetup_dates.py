@@ -53,11 +53,15 @@ def test_saved_rss_date_survives_extraction_storage_and_normal_listing(tmp_path,
         [('title', 'title'), ('link', 'link'), ('pubDate', 'published'), ('description', 'description')]
     ) + '</item></channel></rss>').encode()
     class SavedFeed:
-        def public_page(self, url):
-            assert url == SOURCE['url']
-            return raw
+        def public_page(self, url, allowed_hosts=None):
+            from backend.network import FetchError
+            if url == SOURCE['url']:
+                return raw
+            assert url == ENTRY['link']
+            raise FetchError('Event page unavailable in this feed-only fixture')
     result = rss(SOURCE, SavedFeed(), [], NOW)
     assert len(result.announcements) == 1
+    assert result.warnings and result.announcements[0]['verification_method'] == 'feed'
     ann = result.announcements[0]
     assert ann['facts']['competition_date'] == parse_moment('November 4, 2026')
     assert 'Happening on November 4, 2026' in ann['field_evidence']['competition_date']['quote']

@@ -138,6 +138,31 @@ def test_unreadable_standard_exceptions_are_unverified():
         parse(page(eligibility=ELIGIBILITY.replace('title="Cuba, Iran"', 'title=""')))
 
 
+def test_specific_excluded_countries_requires_readable_list_without_philippines():
+    eligibility = ELIGIBILITY.replace('All countries/territories, excluding', 'Specific countries/territories excluded')
+    assert parse(page(eligibility=eligibility))[0]
+    assert parse(page(eligibility=eligibility.replace('Cuba, Iran', 'Philippines, Iran')))[0] is None
+    with pytest.raises(FetchError, match='country exceptions'):
+        parse(page(eligibility=eligibility.replace('title="Cuba, Iran"', 'title=""')))
+
+
+def test_linked_rules_joint_period_sets_two_cutoffs_and_not_event_start():
+    rules = f'''<div id="challenge-rules"><h2>{TITLE} Official Rules</h2>
+    <p>NO PURCHASE OR PAYMENT NECESSARY TO ENTER OR WIN.</p>
+    <p>Registration and Submission Period: November 21, 2037 (3:00 am Eastern Time) – November 28, 2037 (6:00 pm Eastern Time)</p>
+    <p>Individuals who are at least 18 years or older at the time of entry.</p></div>'''
+    ann, reason = parse_event(page(body='<p>Build software applications.</p>'), URL, {}, NOW, rules_raw=rules)
+    assert ann, reason
+    assert ann['facts']['deadline']['value'] == ann['facts']['submission_deadline']['value'] == '2037-11-29T07:00:00+08:00'
+    assert ann['facts']['start']['value'] != ann['facts']['deadline']['value']
+    assert ann['facts']['price']['kind'] == 'free'
+    assert '18 years' in ann['facts']['eligibility']
+    assert ann['field_evidence']['deadline']['url'] == URL+'rules'
+    with pytest.raises(FetchError, match='conflicts'):
+        parse_event(page(body='<p>Build software applications.</p>'), URL, {}, NOW,
+                    rules_raw=rules.replace('November 28', 'November 27'))
+
+
 @pytest.mark.parametrize('restriction', [
     'The event is for Canadian undergraduate students currently studying in Korea.',
     'US residents only.', 'Participation is not open to residents of the Philippines.',
