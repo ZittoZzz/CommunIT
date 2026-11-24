@@ -159,7 +159,7 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 }, { name: 
     await expect(page.locator('.event-card').getByRole('heading', { name: data.events[2].name, exact: true })).toHaveCount(0);
     await search.fill('Community');
     await expect(page.locator('.results-count')).toHaveText('1 event matching your filters');
-    await expect(page.getByRole('tab', { name: /Upcoming events/ }).locator('span')).toHaveText('1');
+    await expect(page.getByRole('tab', { name: /Upcoming/ }).locator('span')).toHaveText('1');
     await search.fill('no matching community here');
     await expect(page.locator('.event-card')).toHaveCount(0);
     await search.fill('Community');
@@ -170,7 +170,7 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 }, { name: 
     await expect(search).toHaveValue('Community');
     await expect(page.locator('.event-card h3')).toHaveText([data.events[1].name, data.events[3].name]);
     await expect(page.locator('.results-count')).toHaveText('2 events matching your filters');
-    await expect(page.getByRole('tab', { name: /Upcoming events/ }).locator('span')).toHaveText('2');
+    await expect(page.getByRole('tab', { name: /Upcoming/ }).locator('span')).toHaveText('2');
     await topic.selectOption('cybersecurity');
     await expect(page.locator('.event-card')).toHaveCount(0);
     await expect(page.locator('.results-count')).toHaveText('0 events matching your filters');
@@ -299,7 +299,7 @@ test('real collected listings, filters, and original event links', async ({ page
   await page.getByRole('combobox', { name: 'How to attend', exact: true }).selectOption('');
   await expect(page.getByRole('combobox', { name: 'Registration', exact: true })).toHaveCount(0);
   await expect(page.locator('.event-card')).toHaveCount(upcoming.length);
-  await page.getByRole('tab', { name: /Past events/ }).click();
+  await page.getByRole('tab', { name: /Past/ }).click();
   await expect(page.locator('.event-card')).toHaveCount(data.events.filter((e: {section: string}) => ['past', 'finished'].includes(e.section)).length);
   await expect(page.getByRole('link', { name: 'Our sources' })).toHaveCount(0);
   expect(data).not.toHaveProperty('sources');
@@ -359,9 +359,9 @@ test('mobile layout fits viewport and tabs work from keyboard', async ({ page })
   await page.goto('/');
   await expect(page.locator('.event-card').first()).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
-  await page.getByRole('tab', {name:/Upcoming events/}).focus();
+  await page.getByRole('tab', {name:/Upcoming/}).focus();
   await page.keyboard.press('ArrowRight');
-  await expect(page.getByRole('tab',{name:/Past events/})).toHaveAttribute('aria-selected','true');
+  await expect(page.getByRole('tab',{name:/Past/})).toHaveAttribute('aria-selected','true');
   await page.keyboard.press('ArrowRight');
   await expect(page.getByRole('tab',{name:/Needs confirmation/})).toHaveAttribute('aria-selected','true');
   await expect(page.getByRole('link',{name:'Our sources'})).toHaveCount(0);
@@ -418,7 +418,7 @@ test('past dates, future teasers, and undated search leads stay distinct (browse
   await selectPaper(page.locator('.event-undated_lead'));
   await expect(page.locator('.paper .event-schedule')).toHaveCount(0);
   await expect(page.locator('.paper-status')).toHaveText('Undated search lead');
-  await page.getByRole('tab',{name:/Past events/}).click();
+  await page.getByRole('tab',{name:/Past/}).click();
   await expect(page.locator('.event-card')).toHaveCount(2);
   const past = page.locator('.event-past_date');
   await selectPaper(past);
@@ -447,7 +447,7 @@ test('conflicting dates stay visible outside Upcoming and Past (browser-only fix
   await page.setViewportSize({width:390,height:844});
   await page.goto('/');
   await expect(page.locator('.event-card')).toHaveCount(0);
-  await page.getByRole('tab',{name:/Past events/}).click();
+  await page.getByRole('tab',{name:/Past/}).click();
   await expect(page.locator('.event-card')).toHaveCount(0);
   await page.getByRole('tab',{name:/Needs confirmation/}).click();
   await expect(page.locator('.event-card')).toHaveCount(1);
@@ -458,9 +458,9 @@ test('conflicting dates stay visible outside Upcoming and Past (browser-only fix
   await expect(page.locator('.history, .field-evidence')).toHaveCount(0);
   await page.getByRole('tab',{name:/Needs confirmation/}).focus();
   await page.keyboard.press('ArrowRight');
-  await expect(page.getByRole('tab',{name:/Archived leads/})).toHaveAttribute('aria-selected','true');
+  await expect(page.getByRole('tab',{name:/Archive/})).toHaveAttribute('aria-selected','true');
   await page.keyboard.press('ArrowRight');
-  await expect(page.getByRole('tab',{name:/Upcoming events/})).toHaveAttribute('aria-selected','true');
+  await expect(page.getByRole('tab',{name:/Upcoming/})).toHaveAttribute('aria-selected','true');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
 });
 
@@ -644,7 +644,7 @@ for (const [layout, width] of [['desktop', 1366], ['mobile', 320]] as const) {
     ];
     await page.route('**/api/events',route=>route.fulfill({json:{...data,events}}));
     await page.setViewportSize({width,height:900}); await page.goto('/');
-    await expect(page.getByRole('tab')).toHaveText(['Upcoming events5','Past events1','Needs confirmation3','Archived leads1']);
+    await expect(page.getByRole('tab')).toHaveText(['Upcoming5','Past1','Needs confirmation3','Archive1']);
     const tab=page.getByRole('tab',{name:/Needs confirmation/}); await tab.click();
     await expect(page.locator('.event-card')).toHaveCount(3);
     expect(new Set(await page.locator('.notice-select').evaluateAll(nodes=>nodes.map(n=>n.id))).size).toBe(3);
@@ -657,7 +657,7 @@ for (const [layout, width] of [['desktop', 1366], ['mobile', 320]] as const) {
     await expect(page.locator('.paper')).toContainText('Pending security workshop');
     await expect(page.locator('.paper')).toContainText('Conflicting dates');
     if(width<=760){await page.getByRole('button',{name:'Back to the board'}).click();await expect(card).toBeFocused();}
-    await page.getByRole('tab',{name:/Upcoming events/}).click();
+    await page.getByRole('tab',{name:/Upcoming/}).click();
     await expect(page.locator('.event-card')).toHaveCount(0); await tab.click();
     await expect(page.getByRole('searchbox')).toHaveValue('workshop');
     await expect(page.locator('.event-card')).toHaveCount(1);
@@ -671,7 +671,7 @@ for (const [layout, width] of [['desktop', 1366], ['mobile', 320]] as const) {
 test('each section has a truthful empty-directory message', async ({page})=>{
   await page.route('**/api/events',route=>route.fulfill({json:{events:[],generated_at:'2037-05-01T00:00:00Z'}}));
   await page.goto('/');
-  for(const [tab,message] of [['Upcoming events','No upcoming events recorded yet.'],['Past events','No past events recorded yet.'],['Needs confirmation','No events needing confirmation.'],['Archived leads','No archived leads.']]) {
+  for(const [tab,message] of [['Upcoming','No upcoming events recorded yet.'],['Past','No past events recorded yet.'],['Needs confirmation','No events needing confirmation.'],['Archive','No archived leads.']]) {
     await page.getByRole('tab',{name:new RegExp(tab)}).click();
     await expect(page.getByRole('heading',{name:message,exact:true})).toBeVisible();
     await expect(page.locator('.results-count')).toHaveText('0 events');
@@ -698,8 +698,8 @@ for (const width of [1366, 390]) {
     await expect(panel.locator('.collection-status')).toHaveCount(0);
     await expect(panel.getByRole('button',{name:'Fetch events',exact:true})).toHaveCount(0);
     await expect(page.locator('.board .results-heading, .board .result-tools, .board .collection-status')).toHaveCount(0);
-    await expect(page.locator('.board').getByRole('heading',{name:'Upcoming events',exact:true})).toHaveCount(0);
-    await expect(page.getByRole('tab',{name:/Upcoming events/})).toContainText('5');
+    await expect(page.locator('.board').getByRole('heading',{name:'Upcoming',exact:true})).toHaveCount(0);
+    await expect(page.getByRole('tab',{name:/Upcoming/})).toContainText('5');
     const coverageBox = await page.locator('.board').boundingBox();
     const panelBox = await panel.boundingBox();
     expect(panelBox!.y).toBeGreaterThanOrEqual(coverageBox!.y + coverageBox!.height);

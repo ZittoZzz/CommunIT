@@ -45,13 +45,13 @@ for (const width of [1280, 390]) {
     await expect(page.locator('.review-note')).toContainText('remains visible');
     await expect(page.locator('.history, .checked')).toHaveCount(0);
     await expect(page.locator('.review-note')).toContainText('Source content could not be verified');
-    await page.getByRole('tab', {name:/Archived leads/}).click();
+    await page.getByRole('tab', {name:/Archive/}).click();
     await expect(page.locator('.event-card')).toHaveCount(1);
     await expect(page.locator('.preview-facts')).toContainText('Verification expired');
     await expect(page.locator('.preview-facts')).not.toContainText('Finished');
     await page.locator('.notice-select').click();
     await expect(page.locator('.review-note')).toContainText('does not confirm the event ended');
-    await page.getByRole('tab', {name:/Past events/}).click();
+    await page.getByRole('tab', {name:/Past/}).click();
     await expect(page.locator('.event-date')).toContainText('Event date');
     await expect(page.locator('.event-date')).toHaveAttribute('datetime','2034-10-04');
     await page.locator('.notice-select').click();

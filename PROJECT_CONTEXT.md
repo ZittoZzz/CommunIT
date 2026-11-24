@@ -4,6 +4,10 @@ Last updated: **November 24, 2026, Asia/Manila**.
 
 Read [AGENTS.md](AGENTS.md) for durable rules and [RUN_LOCAL.md](RUN_LOCAL.md) for setup and checks. This is current implementation context, not a claim about running processes or live source availability. Superseded checkpoints are in the [archived November 23–24 handoff](docs/archive/project-context-2026-11-24.md); the [archive index](docs/archive/README.md) records artifact locations and preservation decisions.
 
+## Campus board refresh · November 24
+
+The forest-green search panel, calendar stubs and pinned-notice feedback now pair with equal-height paper index tabs. The board uses lighter cork grain, tape-style geography labels, and layered edges on the pinned notice. Switching sections gently settles the result groups into place. The selected tab lifts two pixels and settles in 190 ms. Reduced-motion preferences disable the animation. The frontend production build passed. Interactive browser verification remains pending after Chromium's process socket was denied.
+
 ## Architecture
 
 CommunIT lists Philippine tech meetups, workshops, conferences and competitions, plus international online opportunities available to Filipinos. The repository is `ZittoZzz/CommunIT`; legacy package names and deployment defaults remain unchanged.
@@ -32,7 +36,7 @@ Normal listings flow through `backend.db.events()` → public API projection →
 
 - Navbar home link: **CommunIT**, with the cork/two-note inline logo. Browser title: **Tech Board | CommunT**; favicon: [frontend/public/communit.svg](frontend/public/communit.svg). There is no visible hero heading; **Tech events** remains an accessible hidden H1. **Philippines · PHT** sits beside Events; dates use Asia/Manila.
 - The Campus Bulletin cork board has compact date-first cards and one pinned detail paper. Desktop selection preserves list position; mobile Back restores filters, scroll and selected-card focus. Listings sort by displayed Manila calendar day within separate PH/international-online groups; unknown/conflicting dates go last, with stable same-day ties.
-- Public tabs are **Upcoming events**, **Past events**, **Needs confirmation**, **Archived leads**. Needs confirmation combines backend unconfirmed/watchlist records without changing their meaning. Undated unresolved leads expire after 45 days from first discovery into Archived leads; rediscovery does not reset verification or imply completion.
+- Public tabs are **Upcoming**, **Past**, **Needs confirmation**, **Archive**. Needs confirmation combines backend unconfirmed/watchlist records without changing their meaning. Undated unresolved leads expire after 45 days from first discovery into Archived leads; rediscovery does not reset verification or imply completion.
 - Controls are **Search events**, **Browse by interest**, **How to attend**. Registration never filters public listings. **Interests in these listings** with **Select to filter** shows at most four categories from current section/search/attendance matches before interest filtering; chips and dropdown share selection. Unsupported topics stay visible under All interests.
 - Important review/source notes precede the **What we can get** fact grid. Only supported schedule, venue, attendance, interests, eligibility, price, account and signup/deadline facts appear. Preserve original date precision; missing facts/empty sections stay absent. Current fully fetched event-page location evidence can supply venues; organizer addresses, stale or search-only evidence cannot.
 - Primary **View organizer’s page** and a distinct **Register** action remain below collected facts. Internal evidence/history, route inventories and collector diagnostics are not shown in the public notice. The underlying records are retained.
