@@ -138,25 +138,22 @@ for (const width of [1366, 390]) {
     expect(tabs!.y).toBeGreaterThanOrEqual(filters!.y + filters!.height);
     expect(board!.y - (tabs!.y + tabs!.height)).toBeLessThanOrEqual(1);
     const frame = await page.locator('.board').evaluate(element => getComputedStyle(element).borderColor);
-    const colors = new Set<string>();
+
     for (const section of ['upcoming','finished','confirmation','archived']) {
       const tab = page.locator(`#tab-${section}`);
       await tab.click();
       await expect(tab).toHaveAttribute('aria-selected','true');
-      await expect(tab.locator('span')).toHaveCSS('color', 'rgb(255, 255, 255)');
+      await expect(tab).toHaveCSS('height', '46px');
       await expect(page.locator('.board-section')).toHaveAttribute('data-section', section);
-      const accent = await tab.evaluate(element => getComputedStyle(element).backgroundColor);
+      await expect(tab).toHaveCSS('background-color', 'rgb(255, 253, 242)');
       expect(await page.locator('.board').evaluate(element => getComputedStyle(element).borderColor)).toBe(frame);
       await page.mouse.move(0, 0);
       for (const other of await page.locator('[role=tab][aria-selected=false]').all()) {
-        await expect(other).toHaveCSS('background-color', 'rgb(255, 255, 255)');
-        await expect(other).toHaveCSS('color', 'rgb(85, 93, 78)');
-        await expect(other.locator('span')).toHaveCSS('background-color', 'rgb(228, 231, 220)');
-        await expect(other.locator('span')).toHaveCSS('color', 'rgb(61, 73, 63)');
+        await expect(other).toHaveCSS('height', '46px');
       }
-      colors.add(accent);
     }
-    expect(colors.size).toBe(4);
+    await page.emulateMedia({reducedMotion:'reduce'});
+    await expect(page.locator('.tabs .active')).toHaveCSS('animation-name','none');
     await page.keyboard.press('Home');
     await expect(page.locator('#tab-upcoming')).toBeFocused();
     await expect(page.locator('#tab-upcoming')).toBeInViewport();
@@ -216,7 +213,7 @@ for (const width of [1366, 390]) {
 
 for (const width of [1366, 390]) {
   for (const [label, section, expected] of [
-    ['Past events', 'finished', 1], ['Needs confirmation', 'confirmation', 1],
+    ['Past', 'finished', 1], ['Needs confirmation', 'confirmation', 1],
   ] as const) {
     test(`${label} handles legacy publisher records without crashing at ${width}px`, async ({ page }) => {
       const errors: string[] = [];
@@ -251,7 +248,7 @@ for (const width of [1366, 390]) {
       await expect(page.getByRole('heading',{name:'No matches for these filters.'})).toBeVisible();
       await page.getByRole('searchbox').fill('');
       await expect(page.locator('.event-card')).toHaveCount(expected);
-      await page.getByRole('tab',{name:/Upcoming events/}).click();
+      await page.getByRole('tab',{name:/Upcoming/}).click();
       await expect(page.locator('.event-card')).toHaveCount(1);
       expect(errors).toEqual([]);
     });

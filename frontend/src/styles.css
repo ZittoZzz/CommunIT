@@ -47,22 +47,27 @@ main { padding-top: 23px; padding-bottom: 28px; }
 .controls { margin-bottom: 16px; }
 .filter-footer { display: flex; justify-content: flex-end; align-items: center; gap: 18px; margin-top: 10px; min-height: 18px; }
 .filter-footer .text-button { padding: 0; }
-/* Attached folder tabs select a board; every section keeps the cork finish. */
-/* Section colors belong only to the active tab, never to the board. */
-.tabs button[data-section="upcoming"] { --tab-accent: #285340; }
-.tabs button[data-section="finished"] { --tab-accent: #963e36; }
-.tabs button[data-section="confirmation"] { --tab-accent: #9b4c10; }
-.tabs button[data-section="archived"] { --tab-accent: #6c537d; }
+/* A clipped corner and a narrow ink edge distinguish the selected paper tab. */
 .control-top { margin: 0; }
-.tabs { --tab-height: 52px; --tab-padding: 12px; display: flex; align-items: flex-end; gap: 5px; padding: 4px 3px 0; overflow-x: auto; scrollbar-width: thin; }
-.tabs button { display: flex; flex: 1 0 auto; justify-content: center; align-items: center; gap: 7px; border: 1px solid var(--line); border-top: 4px solid transparent; border-bottom: 0; border-radius: 7px 7px 0 0; background: #fff; color: var(--muted); padding: calc(var(--tab-padding) - 10px) 10px; min-height: calc(var(--tab-height) - 20px); font-size: 13px; font-weight: 750; white-space: nowrap; }
-.tabs button span { font-size: 11px; padding: 2px 6px; background: #ffffffa6; color: inherit; border-radius: 3px; }
-.tabs button:not(.active) span { background: #e4e7dc; color: #3d493f; box-shadow: inset 0 0 0 1px #ccd1c0; }
-.tabs button:not(.active):hover { background: #f6f5ef; border-color: #c5c4b9; }
-.tabs button.active { min-height: var(--tab-height); padding: var(--tab-padding) 10px; background: var(--tab-accent); border-color: var(--tab-accent); color: white; }
-.tabs button.active span { background: #ffffff24; color: white; }
-.tabs button:focus-visible { outline-offset: -4px; outline-color: #163a92; }
-.tabs button.active:focus-visible { outline-color: white; }
+.tabs { display: flex; align-items: end; gap: 5px; padding: 5px 5px 0; overflow-x: auto; scrollbar-width: thin; }
+.tabs button {
+  flex: 0 0 auto; display: flex; align-items: center; justify-content: center; gap: 7px;
+  height: 46px; padding: 0 14px; border: 1px solid #c8bfa9; border-bottom: 0;
+  border-radius: 3px 0 0 0; clip-path: polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,0 100%);
+  background: #eee9d8; color: #4e584e; font-size: 14px; font-weight: 600; white-space: nowrap;
+}
+.tabs button span { font-size: 11px; font-variant-numeric: tabular-nums; }
+.tabs button:not(.active):hover { background: #f7f3e5; }
+.tabs button.active { background: #fffdf2; color: #214e3c; font-weight: 750; box-shadow: inset 0 4px #285640; }
+.tabs button:focus-visible { outline: 2px solid #245aab; outline-offset: -5px; }
+@media (prefers-reduced-motion: no-preference) {
+  .tabs button.active { animation: tab-settle 190ms ease-out; }
+  @keyframes tab-settle {
+    0% { transform: translateY(1px); }
+    45% { transform: translateY(-2px); }
+    100% { transform: translateY(0); }
+  }
+}
 .filters { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(200px, 1fr) minmax(240px, 1.1fr); gap: 10px; }
 .filter { min-width: 0; }
 .filter > span:first-child { display: block; margin-bottom: 5px; color: var(--muted); font-size: 12px; font-weight: 650; }
@@ -76,7 +81,9 @@ main { padding-top: 23px; padding-bottom: 28px; }
 .select-wrap option[value=""] { color: var(--muted); }
 .select-wrap > svg { position: absolute; right: 10px; top: 14px; pointer-events: none; }
 .explore-interests { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-top: 12px; }
-.explore-interests > span { color: var(--muted); font-size: 12px; font-weight: 650; margin-right: 3px; }
+.interest-context { color: var(--muted); font-size: 12px; margin-right: 5px; }
+.interest-context > span { display: block; }
+#explore-interests-label { font-weight: 650; }
 .interest-chip { border: 1px solid #c4ccba; border-radius: 16px; background: var(--paper); color: var(--navy); padding: 6px 11px; min-height: 32px; font-size: 12px; line-height: 1.4; }
 .interest-chip:hover { background: var(--mint); }
 .interest-chip[aria-pressed="true"] { background: var(--navy); color: var(--paper); border-color: var(--navy); }
@@ -255,8 +262,7 @@ footer > span { display: flex; gap: 7px; align-items: center; }
   .eyebrow { font-size: 10px; }
   .filter input, .filter select { font-size: 16px; }
   .interest-chip { min-height: 40px; }
-  .tabs { --tab-height: 48px; --tab-padding: 10px; }
-  .tabs button { font-size: 12px; }
+  .tabs button { padding-inline: 11px; font-size: 13px; }
   .control-top { gap: 8px; }
   .board { border-width: 5px; padding: 12px 10px 16px; }
   .directory-tools-heading { align-items: flex-start; flex-direction: column; }
