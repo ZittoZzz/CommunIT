@@ -27,7 +27,7 @@ for(const width of [1366,760,390,320]) {
     const search = page.getByRole('searchbox',{name:'Search events'});
     const interest = page.getByRole('combobox',{name:'Browse by interest'});
     const attend = page.getByRole('combobox',{name:'How to attend'});
-    const chips = page.getByRole('group',{name:'Explore interests'});
+    const chips = page.getByRole('group',{name:'Interests in these listings'});
     const cloud = chips.getByRole('button',{name:'Cloud',exact:true});
     await expect(controls.locator('.filter > span:first-child')).toHaveText(['Search events','Browse by interest','How to attend']);
     await expect(search).toHaveAttribute('placeholder','Event, organizer, or school');

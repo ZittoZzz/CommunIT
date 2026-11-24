@@ -15,7 +15,7 @@ The Python collector itself was run against these sources. Browser/search-engine
 | [CTFtime documented API](https://ctftime.org/api/) | HTTP 200; monthly windows over 180 days back / 365 days ahead | 180 unique records; 0 met configured Philippine-organizer / Philippine-venue criteria. Global online events merely open to Filipinos were excluded. No rankings or writeups are copied. |
 | Facebook announcements through [Brave Search API](https://api-dashboard.search.brave.com/app/documentation/web-search/get-started) | Needs credentials + contractual storage rights | No keyed request made. No Facebook full posts fetched. Fixture-tested only. |
 
-The exact first and second run reports are in [verification.json](verification.json). Daily runtime results are in `data/last-collection.json` and the app’s source panel; those can change independently of this dated report.
+The exact first and second run reports are in [verification.json](archive/initial-verification-2026-11-21/verification.json). Daily runtime results are in `data/last-collection.json` and the app’s source panel; those can change independently of this dated report.
 
 ## Actual listings
 

@@ -71,7 +71,9 @@ main { padding-top: 23px; padding-bottom: 28px; }
 .select-wrap option[value=""] { color: var(--muted); }
 .select-wrap > svg { position: absolute; right: 10px; top: 14px; pointer-events: none; }
 .explore-interests { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-top: 12px; }
-.explore-interests > span { color: var(--muted); font-size: 12px; font-weight: 650; margin-right: 3px; }
+.interest-context { color: var(--muted); font-size: 12px; margin-right: 5px; }
+.interest-context > span { display: block; }
+#explore-interests-label { font-weight: 650; }
 .interest-chip { border: 1px solid #c4ccba; border-radius: 16px; background: var(--paper); color: var(--navy); padding: 6px 11px; min-height: 32px; font-size: 12px; line-height: 1.4; }
 .interest-chip:hover { background: var(--mint); }
 .interest-chip[aria-pressed="true"] { background: var(--navy); color: var(--paper); border-color: var(--navy); }
