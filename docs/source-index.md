@@ -1,6 +1,20 @@
 # Publisher source index pilot — 22 November 2026
 
-## Current configuration
+## Current source-maintenance rules — 23 November 2026
+
+The community profile's current qualification decisions are in [the cleanup report](source-quality-2026-11-23.md) and [measured comparison](source-quality-qualification-2026-11-23.json). It has 16 request-eligible routes and 17 disabled candidates; the separate default CTF profile/index is unchanged. The counts and active labels below are historical default-profile checkpoints, not current community scheduling decisions.
+
+1. Discover recurring publishers/directories with generic region, topic and publisher-type research: campus groups, professional associations, local communities and regional chapters. Follow organizer/partner links to actual announcement channels. A partner mention or historical event is a lead worth investigating. Never feed benchmark titles or individual event URLs into routine discovery.
+2. Prefer public RSS, Atom, iCal, documented APIs and stable calendars linking to details. For HTML directories, qualify the normal collector's traversal and primary-page verification inside existing access rules and page budgets. HTTP success alone proves neither useful coverage nor a healthy parser.
+3. Start a candidate record with its recurring URL (or unknown until found), discovery path, publisher role, geographic/topic scope, recurrence evidence and test outcome. Store leads and qualification evidence internally; do not automatically enable harvested partners. DEVCON remains a lead until a readable recurring announcement route is demonstrated.
+4. Enable routes with advance invitation capability and demonstrated contribution: unique identities, earlier discovery, stronger primary facts or underserved regional/topic coverage. Small chapters and CTF feeds can qualify. Distinguish publication-before-event, collector discovery-before-event and verified open signup. Accepted announcements may be retained history; inspect identity and first-seen/revisions before counting new events.
+5. Remove individual event seeds, recap-only and single-answer routes from routine discovery, preserving event citations/history. Pause redundant or consistently unproductive routes when evidence supports it. One quiet run is insufficient; explicitly time-bound provisional keeps and state unknown contribution instead of inventing success. Disabled candidates remain available for later qualification.
+6. Record healthy empty calendars, parser failures, temporary 429/cooldown, budget-limited partial results, persistent access blocks and policy restrictions separately. Partial runs may contribute useful verified pages; deferred is not rejected. Re-enable blocked routes only after permitted access qualifies, never by alternate-access bypass.
+7. Preserve host delays, robots/terms restrictions, cooldowns and budgets. Reuse permitted page fetches where practical; no paid services or logged-in Facebook. Qualify changes in isolated databases and compare canonical identities with retained history. Preserve frozen benchmark scores; label these exercises source qualification.
+
+Profile scheduling overrides support only `enabled` and `reason`, by known source ID. They do not mutate the inherited default profile. Complete profile membership is stored separately from historical source rows; partial `--source` runs must not retire unrelated routes. Public responses carry visitor evidence only. Use CLI reports and local SQLite for source health, discovery paths and queries; no public inventory or admin dashboard is needed.
+
+## Historical default configuration checkpoint
 
 The index now contains **17 records: twelve enabled monitors and five disabled candidates**. The public site remains an event directory; MLH adds one international online general IT source through the existing collector, storage and listing paths. The [publisher and registration-opportunity report](publisher-opportunity-report.md) records the latest verification. The original pilot measurements below remain a historical checkpoint, and the existing benchmark is unchanged.
 

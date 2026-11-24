@@ -92,6 +92,7 @@ def collect(db, sources, *, client=None, adapters=None, now=None):
                         added += int(created)
                         discoveries.append({'event_id': event_id, 'url': announcement['url'],
                                             'path': announcement.get('discovery_path', [source['url'], announcement['url']]),
+                                            'paths': announcement.get('discovery_paths', [announcement.get('discovery_path', [source['url'], announcement['url']])]),
                                             'related_links': announcement.get('related_links', []),
                                             'parsed_fields': announcement.get('facts', {}),
                                             'field_evidence': announcement.get('field_evidence', {})})
@@ -171,6 +172,7 @@ def main():
         sources = load_sources(args.config)
     except (OSError, ValueError, TypeError, KeyError) as exc:
         parser.error(f'Invalid source configuration: {exc}')
+    configured_sources = sources
     if args.source:
         missing = set(args.source) - {s['id'] for s in sources}
         if missing:
@@ -189,6 +191,7 @@ def main():
             parser.exit(1, 'Another collector is already running.\n')
         db = storage.connect(args.database)
         try:
+            storage.reconcile_sources(db, configured_sources, str(Path(args.config).resolve()))
             report = collect(db, sources)
         finally:
             db.close()

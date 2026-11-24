@@ -1,0 +1,804 @@
+COMMUNITY PH — SOURCE AND EVENT-DISCOVERY REVIEW HANDOFF
+Repository: IT_Community_PH
+Audit date: November 23, 2026, Asia/Manila
+Purpose: Give another agent enough verified implementation context to review
+source correctness, discovery coverage, and whether collector diagnostics belong
+on the public homepage. This is a review handoff, not an implementation patch.
+
+READ THIS FIRST
+
+The public brand is CommunITy PH; the homepage is The Tech Board. The application
+is a Python/Flask + SQLite collector/API with a React/TypeScript/Vite frontend.
+It is NOT a general autonomous web crawler, and it does NOT use an LLM to parse
+or rank events at runtime. Python adapters, HTML/structured-data parsers, and
+explicit evidence/identity/date rules do that work.
+
+The immediate defect is real: a legacy, explicitly configured individual AWS
+event website remains in source coverage after its source ID was excluded from
+the community collection profile. Stored source status is being mistaken for
+current source membership. Hiding the panel alone would conceal this defect,
+not repair it. Conversely, removing historical source rows could damage event
+provenance or hide saved events through database joins.
+
+Recommended direction for review: keep organizer links, field evidence, review
+notes and event-level verification visible to visitors; move detailed collection
+route health/query diagnostics out of the main public experience. Reconcile
+source membership independently of historical source health. Do not add an admin
+system merely to remove the public panel.
+
+No collector, source-site browsing, backend service startup, collection schedule,
+production-data mutation, or runtime configuration change was performed for this
+handoff. Source files were read, configurations resolved, and the saved preview
+SQLite database queried in mode=ro. Running service environment/configuration was
+NOT inspected. A file's configuration is not proof of what an old process loaded.
+
+Companion: docs/source-discovery-inventory-2026-11-23.json contains resolved source
+profiles, public URLs, relevant configuration bounds, saved preview source states,
+and summaries of the three latest saved collection runs. It contains no API keys,
+browser collection tokens, environment-file contents, or captured private data.
+Historical logs are evidence of those runs, not a guarantee a source works today.
+
+1. FIVE DIFFERENT THINGS CURRENTLY CALLED A SOURCE
+
+A. Collection route / monitor
+   A configured job with id, kind, URL, bounds and optional publisher metadata.
+   Examples: a city calendar, an RSS feed, a chapter calendar, a search query set.
+   It answers: where/how does this collector look for candidates?
+
+B. Publisher / organizer
+   A person or organization associated with a post/event. A publisher can host,
+   reshare, sponsor or report on an event. Publishing an article does not prove
+   that publisher organizes the event or that the event is Philippine-based.
+
+C. Discovery hit / candidate URL
+   A URL returned by a calendar/feed/search. Discovery alone establishes neither
+   current event facts nor availability. A URL might be a directory, recap,
+   unsupported page, login wall, duplicate or irrelevant result.
+
+D. Event evidence / announcement
+   A fetched announcement or primary event page with extracted fields and linked
+   evidence. The AWS event website can be valuable evidence without qualifying
+   as a reusable directory for independently discovering future events.
+
+E. Publisher candidate
+   A separately stored identity/relationship lead. It is not automatically a
+   configured network input and does not itself create an event.
+
+The current public SourcePanel mostly displays A's persisted database rows. It
+does not display a clean catalog of B or D, nor validate recurring-source quality.
+This conceptual separation should drive the fix.
+
+2. CONFIGURATION: HOW A ROUTE ENTERS THE COLLECTOR
+
+Code: backend/source_index.py:load_sources, backend/db.py:register_sources.
+
+- sources.json is the default configuration. It references source-index.json
+  through publisher_index and retains the original, predominantly CTF routes.
+- source-index.json describes publishers with stable id, name, role
+  (organizer/resharer/both), coverage, enabled, qualification status and reason.
+  Each entry either references a legacy source via source_id OR embeds a monitor.
+- sources.community.json extends sources.json, excludes aws-mindanao, specifies
+  listing_window_days=45, and adds five broader technology discovery routes.
+- data/local-preview-sources.json currently extends sources.community.json with
+  listing_window_days=45 and sources=[]. Empty child sources does not mean no
+  collection: inherited routes still apply.
+- CTF_SOURCES selects the backend/collector profile. CLI --config also selects it.
+  Flask reads configuration during create_app; restart is needed for its loaded
+  listing-window/source registration state. Manual collection resolves its config
+  file again when starting a job; the CLI resolves it per invocation.
+- The loader supports relative extends paths, rejects inheritance cycles, validates
+  required fields and supported adapter kinds, checks duplicate IDs/references,
+  and validates exclusion IDs. Unreferenced legacy sources are retained.
+- enabled=false entries remain in the resolved configuration so a disabled reason
+  can be recorded without a network request. kind=restricted records policy blocks.
+- Direct monitors are ordered before search routes; this is sequential collection,
+  not simultaneous coverage of every source. Exact ordering follows loader merges.
+- An operator adding an index/monitor entry is a manual configuration decision.
+  Finding a publisher in search does not automatically enable it.
+
+Resolved file snapshot (not a live availability claim):
+  sources.json:                     27 routes; 20 enabled/request-eligible,
+                                   6 disabled, 1 policy-restricted.
+  sources.community.json:           31 routes; 24 enabled/request-eligible,
+                                   6 disabled, 1 policy-restricted.
+  data/local-preview-sources.json:  same 31 resolved routes.
+The source index has 17 publisher entries, 12 enabled and 5 disabled. Those numbers
+are not additive to route totals: some entries refer to existing routes.
+
+The loader docstring/index description says recurring publishers, never individual
+event URLs. The legacy aws-mindanao entry contradicts that stated rule; the loader
+validates structure, not whether a URL really is a reusable recurring directory.
+
+3. EXACT AWS CASE: WHY THE SCREENSHOT EXISTS
+
+source-index.json defines:
+  id: aws-mindanao
+  display name: AWS student communities · Mindanao
+  kind: html
+  URL: https://awsscd-mindanao.org/
+  enabled: true; qualification status: active
+  article_selector: main
+  title_from_metadata: true
+  ctf_component_heading: true
+  link_pattern: (?!)
+  max_pages: 2
+
+The name is supplied by configuration, not inferred by the frontend. The (?!)
+pattern never matches, so this setup is effectively a direct-page seed, not an
+archive traversal. A bare CTF heading no longer establishes an independent CTF;
+legacy saved content is repaired conservatively on the read path. The old source
+configuration nonetheless remains in the default profile.
+
+Observed read-only in data/local-preview.sqlite3:
+  aws-mindanao, enabled=1, status=ok,
+  last_success=2026-11-23T08:59:27.088633+00:00 (4:59:27 p.m. PHT),
+  discovered=1, accepted=1.
+Its generic message says an organizer index was scanned. That is shared HTML
+adapter text, not evidence that this website is a recurring event index.
+
+Current preview configuration excludes this ID, but the database still contains
+32 source rows for 31 configured routes. aws-mindanao is the one extra row.
+register_sources upserts supplied IDs; it does not retire IDs missing from a later
+profile. source_states runs SELECT * FROM sources ORDER BY name, without filtering
+to the active profile. Flask returns those rows and SourcePanel displays them.
+Thus the old successful state remains public as Working despite exclusion.
+
+The database has 42 event identity rows and 45 non-withdrawn announcements at this
+snapshot. These are raw storage counts, NOT distinct rendered-card counts; the read
+projection can reconcile duplicate Meetup IDs and hide withdrawn-orphan records.
+
+Do not fix this by deleting the AWS source or event. Event projection joins
+announcements to sources. Removing a source row can make its announcements vanish
+from the normal listing and loses attribution. Preserve history while explicitly
+marking route membership/inactivity. Also account for --source subset runs: absence
+from a partial run must never disable the rest of the configured profile.
+
+4. WHAT THE CURRENT ROUTES ACTUALLY DO
+
+Original/default routes:
+- ROOTCON Bluesky: public API posts and retained-post rechecks, bounded pagination
+  and lookback. The website route is separately policy-restricted.
+- HackTheNorth.ph, UP ACM, DICT and other configured HTML publishers: fetch allowed
+  roots/indices, follow matching links within allowed hosts/page budgets, inspect
+  article bodies/metadata and revisit retained announcements. CTF-oriented gates
+  remain; these are not generic technology-event scrapers.
+- PUP announcements/news, CERT-PH, UP Manila, HTB Meetup, KakaComputer, Cyber404:
+  RSS/Atom routes with per-source article/body/ownership/relationship rules. A feed
+  title can be discovery; a readable body supplies richer evidence.
+- CREST: a bounded Asia event index with an explicit ROOTCON scope/relationship
+  restriction, not automatic acceptance of every Asia event.
+- CTFtime: monthly API slices to avoid a single capped response; include configured
+  Philippine organizer identities or Philippine venues. Default configuration
+  does not enable the optional international-primary-verification branch in
+  backend/ctftime_primary.py. Presence of code is not evidence of an enabled route.
+- Luma Manila, CyberPH and Cisco NetConnect: public city/calendar/iCal routes;
+  defaults retain CTF qualification rules. A successful zero-CTF result is valid.
+- Safe AI Philippines: explicit community scope on the shared Luma adapter.
+- MLH Global Hack Week: recurring organizer calendar -> edition -> linked signup
+  page, with bounded editions and retained-edition checks.
+- Legacy Tavily CTF search: titles identify conservative search-only leads.
+- Brave Facebook-index search: implemented but disabled in zero-API-fee config.
+  If enabled separately, it requires BRAVE_SEARCH_API_KEY AND BRAVE_STORAGE_RIGHTS=1.
+  Do not enable a paid/credentialed path as an implicit fix.
+- Disabled candidates: FEU Eventually, UM SDC, OWASP Cebu, PIA, VEKTR. Their stored
+  reasons explain unqualified parsing/recurrence or access restrictions. Disabled
+  is not equivalent to a failed current network attempt.
+
+Broader routes added by sources.community.json:
+  meetup-tech-ph — 60-page shared budget, 45-day window:
+    https://www.meetup.com/find/ph--manila/technology/
+    https://www.meetup.com/find/ph--cebu/technology/
+    https://www.meetup.com/aws-sbg-at-university-of-the-philippines-mindanao-campus/
+  luma-tech-community — 50 pages, 45 days:
+    https://luma.com/cerebras
+    https://luma.com/manila
+  online-tech-conferences — 8 pages, 45 days, external traversal enabled:
+    https://www.conf42.com/
+  devpost-public-hackathons — 50 pages, 45 days:
+    https://devpost.com/c/artificial-intelligence
+  community-opportunity-search — 80 pages, 20 results/query, 45 days,
+    external public pages enabled, keyless Tavily transport.
+
+Its five reusable query templates are:
+  Philippines cloud software engineering community conferences {months}
+  site:meetup.com Philippines developer community events {months}
+  site:luma.com Philippines AI technology meetups {months}
+  online embedded systems hackathons {months}
+  online software developer conferences {months}
+{months} is generated from the Manila dates covering the configured window; it is
+not a benchmark-title list. These routes cover selected calendars/categories,
+not all cities, organizers, topics or event platforms.
+
+5. END-TO-END EXECUTION AND TRACING
+
+Normal flow:
+  configured profile/index
+    -> load_sources
+    -> register_sources
+    -> per-route adapter discovery + retained-page rechecks
+    -> fetch allowed public pages/API responses
+    -> deterministic parsing + scope/identity/window/evidence checks
+    -> accepted announcement contract
+    -> db.ingest (identity, facts, provenance and revisions)
+    -> source health and run report
+    -> db.events read projection (lifecycle, topics, review, deduplication)
+    -> GET /api/events
+    -> frontend filters, PH/international groups, chronological cards and paper.
+
+backend/collect.py receives each source's known, non-withdrawn announcements and
+passes them to its adapter. Updates are committed source by source. Failures are
+bounded/sanitized, earlier saved listings are retained, and a JSON report records
+what happened. Search results that fail qualification do not become event facts.
+Explicit API-confirmed deletions use a separate withdrawal path; failed fetches
+are not deletions. Withdrawal clears cached social facts/revisions and hides
+orphan events, so it is a different operation from disabling a monitor.
+
+For each suspected missing event, ask for this chain, with actual runtime evidence:
+  effective source ID/provider
+  -> query/feed/calendar URL
+  -> returned candidate URL
+  -> fetched page outcome (and capture hash/path if a capture exists)
+  -> extracted fields + supporting quotes/URLs
+  -> acceptance/rejection/defer reason
+  -> stored announcement/event ID
+  -> API section and final frontend filter/group.
+
+The run report can include searches, route_checks, decisions, discoveries,
+parsed_fields, field_evidence, retry_after, next_retry_at, publisher-candidate
+counts and registration observations. Not every adapter emits every field at
+equal granularity. Do not fabricate a complete trace from only a final event row.
+Normal persistence stores parsed payloads/evidence and reports, not complete raw
+HTML for every request. Historical benchmark capture instrumentation saved full
+responses separately; that is not an always-on production capture system.
+
+6. CALENDAR/SEARCH TRAVERSAL AND LIMITS
+
+backend/opportunity_search.py is used for BOTH opportunity_calendar and
+opportunity_search. Calendar mode directly fetches configured roots; it does not
+call Tavily. Search mode calls Tavily or, only when explicitly configured, reads
+an external search manifest.
+
+- Normalize supported public platform URLs; reject unsupported schemes/ports and
+  PDF targets. Without external_pages, supported hosts/platform shapes are bounded.
+  Facebook page fetching and ROOTCON's policy-excluded website remain blocked.
+- Return search URLs/titles before scope filtering in audit records. Search hit
+  rank is not event relevance/date order in the UI.
+- Round-robin current queries; alternate calendar roots and discovered links so
+  one root cannot monopolize every slot. Rechecks of retained-only URLs follow
+  current discovery. This protects discovery budgets but may delay re-verification
+  when current results fill the budget.
+- Follow actual directory/calendar links, not invented event URLs. Detail-page
+  recommendations are not automatically treated as a fresh discovery archive.
+  External directory traversal is bounded to shallow depth (directory links can
+  be followed while depth < 2); ordinary platform-root traversal is tighter.
+- max_pages is clamped to 1..80 for this adapter. A shared PublicPages cache/budget
+  also covers verifier-linked ownership/rules pages. It is not a global cap across
+  all sources, and page-check counts are not identical to raw HTTP request counts
+  because robots checks and other transport work also occur.
+- Multiple routes may overlap (e.g. Luma Manila appears in two collection paths).
+  The cache is per adapter invocation, not a cross-route global fetch cache.
+- Known accepted pages can be refreshed even after leaving the upcoming calendar,
+  but bounds/rate limits can defer them. A valid missing calendar entry is not
+  proof that its event was cancelled.
+- Newly found opportunities generally require a confirmed start/registration
+  cutoff/submission cutoff in the window; retained pages can be refreshed outside
+  it. Conflict claims inside the window have a special preservation path.
+- Deferred, blocked, unsupported and rejected are distinct outcomes. Empty results
+  are evidence only if the relevant discovery route actually succeeded.
+
+Window precision deserves review: domain.in_window uses [now, now+days) for exact
+instants, but strict interior Manila dates for date-only discovery boundaries.
+The API's listing projection separately preserves already-saved date-only events
+on today's calendar day. A new date-only event on a boundary can therefore differ
+from a retained one. Preserve precision and test this; do not invent midnight.
+
+A code-level health limitation: calendar root descriptors start with status=ok
+before transport; actual fetch failures are recorded later in route_checks and
+warnings. Aggregate failure classification can therefore be partial even when
+all actual public-page reads failed. This needs an isolated failing-route test
+before a patch, not an assumption that aggregate ok/partial means full coverage.
+
+7. SEARCH PROVIDERS, FACEBOOK AND SUPPLEMENTAL FILES
+
+Tavily implementation: backend/tavily.py, backend/network.py.
+- Endpoint is https://api.tavily.com/search; keyless header, anonymous POST,
+  basic search, general topic, maximum 20 results/query, no answer, raw content or
+  images requested. Optional domain restrictions are sent for configured queries.
+- No API key or paid fallback is used by this path. A short Retry-After (<=30s)
+  can cause one retry; longer/repeated 429 stops later queries in that invocation.
+  Existing code is not a guarantee keyless access remains available.
+- The legacy tavily adapter can publish search-only CTF leads when a result title
+  establishes a supported competition identity/edition and Philippine scope.
+  It ignores snippets for dates, organizer, locality, fees, eligibility and signup.
+  Numeric Facebook post IDs have special duplicate reconciliation; opaque share
+  tokens do not prove equivalent posts. Configured publisher accounts alone do
+  not prove ownership of every promoted event.
+- The broader opportunity_search route uses search only for discovery and requires
+  public event-page verification before publishing an accepted opportunity.
+- Direct Facebook HTML, login/cookies/challenge bypass are not used. Search-only
+  Facebook leads cannot be freshly checked for hidden end dates or closure simply
+  because their link is returned again. They remain visibly uncertain.
+
+The user's ChatGPT benchmark search is NOT the same as the application's Tavily
+API. The provider behind ChatGPT public web search was unspecified. Do not call
+that reference set a Tavily benchmark.
+
+Supplemental files:
+  data/benchmark-2026-11-23/supplemental/search-1.txt ... search-8.txt
+  data/benchmark-2026-11-23/supplemental/manifest.json
+These are retained generic public-search outputs and a structured experiment
+manifest. The normal community configuration has no search_results_path. The text
+files do not continuously power the site, retrain an AI, or automatically expand
+its sources. When an experiment explicitly supplies search_results_path, the
+manifest reader consumes complete query output (provider, query, status, URL,
+title), then performs normal public-page verification. That is assisted discovery,
+not an autonomous Tavily run. Do not edit these frozen evidence files into new
+runtime seeds. Backend grep/read-only profile resolution can verify their absence
+from active runtime configuration.
+
+8. PAGE VERIFICATION: WHY A FOUND URL MAY STILL FAIL
+
+The collector uses requests/BeautifulSoup/feed/JSON parsing. It does not run a
+headless browser, OCR event posters, log into sites, or ask an LLM to fill gaps.
+An event visible in a human browser can remain unreadable to the backend.
+
+Meetup (backend/opportunity_pages.py, adapters.rss, verification.py):
+- Match structured Event records to the actual numeric event URL; require usable
+  title, organizer identity, schedule, technical content and geographic scope.
+- PH online scope can come from matching Event -> Group country/identity metadata,
+  not an unrelated recommendation or a PH word elsewhere on the page.
+- Extract the full matched event description where available. Retain explicit
+  eligibility such as QCU-only attendance and separate registration-form needs.
+- A raw RSVP/link is not available-seat proof. Registration state needs supporting
+  control/availability metadata; YES RSVP capacity must not be confused with
+  WAITLIST counts. Missing public widget data remains unknown.
+- HTB RSS now attempts the event page even with content_complete=true. A failed
+  recheck cannot overwrite a previously verified page with an older feed excerpt.
+- Stable numeric Meetup event ID governs revisions and duplicate display even if
+  title/group slug changes. Legacy duplicate rows/history are preserved.
+- Conflicting primary schedule/body dates are retained for review; do not select
+  whichever date is convenient. Whole-event schedule is not a CTF track schedule.
+
+Luma (backend/luma.py and opportunity_pages.py):
+- Discover through configured public page/calendar/iCal routes, then inspect the
+  public event's embedded structured data and body. No undocumented pagination
+  or authenticated API. If a rendered calendar is a partial slice, report it.
+- iCal links are candidates, not enough to prove every event's signup state.
+- Calendar/event identity and organizer/PH venue or international eligibility must
+  support the accepted scope; retained events are rechecked within the cap.
+- Distinguish public tickets from restricted fellow/member tickets. Approval,
+  waitlist, sold-out/closed and unknown states are distinct. Keep attendance
+  options and price facts per ticket; public hybrid options share one event card.
+- A free-type flag with null price does not establish free entry. Ticket validity
+  intervals are not automatically registration deadlines. A visible Request to
+  Join button alone does not override a confirmed past event end.
+- Some configured Luma paths remain CTF-only while others opt into community
+  parsing. Merely adding a calendar does not imply accepting all technology events.
+
+Devpost (backend/devpost.py):
+- Category/directory URL discovers individual hackathon subdomains. Verify the
+  event, and follow /rules only when actually linked from its page.
+- Parse explicitly labelled registration and submission cutoffs separately from
+  start/end, eligibility/age, fee and account requirements. Unreadable country
+  exclusions can block acceptance for Philippine participation.
+
+MLH (backend/mlh.py):
+- Recurring GHW root -> edition -> designated signup page. Stable registration ID
+  distinguishes editions. Verify international eligibility, schedule, price and
+  signup facts; use explicit UTC offsets and preserve Manila date rollovers.
+
+Standalone sites / Conf42:
+- Only enabled external traversal reaches arbitrary supported organizer pages.
+  The semantic fallback requires corroborating heading/canonical organizer/venue/
+  ticket/date structure; it is deliberately narrow, not universal scraping.
+- Structured Event fallback checks primary identity rather than every JSON-LD
+  object on the page. Organizer ownership and public online access must be proven.
+- Conference agenda check-in is not a registration deadline. Advertised minimum
+  ticket price is not proof of inventory. A public YouTube premiere link does not
+  by itself prove the organizer explicitly said “no registration required.”
+- A standalone PH cybersecurity page can be rejected by the broad verifier in
+  favor of the separate competition path; review this coverage limitation before
+  promising broad cybersecurity-meetup support from every site.
+
+9. EXTRACTION, TOPICS, STORAGE AND RECHECKS
+
+Accepted announcements carry identity, URL/external_id, title, access level,
+facts, field_evidence, optional posted_at, discovery path/queries/provider and
+publisher relationships. A field citation has a URL and retained supporting quote.
+No date, fee, capacity, eligibility or signup fact should be invented to complete
+a card. Source fetch success is not field completeness.
+
+Legacy extract.py recognizes explicit CTF/event editions, scope, named fields,
+recaps/cancellation/postponement/completion and date conflicts. A sponsor or
+university reporting participation in a foreign event is not evidence of PH
+organization. A conference containing a bare CTF agenda heading is not an
+independent CTF event. Parent-program dates remain labelled parent context.
+
+Topics are projected from retained event evidence in backend/topics.py and
+backend/event_text.py. Cloud and DevOps are separate. Organizer/tool names alone
+are insufficient; hackathon alone does not prove Software Development. Community
+requires meaningful community-program evidence, not just a networking break.
+Untagged events remain visible under All topics. HackForGov/Hack4Gov series plus
+its retained matching title citation can establish Cybersecurity, even for a
+search-only lead; this does not verify any other field.
+
+SQLite tables:
+  events: identity_json and original first_seen.
+  announcements: event/source association, URL/external ID, current parsed payload,
+    first_seen, last_seen, last_observed_at, changed_at, revision_count, withdrawn.
+  revisions: extracted facts and field evidence at recorded revisions.
+  sources: route metadata plus last stored aggregate health/counters/timestamps.
+  runs: start/finish and full JSON collector report.
+  publisher_candidates / publisher_identity_keys / publisher_relationships:
+    discovery identities, explicit roles and associated evidence.
+
+Identity is conservative: hashed structured identity, stable platform IDs, exact
+shared article/specific registration links with compatibility checks, and a
+narrow evidence-backed recap/calendar context join. Similar titles or organizer
+names alone do not justify merging editions. Cross-platform merging is not
+universally solved (e.g. standalone AWS website vs Meetup).
+
+Search rediscovery never overwrites stronger fetched content or renews its
+successful-content-fetch timestamp. New accepted payloads preserve first_seen;
+changes add revision evidence. Facts are projected at read time, including legacy
+content repairs and Meetup duplicate folding; original rows/history remain.
+
+Provenance caveat for the reviewer: an announcement has one source_id, and an
+update from another route can replace that attribution. Discovery queries are
+merged and an existing path can be retained, but this is not a complete normalized
+many-to-many route-observation ledger. Run reports matter when reconstructing
+all discovery routes; do not assume one source_id is the event's only origin.
+
+Publisher candidates do not automatically become monitors. harvest requires a
+name, recognized role, evidence URL and quote; identity is exact URL/account-based
+or evidence-scoped, never a name-only merge. A separately qualified configured
+monitor can be linked through exact aliases plus active index state and a saved
+successful check. sync_configured_publishers does not rewrite configuration.
+Read-only preview snapshot: 44 candidates, of which 1 active and 43 candidate.
+As with source membership, review how associations behave when a monitor disappears
+from configuration; activation linkage should not silently imply current health.
+
+10. LIFECYCLE, PUBLIC REVIEW AND LISTING ORDER
+
+backend/domain.py computes lifecycle and registration separately. Explicit
+cancelled/postponed/finished evidence, end times, start times, date-only passage
+and date conflicts have different meanings. “Past date” is not the same as proof
+that an event officially finished; unknown end time remains unknown.
+
+backend/db.py applies the configured listing window to the projected view. Undated
+leads and unverified recurring signup opportunities go to Watchlist under the
+preview's 45-day view. All events includes the other sections with active filters.
+backend/verification.py adds public review reasons for unreadable/search-only
+content, unverified Meetup page checks, conflicts and unresolved schedules.
+
+Unresolved leads with no confirmed start/end/competition date/registration or
+submission cutoff expire after 45 days from their earliest announcement discovery
+into Archived leads. Expiry does not assert completion and search rediscovery does
+not renew the clock. Dated-but-conflicting/postponed/partially dated records are
+not guaranteed to expire by that specific rule. No admin moderation interface or
+automatic deletion of every unverifiable listing exists.
+
+Three per-event freshness fields must stay distinct:
+  last_observed_at: a search/feed may merely have returned the URL again.
+  last_content_fetched_at: retained content was actually fetched.
+  last_event_page_checked_at: primary event page verified, when supported.
+Missing historical event-page proof remains unknown. The general failed-source
+review reason is currently based on associated source-wide statuses, not a complete
+per-event fetch-outcome ledger. A partial route with a failed detail page can be
+less explicit than its per-page log; a source-wide failure can also be coarser than
+the event evidence. Review per-event stale/failure indicators separately.
+
+The frontend now sorts by the Manila calendar date shown on each card, ascending
+within PH and international-online groups. Signup status and free price no longer
+outrank date. Unknown/conflicting dates sort last; same-day ties retain input order.
+Search, topics, format, registration and section filters are frontend projections.
+An accepted stored event can be absent from the selected view without having been
+rejected by the collector. Check API section and all active filters.
+
+11. HEALTH, COUNTERS AND “LAST UPDATED” ARE NOT INTERCHANGEABLE
+
+Current aggregate source status:
+  ok: adapter returned without warnings/failure; can legitimately accept zero.
+  partial: warnings/truncation/detail failures; may still store valid events.
+  error/blocked/rate_limited/needs_credentials: different unsuccessful conditions.
+  disabled: configuration says do not request.
+  policy_restricted: a configured policy prohibition, not an empty result.
+  not_run: source metadata registered without a completed check.
+
+Source last_success advances only on aggregate ok, not partial. A partial run may
+therefore update real event facts without advancing that source's last_success.
+last_attempt can be updated while processing disabled/cooldown entries; it is not
+always proof of an actual HTTP request. Consult per-route attempts and reports.
+
+The UI labels ok as Working and counts ok/partial as responding. There is no
+age-aware test that a source is still healthy today. The denominator includes
+stored rows, including excluded/disabled/restricted ones.
+
+“discovered” is adapter-specific: HTML visited pages, feed entries, raw search
+hits, or calendar roots/links. “accepted” counts announcements handled this run,
+including retained/repeated ones, not unique new events. That is why a calendar
+route can show 3 discovered roots and 14 accepted event pages. Presenting every
+adapter as “N checked · M announcements” obscures these units.
+
+Homepage “Listings last updated” currently takes the maximum valid sources[].
+last_success, formats it in PHT, and shows Not recorded yet if none. It is not API
+generated_at (which means directory loaded), not website deployment time, not
+last changed event data, and not proof all events were recently verified.
+Its candidate set currently includes stale, historical or search-only routes;
+a successful search with no verified page can advance it. A partial run with real
+updates may not. This consequence should be reviewed together with source cleanup,
+not hidden by simply dropping sources from the API.
+
+Recommended future separation: directory checked/collection outcome, successful
+primary-event verification coverage, and event-specific last verified dates.
+Choose the public wording based on what is actually measured. Do not advertise
+“all listings updated” using a single maximum timestamp from an arbitrary route.
+
+12. WHAT THE LATEST SAVED PREVIEW RUN ACTUALLY SHOWS
+
+This is distinct from the frozen benchmark. Preview run 10 started November 23
+at 7:09:39 p.m. PHT and finished at 7:14:38 p.m. PHT. No new run was performed here.
+Selected observed outcomes from its saved JSON report:
+- Meetup calendars: ok, 3 discovered roots, 14 accepted announcements.
+- Broader Luma calendars: ok, 2 roots, 5 accepted announcements.
+- Conf42: partial, 8 page checks, 1 accepted; 109 URLs deferred by budget.
+- Devpost: partial, 50 page checks, 8 accepted; eligibility failures and budget
+  deferrals recorded. Decision ledger contains 40 deferred entries (including a
+  shared-budget interruption), not merely an assertion that other events do not exist.
+- Broader Tavily search: five successful queries, 99 hits, 80 public page checks,
+  zero accepted opportunities. Decisions: 1 unsupported, 12 blocked, 52 rejected,
+  13 error, 671 deferred. The deferred queue includes discovered directory links,
+  so it can exceed the original hit count.
+- Legacy Tavily CTF route: no accepted events; HTTP 429 with a 280-second retry
+  instruction, later queries skipped. Aggregate was error, illustrating that
+  adapter-level rate-limit propagation is not uniform.
+- DICT and CERT-PH: blocked. ROOTCON website: policy_restricted. Disabled sources
+  remained disabled. Several readable legacy routes accepted zero events.
+
+These logs prove the application did call the broader search provider in that run.
+They also prove “search returned results” did not mean “verified events published.”
+Do not infer that search is never used from the earlier benchmark's quota failure.
+
+13. NETWORK, RESOURCE AND DEPLOYMENT BOUNDARIES
+
+backend/network.py uses identified public requests, no .netrc/proxy credential
+inheritance (trust_env=False), clears cookies, bounds normal responses at 4 MB,
+uses 5-second connect / 15-second read timeouts, applies host delays and 429
+cooldowns, and normally permits at most one same-allowed-host redirect.
+public_page verifies robots.txt; 404/410 robots is treated as absent, while other
+robots verification failures stop reads. Crawl delay >30 seconds is rejected for
+this job budget. API/read routes differ from public_page, so do not claim every
+API request goes through robots parsing.
+
+External discovered_page checks DNS resolves only to public IPs and excludes the
+policy-blocked host. This is a guard, not a proof of comprehensive SSRF protection:
+review redirect targets, credential-bearing URLs, DNS re-resolution/rebinding and
+actual connection addressing before expanding arbitrary-URL inputs. No new public
+URL submission endpoint is authorized by this handoff.
+
+The collector CLI uses a resolved-database flock to prevent concurrent jobs.
+Manual fetch is opt-in (CTF_ENABLE_MANUAL_FETCH=1), localhost-restricted, token-
+checked and refuses the main DB including aliases. It calls the same collector
+in a child process, with a 20-minute limit. Requests cannot choose DB/config paths.
+Refresh saved listings only reloads GET /api/events and does not collect.
+Completion can mean some ok/partial sources, not every source succeeded or new
+records were found. Logs/reports persist under the preview DB's manual-fetch/.
+In-memory job status is not a durable cross-restart moderation/admin system.
+
+scripts/install-services.sh defines a daily 06:00 Asia/Manila systemd timer,
+a 15-minute collector service timeout and a Flask service. It reads an optional
+.env. These are installer definitions; installed/running unit state was not
+checked. Do not execute the installer to review the UI or silently change service
+schedules. Production defaults and community preview profiles remain separate.
+
+Use RUN_LOCAL.md. Always set CTF_DATABASE explicitly before backend startup;
+backend.connect performs schema setup/migrations and source registration can write
+metadata. For a genuinely read-only audit, use sqlite3 URI mode=ro directly as this
+audit did, rather than calling create_app/connect on the main database.
+
+14. PUBLIC VISIBILITY: WHAT TO KEEP AND WHAT TO CONSIDER HIDING
+
+Current public surfaces:
+- Navbar “Our sources” opens #coverage.
+- SourcePanel shows route names/URLs, message, last success/attempt, counts and
+  aggregate health; GET /api/events includes sources; GET /api/sources returns them.
+- Event paper has original organizer/registration links, field evidence, source/
+  announcement history, discovery queries/paths and review notes.
+- Directory updates contains Refresh, opt-in local Fetch, and completion/warnings.
+- Header freshness depends directly on the sources array.
+
+Recommended review decision, not implemented:
+A. Remove the technical route-health panel/nav entry from the PUBLIC homepage.
+B. Keep event-level citations, organizer links, verification uncertainty and
+   “flagged for review” notices publicly available. Removing diagnostics is not
+   permission to make weak evidence look verified.
+C. Keep diagnostics accessible to developers via local CLI/logs/review reports;
+   an admin login/dashboard is optional separate scope, not a prerequisite.
+D. Decide whether hiding is presentation-only or also API minimization. CSS hiding
+   leaves diagnostics in JSON and accessible endpoints. If internal-only is the
+   goal, return a deliberate public data shape and gate/remove diagnostic routes.
+   Do not expose a diagnostic switch/token through the browser as fake security.
+E. Before removing sources from GET /api/events, provide a correctly defined public
+   freshness summary. Do not break the header or change it to page-load time.
+F. Update “see source coverage above” messages, #coverage navigation, empty-state
+   guidance, tests, and developer run instructions together. Preserve useful fetch
+   failure feedback in local mode without broken public links.
+G. Decide separately whether per-event discovery query traces belong in ordinary
+   public details. Evidence/organizer links and internal search operations need
+   not have identical visibility. Preserve the underlying history either way.
+
+15. PROPOSED FIX ORDER AND ACCEPTANCE CRITERIA
+
+P0 — Separate current configuration from historical source rows.
+- Derive membership from a full effective profile, or persist explicit profile
+  membership/configuration revision. Keep enabled, qualified, active-in-profile,
+  last outcome, age/staleness and route purpose as separate concepts.
+- Treat omitted routes as inactive for that profile while retaining rows/history.
+  Do not let a partial --source invocation retire unrelated configured routes.
+- Decide behavior for multiple profiles sharing one DB; avoid one startup globally
+  overwriting another profile's membership. Defaults/preview are not interchangeable.
+- Separate retiring a discovery route from scheduling event-page verification.
+  Otherwise an excluded monitor can strand its retained events without rechecks.
+  Define which still-relevant saved pages should be reverified through an eligible
+  route, with provenance, bounds, policy restrictions and no benchmark seeding.
+- AWS excluded from the community profile must not be advertised as currently
+  monitored, but its historical announcement, first_seen, revisions and links stay.
+
+P1 — Classify and qualify collection routes.
+- Explicitly distinguish recurring organizer feed/calendar, directory, search,
+  event-specific verification/recheck, disabled candidate and historical route.
+- An event website can be a valid recurring series site, but that requires checked
+  evidence; naming it “community” is not qualification. The current AWS no-follow
+  configuration should not count as independent recurring discovery.
+- Document provenance of manual qualification: what recurring route returns, what
+  scope it covers, access method, pagination, parser requirements and restrictions.
+- Keep benchmark-known titles/URLs out of runtime seeds. Record setup assistance.
+- Deduplicate overlapping fetch work only with preserved discovery-route provenance.
+
+P2 — Make health/counts/freshness honest.
+- Report transport success, directory parse success, detail checks, acceptance,
+  partial coverage, deferrals, known-page rechecks and last verified facts separately.
+- Uniformly propagate 429 and all-failed calendar routes; never turn failure into
+  success with zero matches. Define a staleness threshold rather than eternal Working.
+- Use named counter units. Separate checked candidates, accepted announcements,
+  newly created events, updated existing events and unchanged observations.
+- Define freshness for partial successful updates, search-only success, removed
+  routes and no recorded checks. A recent successful route must not bless all cards.
+
+P3 — Simplify public presentation after data contracts are decided.
+- Public homepage focuses on events, filters and a defensible freshness statement.
+- Retain event-level organizer/evidence access and uncertainties; keep technical
+  diagnostics local/internal if chosen. No admin system required for this step.
+
+Required regressions before implementing these proposals:
+1. Full profile A -> full profile B exclusion: inactive source no longer counted;
+   original announcements, revisions, first_seen and rendered event evidence remain.
+2. --source subset and multiple profile use do not deactivate unrelated monitors.
+3. Disabled/restricted/retired/stale states remain distinct from failed HTTP reads.
+4. AWS legacy record cannot silently reactivate in the community profile; any
+   default-profile policy change is explicit and separately tested.
+5. Valid empty directory vs malformed directory vs every fetch blocked vs quota
+   failure vs partial successful details: correct health and preserved events.
+6. Signup/button presence, fees, deadlines, date precision/conflicts, restricted
+   tickets and PH/international scope remain conservative after refactoring.
+7. Search rediscovery does not renew event-page verification/45-day expiry.
+8. Primary-page revisions, stable Meetup IDs and cross-route observations preserve
+   correct history without duplicate display or accidental source-attribution loss.
+9. Public UI hides only intended diagnostics; event citations and warnings remain;
+   no broken nav/coverage instructions, freshness regression or local-fetch leak.
+10. Build/browser checks at desktop/mobile, keyboard selection, filtering, mobile
+    Back, chronological order, and appropriate isolated backend tests pass.
+
+16. BENCHMARK BOUNDARIES AND KNOWN GAPS
+
+Frozen November 23 report: docs/benchmark-2026-11-23.md and its results JSON.
+The known-reference improvement recovered 10/10 event identities, 9/10 reference
+URLs, not complete-field parity, a blind result or a Tavily benchmark. Development
+used knowledge of the examples and public search to qualify recurring calendars.
+The scored final run used calendars; Tavily hit 429. AWS came via its co-organizer
+Meetup calendar. Its exact website was verified in a separate assisted manifest
+run, not autonomous exact-URL discovery credit. That distinction must survive.
+
+Outstanding limitations documented there include exact AWS website discovery,
+unknown Meetup RSVP controls, Conf42's unproven no-registration wording,
+AI Unwrapped attendee-only link detail, bounded traversal and untested cross-
+platform AWS merging. Later code split Cloud/DevOps and changed review/UI behavior;
+older reports describe their own checkpoints and must not be rewritten as new
+results. Do not seed replay fixtures/benchmark answers into discovery to improve
+scores. Original November 22 blind/known-reference results remain frozen too.
+
+General gaps: unknown/unqualified publishers, narrow legacy CTF gates, geography/
+eligibility rejection, rendering/access blocks, quota, finite page budgets,
+provider changes and incomplete recurrence/pagination. Ten known matches are not
+an estimate of all events, nor available-seat proof. No admin moderation, global
+crawler, login scraper, OCR fallback or universal parser is implemented.
+
+17. FILE MAP AND REVIEW DELIVERABLE
+
+Start: AGENTS.md, PROJECT_CONTEXT.md, RUN_LOCAL.md.
+Configuration: sources.json, source-index.json, sources.community.json,
+  backend/source_index.py.
+Execution/health: backend/collect.py, manual_collection.py, app.py, db.py;
+  scripts/install-services.sh.
+Network/search: backend/network.py, tavily.py, opportunity_search.py,
+  tavily_check.py (diagnostic, not automatic source enrollment).
+Platform extraction: backend/adapters.py, opportunity_pages.py, luma.py, mlh.py,
+  devpost.py, standalone_event.py, ctftime_primary.py.
+Facts/lifecycle: backend/extract.py, domain.py, event_text.py, topics.py,
+  verification.py, event_context.py.
+Publisher identities: backend/relationships.py, publishers.py.
+Timeliness evidence: backend/metrics.py (distinguishes dated-deadline evidence
+  from observed live-open controls; missing deadline is not a timely-window proof).
+Frontend: frontend/src/App.tsx (SourcePanel, lastUpdated, EventPaper,
+  eventDay, filters), styles.css, frontend/e2e/*.spec.ts.
+Tests to inspect: tests/test_source_index_config.py, test_publisher_candidates.py,
+  test_publisher_discovery.py, test_discovery.py, test_opportunity_search.py,
+  test_opportunity_pages.py, test_luma.py, test_luma_community.py,
+  test_meetup_dates.py, test_devpost.py, test_community_collection.py,
+  test_tavily_discovery.py, test_tavily_network.py, test_manual_collection.py,
+  plus lifecycle/listing/topic/storage regressions in tests/.
+
+Requested review output:
+- A diagram/data model distinguishing route, publisher, event, announcement,
+  verification observation, run, and profile membership.
+- Findings separated into confirmed code defects, saved-run observations,
+  hypotheses requiring tests, and product-policy decisions.
+- A clear recommendation for PUBLIC visibility vs LOCAL/internal diagnostics.
+- A minimal non-destructive migration/API/UI plan, including freshness semantics
+  and treatment of excluded sources/history/partial runs.
+- Discovery gaps with exact pipeline stage, not “add more sources” as a diagnosis.
+- Test cases, acceptance criteria and a preservation/rollback plan.
+- No benchmark score changes without a new explicitly labelled evaluation.
+
+Validation performed for this document: read-only source inspection, actual loader
+resolution of three profiles, read-only preview metadata/run queries, JSON and
+reference checks. No new live collection or test-suite result is claimed. Earlier
+verification counts in PROJECT_CONTEXT.md belong to their dated checkpoints.
+The existing checkout contains substantial unrelated uncommitted work; preserve it.
+Do not deploy, merge, delete historical data, enable paid APIs, or modify installed
+services/production DB as a side effect of this review.
+
+APPENDIX: RESOLVED COMMUNITY ROUTE INVENTORY
+
+The companion JSON contains URLs, names, query templates, profile membership,
+limits and timestamped stored state. The compact table below is generated from
+that same read-only snapshot. “Saved outcome” is historical; “enabled” means
+configured, not proven healthy. An em dash means no saved source row was found.
+
+Snapshot: 2026-11-23T22:48:28.066907+08:00
+
+ID | Adapter | Configured | Saved outcome | Root URL
+rootcon-bluesky | bluesky | enabled | ok | https://bsky.app/profile/rootcon.bsky.social
+hackthenorth | html | enabled | ok | https://hackthenorth.ph/
+up-acm | html | enabled | ok | https://upacm.net/events/
+pup-announcements | rss | enabled | ok | https://www.pup.edu.ph/rss/announcements/
+pup-news | rss | enabled | ok | https://www.pup.edu.ph/rss/news/
+ncert | rss | enabled | blocked | https://ncert.gov.ph/feed/
+dict | html | enabled | blocked | https://dict.gov.ph/
+rootcon-website | restricted | restricted | policy_restricted | https://rootcon.org/
+ctftime | ctftime | enabled | ok | https://ctftime.org/api/v1/events/
+safeai-luma-calendar | luma | enabled | ok | https://luma.com/safeaiph?k=c
+mlh-global-hack-week | mlh | enabled | ok | https://ghw.mlh.com/
+up-manila | rss | enabled | ok | https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag
+htb-meetup-ph | rss | enabled | ok | https://www.meetup.com/hack-the-box-meetup-ph/events/rss/
+feu-eventually | html | disabled | disabled | https://paraverse.feutech.edu.ph/eventually/discover/
+crest-asia | html | enabled | ok | https://www.crest-approved.org/events/category/asia-events/list/
+um-sdc | html | disabled | disabled | https://luma.com/user/usr-8iOKid6iGmryO2o
+owasp-cebu | html | disabled | disabled | https://www.owasp-cebu.org/ctfs
+pia | rss | disabled | disabled | https://pia.gov.ph/feed/?s=capture+the+flag
+vektr-community | html | disabled | disabled | https://vektrsec.com/
+luma-manila | luma | enabled | ok | https://luma.com/manila
+kakacomputer-ctf | rss | enabled | ok | https://kakacomputer.com/tag/ctf/feed/
+cyber404-news | rss | enabled | ok | https://cyber404.net/blog/feed.xml
+cyberph-luma-calendar | luma | enabled | ok | https://api.luma.com/ics/get?entity=calendar&id=cal-ZW4YOEwv4lmL66C
+cisco-netconnect-luma-calendar | luma | enabled | ok | https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7
+meetup-tech-ph | opportunity_calendar | enabled | ok | https://www.meetup.com/find/ph--manila/technology/
+luma-tech-community | opportunity_calendar | enabled | ok | https://luma.com/cerebras
+online-tech-conferences | opportunity_calendar | enabled | partial | https://www.conf42.com/
+devpost-public-hackathons | opportunity_calendar | enabled | partial | https://devpost.com/c/artificial-intelligence
+community-opportunity-search | opportunity_search | enabled | partial | https://api.tavily.com/search
+tavily-keyless | tavily | enabled | error | https://api.tavily.com/search
+facebook-search | brave | disabled | disabled | https://api.search.brave.com/res/v1/web/search
+
+Excluded legacy route (still in default profile and preview DB):
+aws-mindanao | html | excluded from community | ok (historical) | https://awsscd-mindanao.org/
