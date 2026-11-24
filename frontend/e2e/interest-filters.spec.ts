@@ -19,7 +19,7 @@ const events = [
   {...base,id:'none',name:'Campus general gathering',topics:[]},
 ];
 for(const width of [1366,760,390,320]) {
-  test(`interest chips and dropdowns compose without clipping at ${width}px`, async ({page},testInfo) => {
+  test(`navbar search and labeled dropdowns compose without clipping at ${width}px`, async ({page},testInfo) => {
     await page.setViewportSize({width,height:900});
     await page.route('**/api/events',route=>route.fulfill({json:{events,generated_at:'2035-11-01T00:00:00Z'}}));
     await page.goto('/');
@@ -27,16 +27,15 @@ for(const width of [1366,760,390,320]) {
     const search = page.getByRole('searchbox',{name:'Search events'});
     const interest = page.getByRole('combobox',{name:'Browse by interest'});
     const attend = page.getByRole('combobox',{name:'How to attend'});
-    const chips = page.getByRole('group',{name:'Interests in these listings'});
-    const cloud = chips.getByRole('button',{name:'Cloud',exact:true});
-    await expect(controls.locator('.filter > span:first-child')).toHaveText(['Search events','Browse by interest','How to attend']);
+    await expect(page.locator('.topbar').getByRole('searchbox',{name:'Search events'})).toHaveCount(1);
+    await expect(controls.locator('.filter > span:first-child')).toHaveText(['Browse by interest','How to attend']);
     await expect(search).toHaveAttribute('placeholder','Event, organizer, or school');
     await expect(page.getByRole('combobox')).toHaveCount(2);
     await expect(interest.locator('option:checked')).toHaveText('All interests');
-    await expect(attend.locator('option:checked')).toHaveText('Online, in person, or both');
+    await expect(attend.locator('option:checked')).toHaveText('All formats');
     await expect(interest).toHaveClass('is-default');
     await expect(attend).toHaveClass('is-default');
-    await expect(chips.getByRole('button')).toHaveText(['Cybersecurity','AI & Data','Cloud','Community']);
+    await expect(page.locator('.interest-chip, .explore-interests')).toHaveCount(0);
     await expect(page.locator('.event-card')).toHaveCount(7);
     await expect(page.locator('.directory-updated')).toHaveCount(0);
     for(const select of [interest,attend]) {
@@ -48,35 +47,30 @@ for(const width of [1366,760,390,320]) {
         return ctx.measureText(el.selectedOptions[0].text).width+parseFloat(style.paddingLeft)+parseFloat(style.paddingRight)<=el.clientWidth;
       })).toBeTruthy();
     }
+    const searchBox = await search.boundingBox();
     const boxes = await controls.locator('.filter').evaluateAll(elements=>elements.map(el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height};}));
-    expect(boxes[0].width).toBeGreaterThanOrEqual(Math.max(boxes[1].width,boxes[2].width));
-    if(width<=760) expect(boxes[1].y).toBeGreaterThanOrEqual(boxes[0].y+boxes[0].height);
+    expect(boxes[0].y).toBeGreaterThanOrEqual(searchBox!.y+searchBox!.height);
+    if(width>760) expect(boxes[0].y).toBe(boxes[1].y);
+    const tabs = await page.getByRole('tablist').boundingBox();
+    expect(tabs!.y).toBeGreaterThanOrEqual(Math.max(...boxes.map(box=>box.y+box.height)));
     await page.screenshot({path:testInfo.outputPath(`defaults-${width}.png`),fullPage:false});
-    await cloud.focus(); await page.keyboard.press('Space');
-    await expect(cloud).toHaveAttribute('aria-pressed','true');
-    await expect(cloud).toBeFocused();
-    await expect(interest).toHaveValue('cloud');
+    await interest.selectOption('cloud');
     await expect(interest).not.toHaveClass('is-default');
     await expect(page.locator('.event-card')).toHaveCount(2);
-    await expect(chips.getByRole('button')).toHaveText(['Cybersecurity','AI & Data','Cloud','Community']);
     await interest.selectOption('ai_data');
-    await expect(cloud).toHaveAttribute('aria-pressed','false');
-    await expect(chips.getByRole('button',{name:'AI & Data',exact:true})).toHaveAttribute('aria-pressed','true');
     await expect(page.locator('.event-card')).toHaveCount(1);
+    await expect(page.locator('.event-card h3')).toHaveText(['Campus AI workshop']);
     await interest.selectOption('');
-    await expect(chips.locator('[aria-pressed=true]')).toHaveCount(0);
     await expect(page.locator('.event-card')).toHaveCount(7);
     await search.fill('Campus'); await attend.selectOption('online');
-    await cloud.click();
+    await interest.selectOption('cloud');
     await expect(page.locator('.event-card h3')).toHaveText(['Campus cloud stream']);
     await expect(page.locator('.event-card .signup-fact')).toHaveText('Registration closed');
     await page.locator('.notice-select').click();
     await expect(page.locator('.signup-detail dd')).toHaveText('Registration closed');
     if(width<=760) await page.getByRole('button',{name:'Back to the board'}).click();
     await expect(interest).toHaveValue('cloud');
-    await cloud.focus(); await page.keyboard.press('Enter');
-    await expect(interest).toHaveValue('');
-    await expect(cloud).toHaveAttribute('aria-pressed','false');
+    await interest.selectOption('');
     await expect(search).toHaveValue('Campus');
     await expect(attend).toHaveValue('online');
     await expect(page.locator('.event-card')).toHaveCount(2);
@@ -109,16 +103,22 @@ test('legacy URL and saved registration values never filter the directory', asyn
   expect(requests.every(url=>new URL(url).search==='')).toBeTruthy();
 });
 
-test('chips use represented categories and fall back beyond the preferred four', async ({page}) => {
+test('all supported interest options remain available without suggestions and empty refresh clears details', async ({page}) => {
   let current = [{...base,id:'network',name:'Network session',topics:['networking_systems']}, {...base,id:'delivery',name:'Delivery session',topics:['devops']}];
   await page.route('**/api/events',route=>route.fulfill({json:{events:current,generated_at:'2035-11-01T00:00:00Z'}}));
   await page.goto('/');
-  await expect(page.locator('.interest-chip')).toHaveText(['DevOps','Networking & Systems']);
-  await page.getByRole('combobox',{name:'Browse by interest'}).selectOption('devops');
-  await expect(page.locator('.interest-chip')).toHaveText(['DevOps','Networking & Systems']);
+  await expect(page.locator('.event-card .event-topics')).toHaveText(['Networking & Systems','DevOps']);
+  await expect(page.locator('.interest-chip, .explore-interests')).toHaveCount(0);
+  const interest = page.getByRole('combobox',{name:'Browse by interest'});
+  await interest.selectOption('devops');
+  await expect(page.locator('.event-card h3')).toHaveText(['Delivery session']);
+  await interest.selectOption('networking_systems');
+  await expect(page.locator('.event-card h3')).toHaveText(['Network session']);
   current=[];
   await page.getByRole('button',{name:'Refresh saved listings'}).click();
-  await expect(page.locator('.explore-interests')).toHaveCount(0);
+  await expect(page.locator('.event-card, .paper')).toHaveCount(0);
+  await expect(page.getByRole('heading',{name:'No matches for these filters.'})).toBeVisible();
+  await expect(interest).toHaveValue('networking_systems');
 });
 
 test('missing and invalid freshness timestamps omit the whole line', async ({page}) => {

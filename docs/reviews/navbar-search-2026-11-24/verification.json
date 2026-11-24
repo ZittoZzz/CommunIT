@@ -1,0 +1,343 @@
+{
+  "verified_at": "2026-11-24T23:41:22.591065+08:00",
+  "production_build": "passed",
+  "browser_suite": {
+    "browser": "Chromium",
+    "passed": 80,
+    "failed": 0,
+    "duration_minutes": 2.4,
+    "log": "data/navbar-layout/verified-playwright.log"
+  },
+  "saved_data_rendering": [
+    {
+      "name": "desktop",
+      "geom": {
+        "filters": [
+          {
+            "value": "",
+            "label": "Browse by interest\nAll interests\nCybersecurity\nAI & Data\nCloud\nDevOps\nSoftware Development\nNetworking & Systems\nCommunity\nGeneral IT",
+            "selected": "All interests",
+            "clientWidth": 288,
+            "scrollWidth": 288
+          },
+          {
+            "value": "",
+            "label": "How to attend\nAll formats\nOnline\nIn person\nHybrid\nFormat unconfirmed",
+            "selected": "All formats",
+            "clientWidth": 322,
+            "scrollWidth": 322
+          }
+        ],
+        "firstCardBottom": 456.875,
+        "width": 1366,
+        "scrollWidth": 1351,
+        "scrollHeight": 4325,
+        "rects": {
+          ".topbar": {
+            "x": 32,
+            "y": 0,
+            "width": 1287,
+            "height": 68,
+            "display": "flex"
+          },
+          ".nav-search": {
+            "x": 437.140625,
+            "y": 13,
+            "width": 450,
+            "height": 42,
+            "display": "block"
+          },
+          ".filters": {
+            "x": 45,
+            "y": 101,
+            "width": 623.796875,
+            "height": 64,
+            "display": "grid"
+          },
+          ".tabs": {
+            "x": 32,
+            "y": 224.796875,
+            "width": 649.796875,
+            "height": 50,
+            "display": "grid"
+          },
+          ".board-list": {
+            "x": 49,
+            "y": 291.796875,
+            "width": 615.796875,
+            "height": 3751.4375,
+            "display": "block"
+          },
+          ".notice-select": {
+            "x": 122,
+            "y": 340.796875,
+            "width": 135.40625,
+            "height": 19.5,
+            "display": "inline-block"
+          },
+          ".pinned-detail": {
+            "x": 717.3125,
+            "y": 91,
+            "width": 601.6875,
+            "height": 656,
+            "display": "block"
+          },
+          "#paper-title": {
+            "x": 756.3125,
+            "y": 161,
+            "width": 509.6875,
+            "height": 49.234375,
+            "display": "block"
+          },
+          ".paper-scroll": {
+            "x": 717.3125,
+            "y": 91,
+            "width": 601.6875,
+            "height": 656,
+            "display": "block"
+          }
+        },
+        "clipped": []
+      },
+      "errors": []
+    },
+    {
+      "name": "mobile",
+      "geom": {
+        "filters": [
+          {
+            "value": "",
+            "label": "Browse by interest\nAll interests\nCybersecurity\nAI & Data\nCloud\nDevOps\nSoftware Development\nNetworking & Systems\nCommunity\nGeneral IT",
+            "selected": "All interests",
+            "clientWidth": 150,
+            "scrollWidth": 150
+          },
+          {
+            "value": "",
+            "label": "How to attend\nAll formats\nOnline\nIn person\nHybrid\nFormat unconfirmed",
+            "selected": "All formats",
+            "clientWidth": 169,
+            "scrollWidth": 169
+          }
+        ],
+        "firstCardBottom": 468.765625,
+        "width": 390,
+        "scrollWidth": 375,
+        "scrollHeight": 4695,
+        "rects": {
+          ".topbar": {
+            "x": 12,
+            "y": 0,
+            "width": 351,
+            "height": 102,
+            "display": "flex"
+          },
+          ".nav-search": {
+            "x": 12,
+            "y": 48,
+            "width": 351,
+            "height": 42,
+            "display": "block"
+          },
+          ".filters": {
+            "x": 22,
+            "y": 127,
+            "width": 331,
+            "height": 62,
+            "display": "grid"
+          },
+          ".tabs": {
+            "x": 12,
+            "y": 246,
+            "width": 351,
+            "height": 50,
+            "display": "grid"
+          },
+          ".board-list": {
+            "x": 20,
+            "y": 307,
+            "width": 335,
+            "height": 4036.984375,
+            "display": "block"
+          },
+          ".notice-select": {
+            "x": 85,
+            "y": 355,
+            "width": 126.390625,
+            "height": 18.1875,
+            "display": "inline-block"
+          },
+          ".pinned-detail": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "display": "none"
+          },
+          "#paper-title": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "display": "block"
+          },
+          ".paper-scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "display": "block"
+          }
+        },
+        "clipped": []
+      },
+      "notice": {
+        "scrollWidth": 375,
+        "width": 390,
+        "title": {
+          "x": 31,
+          "y": 140,
+          "width": 308,
+          "height": 32.125,
+          "top": 140,
+          "right": 339,
+          "bottom": 172.125,
+          "left": 31
+        },
+        "paper": {
+          "x": 12,
+          "y": 16,
+          "width": 351,
+          "height": 1794.890625,
+          "top": 16,
+          "right": 363,
+          "bottom": 1810.890625,
+          "left": 12
+        }
+      },
+      "errors": []
+    },
+    {
+      "name": "narrow",
+      "geom": {
+        "filters": [
+          {
+            "value": "",
+            "label": "Browse by interest\nAll interests\nCybersecurity\nAI & Data\nCloud\nDevOps\nSoftware Development\nNetworking & Systems\nCommunity\nGeneral IT",
+            "selected": "All interests",
+            "clientWidth": 120,
+            "scrollWidth": 120
+          },
+          {
+            "value": "",
+            "label": "How to attend\nAll formats\nOnline\nIn person\nHybrid\nFormat unconfirmed",
+            "selected": "All formats",
+            "clientWidth": 135,
+            "scrollWidth": 135
+          }
+        ],
+        "firstCardBottom": 497.34375,
+        "width": 320,
+        "scrollWidth": 305,
+        "scrollHeight": 5548,
+        "rects": {
+          ".topbar": {
+            "x": 12,
+            "y": 0,
+            "width": 281,
+            "height": 98,
+            "display": "flex"
+          },
+          ".nav-search": {
+            "x": 12,
+            "y": 44,
+            "width": 281,
+            "height": 42,
+            "display": "block"
+          },
+          ".filters": {
+            "x": 20,
+            "y": 123,
+            "width": 265,
+            "height": 62,
+            "display": "grid"
+          },
+          ".tabs": {
+            "x": 12,
+            "y": 259.1875,
+            "width": 281,
+            "height": 50,
+            "display": "grid"
+          },
+          ".board-list": {
+            "x": 20,
+            "y": 320.1875,
+            "width": 265,
+            "height": 4845.15625,
+            "display": "block"
+          },
+          ".notice-select": {
+            "x": 85,
+            "y": 368.1875,
+            "width": 126.390625,
+            "height": 18.1875,
+            "display": "inline-block"
+          },
+          ".pinned-detail": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "display": "none"
+          },
+          "#paper-title": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "display": "block"
+          },
+          ".paper-scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "display": "block"
+          }
+        },
+        "clipped": []
+      },
+      "notice": {
+        "scrollWidth": 305,
+        "width": 320,
+        "title": {
+          "x": 31,
+          "y": 140.1875,
+          "width": 238,
+          "height": 30.46875,
+          "top": 140.1875,
+          "right": 269,
+          "bottom": 170.65625,
+          "left": 31
+        },
+        "paper": {
+          "x": 12,
+          "y": 16.1875,
+          "width": 281,
+          "height": 2067.671875,
+          "top": 16.1875,
+          "right": 293,
+          "bottom": 2083.859375,
+          "left": 12
+        }
+      },
+      "errors": []
+    }
+  ],
+  "limits": [
+    "Firefox and WebKit not run",
+    "Touch, forced colors and reduced motion emulated in Chromium; no physical-device or assistive-technology session",
+    "Organizer pages not reverified"
+  ],
+  "publication": "Local only; no commit, push, new PR or deployment"
+}

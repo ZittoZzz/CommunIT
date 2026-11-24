@@ -336,6 +336,37 @@ function verifiedTimestamp(value?: string | null): string | null {
   return month >= 1 && month <= 12 && day >= 1 && day <= lastDay && hour < 24 && minute < 60 && second < 60 ? value : null;
 }
 
+function useNoticeScrollbar() {
+  const [active, setActive] = useState(false);
+  const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const reveal = useCallback(() => {
+    setActive(true);
+    if (idleTimer.current) clearTimeout(idleTimer.current);
+    idleTimer.current = setTimeout(() => setActive(false), 1000);
+  }, []);
+  useEffect(() => () => { if (idleTimer.current) clearTimeout(idleTimer.current); }, []);
+  return { active, reveal };
+}
+
+// Decorative reference notes enter only after scrolling, below the working area.
+// They never reserve space in the initial view or intercept an interaction.
+function BoardDoodles() {
+  const [stage, setStage] = useState(0);
+  useEffect(() => {
+    const update = () => {
+      const distance = Math.max(window.scrollY, document.getElementById('pinned-paper')?.scrollTop || 0);
+      setStage(distance >= 110 ? 2 : distance >= 12 ? 1 : 0);
+    };
+    document.addEventListener('scroll', update, { capture: true, passive: true });
+    return () => document.removeEventListener('scroll', update, true);
+  }, []);
+  if (!stage) return null;
+  return <div className="board-doodles" data-revealed="true" data-stage={stage} aria-hidden="true">
+    <svg viewBox="0 0 96 95" focusable="false"><path d="M3 3h90v78L81 92H3z" fill="#f6dd88"/><path d="M80 92l2-13 11 2" fill="#8d7b4933"/><path d="m33 1 29 1-1 9-29-2z" fill="#f3e6be" opacity=".83"/><g fill="none" stroke="#364035" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="46" cy="38" r="6"/><path d="M45 45l-2 16m1-11-9 5-5-7m14 1 9-4 6-9M43 61l-9 11-8 1m17-12 8 9 7 1M59 36l5-4m1-4 3-2M23 77q21 2 41-1"/><path d="m60 29 5-12 12 5-5 12z" fill="#fff5ce"/><path d="m64 23 7 3m-8 0 6 3"/></g></svg>
+    <svg viewBox="0 0 96 95" focusable="false"><path d="M3 3h90v78L81 92H3z" fill="#d5e3b4"/><path d="M80 92l2-13 11 2" fill="#8d7b4933"/><path d="m33 1 29 1-1 9-29-2z" fill="#f3e6be" opacity=".83"/><g fill="none" stroke="#364035" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="49" cy="38" r="6"/><path d="m48 45-2 16 10 2 5 11m-15-13-8 2-2 10m10-23 10 5 8-2m-23 2-6 6M32 64h20m-18 1-2 12m18-12 2 11M55 59h22m-4 1v18M58 57l4-11 12 1-3 10zM20 78q28 2 58 0"/><path d="m29 30-4-4m9 0-1-6"/></g></svg>
+  </div>;
+}
+
 export default function App() {
   const [data, setData] = useState<Directory | null>(null);
   const [loading, setLoading] = useState(true);
@@ -360,11 +391,6 @@ export default function App() {
     (!format || e.format === format) &&
     [e.name, e.organizer, e.eligibility, e.region, e.summary, e.description].join(' ').toLowerCase().includes(query.trim().toLowerCase())
   ), [data, format, query]);
-  const interestChips = useMemo(() => {
-    const available = new Set(browseable.filter(event => inSection(event, section)).flatMap(event => event.topics || []));
-    const order = [...new Set(['cybersecurity', 'ai_data', 'cloud', 'community', ...Object.keys(topics)])];
-    return order.filter(key => available.has(key)).slice(0, 4);
-  }, [browseable, section]);
   const matching = useMemo(() => browseable.filter(event => !topic || event.topics?.includes(topic)), [browseable, topic]);
   const counts = Object.fromEntries(sections.map(key => [key, matching.filter(event => inSection(event, key)).length]));
   const filtered = useMemo(() => matching.filter(e => inSection(e, section)).sort((a, b) =>
@@ -378,6 +404,7 @@ export default function App() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [reading, setReading] = useState(false);
   const paperRef = useRef<HTMLDivElement>(null);
+  const scrollbar = useNoticeScrollbar();
   const returnPosition = useRef<{ y: number; id: string } | null>(null);
   const selected = filtered.find(event => event.id === selectedId) || local[0] || international[0];
   const selectEvent = (id: string) => {
@@ -426,23 +453,54 @@ export default function App() {
         <svg className="board-logo" width="28" height="24" viewBox="0 0 80 64" aria-hidden="true" focusable="false"><rect x="0" y="1" width="80" height="62" rx="10" fill="#735038"/><rect x="7.5" y="8" width="65" height="48" rx="3.5" fill="#B98254"/><rect x="17.6" y="18.5" width="21" height="27" rx="1.4" fill="#FDF1D2"/><rect x="46.4" y="29" width="17" height="16" rx="1.4" fill="#245643"/><circle cx="28" cy="23" r="2" fill="#245643"/><path d="M22 32h12m-12 5h9" stroke="#735038" strokeWidth="1.8" strokeLinecap="round"/></svg>
         <span>Commun<strong>IT</strong></span>
       </a>
+      <label className="nav-search"><span className="sr-only">Search events</span><span className="search-wrap"><Icon name="search"/><input type="search" placeholder="Event, organizer, or school" value={query} onChange={e => setQuery(e.target.value)}/></span></label>
       <div className="nav-links"><a href="#events">Events</a><span className="country" role="img" aria-label="Philippines, Philippine Time" title="All dates and times use Asia/Manila (Philippine Time)"><Icon name="globe" size={15}/><span aria-hidden="true">Philippines · PHT</span></span></div>
     </nav></header>
-    <main id="events" className="shell"><h1 className="sr-only">Tech events</h1><section className="controls" aria-label="Find events">
-      <div className="filters">
-        <label className="filter search-filter"><span>Search events</span><span className="search-wrap"><Icon name="search"/><input type="search" placeholder="Event, organizer, or school" value={query} onChange={e => setQuery(e.target.value)}/></span></label>
-        <Select label="Browse by interest" value={topic} onChange={setTopic}><option value="">All interests</option>{Object.entries(topics).map(([key,label]) => <option key={key} value={key}>{label}</option>)}</Select>
-        <Select label="How to attend" value={format} onChange={setFormat}><option value="">Online, in person, or both</option>{Object.entries(formats).map(([key,label]) => <option key={key} value={key}>{label}</option>)}</Select>
+    <main id="events" className="shell">
+      <h1 className="sr-only">Tech events</h1>
+      <div className={`board-split${reading && selected ? ' is-reading' : ''}`}>
+        <div className="browse-column">
+          <section className="controls" aria-label="Find events">
+            <div className="filters">
+              <Select label="Browse by interest" value={topic} onChange={setTopic}><option value="">All interests</option>{Object.entries(topics).map(([key,label]) => <option key={key} value={key}>{label}</option>)}</Select>
+              <Select label="How to attend" value={format} onChange={setFormat}><option value="">All formats</option>{Object.entries(formats).map(([key,label]) => <option key={key} value={key}>{label}</option>)}</Select>
+            </div>
+            {lastUpdated && <p className="directory-updated" role="status"><Icon name="clock" size={16}/><span><strong>Listings last updated: </strong><time dateTime={lastUpdated} title="Latest verified event-page check among saved listings; not every listing was checked at this time.">{recorded(lastUpdated, true)}</time></span></p>}
+            {hasFilters && <div className="filter-footer"><button className="text-button" onClick={clear}>Clear filters</button></div>}
+          </section>
+          {!data && loadError}
+          <div className="board-section" data-section={section}>
+            <div className="control-top">
+              <div className="tabs" role="tablist" aria-label="Event section">{sections.map(tab => <button key={tab} data-section={tab} id={`tab-${tab}`} role="tab" aria-selected={section === tab} aria-controls="results" tabIndex={section === tab ? 0 : -1} className={section === tab ? 'active' : ''} onClick={() => setSection(tab)} onKeyDown={e => {
+                if (['ArrowLeft','ArrowRight','Home','End'].includes(e.key)) {
+                  e.preventDefault();
+                  const next = e.key === 'Home' ? sections[0] : e.key === 'End' ? sections[sections.length - 1] : sections[(sections.indexOf(tab) + (e.key === 'ArrowRight' ? 1 : sections.length - 1)) % sections.length];
+                  setSection(next); document.getElementById(`tab-${next}`)?.focus();
+                }
+              }}>{sectionLabels[tab]}{(tab !== 'archived' || !data || counts[tab] > 0) && <span>{data ? counts[tab] : '—'}</span>}</button>)}</div>
+            </div>
+            <section id="results" className="board" role="tabpanel" aria-labelledby={`tab-${section}`} aria-busy={loading}>
+              <p className="results-count sr-only" aria-live="polite">{data ? `${filtered.length} ${filtered.length === 1 ? 'event' : 'events'}${hasFilters ? ' matching your filters' : ''}` : loading ? 'Checking the directory…' : 'Listings unavailable'}</p>
+              {loading && !data ? <div className="empty" role="status">Loading verified announcements…</div> : data && filtered.length ?
+                <div className="board-list" key={section}>
+                  {local.length > 0 && <section className="opportunity-group" aria-labelledby="ph-opportunities-title"><h3 id="ph-opportunities-title">PH opportunities</h3><div className="event-grid">{local.map(e => <EventCard event={e} key={e.id} selected={selected?.id === e.id} onSelect={selectEvent}/>)}</div></section>}
+                  {international.length > 0 && <section className="opportunity-group" aria-labelledby="international-online-title"><h3 id="international-online-title">International online opportunities</h3><div className="event-grid">{international.map(e => <EventCard event={e} key={e.id} selected={selected?.id === e.id} onSelect={selectEvent}/>)}</div></section>}
+                </div> : data ? <div className="empty" key={section}><span className="empty-icon"><Icon name={hasFilters ? 'search' : 'flag'} size={30}/></span><h3>{hasFilters ? 'No matches for these filters.' : section === 'confirmation' ? 'No events needing confirmation.' : section === 'archived' ? 'No archived leads.' : `No ${section === 'finished' ? 'past' : 'upcoming'} events recorded yet.`}</h3><p>{hasFilters ? 'Try another interest, attendance option, or search term.' : 'Only collected announcements appear here. Check back later for more events.'}</p>{hasFilters && <button onClick={clear} className="button primary">Clear filters</button>}</div> : null}
+            </section>
+          </div>
+        </div>
+        {selected && <aside className="pinned-detail" aria-label="Pinned event details">
+          <button className="back-to-board" onClick={backToBoard}>← Back to the board</button>
+          <div id="pinned-paper" ref={paperRef} className="paper-scroll" role="region" aria-label="Selected event notice" tabIndex={0} data-scrolling={scrollbar.active}
+            onPointerEnter={scrollbar.reveal} onPointerMove={scrollbar.reveal} onPointerDown={scrollbar.reveal} onPointerUp={scrollbar.reveal}
+            onTouchStart={scrollbar.reveal} onTouchMove={scrollbar.reveal} onKeyDown={scrollbar.reveal} onFocus={scrollbar.reveal}
+            onWheel={scrollbar.reveal} onScroll={scrollbar.reveal}>
+            <EventPaper event={selected} key={selected.id}/>
+          </div>
+        </aside>}
       </div>
-      {interestChips.length > 0 && <div className="explore-interests" role="group" aria-labelledby="explore-interests-label" aria-describedby="explore-interests-hint"><div className="interest-context"><span id="explore-interests-label">Interests in these listings</span><span id="explore-interests-hint">Select to filter</span></div>{interestChips.map(key => <button key={key} type="button" className="interest-chip" aria-pressed={topic === key} onClick={() => setTopic(topic === key ? '' : key)}>{topics[key]}</button>)}</div>}
-      {lastUpdated && <p className="directory-updated" role="status"><Icon name="clock" size={16}/><span><strong>Listings last updated: </strong><time dateTime={lastUpdated} title="Latest verified event-page check among saved listings; not every listing was checked at this time.">{recorded(lastUpdated, true)}</time></span></p>}
-      {hasFilters && <div className="filter-footer"><button className="text-button" onClick={clear}>Clear filters</button></div>}
-    </section>
-    {!data && loadError}
-    <div className="board-section" data-section={section}><div className="control-top"><div className="tabs" role="tablist" aria-label="Event section">{sections.map(tab => <button key={tab} data-section={tab} id={`tab-${tab}`} role="tab" aria-selected={section === tab} aria-controls="results" tabIndex={section === tab ? 0 : -1} className={section === tab ? 'active' : ''} onClick={() => setSection(tab)} onKeyDown={e => { if (['ArrowLeft','ArrowRight','Home','End'].includes(e.key)) { e.preventDefault(); const next = e.key === 'Home' ? sections[0] : e.key === 'End' ? sections[sections.length - 1] : sections[(sections.indexOf(tab) + (e.key === 'ArrowRight' ? 1 : sections.length - 1)) % sections.length]; setSection(next); document.getElementById(`tab-${next}`)?.focus(); } }}>{sectionLabels[tab]}{(tab !== 'archived' || !data || counts[tab] > 0) && <span>{data ? counts[tab] : '—'}</span>}</button>)}</div></div>
-    <section id="results" className={`board${reading && selected ? ' is-reading' : ''}`} role="tabpanel" aria-labelledby={`tab-${section}`} aria-busy={loading}><p className="results-count sr-only" aria-live="polite">{data ? `${filtered.length} ${filtered.length === 1 ? 'event' : 'events'}${hasFilters ? ' matching your filters' : ''}` : loading ? 'Checking the directory…' : 'Listings unavailable'}</p>
-    {loading && !data ? <div className="empty" role="status">Loading verified announcements…</div> : data && filtered.length ? <div className="board-split"><div className="board-list" key={section}>{local.length > 0 && <section className="opportunity-group" aria-labelledby="ph-opportunities-title"><h3 id="ph-opportunities-title">PH opportunities</h3><div className="event-grid">{local.map(e => <EventCard event={e} key={e.id} selected={selected?.id === e.id} onSelect={selectEvent}/>)}</div></section>}{international.length > 0 && <section className="opportunity-group" aria-labelledby="international-online-title"><h3 id="international-online-title">International online opportunities</h3><div className="event-grid">{international.map(e => <EventCard event={e} key={e.id} selected={selected?.id === e.id} onSelect={selectEvent}/>)}</div></section>}</div><aside className="pinned-detail" aria-label="Pinned event details"><button className="back-to-board" onClick={backToBoard}>← Back to the board</button><div id="pinned-paper" ref={paperRef} className="paper-scroll">{selected && <EventPaper event={selected} key={selected.id}/>}</div></aside></div> : data ? <div className="empty" key={section}><span className="empty-icon"><Icon name={hasFilters ? 'search' : 'flag'} size={30}/></span><h3>{hasFilters ? 'No matches for these filters.' : section === 'confirmation' ? 'No events needing confirmation.' : section === 'archived' ? 'No archived leads.' : `No ${section === 'finished' ? 'past' : 'upcoming'} events recorded yet.`}</h3><p>{hasFilters ? 'Try another interest, attendance option, or search term.' : 'Only collected announcements appear here. Check back later for more events.'}</p>{hasFilters && <button onClick={clear} className="button primary">Clear filters</button>}</div> : null}
-    <p className="date-note"><Icon name="clock" size={16}/> Confirmed times use Manila time. Ambiguous dates stay as the organizer wrote them.</p></section></div>
+      <p className="date-note"><Icon name="clock" size={16}/> Confirmed times use Manila time. Ambiguous dates stay as the organizer wrote them.</p>
+      <BoardDoodles/>
     <section className="directory-tools" aria-labelledby="directory-tools-title">
       <div className="directory-tools-heading"><div><h2 id="directory-tools-title">Directory updates</h2><p>Reload the saved event list.</p></div><div className="result-tools"><button className="button secondary refresh" aria-label="Refresh saved listings" title="Refresh saved listings" disabled={loading} onClick={() => void load()}><Icon name="refresh"/>Refresh saved listings</button></div></div>
       {data && loadError}

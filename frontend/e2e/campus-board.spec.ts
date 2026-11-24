@@ -63,7 +63,9 @@ for (const width of [390, 760]) {
     await expect(back).toBeInViewport();
     const paper = await page.locator('.paper').boundingBox();
     const board = await page.locator('.board-split').boundingBox();
-    expect(paper!.width).toBeCloseTo(board!.width, 0);
+    // The full-width notice reserves a few pixels for its stacked-paper shadow.
+    expect(paper!.width).toBeGreaterThanOrEqual(board!.width-8);
+    expect(paper!.x+paper!.width).toBeLessThanOrEqual(board!.x+board!.width);
     await page.evaluate(() => window.scrollBy(0, 600));
     await back.click();
     await expect(card).toBeFocused();
@@ -130,27 +132,29 @@ test('editing a filter while reading on mobile returns to results and keeps focu
 });
 
 for (const width of [1366, 390]) {
-  test(`section tabs stay neutral until selected and leave the board frame unchanged at ${width}px`, async ({page}) => {
+  test(`level paper tabs retain selection and keyboard navigation above the folder at ${width}px`, async ({page}) => {
     await setup(page, width);
     const filters = await page.locator('.controls').boundingBox();
     const tabs = await page.getByRole('tablist').boundingBox();
     const board = await page.locator('.board').boundingBox();
     expect(tabs!.y).toBeGreaterThanOrEqual(filters!.y + filters!.height);
     expect(board!.y - (tabs!.y + tabs!.height)).toBeLessThanOrEqual(1);
-    const frame = await page.locator('.board').evaluate(element => getComputedStyle(element).borderColor);
+    const tabNames = await page.getByRole('tab').evaluateAll(tabs=>tabs.map(tab=>tab.childNodes[0].textContent));
+    expect(tabNames).toEqual(['Upcoming','Past','Needs confirmation','Archive']);
+    await expect(page.locator('#tab-archived span')).toHaveCount(0);
 
     for (const section of ['upcoming','finished','confirmation','archived']) {
       const tab = page.locator(`#tab-${section}`);
       await tab.click();
       await expect(tab).toHaveAttribute('aria-selected','true');
-      await expect(tab).toHaveCSS('height', '46px');
       await expect(page.locator('.board-section')).toHaveAttribute('data-section', section);
-      await expect(tab).toHaveCSS('background-color', 'rgb(255, 253, 242)');
-      expect(await page.locator('.board').evaluate(element => getComputedStyle(element).borderColor)).toBe(frame);
       await page.mouse.move(0, 0);
-      for (const other of await page.locator('[role=tab][aria-selected=false]').all()) {
-        await expect(other).toHaveCSS('height', '46px');
-      }
+      // Wait for the short selection feedback to settle before measuring the level tabs.
+      await expect(tab).toHaveCSS('transform','none');
+      const bounds = await page.getByRole('tab').evaluateAll(tabs=>tabs.map(tab=>{const box=tab.getBoundingClientRect(); return {top:box.top,bottom:box.bottom,height:box.height};}));
+      expect(new Set(bounds.map(box=>box.top)).size).toBe(1);
+      expect(new Set(bounds.map(box=>box.bottom)).size).toBe(1);
+      expect(bounds.every(box=>box.height>=40)).toBeTruthy();
     }
     await page.emulateMedia({reducedMotion:'reduce'});
     await expect(page.locator('.tabs .active')).toHaveCSS('animation-name','none');

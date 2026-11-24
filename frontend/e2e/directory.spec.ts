@@ -87,15 +87,14 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 }, { name: 
       const nav = document.querySelector('.topbar')!.getBoundingClientRect();
       const brand = document.querySelector('.brand')!.getBoundingClientRect();
       const links = document.querySelector('.nav-links')!.getBoundingClientRect();
-      const filters = document.querySelector('.filters')!.getBoundingClientRect();
+      const search = document.querySelector('.topbar input[type=search]')!.getBoundingClientRect();
       const h1 = document.querySelector('h1')!.getBoundingClientRect();
-      return {gap:filters.top-nav.bottom, separate:brand.right < links.left,
+      return {searchInside:search.top>=nav.top && search.bottom<=nav.bottom, separate:brand.right < links.left,
         sameRow:Math.abs(brand.top+brand.height/2-links.top-links.height/2)<2,
         inside:links.right<=nav.right, hiddenHeading:h1.width<=1 && h1.height<=1,
         noOverflow:document.documentElement.scrollWidth<=innerWidth};
     });
-    expect(geometry).toMatchObject({separate:true,sameRow:true,inside:true,hiddenHeading:true,noOverflow:true});
-    expect(geometry.gap).toBe(viewport.width <= 760 ? 16 : 23);
+    expect(geometry).toMatchObject({searchInside:true,separate:true,sameRow:true,inside:true,hiddenHeading:true,noOverflow:true});
 
     await expect(page.getByRole('link', { name: 'Events', exact: true })).toBeVisible();
     await expect(page.getByRole('searchbox', { name: 'Search events', exact: true })).toBeVisible();
