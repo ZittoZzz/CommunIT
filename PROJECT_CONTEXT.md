@@ -4,6 +4,10 @@ Last updated: **2026-11-24, Asia/Manila**.
 
 This is the current project handoff for a new agent/chat working in the same repository. Read [AGENTS.md](AGENTS.md) for working rules and [RUN_LOCAL.md](RUN_LOCAL.md) for commands. Check the actual workspace before acting; the observations below are dated, not a promise about current process or source availability.
 
+## Campus board refresh · 2026-11-24
+
+Updated `frontend/src/styles.css` with a forest-green search panel, calendar-stub date treatment, and reduced-motion-aware hover and notice transitions. The production frontend build passed. Chromium could not start in the test environment because its process socket was denied, so visual and browser interaction checks remain pending.
+
 ## Project and architecture
 
 Current checkout: `/home/miguel/Documents/GitHub/IT_Community_PH`. Repository/package configuration has not been renamed; the public-facing brand is **CommunIT**.
