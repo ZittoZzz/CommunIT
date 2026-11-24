@@ -1,8 +1,18 @@
 # CommunIT project handoff
 
-Last updated: **November 24, 2026, Asia/Manila**.
+Last updated: **November 25, 2026, Asia/Manila**.
 
 Read [AGENTS.md](AGENTS.md) for durable rules and [RUN_LOCAL.md](RUN_LOCAL.md) for setup and checks. This is current implementation context, not a claim about running processes or live source availability. Superseded checkpoints are in the [archived November 23–24 handoff](docs/archive/project-context-2026-11-24.md); the [archive index](docs/archive/README.md) records artifact locations and preservation decisions.
+
+## Sticky event-day groups · November 25, 2026, Asia/Manila
+
+`frontend/src/App.tsx` now groups the already filtered and stably sorted cards by the existing `eventDay` helper within each geography. Each labelled section has a day heading (for example **Wed, Nov 25**) and retains the existing cards; unresolved/conflicting dates go into **Date to confirm**. Deadlines never define a group. `frontend/src/styles.css` bounds the desktop list as a native keyboard-accessible scroll region; phones retain page scrolling. Opaque folder-colored CSS sticky headings are bounded by their sections, letting the next day push the previous one away. Navbar/filters are not persistent toolbars, so the sticky inset is zero. Surrounding controls, notice content and backend behavior were not changed by this follow-up.
+
+Reviewed the supplied local `CommunIT-board-pair.html` after its Library URL could not be fetched. Its comparison controls, demo records, chips and “What we found”/“Missing:” content were not imported; this checkout retains its existing dropdowns and **Info we got** notice.
+
+**Verified:** production TypeScript/Vite build; **84/84 Chromium tests passed**, including four new checks in `frontend/e2e/day-groups.spec.ts`. The fixture has three November 25 events and two November 27 events, plus a separate geography for trailing scroll space. At 1366×768, 390×768 and 320×768, geometry checks and screenshots confirm pinning, push-away without overlapping headings, next-day takeover, desktop selection position and mobile Back focus/scroll. Checks cover a UTC timestamp falling on the following Manila day, stable ties, unresolved/conflicting and parent-event dates, deadline separation, combined filters removing whole groups, empty results and clearing. The existing suite also passed first-screen layout, keyboard navigation, reduced motion and notice scrollbar checks. Normal saved-API screenshots have no page errors or horizontal overflow at those widths. `git diff --check` passed. [Review, screenshots and reproduction](docs/reviews/day-groups-2026-11-25/README.md); complete local logs/captures: `data/day-groups/`.
+
+Firefox/WebKit and physical devices were not tested. No backend tests were rerun for this list-only change; existing backend edits remain separate. Preview commands/ports are unchanged (Vite 5173, isolated API 5001); no collection, main-database access or deployment. The requested draft is prepared as a day-grouping change over a separate snapshot of the unpublished navbar UI; remote review status will be recorded once created.
 
 ## Idle scrollbar gutter follow-up · November 24, 2026, Asia/Manila
 

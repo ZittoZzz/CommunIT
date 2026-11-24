@@ -110,6 +110,24 @@ function calendarDay(value?: Moment | null): string | null {
 function eventDay(event: Competition): string | null {
   return event.status === 'date_conflict' ? null : calendarDay(event.start || event.competition_date || event.parent_event_start);
 }
+function DayGroups({events, geography, selectedId, onSelect}: {events: Competition[]; geography: string; selectedId?: string; onSelect: (id: string) => void}) {
+  // Input is already filtered and stably sorted by eventDay. Never group by a cutoff.
+  const groups = new Map<string | null, Competition[]>();
+  for (const event of events) {
+    const day = eventDay(event);
+    const group = groups.get(day);
+    if (group) group.push(event);
+    else groups.set(day, [event]);
+  }
+  return <>{Array.from(groups, ([day, listings]) => {
+    const id = `${geography}-day-${day || 'unconfirmed'}`;
+    const label = day && new Intl.DateTimeFormat('en-US', {timeZone:'Asia/Manila', weekday:'short', month:'short', day:'numeric'}).format(new Date(`${day}T00:00:00+08:00`));
+    return <section className="event-day-group" key={day || 'unconfirmed'} aria-labelledby={id}>
+      <h4 className="event-day-heading" id={id}>{day ? <time dateTime={day}>{label}</time> : 'Date to confirm'}</h4>
+      <div className="event-grid">{listings.map(event => <EventCard event={event} key={event.id} selected={selectedId === event.id} onSelect={onSelect}/>)}</div>
+    </section>;
+  })}</>;
+}
 function clockTime(value?: Moment | null): string | null {
   if (value?.precision !== 'datetime' || !calendarDay(value)) return null;
   return new Intl.DateTimeFormat('en-US', {timeZone:'Asia/Manila', hour:'numeric', minute:'2-digit', hour12:true}).format(new Date(value.value!));
@@ -482,9 +500,9 @@ export default function App() {
             <section id="results" className="board" role="tabpanel" aria-labelledby={`tab-${section}`} aria-busy={loading}>
               <p className="results-count sr-only" aria-live="polite">{data ? `${filtered.length} ${filtered.length === 1 ? 'event' : 'events'}${hasFilters ? ' matching your filters' : ''}` : loading ? 'Checking the directory…' : 'Listings unavailable'}</p>
               {loading && !data ? <div className="empty" role="status">Loading verified announcements…</div> : data && filtered.length ?
-                <div className="board-list" key={section}>
-                  {local.length > 0 && <section className="opportunity-group" aria-labelledby="ph-opportunities-title"><h3 id="ph-opportunities-title">PH opportunities</h3><div className="event-grid">{local.map(e => <EventCard event={e} key={e.id} selected={selected?.id === e.id} onSelect={selectEvent}/>)}</div></section>}
-                  {international.length > 0 && <section className="opportunity-group" aria-labelledby="international-online-title"><h3 id="international-online-title">International online opportunities</h3><div className="event-grid">{international.map(e => <EventCard event={e} key={e.id} selected={selected?.id === e.id} onSelect={selectEvent}/>)}</div></section>}
+                <div className="board-list" key={section} role="region" aria-label="Event listings" tabIndex={0}>
+                  {local.length > 0 && <section className="opportunity-group" aria-labelledby="ph-opportunities-title"><h3 id="ph-opportunities-title">PH opportunities</h3><DayGroups events={local} geography="ph" selectedId={selected?.id} onSelect={selectEvent}/></section>}
+                  {international.length > 0 && <section className="opportunity-group" aria-labelledby="international-online-title"><h3 id="international-online-title">International online opportunities</h3><DayGroups events={international} geography="international" selectedId={selected?.id} onSelect={selectEvent}/></section>}
                 </div> : data ? <div className="empty" key={section}><span className="empty-icon"><Icon name={hasFilters ? 'search' : 'flag'} size={30}/></span><h3>{hasFilters ? 'No matches for these filters.' : section === 'confirmation' ? 'No events needing confirmation.' : section === 'archived' ? 'No archived leads.' : `No ${section === 'finished' ? 'past' : 'upcoming'} events recorded yet.`}</h3><p>{hasFilters ? 'Try another interest, attendance option, or search term.' : 'Only collected announcements appear here. Check back later for more events.'}</p>{hasFilters && <button onClick={clear} className="button primary">Clear filters</button>}</div> : null}
             </section>
           </div>
