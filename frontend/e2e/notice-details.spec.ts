@@ -41,7 +41,7 @@ for (const width of [1366, 390, 320]) {
     await expect(page.locator('.event-card').first().locator('.event-location')).toHaveText('NCR · In person');
     await select(page, full.name);
     await expect(page.locator('.interests-detail')).toHaveText('InterestsCommunity · Cloud');
-    const collected = page.getByRole('region', {name:'What we can get'});
+    const collected = page.getByRole('region', {name:'Info we got'});
     await expect(collected).toBeVisible();
     await expect(collected).toHaveCSS('border-top-style','dotted');
     await expect(collected).toHaveCSS('border-bottom-style','dotted');

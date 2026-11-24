@@ -301,7 +301,7 @@ function EventPaper({ event }: { event: Competition }) {
       </div>
       <div className="event-detail-body">
         {hasCollectedDetails && <section className="collected-details" aria-labelledby="collected-details-title">
-        <h3 id="collected-details-title">What we can get</h3>
+        <h3 id="collected-details-title">Info we got</h3>
         <dl className="collected-grid">
           {attendance && <div className="attendance-detail"><dt>How to attend</dt><dd>{attendance}</dd></div>}
           {interests.length > 0 && <div className="interests-detail"><dt>Interests</dt><dd>{interests.join(' · ')}</dd></div>}
