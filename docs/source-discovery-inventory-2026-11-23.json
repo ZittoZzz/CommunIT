@@ -1,0 +1,2166 @@
+{
+  "observed_at": "2026-11-23T22:48:28.066907+08:00",
+  "basis": "Read-only configuration resolution and preview SQLite queries; no live collection or external requests. Running service configuration not checked.",
+  "profiles": {
+    "sources.json": [
+      {
+        "id": "rootcon-bluesky",
+        "name": "ROOTCON · Bluesky",
+        "kind": "bluesky",
+        "url": "https://bsky.app/profile/rootcon.bsky.social",
+        "enabled": true,
+        "index_id": "rootcon-community",
+        "index_status": "active",
+        "publisher_role": "organizer",
+        "coverage": [
+          "Luzon",
+          "National",
+          "Online"
+        ],
+        "max_pages": 4,
+        "index_reason": ""
+      },
+      {
+        "id": "hackthenorth",
+        "name": "HackTheNorth.ph · Announcements",
+        "kind": "html",
+        "url": "https://hackthenorth.ph/",
+        "max_pages": 12,
+        "enabled": true
+      },
+      {
+        "id": "up-acm",
+        "name": "UP ACM · Events",
+        "kind": "html",
+        "url": "https://upacm.net/events/",
+        "max_pages": 8,
+        "enabled": true
+      },
+      {
+        "id": "pup-announcements",
+        "name": "PUP · Announcements feed",
+        "kind": "rss",
+        "url": "https://www.pup.edu.ph/rss/announcements/",
+        "max_items": 10,
+        "enabled": true
+      },
+      {
+        "id": "pup-news",
+        "name": "PUP · News feed",
+        "kind": "rss",
+        "url": "https://www.pup.edu.ph/rss/news/",
+        "max_items": 10,
+        "enabled": true
+      },
+      {
+        "id": "ncert",
+        "name": "DICT / CERT-PH · Feed",
+        "kind": "rss",
+        "url": "https://ncert.gov.ph/feed/",
+        "max_items": 40,
+        "enabled": true
+      },
+      {
+        "id": "dict",
+        "name": "DICT · Announcements",
+        "kind": "html",
+        "url": "https://dict.gov.ph/",
+        "max_pages": 10,
+        "enabled": true
+      },
+      {
+        "id": "rootcon-website",
+        "name": "ROOTCON · Website",
+        "kind": "restricted",
+        "url": "https://rootcon.org/",
+        "enabled": true
+      },
+      {
+        "id": "ctftime",
+        "name": "CTFtime · Philippine connections",
+        "kind": "ctftime",
+        "url": "https://ctftime.org/api/v1/events/",
+        "enabled": true
+      },
+      {
+        "id": "safeai-luma-calendar",
+        "name": "Safe AI Philippines · Public Luma calendar",
+        "kind": "luma",
+        "url": "https://luma.com/safeaiph?k=c",
+        "enabled": true,
+        "index_id": "safeai-luma-calendar",
+        "index_status": "active",
+        "publisher_role": "organizer",
+        "coverage": [
+          "Philippines",
+          "AI community events"
+        ],
+        "max_items": 60,
+        "window_days": 45,
+        "event_scope": "community",
+        "topic": "ai",
+        "index_reason": ""
+      },
+      {
+        "id": "mlh-global-hack-week",
+        "name": "Major League Hacking · Global Hack Week",
+        "kind": "mlh",
+        "url": "https://ghw.mlh.com/",
+        "enabled": true,
+        "index_id": "mlh-global-hack-week",
+        "index_status": "active",
+        "publisher_role": "organizer",
+        "coverage": [
+          "International online",
+          "General IT",
+          "Students"
+        ],
+        "max_items": 40,
+        "window_days": 45,
+        "index_reason": ""
+      },
+      {
+        "id": "up-manila",
+        "name": "UP Manila · Competition invitations",
+        "kind": "rss",
+        "url": "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag",
+        "enabled": true,
+        "index_id": "up-manila",
+        "index_status": "active",
+        "publisher_role": "resharer",
+        "coverage": [
+          "NCR",
+          "National university invitations"
+        ],
+        "max_items": 30,
+        "index_reason": ""
+      },
+      {
+        "id": "htb-meetup-ph",
+        "name": "Hack The Box Meetup Manila · Community feed",
+        "kind": "rss",
+        "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/rss/",
+        "enabled": true,
+        "index_id": "htb-meetup-ph",
+        "index_status": "active",
+        "publisher_role": "both",
+        "coverage": [
+          "NCR",
+          "Philippine cybersecurity community"
+        ],
+        "max_items": 40,
+        "index_reason": ""
+      },
+      {
+        "id": "aws-mindanao",
+        "name": "AWS student communities · Mindanao",
+        "kind": "html",
+        "url": "https://awsscd-mindanao.org/",
+        "enabled": true,
+        "index_id": "aws-mindanao",
+        "index_status": "active",
+        "publisher_role": "organizer",
+        "coverage": [
+          "Mindanao",
+          "Davao"
+        ],
+        "max_pages": 2,
+        "index_reason": ""
+      },
+      {
+        "id": "feu-eventually",
+        "name": "FEU Tech · Eventually campus calendar",
+        "kind": "html",
+        "url": "https://paraverse.feutech.edu.ph/eventually/discover/",
+        "enabled": false,
+        "index_id": "feu-eventually",
+        "index_status": "candidate",
+        "publisher_role": "resharer",
+        "coverage": [
+          "NCR",
+          "Campus competitions"
+        ],
+        "max_pages": 30,
+        "index_reason": "Calendar is readable, but the documented CTF invitation needs structured date/venue extraction outside its article body. Advance publication timing is also unverified. Not counted as a working CTF monitor."
+      },
+      {
+        "id": "crest-asia",
+        "name": "CREST · Philippine partner announcements",
+        "kind": "html",
+        "url": "https://www.crest-approved.org/events/category/asia-events/list/",
+        "enabled": true,
+        "index_id": "crest-asia",
+        "index_status": "active",
+        "publisher_role": "resharer",
+        "coverage": [
+          "Philippine events in an Asia partner calendar",
+          "Luzon"
+        ],
+        "max_pages": 8,
+        "index_reason": ""
+      },
+      {
+        "id": "um-sdc",
+        "name": "University of Mindanao Student Developers Community",
+        "kind": "html",
+        "url": "https://luma.com/user/usr-8iOKid6iGmryO2o",
+        "enabled": false,
+        "index_id": "um-sdc",
+        "index_status": "candidate",
+        "publisher_role": "organizer",
+        "coverage": [
+          "Mindanao",
+          "Davao"
+        ],
+        "index_reason": "Historical CTF invitation exists, but a reliable recurring calendar returning event links has not been verified. No event URL seeded."
+      },
+      {
+        "id": "owasp-cebu",
+        "name": "OWASP Cebu",
+        "kind": "html",
+        "url": "https://www.owasp-cebu.org/ctfs",
+        "enabled": false,
+        "index_id": "owasp-cebu",
+        "index_status": "candidate",
+        "publisher_role": "organizer",
+        "coverage": [
+          "Visayas",
+          "Cebu"
+        ],
+        "index_reason": "CTF index redirects to login; public feed access not verified. No credentials or cookies used."
+      },
+      {
+        "id": "pia",
+        "name": "Philippine Information Agency",
+        "kind": "rss",
+        "url": "https://pia.gov.ph/feed/?s=capture+the+flag",
+        "enabled": false,
+        "index_id": "pia",
+        "index_status": "candidate",
+        "publisher_role": "resharer",
+        "coverage": [
+          "National",
+          "Luzon",
+          "Visayas",
+          "Mindanao"
+        ],
+        "index_reason": "Advance competition invitations documented, but robots.txt verification returns HTTP 403. Candidate only."
+      },
+      {
+        "id": "vektr-community",
+        "name": "VEKTR Security · Community sponsor",
+        "kind": "html",
+        "url": "https://vektrsec.com/",
+        "enabled": false,
+        "index_id": "vektr-community",
+        "index_status": "candidate",
+        "publisher_role": "resharer",
+        "coverage": [
+          "Philippine community competitions"
+        ],
+        "index_reason": "Website readable but no recurring announcement feed or archive links found. Indexed social reshares are not a working publisher integration."
+      },
+      {
+        "id": "luma-manila",
+        "name": "Luma Manila · Public city calendar",
+        "kind": "luma",
+        "url": "https://luma.com/manila",
+        "enabled": true,
+        "index_id": "luma-manila",
+        "index_status": "active",
+        "publisher_role": "resharer",
+        "coverage": [
+          "NCR",
+          "Public approved in-person Manila events; online/private events excluded by city calendar"
+        ],
+        "ical_url": "https://api.luma.com/ics/get?entity=discover&id=discplace-XeAvnK62YmCW54R",
+        "max_items": 60,
+        "index_reason": "Public city iCal and public page tested; monitor event bodies before competition filtering. No current CTF required to represent a successful calendar check."
+      },
+      {
+        "id": "kakacomputer-ctf",
+        "name": "KakaComputer · CTF reporting",
+        "kind": "rss",
+        "url": "https://kakacomputer.com/tag/ctf/feed/",
+        "enabled": true,
+        "index_id": "kakacomputer-ctf",
+        "index_status": "active",
+        "publisher_role": "resharer",
+        "coverage": [
+          "Philippine community competitions; includes historical recaps"
+        ],
+        "max_items": 20,
+        "index_reason": "Readable recurring CTF RSS and article bodies. Recaps corroborate past competitions and publisher relationships; no advance-alert coverage claimed."
+      },
+      {
+        "id": "cyber404-news",
+        "name": "CYBER404 · Community partnerships",
+        "kind": "rss",
+        "url": "https://cyber404.net/blog/feed.xml",
+        "enabled": true,
+        "index_id": "cyber404-news",
+        "index_status": "active",
+        "publisher_role": "resharer",
+        "coverage": [
+          "Philippine cybersecurity community publisher leads"
+        ],
+        "max_items": 20,
+        "index_reason": "Readable recurring Atom feed and partnership articles. Publisher leads alone never create a competition."
+      },
+      {
+        "id": "cyberph-luma-calendar",
+        "name": "CyberPH · Public Luma calendar",
+        "kind": "luma",
+        "url": "https://api.luma.com/ics/get?entity=calendar&id=cal-ZW4YOEwv4lmL66C",
+        "enabled": true,
+        "index_id": "cyberph-luma-calendar",
+        "index_status": "active",
+        "publisher_role": "organizer",
+        "coverage": [
+          "Philippine community events",
+          "Calendar includes online events; each CTF requires Philippine-scope evidence"
+        ],
+        "ical_url": "https://api.luma.com/ics/get?entity=calendar&id=cal-ZW4YOEwv4lmL66C",
+        "max_items": 60,
+        "page_fallback": false,
+        "index_reason": "Documented public subscription returned event links including an online webinar and a CTF activity. Publisher-name search assisted one-time qualification; registration timing is evaluated per event. Facebook and Luma identities are not automatically merged."
+      },
+      {
+        "id": "cisco-netconnect-luma-calendar",
+        "name": "Cisco NetConnect · Public Luma calendar",
+        "kind": "luma",
+        "url": "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7",
+        "enabled": true,
+        "index_id": "cisco-netconnect-luma-calendar",
+        "index_status": "active",
+        "publisher_role": "organizer",
+        "coverage": [
+          "Student cybersecurity community events",
+          "Public calendar includes online and in-person events; each CTF requires Philippine-scope evidence"
+        ],
+        "ical_url": "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7",
+        "max_items": 60,
+        "page_fallback": false,
+        "index_reason": "Documented public calendar subscription returned nine readable events, including online events. Current entries are historical training and community events, with no CTF accepted. Publisher-name search assisted one-time qualification."
+      },
+      {
+        "id": "tavily-keyless",
+        "name": "Tavily · Free Philippine CTF discovery",
+        "kind": "tavily",
+        "url": "https://api.tavily.com/search",
+        "queries": [
+          {
+            "query": "site:facebook.com Philippines cybersecurity CTF competition registration",
+            "include_domains": [
+              "facebook.com"
+            ]
+          },
+          {
+            "query": "Philippines capture the flag CTF competition registration"
+          },
+          {
+            "query": "Philippines cybersecurity community CTF events calendar registration"
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "id": "facebook-search",
+        "name": "Facebook · Indexed announcements",
+        "kind": "brave",
+        "url": "https://api.search.brave.com/res/v1/web/search",
+        "enabled": false
+      }
+    ],
+    "sources.community.json": [
+      {
+        "id": "rootcon-bluesky",
+        "name": "ROOTCON · Bluesky",
+        "kind": "bluesky",
+        "url": "https://bsky.app/profile/rootcon.bsky.social",
+        "enabled": true,
+        "index_id": "rootcon-community",
+        "index_status": "active",
+        "publisher_role": "organizer",
+        "coverage": [
+          "Luzon",
+          "National",
+          "Online"
+        ],
+        "max_pages": 4,
+        "index_reason": ""
+      },
+      {
+        "id": "hackthenorth",
+        "name": "HackTheNorth.ph · Announcements",
+        "kind": "html",
+        "url": "https://hackthenorth.ph/",
+        "max_pages": 12,
+        "enabled": true
+      },
+      {
+        "id": "up-acm",
+        "name": "UP ACM · Events",
+        "kind": "html",
+        "url": "https://upacm.net/events/",
+        "max_pages": 8,
+        "enabled": true
+      },
+      {
+        "id": "pup-announcements",
+        "name": "PUP · Announcements feed",
+        "kind": "rss",
+        "url": "https://www.pup.edu.ph/rss/announcements/",
+        "max_items": 10,
+        "enabled": true
+      },
+      {
+        "id": "pup-news",
+        "name": "PUP · News feed",
+        "kind": "rss",
+        "url": "https://www.pup.edu.ph/rss/news/",
+        "max_items": 10,
+        "enabled": true
+      },
+      {
+        "id": "ncert",
+        "name": "DICT / CERT-PH · Feed",
+        "kind": "rss",
+        "url": "https://ncert.gov.ph/feed/",
+        "max_items": 40,
+        "enabled": true
+      },
+      {
+        "id": "dict",
+        "name": "DICT · Announcements",
+        "kind": "html",
+        "url": "https://dict.gov.ph/",
+        "max_pages": 10,
+        "enabled": true
+      },
+      {
+        "id": "rootcon-website",
+        "name": "ROOTCON · Website",
+        "kind": "restricted",
+        "url": "https://rootcon.org/",
+        "enabled": true
+      },
+      {
+        "id": "ctftime",
+        "name": "CTFtime · Philippine connections",
+        "kind": "ctftime",
+        "url": "https://ctftime.org/api/v1/events/",
+        "enabled": true
+      },
+      {
+        "id": "safeai-luma-calendar",
+        "name": "Safe AI Philippines · Public Luma calendar",
+        "kind": "luma",
+        "url": "https://luma.com/safeaiph?k=c",
+        "enabled": true,
+        "index_id": "safeai-luma-calendar",
+        "index_status": "active",
+        "publisher_role": "organizer",
+        "coverage": [
+          "Philippines",
+          "AI community events"
+        ],
+        "max_items": 60,
+        "window_days": 45,
+        "event_scope": "community",
+        "topic": "ai",
+        "index_reason": ""
+      },
+      {
+        "id": "mlh-global-hack-week",
+        "name": "Major League Hacking · Global Hack Week",
+        "kind": "mlh",
+        "url": "https://ghw.mlh.com/",
+        "enabled": true,
+        "index_id": "mlh-global-hack-week",
+        "index_status": "active",
+        "publisher_role": "organizer",
+        "coverage": [
+          "International online",
+          "General IT",
+          "Students"
+        ],
+        "max_items": 40,
+        "window_days": 45,
+        "index_reason": ""
+      },
+      {
+        "id": "up-manila",
+        "name": "UP Manila · Competition invitations",
+        "kind": "rss",
+        "url": "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag",
+        "enabled": true,
+        "index_id": "up-manila",
+        "index_status": "active",
+        "publisher_role": "resharer",
+        "coverage": [
+          "NCR",
+          "National university invitations"
+        ],
+        "max_items": 30,
+        "index_reason": ""
+      },
+      {
+        "id": "htb-meetup-ph",
+        "name": "Hack The Box Meetup Manila · Community feed",
+        "kind": "rss",
+        "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/rss/",
+        "enabled": true,
+        "index_id": "htb-meetup-ph",
+        "index_status": "active",
+        "publisher_role": "both",
+        "coverage": [
+          "NCR",
+          "Philippine cybersecurity community"
+        ],
+        "max_items": 40,
+        "index_reason": ""
+      },
+      {
+        "id": "feu-eventually",
+        "name": "FEU Tech · Eventually campus calendar",
+        "kind": "html",
+        "url": "https://paraverse.feutech.edu.ph/eventually/discover/",
+        "enabled": false,
+        "index_id": "feu-eventually",
+        "index_status": "candidate",
+        "publisher_role": "resharer",
+        "coverage": [
+          "NCR",
+          "Campus competitions"
+        ],
+        "max_pages": 30,
+        "index_reason": "Calendar is readable, but the documented CTF invitation needs structured date/venue extraction outside its article body. Advance publication timing is also unverified. Not counted as a working CTF monitor."
+      },
+      {
+        "id": "crest-asia",
+        "name": "CREST · Philippine partner announcements",
+        "kind": "html",
+        "url": "https://www.crest-approved.org/events/category/asia-events/list/",
+        "enabled": true,
+        "index_id": "crest-asia",
+        "index_status": "active",
+        "publisher_role": "resharer",
+        "coverage": [
+          "Philippine events in an Asia partner calendar",
+          "Luzon"
+        ],
+        "max_pages": 8,
+        "index_reason": ""
+      },
+      {
+        "id": "um-sdc",
+        "name": "University of Mindanao Student Developers Community",
+        "kind": "html",
+        "url": "https://luma.com/user/usr-8iOKid6iGmryO2o",
+        "enabled": false,
+        "index_id": "um-sdc",
+        "index_status": "candidate",
+        "publisher_role": "organizer",
+        "coverage": [
+          "Mindanao",
+          "Davao"
+        ],
+        "index_reason": "Historical CTF invitation exists, but a reliable recurring calendar returning event links has not been verified. No event URL seeded."
+      },
+      {
+        "id": "owasp-cebu",
+        "name": "OWASP Cebu",
+        "kind": "html",
+        "url": "https://www.owasp-cebu.org/ctfs",
+        "enabled": false,
+        "index_id": "owasp-cebu",
+        "index_status": "candidate",
+        "publisher_role": "organizer",
+        "coverage": [
+          "Visayas",
+          "Cebu"
+        ],
+        "index_reason": "CTF index redirects to login; public feed access not verified. No credentials or cookies used."
+      },
+      {
+        "id": "pia",
+        "name": "Philippine Information Agency",
+        "kind": "rss",
+        "url": "https://pia.gov.ph/feed/?s=capture+the+flag",
+        "enabled": false,
+        "index_id": "pia",
+        "index_status": "candidate",
+        "publisher_role": "resharer",
+        "coverage": [
+          "National",
+          "Luzon",
+          "Visayas",
+          "Mindanao"
+        ],
+        "index_reason": "Advance competition invitations documented, but robots.txt verification returns HTTP 403. Candidate only."
+      },
+      {
+        "id": "vektr-community",
+        "name": "VEKTR Security · Community sponsor",
+        "kind": "html",
+        "url": "https://vektrsec.com/",
+        "enabled": false,
+        "index_id": "vektr-community",
+        "index_status": "candidate",
+        "publisher_role": "resharer",
+        "coverage": [
+          "Philippine community competitions"
+        ],
+        "index_reason": "Website readable but no recurring announcement feed or archive links found. Indexed social reshares are not a working publisher integration."
+      },
+      {
+        "id": "luma-manila",
+        "name": "Luma Manila · Public city calendar",
+        "kind": "luma",
+        "url": "https://luma.com/manila",
+        "enabled": true,
+        "index_id": "luma-manila",
+        "index_status": "active",
+        "publisher_role": "resharer",
+        "coverage": [
+          "NCR",
+          "Public approved in-person Manila events; online/private events excluded by city calendar"
+        ],
+        "ical_url": "https://api.luma.com/ics/get?entity=discover&id=discplace-XeAvnK62YmCW54R",
+        "max_items": 60,
+        "index_reason": "Public city iCal and public page tested; monitor event bodies before competition filtering. No current CTF required to represent a successful calendar check."
+      },
+      {
+        "id": "kakacomputer-ctf",
+        "name": "KakaComputer · CTF reporting",
+        "kind": "rss",
+        "url": "https://kakacomputer.com/tag/ctf/feed/",
+        "enabled": true,
+        "index_id": "kakacomputer-ctf",
+        "index_status": "active",
+        "publisher_role": "resharer",
+        "coverage": [
+          "Philippine community competitions; includes historical recaps"
+        ],
+        "max_items": 20,
+        "index_reason": "Readable recurring CTF RSS and article bodies. Recaps corroborate past competitions and publisher relationships; no advance-alert coverage claimed."
+      },
+      {
+        "id": "cyber404-news",
+        "name": "CYBER404 · Community partnerships",
+        "kind": "rss",
+        "url": "https://cyber404.net/blog/feed.xml",
+        "enabled": true,
+        "index_id": "cyber404-news",
+        "index_status": "active",
+        "publisher_role": "resharer",
+        "coverage": [
+          "Philippine cybersecurity community publisher leads"
+        ],
+        "max_items": 20,
+        "index_reason": "Readable recurring Atom feed and partnership articles. Publisher leads alone never create a competition."
+      },
+      {
+        "id": "cyberph-luma-calendar",
+        "name": "CyberPH · Public Luma calendar",
+        "kind": "luma",
+        "url": "https://api.luma.com/ics/get?entity=calendar&id=cal-ZW4YOEwv4lmL66C",
+        "enabled": true,
+        "index_id": "cyberph-luma-calendar",
+        "index_status": "active",
+        "publisher_role": "organizer",
+        "coverage": [
+          "Philippine community events",
+          "Calendar includes online events; each CTF requires Philippine-scope evidence"
+        ],
+        "ical_url": "https://api.luma.com/ics/get?entity=calendar&id=cal-ZW4YOEwv4lmL66C",
+        "max_items": 60,
+        "page_fallback": false,
+        "index_reason": "Documented public subscription returned event links including an online webinar and a CTF activity. Publisher-name search assisted one-time qualification; registration timing is evaluated per event. Facebook and Luma identities are not automatically merged."
+      },
+      {
+        "id": "cisco-netconnect-luma-calendar",
+        "name": "Cisco NetConnect · Public Luma calendar",
+        "kind": "luma",
+        "url": "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7",
+        "enabled": true,
+        "index_id": "cisco-netconnect-luma-calendar",
+        "index_status": "active",
+        "publisher_role": "organizer",
+        "coverage": [
+          "Student cybersecurity community events",
+          "Public calendar includes online and in-person events; each CTF requires Philippine-scope evidence"
+        ],
+        "ical_url": "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7",
+        "max_items": 60,
+        "page_fallback": false,
+        "index_reason": "Documented public calendar subscription returned nine readable events, including online events. Current entries are historical training and community events, with no CTF accepted. Publisher-name search assisted one-time qualification."
+      },
+      {
+        "id": "meetup-tech-ph",
+        "name": "Meetup · Philippine technology and chapter calendars",
+        "kind": "opportunity_calendar",
+        "url": "https://www.meetup.com/find/ph--manila/technology/",
+        "calendar_urls": [
+          "https://www.meetup.com/find/ph--manila/technology/",
+          "https://www.meetup.com/find/ph--cebu/technology/",
+          "https://www.meetup.com/aws-sbg-at-university-of-the-philippines-mindanao-campus/"
+        ],
+        "max_pages": 60,
+        "window_days": 45,
+        "enabled": true
+      },
+      {
+        "id": "luma-tech-community",
+        "name": "Luma · Technology community calendars",
+        "kind": "opportunity_calendar",
+        "url": "https://luma.com/cerebras",
+        "calendar_urls": [
+          "https://luma.com/cerebras",
+          "https://luma.com/manila"
+        ],
+        "max_pages": 50,
+        "window_days": 45,
+        "enabled": true
+      },
+      {
+        "id": "online-tech-conferences",
+        "name": "Conf42 · Online conference calendar",
+        "kind": "opportunity_calendar",
+        "url": "https://www.conf42.com/",
+        "max_pages": 8,
+        "window_days": 45,
+        "allow_external_pages": true,
+        "enabled": true
+      },
+      {
+        "id": "devpost-public-hackathons",
+        "name": "Devpost · Public hackathon categories",
+        "kind": "opportunity_calendar",
+        "url": "https://devpost.com/c/artificial-intelligence",
+        "max_pages": 50,
+        "window_days": 45,
+        "enabled": true
+      },
+      {
+        "id": "community-opportunity-search",
+        "name": "Tavily · Public technology opportunity discovery",
+        "kind": "opportunity_search",
+        "url": "https://api.tavily.com/search",
+        "query_templates": [
+          "Philippines cloud software engineering community conferences {months}",
+          "site:meetup.com Philippines developer community events {months}",
+          "site:luma.com Philippines AI technology meetups {months}",
+          "online embedded systems hackathons {months}",
+          "online software developer conferences {months}"
+        ],
+        "max_pages": 80,
+        "window_days": 45,
+        "allow_external_pages": true,
+        "enabled": true
+      },
+      {
+        "id": "tavily-keyless",
+        "name": "Tavily · Free Philippine CTF discovery",
+        "kind": "tavily",
+        "url": "https://api.tavily.com/search",
+        "queries": [
+          {
+            "query": "site:facebook.com Philippines cybersecurity CTF competition registration",
+            "include_domains": [
+              "facebook.com"
+            ]
+          },
+          {
+            "query": "Philippines capture the flag CTF competition registration"
+          },
+          {
+            "query": "Philippines cybersecurity community CTF events calendar registration"
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "id": "facebook-search",
+        "name": "Facebook · Indexed announcements",
+        "kind": "brave",
+        "url": "https://api.search.brave.com/res/v1/web/search",
+        "enabled": false
+      }
+    ],
+    "data/local-preview-sources.json": [
+      {
+        "id": "rootcon-bluesky",
+        "name": "ROOTCON · Bluesky",
+        "kind": "bluesky",
+        "url": "https://bsky.app/profile/rootcon.bsky.social",
+        "enabled": true,
+        "index_id": "rootcon-community",
+        "index_status": "active",
+        "publisher_role": "organizer",
+        "coverage": [
+          "Luzon",
+          "National",
+          "Online"
+        ],
+        "max_pages": 4,
+        "index_reason": ""
+      },
+      {
+        "id": "hackthenorth",
+        "name": "HackTheNorth.ph · Announcements",
+        "kind": "html",
+        "url": "https://hackthenorth.ph/",
+        "max_pages": 12,
+        "enabled": true
+      },
+      {
+        "id": "up-acm",
+        "name": "UP ACM · Events",
+        "kind": "html",
+        "url": "https://upacm.net/events/",
+        "max_pages": 8,
+        "enabled": true
+      },
+      {
+        "id": "pup-announcements",
+        "name": "PUP · Announcements feed",
+        "kind": "rss",
+        "url": "https://www.pup.edu.ph/rss/announcements/",
+        "max_items": 10,
+        "enabled": true
+      },
+      {
+        "id": "pup-news",
+        "name": "PUP · News feed",
+        "kind": "rss",
+        "url": "https://www.pup.edu.ph/rss/news/",
+        "max_items": 10,
+        "enabled": true
+      },
+      {
+        "id": "ncert",
+        "name": "DICT / CERT-PH · Feed",
+        "kind": "rss",
+        "url": "https://ncert.gov.ph/feed/",
+        "max_items": 40,
+        "enabled": true
+      },
+      {
+        "id": "dict",
+        "name": "DICT · Announcements",
+        "kind": "html",
+        "url": "https://dict.gov.ph/",
+        "max_pages": 10,
+        "enabled": true
+      },
+      {
+        "id": "rootcon-website",
+        "name": "ROOTCON · Website",
+        "kind": "restricted",
+        "url": "https://rootcon.org/",
+        "enabled": true
+      },
+      {
+        "id": "ctftime",
+        "name": "CTFtime · Philippine connections",
+        "kind": "ctftime",
+        "url": "https://ctftime.org/api/v1/events/",
+        "enabled": true
+      },
+      {
+        "id": "safeai-luma-calendar",
+        "name": "Safe AI Philippines · Public Luma calendar",
+        "kind": "luma",
+        "url": "https://luma.com/safeaiph?k=c",
+        "enabled": true,
+        "index_id": "safeai-luma-calendar",
+        "index_status": "active",
+        "publisher_role": "organizer",
+        "coverage": [
+          "Philippines",
+          "AI community events"
+        ],
+        "max_items": 60,
+        "window_days": 45,
+        "event_scope": "community",
+        "topic": "ai",
+        "index_reason": ""
+      },
+      {
+        "id": "mlh-global-hack-week",
+        "name": "Major League Hacking · Global Hack Week",
+        "kind": "mlh",
+        "url": "https://ghw.mlh.com/",
+        "enabled": true,
+        "index_id": "mlh-global-hack-week",
+        "index_status": "active",
+        "publisher_role": "organizer",
+        "coverage": [
+          "International online",
+          "General IT",
+          "Students"
+        ],
+        "max_items": 40,
+        "window_days": 45,
+        "index_reason": ""
+      },
+      {
+        "id": "up-manila",
+        "name": "UP Manila · Competition invitations",
+        "kind": "rss",
+        "url": "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag",
+        "enabled": true,
+        "index_id": "up-manila",
+        "index_status": "active",
+        "publisher_role": "resharer",
+        "coverage": [
+          "NCR",
+          "National university invitations"
+        ],
+        "max_items": 30,
+        "index_reason": ""
+      },
+      {
+        "id": "htb-meetup-ph",
+        "name": "Hack The Box Meetup Manila · Community feed",
+        "kind": "rss",
+        "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/rss/",
+        "enabled": true,
+        "index_id": "htb-meetup-ph",
+        "index_status": "active",
+        "publisher_role": "both",
+        "coverage": [
+          "NCR",
+          "Philippine cybersecurity community"
+        ],
+        "max_items": 40,
+        "index_reason": ""
+      },
+      {
+        "id": "feu-eventually",
+        "name": "FEU Tech · Eventually campus calendar",
+        "kind": "html",
+        "url": "https://paraverse.feutech.edu.ph/eventually/discover/",
+        "enabled": false,
+        "index_id": "feu-eventually",
+        "index_status": "candidate",
+        "publisher_role": "resharer",
+        "coverage": [
+          "NCR",
+          "Campus competitions"
+        ],
+        "max_pages": 30,
+        "index_reason": "Calendar is readable, but the documented CTF invitation needs structured date/venue extraction outside its article body. Advance publication timing is also unverified. Not counted as a working CTF monitor."
+      },
+      {
+        "id": "crest-asia",
+        "name": "CREST · Philippine partner announcements",
+        "kind": "html",
+        "url": "https://www.crest-approved.org/events/category/asia-events/list/",
+        "enabled": true,
+        "index_id": "crest-asia",
+        "index_status": "active",
+        "publisher_role": "resharer",
+        "coverage": [
+          "Philippine events in an Asia partner calendar",
+          "Luzon"
+        ],
+        "max_pages": 8,
+        "index_reason": ""
+      },
+      {
+        "id": "um-sdc",
+        "name": "University of Mindanao Student Developers Community",
+        "kind": "html",
+        "url": "https://luma.com/user/usr-8iOKid6iGmryO2o",
+        "enabled": false,
+        "index_id": "um-sdc",
+        "index_status": "candidate",
+        "publisher_role": "organizer",
+        "coverage": [
+          "Mindanao",
+          "Davao"
+        ],
+        "index_reason": "Historical CTF invitation exists, but a reliable recurring calendar returning event links has not been verified. No event URL seeded."
+      },
+      {
+        "id": "owasp-cebu",
+        "name": "OWASP Cebu",
+        "kind": "html",
+        "url": "https://www.owasp-cebu.org/ctfs",
+        "enabled": false,
+        "index_id": "owasp-cebu",
+        "index_status": "candidate",
+        "publisher_role": "organizer",
+        "coverage": [
+          "Visayas",
+          "Cebu"
+        ],
+        "index_reason": "CTF index redirects to login; public feed access not verified. No credentials or cookies used."
+      },
+      {
+        "id": "pia",
+        "name": "Philippine Information Agency",
+        "kind": "rss",
+        "url": "https://pia.gov.ph/feed/?s=capture+the+flag",
+        "enabled": false,
+        "index_id": "pia",
+        "index_status": "candidate",
+        "publisher_role": "resharer",
+        "coverage": [
+          "National",
+          "Luzon",
+          "Visayas",
+          "Mindanao"
+        ],
+        "index_reason": "Advance competition invitations documented, but robots.txt verification returns HTTP 403. Candidate only."
+      },
+      {
+        "id": "vektr-community",
+        "name": "VEKTR Security · Community sponsor",
+        "kind": "html",
+        "url": "https://vektrsec.com/",
+        "enabled": false,
+        "index_id": "vektr-community",
+        "index_status": "candidate",
+        "publisher_role": "resharer",
+        "coverage": [
+          "Philippine community competitions"
+        ],
+        "index_reason": "Website readable but no recurring announcement feed or archive links found. Indexed social reshares are not a working publisher integration."
+      },
+      {
+        "id": "luma-manila",
+        "name": "Luma Manila · Public city calendar",
+        "kind": "luma",
+        "url": "https://luma.com/manila",
+        "enabled": true,
+        "index_id": "luma-manila",
+        "index_status": "active",
+        "publisher_role": "resharer",
+        "coverage": [
+          "NCR",
+          "Public approved in-person Manila events; online/private events excluded by city calendar"
+        ],
+        "ical_url": "https://api.luma.com/ics/get?entity=discover&id=discplace-XeAvnK62YmCW54R",
+        "max_items": 60,
+        "index_reason": "Public city iCal and public page tested; monitor event bodies before competition filtering. No current CTF required to represent a successful calendar check."
+      },
+      {
+        "id": "kakacomputer-ctf",
+        "name": "KakaComputer · CTF reporting",
+        "kind": "rss",
+        "url": "https://kakacomputer.com/tag/ctf/feed/",
+        "enabled": true,
+        "index_id": "kakacomputer-ctf",
+        "index_status": "active",
+        "publisher_role": "resharer",
+        "coverage": [
+          "Philippine community competitions; includes historical recaps"
+        ],
+        "max_items": 20,
+        "index_reason": "Readable recurring CTF RSS and article bodies. Recaps corroborate past competitions and publisher relationships; no advance-alert coverage claimed."
+      },
+      {
+        "id": "cyber404-news",
+        "name": "CYBER404 · Community partnerships",
+        "kind": "rss",
+        "url": "https://cyber404.net/blog/feed.xml",
+        "enabled": true,
+        "index_id": "cyber404-news",
+        "index_status": "active",
+        "publisher_role": "resharer",
+        "coverage": [
+          "Philippine cybersecurity community publisher leads"
+        ],
+        "max_items": 20,
+        "index_reason": "Readable recurring Atom feed and partnership articles. Publisher leads alone never create a competition."
+      },
+      {
+        "id": "cyberph-luma-calendar",
+        "name": "CyberPH · Public Luma calendar",
+        "kind": "luma",
+        "url": "https://api.luma.com/ics/get?entity=calendar&id=cal-ZW4YOEwv4lmL66C",
+        "enabled": true,
+        "index_id": "cyberph-luma-calendar",
+        "index_status": "active",
+        "publisher_role": "organizer",
+        "coverage": [
+          "Philippine community events",
+          "Calendar includes online events; each CTF requires Philippine-scope evidence"
+        ],
+        "ical_url": "https://api.luma.com/ics/get?entity=calendar&id=cal-ZW4YOEwv4lmL66C",
+        "max_items": 60,
+        "page_fallback": false,
+        "index_reason": "Documented public subscription returned event links including an online webinar and a CTF activity. Publisher-name search assisted one-time qualification; registration timing is evaluated per event. Facebook and Luma identities are not automatically merged."
+      },
+      {
+        "id": "cisco-netconnect-luma-calendar",
+        "name": "Cisco NetConnect · Public Luma calendar",
+        "kind": "luma",
+        "url": "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7",
+        "enabled": true,
+        "index_id": "cisco-netconnect-luma-calendar",
+        "index_status": "active",
+        "publisher_role": "organizer",
+        "coverage": [
+          "Student cybersecurity community events",
+          "Public calendar includes online and in-person events; each CTF requires Philippine-scope evidence"
+        ],
+        "ical_url": "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7",
+        "max_items": 60,
+        "page_fallback": false,
+        "index_reason": "Documented public calendar subscription returned nine readable events, including online events. Current entries are historical training and community events, with no CTF accepted. Publisher-name search assisted one-time qualification."
+      },
+      {
+        "id": "meetup-tech-ph",
+        "name": "Meetup · Philippine technology and chapter calendars",
+        "kind": "opportunity_calendar",
+        "url": "https://www.meetup.com/find/ph--manila/technology/",
+        "calendar_urls": [
+          "https://www.meetup.com/find/ph--manila/technology/",
+          "https://www.meetup.com/find/ph--cebu/technology/",
+          "https://www.meetup.com/aws-sbg-at-university-of-the-philippines-mindanao-campus/"
+        ],
+        "max_pages": 60,
+        "window_days": 45,
+        "enabled": true
+      },
+      {
+        "id": "luma-tech-community",
+        "name": "Luma · Technology community calendars",
+        "kind": "opportunity_calendar",
+        "url": "https://luma.com/cerebras",
+        "calendar_urls": [
+          "https://luma.com/cerebras",
+          "https://luma.com/manila"
+        ],
+        "max_pages": 50,
+        "window_days": 45,
+        "enabled": true
+      },
+      {
+        "id": "online-tech-conferences",
+        "name": "Conf42 · Online conference calendar",
+        "kind": "opportunity_calendar",
+        "url": "https://www.conf42.com/",
+        "max_pages": 8,
+        "window_days": 45,
+        "allow_external_pages": true,
+        "enabled": true
+      },
+      {
+        "id": "devpost-public-hackathons",
+        "name": "Devpost · Public hackathon categories",
+        "kind": "opportunity_calendar",
+        "url": "https://devpost.com/c/artificial-intelligence",
+        "max_pages": 50,
+        "window_days": 45,
+        "enabled": true
+      },
+      {
+        "id": "community-opportunity-search",
+        "name": "Tavily · Public technology opportunity discovery",
+        "kind": "opportunity_search",
+        "url": "https://api.tavily.com/search",
+        "query_templates": [
+          "Philippines cloud software engineering community conferences {months}",
+          "site:meetup.com Philippines developer community events {months}",
+          "site:luma.com Philippines AI technology meetups {months}",
+          "online embedded systems hackathons {months}",
+          "online software developer conferences {months}"
+        ],
+        "max_pages": 80,
+        "window_days": 45,
+        "allow_external_pages": true,
+        "enabled": true
+      },
+      {
+        "id": "tavily-keyless",
+        "name": "Tavily · Free Philippine CTF discovery",
+        "kind": "tavily",
+        "url": "https://api.tavily.com/search",
+        "queries": [
+          {
+            "query": "site:facebook.com Philippines cybersecurity CTF competition registration",
+            "include_domains": [
+              "facebook.com"
+            ]
+          },
+          {
+            "query": "Philippines capture the flag CTF competition registration"
+          },
+          {
+            "query": "Philippines cybersecurity community CTF events calendar registration"
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "id": "facebook-search",
+        "name": "Facebook · Indexed announcements",
+        "kind": "brave",
+        "url": "https://api.search.brave.com/res/v1/web/search",
+        "enabled": false
+      }
+    ]
+  },
+  "preview": {
+    "path": "data/local-preview.sqlite3",
+    "source_rows": [
+      {
+        "id": "aws-mindanao",
+        "name": "AWS student communities · Mindanao",
+        "kind": "html",
+        "url": "https://awsscd-mindanao.org/",
+        "enabled": 1,
+        "status": "ok",
+        "last_success": "2026-11-23T08:59:27.088633+00:00",
+        "last_attempt": "2026-11-23T08:59:26.082556+00:00",
+        "discovered": 1,
+        "accepted": 1,
+        "in_preview_configuration": false
+      },
+      {
+        "id": "cisco-netconnect-luma-calendar",
+        "name": "Cisco NetConnect · Public Luma calendar",
+        "kind": "luma",
+        "url": "https://api.luma.com/ics/get?entity=calendar&id=cal-eaknIQWG6bEHiP7",
+        "enabled": 1,
+        "status": "ok",
+        "last_success": "2026-11-23T11:11:02.215901+00:00",
+        "last_attempt": "2026-11-23T11:10:54.613481+00:00",
+        "discovered": 9,
+        "accepted": 0,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "community-opportunity-search",
+        "name": "Tavily · Public technology opportunity discovery",
+        "kind": "opportunity_search",
+        "url": "https://api.tavily.com/search",
+        "enabled": 1,
+        "status": "partial",
+        "last_success": null,
+        "last_attempt": "2026-11-23T11:12:51.716147+00:00",
+        "discovered": 99,
+        "accepted": 0,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "crest-asia",
+        "name": "CREST · Philippine partner announcements",
+        "kind": "html",
+        "url": "https://www.crest-approved.org/events/category/asia-events/list/",
+        "enabled": 1,
+        "status": "ok",
+        "last_success": "2026-11-23T11:10:41.200804+00:00",
+        "last_attempt": "2026-11-23T11:10:10.152007+00:00",
+        "discovered": 3,
+        "accepted": 1,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "ctftime",
+        "name": "CTFtime · Philippine connections",
+        "kind": "ctftime",
+        "url": "https://ctftime.org/api/v1/events/",
+        "enabled": 1,
+        "status": "ok",
+        "last_success": "2026-11-23T11:10:02.712808+00:00",
+        "last_attempt": "2026-11-23T11:09:53.636283+00:00",
+        "discovered": 185,
+        "accepted": 0,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "cyber404-news",
+        "name": "CYBER404 · Community partnerships",
+        "kind": "rss",
+        "url": "https://cyber404.net/blog/feed.xml",
+        "enabled": 1,
+        "status": "ok",
+        "last_success": "2026-11-23T11:10:52.319292+00:00",
+        "last_attempt": "2026-11-23T11:10:49.370409+00:00",
+        "discovered": 2,
+        "accepted": 0,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "cyberph-luma-calendar",
+        "name": "CyberPH · Public Luma calendar",
+        "kind": "luma",
+        "url": "https://api.luma.com/ics/get?entity=calendar&id=cal-ZW4YOEwv4lmL66C",
+        "enabled": 1,
+        "status": "ok",
+        "last_success": "2026-11-23T11:10:54.599943+00:00",
+        "last_attempt": "2026-11-23T11:10:52.327000+00:00",
+        "discovered": 3,
+        "accepted": 1,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "devpost-public-hackathons",
+        "name": "Devpost · Public hackathon categories",
+        "kind": "opportunity_calendar",
+        "url": "https://devpost.com/c/artificial-intelligence",
+        "enabled": 1,
+        "status": "partial",
+        "last_success": null,
+        "last_attempt": "2026-11-23T11:11:48.691996+00:00",
+        "discovered": 1,
+        "accepted": 8,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "dict",
+        "name": "DICT · Announcements",
+        "kind": "html",
+        "url": "https://dict.gov.ph/",
+        "enabled": 1,
+        "status": "blocked",
+        "last_success": null,
+        "last_attempt": "2026-11-23T11:09:53.435845+00:00",
+        "discovered": 0,
+        "accepted": 0,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "facebook-search",
+        "name": "Facebook · Indexed announcements",
+        "kind": "brave",
+        "url": "https://api.search.brave.com/res/v1/web/search",
+        "enabled": 0,
+        "status": "disabled",
+        "last_success": null,
+        "last_attempt": "2026-11-23T11:14:38.786089+00:00",
+        "discovered": 0,
+        "accepted": 0,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "feu-eventually",
+        "name": "FEU Tech · Eventually campus calendar",
+        "kind": "html",
+        "url": "https://paraverse.feutech.edu.ph/eventually/discover/",
+        "enabled": 0,
+        "status": "disabled",
+        "last_success": null,
+        "last_attempt": "2026-11-23T11:10:10.150921+00:00",
+        "discovered": 0,
+        "accepted": 0,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "hackthenorth",
+        "name": "HackTheNorth.ph · Announcements",
+        "kind": "html",
+        "url": "https://hackthenorth.ph/",
+        "enabled": 1,
+        "status": "ok",
+        "last_success": "2026-11-23T11:09:45.316823+00:00",
+        "last_attempt": "2026-11-23T11:09:40.646775+00:00",
+        "discovered": 11,
+        "accepted": 0,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "htb-meetup-ph",
+        "name": "Hack The Box Meetup Manila · Community feed",
+        "kind": "rss",
+        "url": "https://www.meetup.com/hack-the-box-meetup-ph/events/rss/",
+        "enabled": 1,
+        "status": "ok",
+        "last_success": "2026-11-23T11:10:10.148032+00:00",
+        "last_attempt": "2026-11-23T11:10:09.524783+00:00",
+        "discovered": 2,
+        "accepted": 1,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "kakacomputer-ctf",
+        "name": "KakaComputer · CTF reporting",
+        "kind": "rss",
+        "url": "https://kakacomputer.com/tag/ctf/feed/",
+        "enabled": 1,
+        "status": "ok",
+        "last_success": "2026-11-23T11:10:49.356866+00:00",
+        "last_attempt": "2026-11-23T11:10:46.668125+00:00",
+        "discovered": 1,
+        "accepted": 1,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "luma-manila",
+        "name": "Luma Manila · Public city calendar",
+        "kind": "luma",
+        "url": "https://luma.com/manila",
+        "enabled": 1,
+        "status": "ok",
+        "last_success": "2026-11-23T11:10:46.661118+00:00",
+        "last_attempt": "2026-11-23T11:10:41.213546+00:00",
+        "discovered": 6,
+        "accepted": 0,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "luma-tech-community",
+        "name": "Luma · Technology community calendars",
+        "kind": "opportunity_calendar",
+        "url": "https://luma.com/cerebras",
+        "enabled": 1,
+        "status": "ok",
+        "last_success": "2026-11-23T11:11:41.282700+00:00",
+        "last_attempt": "2026-11-23T11:11:15.093353+00:00",
+        "discovered": 2,
+        "accepted": 5,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "meetup-tech-ph",
+        "name": "Meetup · Philippine technology and chapter calendars",
+        "kind": "opportunity_calendar",
+        "url": "https://www.meetup.com/find/ph--manila/technology/",
+        "enabled": 1,
+        "status": "ok",
+        "last_success": "2026-11-23T11:11:15.074529+00:00",
+        "last_attempt": "2026-11-23T11:11:02.224903+00:00",
+        "discovered": 3,
+        "accepted": 14,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "mlh-global-hack-week",
+        "name": "Major League Hacking · Global Hack Week",
+        "kind": "mlh",
+        "url": "https://ghw.mlh.com/",
+        "enabled": 1,
+        "status": "ok",
+        "last_success": "2026-11-23T11:10:08.618524+00:00",
+        "last_attempt": "2026-11-23T11:10:04.737114+00:00",
+        "discovered": 2,
+        "accepted": 1,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "ncert",
+        "name": "DICT / CERT-PH · Feed",
+        "kind": "rss",
+        "url": "https://ncert.gov.ph/feed/",
+        "enabled": 1,
+        "status": "blocked",
+        "last_success": null,
+        "last_attempt": "2026-11-23T11:09:53.278785+00:00",
+        "discovered": 0,
+        "accepted": 0,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "online-tech-conferences",
+        "name": "Conf42 · Online conference calendar",
+        "kind": "opportunity_calendar",
+        "url": "https://www.conf42.com/",
+        "enabled": 1,
+        "status": "partial",
+        "last_success": null,
+        "last_attempt": "2026-11-23T11:11:41.314086+00:00",
+        "discovered": 1,
+        "accepted": 1,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "owasp-cebu",
+        "name": "OWASP Cebu",
+        "kind": "html",
+        "url": "https://www.owasp-cebu.org/ctfs",
+        "enabled": 0,
+        "status": "disabled",
+        "last_success": null,
+        "last_attempt": "2026-11-23T11:10:41.208515+00:00",
+        "discovered": 0,
+        "accepted": 0,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "pia",
+        "name": "Philippine Information Agency",
+        "kind": "rss",
+        "url": "https://pia.gov.ph/feed/?s=capture+the+flag",
+        "enabled": 0,
+        "status": "disabled",
+        "last_success": null,
+        "last_attempt": "2026-11-23T11:10:41.210311+00:00",
+        "discovered": 0,
+        "accepted": 0,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "pup-announcements",
+        "name": "PUP · Announcements feed",
+        "kind": "rss",
+        "url": "https://www.pup.edu.ph/rss/announcements/",
+        "enabled": 1,
+        "status": "ok",
+        "last_success": "2026-11-23T11:09:49.950435+00:00",
+        "last_attempt": "2026-11-23T11:09:46.228401+00:00",
+        "discovered": 10,
+        "accepted": 0,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "pup-news",
+        "name": "PUP · News feed",
+        "kind": "rss",
+        "url": "https://www.pup.edu.ph/rss/news/",
+        "enabled": 1,
+        "status": "ok",
+        "last_success": "2026-11-23T11:09:53.271304+00:00",
+        "last_attempt": "2026-11-23T11:09:49.957823+00:00",
+        "discovered": 10,
+        "accepted": 0,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "rootcon-bluesky",
+        "name": "ROOTCON · Bluesky",
+        "kind": "bluesky",
+        "url": "https://bsky.app/profile/rootcon.bsky.social",
+        "enabled": 1,
+        "status": "ok",
+        "last_success": "2026-11-23T11:09:40.643211+00:00",
+        "last_attempt": "2026-11-23T11:09:39.544647+00:00",
+        "discovered": 146,
+        "accepted": 3,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "rootcon-website",
+        "name": "ROOTCON · Website",
+        "kind": "restricted",
+        "url": "https://rootcon.org/",
+        "enabled": 1,
+        "status": "policy_restricted",
+        "last_success": null,
+        "last_attempt": "2026-11-23T11:09:53.634753+00:00",
+        "discovered": 0,
+        "accepted": 0,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "safeai-luma-calendar",
+        "name": "Safe AI Philippines · Public Luma calendar",
+        "kind": "luma",
+        "url": "https://luma.com/safeaiph?k=c",
+        "enabled": 1,
+        "status": "ok",
+        "last_success": "2026-11-23T11:10:04.726519+00:00",
+        "last_attempt": "2026-11-23T11:10:02.719909+00:00",
+        "discovered": 1,
+        "accepted": 1,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "tavily-keyless",
+        "name": "Tavily · Free Philippine CTF discovery",
+        "kind": "tavily",
+        "url": "https://api.tavily.com/search",
+        "enabled": 1,
+        "status": "error",
+        "last_success": "2026-11-23T01:21:10.820217+00:00",
+        "last_attempt": "2026-11-23T11:14:37.917126+00:00",
+        "discovered": 0,
+        "accepted": 0,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "um-sdc",
+        "name": "University of Mindanao Student Developers Community",
+        "kind": "html",
+        "url": "https://luma.com/user/usr-8iOKid6iGmryO2o",
+        "enabled": 0,
+        "status": "disabled",
+        "last_success": null,
+        "last_attempt": "2026-11-23T11:10:41.206672+00:00",
+        "discovered": 0,
+        "accepted": 0,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "up-acm",
+        "name": "UP ACM · Events",
+        "kind": "html",
+        "url": "https://upacm.net/events/",
+        "enabled": 1,
+        "status": "ok",
+        "last_success": "2026-11-23T11:09:46.221588+00:00",
+        "last_attempt": "2026-11-23T11:09:45.323886+00:00",
+        "discovered": 1,
+        "accepted": 0,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "up-manila",
+        "name": "UP Manila · Competition invitations",
+        "kind": "rss",
+        "url": "https://www.upm.edu.ph/feed/?post_type=cpt_announcements&s=capture+the+flag",
+        "enabled": 1,
+        "status": "ok",
+        "last_success": "2026-11-23T11:10:09.516024+00:00",
+        "last_attempt": "2026-11-23T11:10:08.628279+00:00",
+        "discovered": 1,
+        "accepted": 1,
+        "in_preview_configuration": true
+      },
+      {
+        "id": "vektr-community",
+        "name": "VEKTR Security · Community sponsor",
+        "kind": "html",
+        "url": "https://vektrsec.com/",
+        "enabled": 0,
+        "status": "disabled",
+        "last_success": null,
+        "last_attempt": "2026-11-23T11:10:41.211835+00:00",
+        "discovered": 0,
+        "accepted": 0,
+        "in_preview_configuration": true
+      }
+    ],
+    "event_rows": 42,
+    "active_announcements": 45,
+    "latest_saved_runs": [
+      {
+        "id": 10,
+        "started_at": "2026-11-23T11:09:39.539390+00:00",
+        "finished_at": "2026-11-23T11:14:38.788261+00:00",
+        "sources": [
+          {
+            "id": "rootcon-bluesky",
+            "status": "ok",
+            "accepted": 3,
+            "discovered": 146
+          },
+          {
+            "id": "hackthenorth",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 11
+          },
+          {
+            "id": "up-acm",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 1
+          },
+          {
+            "id": "pup-announcements",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 10
+          },
+          {
+            "id": "pup-news",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 10
+          },
+          {
+            "id": "ncert",
+            "status": "blocked",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "dict",
+            "status": "blocked",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "rootcon-website",
+            "status": "policy_restricted",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "ctftime",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 185
+          },
+          {
+            "id": "safeai-luma-calendar",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 1
+          },
+          {
+            "id": "mlh-global-hack-week",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 2
+          },
+          {
+            "id": "up-manila",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 1
+          },
+          {
+            "id": "htb-meetup-ph",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 2
+          },
+          {
+            "id": "feu-eventually",
+            "status": "disabled",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "crest-asia",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 3
+          },
+          {
+            "id": "um-sdc",
+            "status": "disabled",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "owasp-cebu",
+            "status": "disabled",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "pia",
+            "status": "disabled",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "vektr-community",
+            "status": "disabled",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "luma-manila",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 6
+          },
+          {
+            "id": "kakacomputer-ctf",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 1
+          },
+          {
+            "id": "cyber404-news",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 2
+          },
+          {
+            "id": "cyberph-luma-calendar",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 3
+          },
+          {
+            "id": "cisco-netconnect-luma-calendar",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 9
+          },
+          {
+            "id": "meetup-tech-ph",
+            "status": "ok",
+            "accepted": 14,
+            "discovered": 3
+          },
+          {
+            "id": "luma-tech-community",
+            "status": "ok",
+            "accepted": 5,
+            "discovered": 2
+          },
+          {
+            "id": "online-tech-conferences",
+            "status": "partial",
+            "accepted": 1,
+            "discovered": 1
+          },
+          {
+            "id": "devpost-public-hackathons",
+            "status": "partial",
+            "accepted": 8,
+            "discovered": 1
+          },
+          {
+            "id": "community-opportunity-search",
+            "status": "partial",
+            "accepted": 0,
+            "discovered": 99
+          },
+          {
+            "id": "tavily-keyless",
+            "status": "error",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "facebook-search",
+            "status": "disabled",
+            "accepted": 0,
+            "discovered": 0
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "started_at": "2026-11-23T08:58:53.109745+00:00",
+        "finished_at": "2026-11-23T09:00:38.597324+00:00",
+        "sources": [
+          {
+            "id": "rootcon-bluesky",
+            "status": "ok",
+            "accepted": 3,
+            "discovered": 146
+          },
+          {
+            "id": "hackthenorth",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 11
+          },
+          {
+            "id": "up-acm",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 1
+          },
+          {
+            "id": "pup-announcements",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 10
+          },
+          {
+            "id": "pup-news",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 10
+          },
+          {
+            "id": "ncert",
+            "status": "blocked",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "dict",
+            "status": "blocked",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "rootcon-website",
+            "status": "policy_restricted",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "ctftime",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 185
+          },
+          {
+            "id": "safeai-luma-calendar",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 1
+          },
+          {
+            "id": "mlh-global-hack-week",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 2
+          },
+          {
+            "id": "up-manila",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 1
+          },
+          {
+            "id": "htb-meetup-ph",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 2
+          },
+          {
+            "id": "aws-mindanao",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 1
+          },
+          {
+            "id": "feu-eventually",
+            "status": "disabled",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "crest-asia",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 3
+          },
+          {
+            "id": "um-sdc",
+            "status": "disabled",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "owasp-cebu",
+            "status": "disabled",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "pia",
+            "status": "disabled",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "vektr-community",
+            "status": "disabled",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "luma-manila",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 6
+          },
+          {
+            "id": "kakacomputer-ctf",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 1
+          },
+          {
+            "id": "cyber404-news",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 2
+          },
+          {
+            "id": "cyberph-luma-calendar",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 3
+          },
+          {
+            "id": "cisco-netconnect-luma-calendar",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 9
+          },
+          {
+            "id": "tavily-keyless",
+            "status": "error",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "facebook-search",
+            "status": "disabled",
+            "accepted": 0,
+            "discovered": 0
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "started_at": "2026-11-23T01:19:34.765262+00:00",
+        "finished_at": "2026-11-23T01:21:10.831639+00:00",
+        "sources": [
+          {
+            "id": "rootcon-bluesky",
+            "status": "ok",
+            "accepted": 3,
+            "discovered": 146
+          },
+          {
+            "id": "hackthenorth",
+            "status": "error",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "up-acm",
+            "status": "error",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "pup-announcements",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 10
+          },
+          {
+            "id": "pup-news",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 10
+          },
+          {
+            "id": "ncert",
+            "status": "blocked",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "dict",
+            "status": "blocked",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "rootcon-website",
+            "status": "policy_restricted",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "ctftime",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 187
+          },
+          {
+            "id": "safeai-luma-calendar",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 1
+          },
+          {
+            "id": "mlh-global-hack-week",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 2
+          },
+          {
+            "id": "up-manila",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 1
+          },
+          {
+            "id": "htb-meetup-ph",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 1
+          },
+          {
+            "id": "aws-mindanao",
+            "status": "error",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "feu-eventually",
+            "status": "disabled",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "crest-asia",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 3
+          },
+          {
+            "id": "um-sdc",
+            "status": "disabled",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "owasp-cebu",
+            "status": "disabled",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "pia",
+            "status": "disabled",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "vektr-community",
+            "status": "disabled",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "luma-manila",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 6
+          },
+          {
+            "id": "kakacomputer-ctf",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 1
+          },
+          {
+            "id": "cyber404-news",
+            "status": "error",
+            "accepted": 0,
+            "discovered": 0
+          },
+          {
+            "id": "cyberph-luma-calendar",
+            "status": "ok",
+            "accepted": 1,
+            "discovered": 3
+          },
+          {
+            "id": "cisco-netconnect-luma-calendar",
+            "status": "ok",
+            "accepted": 0,
+            "discovered": 9
+          },
+          {
+            "id": "tavily-keyless",
+            "status": "ok",
+            "accepted": 5,
+            "discovered": 60
+          },
+          {
+            "id": "facebook-search",
+            "status": "disabled",
+            "accepted": 0,
+            "discovered": 0
+          }
+        ]
+      }
+    ]
+  }
+}

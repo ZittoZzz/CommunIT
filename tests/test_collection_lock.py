@@ -45,6 +45,7 @@ def test_cli_opens_the_canonical_locked_path_and_preserves_memory_semantics(tmp_
         return connection
     monkeypatch.chdir(tmp_path)
     monkeypatch.setattr(collector.storage, 'connect', connect)
+    monkeypatch.setattr(collector.storage, 'reconcile_sources', lambda *args: None)
     monkeypatch.setattr(collector, 'collect', lambda db, sources: {'sources': [{'status': 'ok'}]})
     monkeypatch.setattr(sys, 'argv', ['collect', '--database', ':memory:' if memory else str(alias), '--config', str(config)])
     assert collector.main() == 0

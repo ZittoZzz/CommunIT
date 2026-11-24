@@ -7,7 +7,8 @@ import signal
 from pathlib import Path
 from flask import Flask, jsonify, request, send_from_directory
 import secrets
-from .db import connect, events, register_sources, source_states
+from .db import connect, events, reconcile_sources
+from .public_directory import public_event, listings_updated_at
 from .domain import utcnow
 from .source_index import load_sources
 from .manual_collection import ManualCollection, local_request
@@ -23,7 +24,7 @@ def create_app(database=None):
     config = Path(os.environ.get('CTF_SOURCES', str(ROOT / 'sources.json')))
     app.config['LISTING_WINDOW_DAYS'] = None
     if config.exists():
-        register_sources(db, load_sources(config))
+        reconcile_sources(db, load_sources(config), str(config.resolve()))
         window = json.loads(config.read_text()).get('listing_window_days')
         if window is not None and (not isinstance(window, int) or isinstance(window, bool) or window <= 0):
             raise ValueError('listing_window_days must be a positive integer')
@@ -38,18 +39,16 @@ def create_app(database=None):
     def event_list():
         db = connect(app.config['DATABASE'])
         try:
-            return jsonify(events=events(db, window_days=app.config['LISTING_WINDOW_DAYS']), sources=source_states(db), generated_at=utcnow(), timezone='Asia/Manila',
-                           manual_collection=manual.capabilities() if local_request(request) else {'enabled': False})
+            records = events(db, window_days=app.config['LISTING_WINDOW_DAYS'])
+            return jsonify(events=[public_event(event) for event in records],
+                           listings_updated_at=listings_updated_at(records),
+                           generated_at=utcnow(), timezone='Asia/Manila')
         finally:
             db.close()
 
     @app.get('/api/sources')
     def source_list():
-        db = connect(app.config['DATABASE'])
-        try:
-            return jsonify(sources=source_states(db))
-        finally:
-            db.close()
+        return jsonify(message='Not found.'), 404
 
     @app.get('/api/health')
     def health():
@@ -57,10 +56,8 @@ def create_app(database=None):
 
     @app.route('/api/collection', methods=['GET', 'POST'])
     def collection():
-        if not manual.enabled:
-            return jsonify(enabled=False, message='Manual collection is disabled.'), 404
-        if not local_request(request):
-            return jsonify(message='Manual collection is available only on this computer.'), 403
+        if not manual.enabled or not local_request(request):
+            return jsonify(message='Not found.'), 404
         if request.method == 'GET':
             return jsonify(manual.snapshot())
         if not secrets.compare_digest(request.headers.get('X-Collection-Token', '').encode(), manual.token.encode()):

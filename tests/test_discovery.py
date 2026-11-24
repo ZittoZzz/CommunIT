@@ -287,8 +287,9 @@ def test_api_provenance_tracks_selected_fact_and_clears_superseded_evidence(tmp_
     record = app.get('/api/events').json['events'][0]
     assert record['field_evidence']['start']['url'] == ARTICLE
     assert len(record['announcements']) == 1
-    assert record['announcements'][0]['related_links'] == ann['related_links']
-    assert record['announcements'][0]['discovery_path'] == [FEED, ARTICLE]
+    assert record['announcements'][0]['related_links'] == [{k:v for k,v in link.items() if k != 'discovered_on'} for link in ann['related_links']]
+    assert 'discovery_path' not in record['announcements'][0]
+    assert events(db)[0]['announcements'][0]['discovery_path'] == [FEED, ARTICLE]
     newer = deepcopy(ann)
     newer['url'] = ARTICLE + 'correction'
     newer['posted_at'] = '2031-02-11T03:00:00Z'

@@ -221,6 +221,8 @@ def opportunity_search(source, client, known, now):
         if isinstance(payload.get('discovery_path'), list) and payload['discovery_path']:
             paths[url] = payload['discovery_path']
     depths = {url: 0 for url in paths}
+    all_paths = {url: [path] for url, path in paths.items()}
+    accepted_urls = {}
     maximum = min(80, max(1, int(source.get('max_pages', 40))))
     pages = PublicPages(client, maximum, result.route_checks, external_pages=external_pages)
     accepted, seen = {}, set()
@@ -258,6 +260,9 @@ def opportunity_search(source, client, known, now):
                 child = supported_url(child, external_pages=external_pages)
                 if not child or child == url:
                     continue
+                child_path = path + [child]
+                if child_path not in all_paths.setdefault(child, []):
+                    all_paths[child].append(child_path)
                 queries_by_url.setdefault(child, set()).update(queries_by_url.get(url, set()))
                 if child not in paths:
                     paths[child], depths[child] = path + [child], depth + 1
@@ -298,6 +303,7 @@ def opportunity_search(source, client, known, now):
             verified_path = ann.get('discovery_path') or [url]
             ann['discovery_path'] = list(dict.fromkeys(prefix + path + verified_path))
             key = ann.get('url') or url
+            accepted_urls[key] = url
             if key in accepted:
                 previous = accepted[key]
                 previous['discovery_queries'] = sorted(set(previous.get('discovery_queries', [])) | queries)
@@ -331,6 +337,18 @@ def opportunity_search(source, client, known, now):
         result.decisions.extend({'url': url, 'accepted': False, 'decision': 'deferred',
                                  'reason': reason, 'depth': depths[url], 'path': paths[url]} for url in pending)
     result.announcements = list(accepted.values())
+    for ann in result.announcements:
+        url = accepted_urls[ann['url']]
+        ann['discovery_paths'] = all_paths.get(url, [ann['discovery_path']])
+    # A configured calendar descriptor is not a successful page check.
+    # Preserve partial results when any page was read; all-access failures must
+    # not masquerade as a healthy empty calendar or a successful search.
+    if calendar and not any(c['status'] == 'ok' for c in result.route_checks):
+        failures = [c['status'] for c in result.route_checks]
+        if failures:
+            result.failed = True
+            result.failure_status = ('rate_limited' if 'rate_limited' in failures else
+                                     'blocked' if all(s == 'blocked' for s in failures) else 'error')
     result.message = (f'{provider}: {len(hits)} search hits; {pages.count} public page checks; '
                       f'{len(result.announcements)} verified or retained opportunities. '
                       'Search output supplies discovery only; public pages supply event facts. '

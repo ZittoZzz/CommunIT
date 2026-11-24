@@ -48,6 +48,16 @@ def connect(path=None):
     CREATE TABLE IF NOT EXISTS runs (
       id INTEGER PRIMARY KEY, started_at TEXT NOT NULL, finished_at TEXT, report TEXT
     );
+    CREATE TABLE IF NOT EXISTS source_membership (
+      profile TEXT NOT NULL, source_id TEXT NOT NULL REFERENCES sources(id),
+      enabled INTEGER NOT NULL, PRIMARY KEY(profile, source_id)
+    );
+    CREATE TABLE IF NOT EXISTS announcement_discovery (
+      announcement_id INTEGER NOT NULL REFERENCES announcements(id),
+      source_id TEXT NOT NULL, path_json TEXT NOT NULL, query_json TEXT NOT NULL,
+      first_seen TEXT NOT NULL,
+      UNIQUE(announcement_id, source_id, path_json, query_json)
+    );
     ''')
     # Additive migrations preserve existing first-seen timestamps and history.
     # Old revisions have no retained evidence; do not manufacture it from the
@@ -101,6 +111,27 @@ def discovery_queries(payload):
     """Preserve the queries that found a URL without duplicating query labels."""
     values = [payload.get('discovery_query'), *(payload.get('discovery_queries') or [])]
     return list(dict.fromkeys(value for value in values if isinstance(value, str) and value.strip()))
+
+
+def reconcile_sources(db, sources, profile):
+    """Replace one complete profile's membership, never its historical sources.
+
+    Call with the full configuration, before selecting a partial --source run.
+    Different profiles sharing a DB keep independent membership snapshots.
+    """
+    register_sources(db, sources)
+    with db:
+        db.execute('DELETE FROM source_membership WHERE profile=?', (profile,))
+        db.executemany('INSERT INTO source_membership VALUES(?,?,?)', [
+            (profile, s['id'], int(s.get('enabled', True) and s['kind'] != 'restricted'))
+            for s in sources])
+
+
+def record_discovery(db, aid, source_id, payload, now):
+    for path in payload.get('discovery_paths') or [payload.get('discovery_path', [])]:
+        db.execute('INSERT OR IGNORE INTO announcement_discovery VALUES(?,?,?,?,?)',
+                   (aid, source_id, json.dumps(path),
+                    json.dumps(discovery_queries(payload)), now))
 
 
 def compatible_post_identity(previous, incoming):
@@ -260,6 +291,8 @@ def ingest(db, source_id, announcement, now=None):
                (key, json.dumps(announcement['identity']), now))
     if existing and not existing['withdrawn']:
         previous = json.loads(existing['payload'])
+        record_discovery(db, existing['id'], existing['source_id'], previous, existing['first_seen'])
+        record_discovery(db, existing['id'], source_id, announcement, now)
         queries = list(dict.fromkeys(discovery_queries(previous) + discovery_queries(announcement)))
         if previous.get('access') != 'search_only' and announcement.get('access') == 'search_only':
             # Seeing an indexed URL again is not a refresh of its full source.
@@ -297,6 +330,7 @@ def ingest(db, source_id, announcement, now=None):
                    (aid, now, json.dumps(announcement['facts'], ensure_ascii=False),
                     json.dumps(announcement.get('field_evidence', {}), ensure_ascii=False), source_id))
     db.execute('UPDATE announcements SET last_observed_at=? WHERE id=?', (now, aid))
+    record_discovery(db, aid, source_id, announcement, now)
     return key, existing is None
 
 
@@ -485,11 +519,21 @@ def events(db, now=None, window_days=None):
     return output
 
 
-def source_states(db):
+def source_states(db, *, profile=None, active_only=False):
     states = []
-    for row in db.execute('SELECT * FROM sources ORDER BY name'):
+    query = 'SELECT s.* FROM sources s'
+    args = ()
+    if profile is not None:
+        query = 'SELECT s.*,m.enabled AS profile_enabled FROM sources s'
+        query += ' JOIN source_membership m ON m.source_id=s.id WHERE m.profile=?'
+        args = (profile,)
+        if active_only:
+            query += ' AND m.enabled=1'
+    elif active_only:
+        raise ValueError('Active coverage requires an explicit profile')
+    for row in db.execute(query + ' ORDER BY s.name', args):
         state = dict(row)
         state['coverage'] = json.loads(state['coverage'])
-        state['enabled'] = bool(state['enabled'])
+        state['enabled'] = bool(state.pop('profile_enabled', state['enabled']))
         states.append(state)
     return states

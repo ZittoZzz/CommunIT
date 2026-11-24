@@ -26,6 +26,25 @@ def _validate_source(source, supported):
         raise SourceConfigurationError(f"Source {source['id']}: enabled must be boolean")
 
 
+def _overrides(sources, config):
+    """Profile-local scheduling decisions; inherited/default routes stay intact."""
+    overrides = config.get('source_overrides', {})
+    if not isinstance(overrides, dict) or set(overrides) - {s['id'] for s in sources}:
+        raise SourceConfigurationError('source_overrides requires known source IDs')
+    for source in sources:
+        patch = overrides.get(source['id'], {})
+        if not isinstance(patch, dict) or set(patch) - {'enabled', 'reason'}:
+            raise SourceConfigurationError('Source overrides support enabled and reason only')
+        if 'enabled' in patch and not isinstance(patch['enabled'], bool):
+            raise SourceConfigurationError('Source override enabled must be boolean')
+        if 'reason' in patch and not isinstance(patch['reason'], str):
+            raise SourceConfigurationError('Source override reason must be text')
+        source.update(patch)
+        if patch.get('reason'):
+            source['index_reason'] = patch['reason']
+    return sources
+
+
 def load_sources(config_path, *, supported_adapters=None, _parents=()):
     """Merge legacy sources with enabled and disabled publisher index records.
 
@@ -64,7 +83,7 @@ def load_sources(config_path, *, supported_adapters=None, _parents=()):
         by_id[source['id']] = source
     index_name = config.get('publisher_index')
     if not index_name:
-        return sorted(sources, key=lambda source: 2 if source['kind'] in ('tavily', 'brave') else
+        return sorted(_overrides(sources, config), key=lambda source: 2 if source['kind'] in ('tavily', 'brave') else
                       1 if source['kind'] == 'opportunity_search' else 0)
     if not isinstance(index_name, str):
         raise SourceConfigurationError('publisher_index must be a file path')
@@ -115,4 +134,4 @@ def load_sources(config_path, *, supported_adapters=None, _parents=()):
         })
     # Direct recurring publishers run before supplemental search, including
     # when monitors were appended from the index.
-    return sorted(sources, key=lambda source: source['kind'] in ('tavily', 'brave', 'opportunity_search'))
+    return sorted(_overrides(sources, config), key=lambda source: source['kind'] in ('tavily', 'brave', 'opportunity_search'))

@@ -1,15 +1,21 @@
 {
   "extends": "sources.json",
-  "exclude_sources": ["aws-mindanao"],
+  "exclude_sources": [
+    "aws-mindanao"
+  ],
   "listing_window_days": 45,
-  "description": "Community preview profile. Recurring calendars and generic queries only; no individual event seeds. The legacy individual conference source is excluded from independent discovery.",
+  "description": "Qualified recurring public community routes. Disabled candidates stay available internally; source-quality qualification is separate from frozen benchmark scoring.",
   "sources": [
     {
       "id": "meetup-tech-ph",
       "name": "Meetup · Philippine technology and chapter calendars",
       "kind": "opportunity_calendar",
       "url": "https://www.meetup.com/find/ph--manila/technology/",
-      "calendar_urls": ["https://www.meetup.com/find/ph--manila/technology/", "https://www.meetup.com/find/ph--cebu/technology/", "https://www.meetup.com/aws-sbg-at-university-of-the-philippines-mindanao-campus/"],
+      "calendar_urls": [
+        "https://www.meetup.com/find/ph--manila/technology/",
+        "https://www.meetup.com/find/ph--cebu/technology/",
+        "https://www.meetup.com/aws-sbg-at-university-of-the-philippines-mindanao-campus/"
+      ],
       "window_days": 45,
       "max_pages": 60
     },
@@ -18,7 +24,10 @@
       "name": "Luma · Technology community calendars",
       "kind": "opportunity_calendar",
       "url": "https://luma.com/cerebras",
-      "calendar_urls": ["https://luma.com/cerebras", "https://luma.com/manila"],
+      "calendar_urls": [
+        "https://luma.com/cerebras",
+        "https://luma.com/manila"
+      ],
       "window_days": 45,
       "max_pages": 50
     },
@@ -55,6 +64,69 @@
       "window_days": 45,
       "max_pages": 80,
       "max_results": 20
+    },
+    {
+      "id": "cebby-events",
+      "name": "Cebby · Cebu public events",
+      "kind": "opportunity_calendar",
+      "url": "https://www.gocebby.com/events",
+      "allow_external_pages": true,
+      "window_days": 45,
+      "max_pages": 30
+    },
+    {
+      "id": "gdg-cebu",
+      "name": "GDG Cebu · Chapter calendar",
+      "kind": "opportunity_calendar",
+      "url": "https://gdg.community.dev/gdg-cebu/",
+      "window_days": 45,
+      "max_pages": 30
     }
-  ]
+  ],
+  "source_overrides": {
+    "dict": {
+      "enabled": false,
+      "reason": "Qualification 2026-11-23: robots verification still returns HTTP 403; paused under existing access rules."
+    },
+    "ncert": {
+      "enabled": false,
+      "reason": "Qualification 2026-11-23: robots verification still returns HTTP 403; paused under existing access rules."
+    },
+    "rootcon-website": {
+      "enabled": false,
+      "reason": "Website extraction is policy restricted. Retain the permitted independent Bluesky route."
+    },
+    "kakacomputer-ctf": {
+      "enabled": false,
+      "reason": "Research/partner-lead candidate only: observed recap duplicates CyberPH event evidence; no advance invitation demonstrated."
+    },
+    "cyber404-news": {
+      "enabled": false,
+      "reason": "Publisher research only: two partner leads, no event invitations in saved runs. Requalify before routine event collection."
+    },
+    "pup-news": {
+      "enabled": false,
+      "reason": "Six saved checks of the same ten-item news feed produced no accepted events/leads. Keep university announcements separately; revisit news on invitation evidence."
+    },
+    "crest-asia": {
+      "enabled": false,
+      "reason": "Partner evidence retained; current route follows ROOTCON only and duplicates its permitted primary Bluesky announcements. Requalify broader recurring coverage."
+    },
+    "luma-manila": {
+      "enabled": false,
+      "reason": "Same recurring city root is already covered by luma-tech-community; no demonstrated unique contribution from the CTF-only route."
+    },
+    "cisco-netconnect-luma-calendar": {
+      "enabled": false,
+      "reason": "Readable recurring calendar, but nine observed training/community entries did not qualify through the CTF adapter. Candidate until scope/parser contribution is qualified."
+    },
+    "community-opportunity-search": {
+      "enabled": false,
+      "reason": "Qualification candidate: saved 99-hit/80-page run verified zero events, with low-precision directories and 671 deferrals. Needs narrower publisher discovery qualification; no claim of permanent low value."
+    },
+    "tavily-keyless": {
+      "enabled": false,
+      "reason": "Research-only search leads and temporary quota failures; no newly verified future pages demonstrated. Retain saved leads/history and keyless adapter; requalify for advance verified coverage."
+    }
+  }
 }

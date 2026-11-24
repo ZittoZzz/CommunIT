@@ -120,7 +120,7 @@ def test_full_fetch_upgrades_search_attribution_and_keeps_query_trace(db):
     assert event['announcements'][0]['discovery_queries'] == [QUERY]
 
 
-def test_api_exposes_single_and_multiple_search_queries_without_duplicates(tmp_path):
+def test_api_keeps_search_queries_internal(tmp_path):
     path = str(tmp_path / 'search.sqlite3')
     db = connect(path)
     register_sources(db, SOURCES)
@@ -132,9 +132,12 @@ def test_api_exposes_single_and_multiple_search_queries_without_duplicates(tmp_p
     db.commit()
     db.close()
     result = create_app(path).test_client().get('/api/events').json['events'][0]['announcements'][0]
-    assert result['discovery_query'] == QUERY
-    assert result['discovery_queries'] == ann['discovery_queries']
-    assert result['discovery_path'] == ann['discovery_path']
+    assert 'discovery_query' not in result
+    assert 'discovery_queries' not in result
+    assert 'discovery_path' not in result
+    internal = connect(path)
+    assert events(internal)[0]['announcements'][0]['discovery_queries'] == ann['discovery_queries']
+    internal.close()
 
 
 def test_equivalent_numeric_facebook_links_keep_one_event_and_announcement(db):

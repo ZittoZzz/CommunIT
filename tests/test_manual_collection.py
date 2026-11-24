@@ -24,7 +24,7 @@ def preview(tmp_path, monkeypatch):
 
 
 def authorization(client):
-    return {'X-Collection-Token': client.get('/api/events').json['manual_collection']['token']}
+    return {'X-Collection-Token': client.application.extensions['manual_collection'].token}
 
 
 def fake_process(monkeypatch, *, statuses=('ok',), code=0, hold=None, timeout=False, started=None):
@@ -63,7 +63,7 @@ def test_default_disabled_even_with_an_explicit_preview(tmp_path, monkeypatch):
     config = tmp_path / 'sources.json'; config.write_text('{"sources": []}')
     monkeypatch.setenv('CTF_SOURCES', str(config))
     client = create_app(tmp_path / 'preview.sqlite3').test_client()
-    assert client.get('/api/events').json['manual_collection'] == {'enabled': False}
+    assert 'manual_collection' not in client.get('/api/events').json
     assert client.get('/api/collection').status_code == 404
     assert client.post('/api/collection', json={}).status_code == 404
 
@@ -87,10 +87,10 @@ def test_token_and_loopback_gate_and_request_cannot_choose_database(preview, mon
     assert client.post('/api/collection', json={}).status_code == 403
     assert client.post('/api/collection', json={}, headers={'X-Collection-Token': 'wrong'}).status_code == 403
     assert client.post('/api/collection', json={}, headers=headers,
-                       environ_overrides={'REMOTE_ADDR': '192.0.2.20'}).status_code == 403
-    assert client.get('/api/events', environ_overrides={'REMOTE_ADDR': '192.0.2.20'}).json['manual_collection'] == {'enabled': False}
-    assert client.get('/api/events', headers={'Host': 'attacker.example'}).json['manual_collection'] == {'enabled': False}
-    assert client.get('/api/collection', headers={'Host': 'attacker.example'}).status_code == 403
+                       environ_overrides={'REMOTE_ADDR': '192.0.2.20'}).status_code == 404
+    assert client.get('/api/events', environ_overrides={'REMOTE_ADDR': '192.0.2.20'}).json.get('manual_collection') is None
+    assert client.get('/api/events', headers={'Host': 'attacker.example'}).json.get('manual_collection') is None
+    assert client.get('/api/collection', headers={'Host': 'attacker.example'}).status_code == 404
     assert client.post('/api/collection', data='{}', headers=headers).status_code == 400
     assert client.post('/api/collection', json={'database': '/somewhere/else'}, headers=headers).status_code == 400
 

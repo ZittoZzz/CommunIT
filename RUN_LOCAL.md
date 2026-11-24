@@ -27,7 +27,7 @@ PY
 
 The command prints the event count and any backup path. If the source is missing, invalid, or empty, preparation stops with an explanation instead of silently creating an empty preview. To use a different saved database, pass `--source /absolute/path/to/saved.sqlite3`. To deliberately refresh an already populated preview from that source, add `--replace`; the previous preview is saved under `data/preview-backups/` first. Stop the preview backend and any preview collection before replacing a populated database.
 
-This copies the main database's saved listings, not a lost temporary prototype snapshot. Data under `data/` survives restarts; `/tmp` snapshots may be removed. Database preparation does not fetch sources. The preview configuration extends `sources.community.json`: existing CTF routes plus recurring public technology calendars and generic search queries, with the existing 45-day listing view. It excludes the legacy individual AWS event seed. Undated leads remain on Watchlist. The deployment's `sources.json` and `source-index.json` are unchanged. Regenerate this configuration to enable the broader sources in an older preview; restarting the backend is required.
+This copies the main database's saved listings, not a lost temporary prototype snapshot. Data under `data/` survives restarts; `/tmp` snapshots may be removed. Database preparation does not fetch sources. The preview configuration extends `sources.community.json`: qualified CTF publishers and recurring public technology calendars, with paused routes retained as disabled candidates, with the existing 45-day listing view. It excludes the legacy individual AWS event seed. Undated leads remain on Watchlist. The deployment's `sources.json` and `source-index.json` are unchanged. Regenerate this configuration to enable the broader sources in an older preview; restarting the backend is required.
 
 ## 2. Run the backend — terminal 1
 
@@ -36,7 +36,7 @@ cd /home/miguel/Documents/GitHub/IT_Community_PH
 
 CTF_DATABASE="$PWD/data/local-preview.sqlite3" \
 CTF_SOURCES="$PWD/data/local-preview-sources.json" \
-CTF_ENABLE_MANUAL_FETCH=1 \
+CTF_ENABLE_MANUAL_FETCH=0 \
 PORT=5001 \
 .venv/bin/python -m backend.app
 ```
@@ -45,7 +45,7 @@ Leave this terminal running. You can check the backend at **http://127.0.0.1:500
 
 **Stop the backend:** press **Ctrl+C** in this terminal. To restart it, run the same command again. Restart after editing backend Python files; this command does not enable automatic reload.
 
-After the public-review update, restart this backend and reload the Vite page to see the review notes, Archived leads, and separate Cloud/DevOps filters. Startup applies an additive observation-timestamp column to the explicitly selected preview database. Topic labels, review/expiry and legacy Meetup duplicate display are read projections; they do not require **Fetch events**. The two reported Meetup/Luma records were already updated in the saved preview from checked public pages, with the prior database backed up under `data/review-verification/preview-before-repair.sqlite3`.
+After the public-review update, restart this backend and reload the Vite page to see the review notes, Archived leads, and separate Cloud/DevOps filters. Startup applies additive observation and source-membership/provenance tables/columns to the explicitly selected preview database. Topic labels, review/expiry and legacy Meetup duplicate display are read projections; they do not require collection. The two reported Meetup/Luma records were already updated in the saved preview from checked public pages, with the prior database backed up under `data/review-verification/preview-before-repair.sqlite3`.
 
 If the preview was started in the background during the empty-database repair, its PID is in `data/local-preview-backend.pid` and its log is in `data/local-preview-verification/backend.log`. Stop that instance before using the foreground command above. This checks that the PID still belongs to the preview backend:
 
@@ -67,7 +67,7 @@ else:
 PY
 ```
 
-`CTF_ENABLE_MANUAL_FETCH=1` enables the temporary **Fetch events** control for local testing. It is disabled by default and refuses the main `data/ctfinder.sqlite3` database, including aliases. Omit this variable for deployment. The control also requires requests from localhost; no fetch endpoint is enabled for normal deployments.
+The public frontend exposes only **Refresh saved listings**. Collection diagnostics and source inventories are local CLI/report functions; no token or diagnostic switch is returned by `/api/events`. Leave `CTF_ENABLE_MANUAL_FETCH` unset (or `0`) for ordinary preview/deployment. The older localhost/token-guarded endpoint remains for local tooling only.
 
 ## 3. Run the frontend — terminal 2
 
@@ -103,13 +103,11 @@ npm --prefix frontend run dev -- --port 5174 --strictPort
 
 Open **http://127.0.0.1:5174**. Stop each process with **Ctrl+C** in its terminal; do not kill another service occupying these ports. No installed service or deployment build is changed. The existing commands on ports 5001/5173 also show the new frontend when run from this branch.
 
-## Fetch events manually
+## Collect events manually (local CLI)
 
-Click **Fetch events** in **Directory updates** at the bottom of the page, below source coverage. It runs the existing collector using `CTF_SOURCES` and writes only to the configured preview database. Progress and completion messages appear in the same panel, and the saved event list reloads when collection finishes. Your filters stay selected. Sources can take several minutes; the button prevents overlapping runs, and collection has a 20-minute limit.
+The public page's **Refresh saved listings** reloads stored data without fetching publishers. To collect, use the isolated CLI command below. No website collection button or route-health panel is exposed. Reports contain per-route outcomes, retries, deferrals, discovery paths and parsed evidence; do not publish them as the public API. A successful process can include partial source failures, so inspect the report.
 
-**Refresh saved listings** only reloads saved listings. **Fetch events** contacts the configured public sources and may add or update events. Current results can differ from earlier snapshots. Blocked or failed sources appear in source coverage; a successful fetch does not guarantee new events. Existing first-seen times and deduplication use the normal collector behavior.
-
-Keep the backend running until the fetch finishes. Reports, logs, and final status are saved in `data/manual-fetch/`; events stay in `data/local-preview.sqlite3`. This button does not change the main database or run a collection schedule.
+The community profile has 16 request-eligible routes and 17 disabled candidates after source qualification. It retains recurring primary/calendar coverage and qualified Cebby/GDG Cebu routes; legacy event seeds, blocked government pages and unqualified/redundant discovery are excluded or disabled. The default CTF profile remains separate. See `docs/source-quality-2026-11-23.md` for every decision. Restart the preview backend after code/config changes; do not run discovery just to update the UI.
 
 ## Isolated community collection
 
@@ -124,14 +122,13 @@ CTF_DATABASE="$PWD/data/community-check.sqlite3" \
 
 Use a new database path for a new evaluation. Reusing it preserves prior discoveries and is not an empty-database benchmark. This profile uses recurring calendars and date-generated generic queries; it never reads the benchmark reports. Keyless Tavily can return HTTP 429; the report records the wait and skipped queries, while calendar routes continue. No paid fallback is enabled.
 
-The November 23 evaluated snapshot is `data/benchmark-2026-11-23/final-live/events.sqlite3` with its exact configuration in `final-live/inputs.json`. To inspect it, substitute those two absolute paths for `CTF_DATABASE` and `CTF_SOURCES` in the backend command, without replacing `data/local-preview.sqlite3`. Keep manual fetching disabled when inspecting a frozen evaluation snapshot. See [the evaluation report](docs/benchmark-2026-11-23.md) for trace paths and limitations.
+The November 23 evaluated snapshot is `data/benchmark-2026-11-23/final-live/events.sqlite3` with its exact configuration in `final-live/inputs.json`. To inspect it, substitute those two absolute paths for `CTF_DATABASE` and `CTF_SOURCES` in the backend command, without replacing `data/local-preview.sqlite3`. Never start the backend against a frozen evaluation database: copy it to a separate ignored preview path first, then inspect the copy. Keep collection disabled. See [the evaluation report](docs/benchmark-2026-11-23.md) for trace paths and limitations.
 
 ## Common startup issues
 
 - **Port already in use:** stop the earlier process in its terminal. If you choose another backend port, also change `VITE_API_TARGET` to match. `--strictPort` prevents Vite from silently using a different frontend port.
 - **API connection error:** confirm the backend is running on port 5001, then restart the frontend if you changed `VITE_API_TARGET`.
-- **Empty directory:** run step 1 and read the printed event count. An existing empty preview is now repaired from the saved source. Also check the selected tab and filters. Use **Fetch events** for a fresh collection.
-- **Fetch button missing:** restart the backend with `CTF_ENABLE_MANUAL_FETCH=1`, an explicit preview `CTF_DATABASE`, and the command above. Reload the page. The feature stays hidden for the main database or when the flag is absent.
+- **Empty directory:** run step 1 and read the printed event count. An existing empty preview is now repaired from the saved source. Also check the selected tab and filters. Use the isolated collector CLI for fresh collection.
 - **Old interface:** use port **5173**. Flask's `/` route serves the last built frontend, which may be older than the source code.
 - **Existing website on port 5000:** it is separate from this preview. If you intentionally want to stop the installed website service, use `systemctl --user stop ctfinder-ph-web.service`. This does not stop the collector timer.
 

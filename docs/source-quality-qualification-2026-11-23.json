@@ -1,0 +1,679 @@
+{
+  "exercise": "source qualification, not benchmark scoring",
+  "branch": "feat/campus-bulletin",
+  "base_commit": "90d2e25d9af4e4dd0cf862fb4b0275a703edd892",
+  "saved_run_started_at": "2026-11-23T11:09:39.539390+00:00",
+  "qualification_started_at": "2026-11-23T15:32:09.027338+00:00",
+  "qualification_finished_at": "2026-11-23T15:32:40.017666+00:00",
+  "counts": {
+    "community_before": {
+      "configured": 31,
+      "request_eligible": 24,
+      "disabled": 6,
+      "enabled_restricted": 1
+    },
+    "community_after": {
+      "configured": 33,
+      "request_eligible": 16,
+      "disabled": 17,
+      "enabled_restricted": 0
+    },
+    "default_unchanged": {
+      "configured": 27,
+      "request_eligible": 20,
+      "disabled": 6,
+      "enabled_restricted": 1
+    }
+  },
+  "comparison_method": "Meetup numeric ID; otherwise canonical event URL. Also checked saved event IDs. Same real-world event on unrelated platforms may remain unidentified. Compare fresh roots against saved full preview, not a fresh full-profile rerun.",
+  "candidate_comparison": [
+    {
+      "source_id": "cebby-events",
+      "status": "ok",
+      "accepted": 3,
+      "discoveries": [
+        {
+          "name": "AI: Growing Up and Leaving Home",
+          "url": "https://luma.com/rl9jbxgv",
+          "canonical_identity": "https://luma.com/rl9jbxgv",
+          "event_id": "e9ff1d4d41c81285d8ad7ff5",
+          "overlaps_meetup_cebu": false,
+          "overlaps_saved_full_preview": false,
+          "path": [
+            "https://www.gocebby.com/events",
+            "https://www.gocebby.com/events/ai-growing-up-and-leaving-home--1775858457072",
+            "https://luma.com/rl9jbxgv"
+          ],
+          "start": {
+            "raw": "2026-11-28T02:00:00.000Z",
+            "value": "2026-11-28T10:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "deadline": null
+        },
+        {
+          "name": "Kiro in Focus : Better Specs, More Focused Prompts",
+          "url": "https://www.meetup.com/aws-sbg-at-cebu-technological-university/events/317378539/",
+          "canonical_identity": "meetup:317378539",
+          "event_id": "27d87a2127a68136c787237d",
+          "overlaps_meetup_cebu": true,
+          "overlaps_saved_full_preview": true,
+          "path": [
+            "https://www.gocebby.com/events",
+            "https://www.gocebby.com/events/kiro-in-focus-better-specs-more-focused-prompts--1775858457074",
+            "https://www.meetup.com/aws-sbg-at-cebu-technological-university/events/317378539/"
+          ],
+          "start": {
+            "raw": "2026-11-28T13:00:00+08:00",
+            "value": "2026-11-28T13:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "deadline": null
+        },
+        {
+          "name": "ITNext summit 2026 How AI is Changing the Way We Build Systems",
+          "url": "https://www.meetup.com/aws-sbg-at-southwestern-university-phinma/events/317409982/",
+          "canonical_identity": "meetup:317409982",
+          "event_id": "91f02b6d3ec01c4a38268ff0",
+          "overlaps_meetup_cebu": true,
+          "overlaps_saved_full_preview": true,
+          "path": [
+            "https://www.gocebby.com/events",
+            "https://www.gocebby.com/events/itnext-summit-2026-how-ai-is-changing-the-way-we-build-systems--1775858457077",
+            "https://www.meetup.com/aws-sbg-at-southwestern-university-phinma/events/317409982/"
+          ],
+          "start": {
+            "raw": "2026-11-29T13:00:00+08:00",
+            "value": "2026-11-29T13:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "deadline": null
+        }
+      ],
+      "not_accepted": [
+        {
+          "url": "https://www.gocebby.com/events",
+          "decision": "rejected",
+          "reason": "Public organizer calendar links discovered for verification"
+        },
+        {
+          "url": "https://www.gocebby.com/events/ai-growing-up-and-leaving-home--1775858457072",
+          "decision": "rejected",
+          "reason": "Public organizer calendar links discovered for verification"
+        },
+        {
+          "url": "https://www.gocebby.com/events/kiro-in-focus-better-specs-more-focused-prompts--1775858457074",
+          "decision": "rejected",
+          "reason": "Public organizer calendar links discovered for verification"
+        },
+        {
+          "url": "https://www.gocebby.com/events/itnext-summit-2026-how-ai-is-changing-the-way-we-build-systems--1775858457077",
+          "decision": "rejected",
+          "reason": "Public organizer calendar links discovered for verification"
+        },
+        {
+          "url": "https://www.gocebby.com/events/bitcoin-meetup-cebu--1775858457071",
+          "decision": "rejected",
+          "reason": "Public organizer calendar links discovered for verification"
+        },
+        {
+          "url": "https://www.gocebby.com/events/bitcoin-meetup-cebu--1775858457066",
+          "decision": "rejected",
+          "reason": "Public organizer calendar links discovered for verification"
+        },
+        {
+          "url": "https://www.gocebby.com/events/cebu-hacktoberfest-2026-awarding--1775858457063",
+          "decision": "rejected",
+          "reason": "Public organizer calendar links discovered for verification"
+        },
+        {
+          "url": "https://www.gocebby.com/events/how-we-work-with-ai-a-collaborative-workflowmapping-session--1775858457068",
+          "decision": "rejected",
+          "reason": "Public organizer calendar links discovered for verification"
+        },
+        {
+          "url": "https://www.gocebby.com/events/malfunction-hackathon-idea--1775858457069",
+          "decision": "rejected",
+          "reason": "Public organizer calendar links discovered for verification"
+        },
+        {
+          "url": "https://www.gocebby.com/events/48th-all-aboard-startup-cebu-mixer--1775858457075",
+          "decision": "rejected",
+          "reason": "Public organizer calendar links discovered for verification"
+        },
+        {
+          "url": "https://www.gocebby.com/events/aws-nu-cebu-general-assembly--1775858457064",
+          "decision": "rejected",
+          "reason": "Public organizer calendar links discovered for verification"
+        },
+        {
+          "url": "https://www.gocebby.com/events/qistcon-ph-2026--1775858457045",
+          "decision": "rejected",
+          "reason": "Public organizer calendar links discovered for verification"
+        },
+        {
+          "url": "https://luma.com/o5pla8r7",
+          "decision": "rejected",
+          "reason": "No supported event topic in the primary title or description"
+        },
+        {
+          "url": "https://www.meetup.com/aws-sbg-at-national-university-cebu-campus/events/317074920/",
+          "decision": "rejected",
+          "reason": "No confirmed start or cutoff inside the 45-day Manila window (date-only boundaries unresolved)"
+        }
+      ]
+    },
+    {
+      "source_id": "gdg-cebu",
+      "status": "ok",
+      "accepted": 1,
+      "discoveries": [
+        {
+          "name": "DevFest Cebu 2026",
+          "url": "https://gdg.community.dev/events/details/google-gdg-cebu-presents-devfest-cebu-2026/",
+          "canonical_identity": "https://gdg.community.dev/events/details/google-gdg-cebu-presents-devfest-cebu-2026/",
+          "event_id": "a53fa8efe851105acfdca64f",
+          "overlaps_meetup_cebu": false,
+          "overlaps_saved_full_preview": false,
+          "path": [
+            "https://gdg.community.dev/gdg-cebu/",
+            "https://gdg.community.dev/events/details/google-gdg-cebu-presents-devfest-cebu-2026/"
+          ],
+          "start": {
+            "raw": "2026-11-29T13:00:00+08:00",
+            "value": "2026-11-29T13:00:00+08:00",
+            "precision": "datetime",
+            "timezone": "Asia/Manila"
+          },
+          "deadline": null
+        }
+      ],
+      "not_accepted": [
+        {
+          "url": "https://gdg.community.dev/gdg-cebu/",
+          "decision": "rejected",
+          "reason": "Public organizer calendar links discovered for verification"
+        },
+        {
+          "url": "https://gdg.community.dev/events/details/google-gdg-cebu-presents-build-with-ai-cebu-2026/",
+          "decision": "rejected",
+          "reason": "No confirmed start or cutoff inside the 45-day Manila window (date-only boundaries unresolved)"
+        },
+        {
+          "url": "https://gdg.community.dev/events/details/google-gdg-cebu-presents-devfest-cebu-2025/",
+          "decision": "rejected",
+          "reason": "No Philippine physical venue or explicitly worldwide online participation"
+        },
+        {
+          "url": "https://gdg.community.dev/events/details/google-gdg-cebu-presents-google-io-extended-cebu-2025/",
+          "decision": "rejected",
+          "reason": "No Philippine physical venue or explicitly worldwide online participation"
+        },
+        {
+          "url": "https://gdg.community.dev/events/details/google-gdg-cebu-presents-gdg-cebu-build-with-ai-2025/",
+          "decision": "rejected",
+          "reason": "No Philippine physical venue or explicitly worldwide online participation"
+        }
+      ]
+    }
+  ],
+  "saved_run_contributions": [
+    {
+      "id": "rootcon-bluesky",
+      "status": "ok",
+      "accepted_announcements": 3,
+      "distinct_event_ids": 2,
+      "event_ids_first_seen_during_run": [],
+      "message": "Public author feed and full post text read through the documented Bluesky API; only extracted facts and brief excerpts retained, no media."
+    },
+    {
+      "id": "hackthenorth",
+      "status": "ok",
+      "accepted_announcements": 0,
+      "distinct_event_ids": 0,
+      "event_ids_first_seen_during_run": [],
+      "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded."
+    },
+    {
+      "id": "up-acm",
+      "status": "ok",
+      "accepted_announcements": 0,
+      "distinct_event_ids": 0,
+      "event_ids_first_seen_during_run": [],
+      "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded."
+    },
+    {
+      "id": "pup-announcements",
+      "status": "ok",
+      "accepted_announcements": 0,
+      "distinct_event_ids": 0,
+      "event_ids_first_seen_during_run": [],
+      "message": "Public RSS/Atom feed scanned; 10 new or retained article URLs rechecked."
+    },
+    {
+      "id": "pup-news",
+      "status": "ok",
+      "accepted_announcements": 0,
+      "distinct_event_ids": 0,
+      "event_ids_first_seen_during_run": [],
+      "message": "Public RSS/Atom feed scanned; 10 new or retained article URLs rechecked."
+    },
+    {
+      "id": "ncert",
+      "status": "blocked",
+      "accepted_announcements": 0,
+      "distinct_event_ids": 0,
+      "event_ids_first_seen_during_run": [],
+      "message": "Cannot verify robots.txt: HTTP 403"
+    },
+    {
+      "id": "dict",
+      "status": "blocked",
+      "accepted_announcements": 0,
+      "distinct_event_ids": 0,
+      "event_ids_first_seen_during_run": [],
+      "message": "Cannot verify robots.txt: HTTP 403"
+    },
+    {
+      "id": "rootcon-website",
+      "status": "policy_restricted",
+      "accepted_announcements": 0,
+      "distinct_event_ids": 0,
+      "event_ids_first_seen_during_run": [],
+      "message": "Website terms prohibit automated data extraction. Use the official Bluesky API source instead."
+    },
+    {
+      "id": "ctftime",
+      "status": "ok",
+      "accepted_announcements": 0,
+      "distinct_event_ids": 0,
+      "event_ids_first_seen_during_run": [],
+      "message": "Supplementary event metadata only. Included Philippine venues or explicitly configured Philippine organizers; global events open to everyone are excluded."
+    },
+    {
+      "id": "safeai-luma-calendar",
+      "status": "ok",
+      "accepted_announcements": 1,
+      "distinct_event_ids": 1,
+      "event_ids_first_seen_during_run": [],
+      "message": "Public Luma calendar returned 1 event links; 1 qualifying or retained events. Read descriptions before configured topic filtering. No login, cookies, or paid API."
+    },
+    {
+      "id": "mlh-global-hack-week",
+      "status": "ok",
+      "accepted_announcements": 1,
+      "distinct_event_ids": 1,
+      "event_ids_first_seen_during_run": [],
+      "message": "MLH calendar read successfully: 2 edition links, 1 qualifying or retained editions. Unstated cutoffs remain unknown."
+    },
+    {
+      "id": "up-manila",
+      "status": "ok",
+      "accepted_announcements": 1,
+      "distinct_event_ids": 1,
+      "event_ids_first_seen_during_run": [],
+      "message": "Public RSS/Atom feed scanned; 1 new or retained article URLs rechecked."
+    },
+    {
+      "id": "htb-meetup-ph",
+      "status": "ok",
+      "accepted_announcements": 1,
+      "distinct_event_ids": 1,
+      "event_ids_first_seen_during_run": [],
+      "message": "Public RSS/Atom feed scanned; 0 new or retained article URLs rechecked."
+    },
+    {
+      "id": "feu-eventually",
+      "status": "disabled",
+      "accepted_announcements": 0,
+      "distinct_event_ids": 0,
+      "event_ids_first_seen_during_run": [],
+      "message": "Calendar is readable, but the documented CTF invitation needs structured date/venue extraction outside its article body. Advance publication timing is also unverified. Not counted as a working CTF monitor."
+    },
+    {
+      "id": "crest-asia",
+      "status": "ok",
+      "accepted_announcements": 1,
+      "distinct_event_ids": 1,
+      "event_ids_first_seen_during_run": [],
+      "message": "Organizer index scanned for new announcements; known announcement pages rechecked. Generic conferences and evergreen CTF descriptions are excluded."
+    },
+    {
+      "id": "um-sdc",
+      "status": "disabled",
+      "accepted_announcements": 0,
+      "distinct_event_ids": 0,
+      "event_ids_first_seen_during_run": [],
+      "message": "Historical CTF invitation exists, but a reliable recurring calendar returning event links has not been verified. No event URL seeded."
+    },
+    {
+      "id": "owasp-cebu",
+      "status": "disabled",
+      "accepted_announcements": 0,
+      "distinct_event_ids": 0,
+      "event_ids_first_seen_during_run": [],
+      "message": "CTF index redirects to login; public feed access not verified. No credentials or cookies used."
+    },
+    {
+      "id": "pia",
+      "status": "disabled",
+      "accepted_announcements": 0,
+      "distinct_event_ids": 0,
+      "event_ids_first_seen_during_run": [],
+      "message": "Advance competition invitations documented, but robots.txt verification returns HTTP 403. Candidate only."
+    },
+    {
+      "id": "vektr-community",
+      "status": "disabled",
+      "accepted_announcements": 0,
+      "distinct_event_ids": 0,
+      "event_ids_first_seen_during_run": [],
+      "message": "Website readable but no recurring announcement feed or archive links found. Indexed social reshares are not a working publisher integration."
+    },
+    {
+      "id": "luma-manila",
+      "status": "ok",
+      "accepted_announcements": 0,
+      "distinct_event_ids": 0,
+      "event_ids_first_seen_during_run": [],
+      "message": "Public Luma calendar returned 6 event links; 0 qualifying or retained events. Read descriptions before configured topic filtering. No login, cookies, or paid API."
+    },
+    {
+      "id": "kakacomputer-ctf",
+      "status": "ok",
+      "accepted_announcements": 1,
+      "distinct_event_ids": 1,
+      "event_ids_first_seen_during_run": [],
+      "message": "Public RSS/Atom feed scanned; 1 new or retained article URLs rechecked."
+    },
+    {
+      "id": "cyber404-news",
+      "status": "ok",
+      "accepted_announcements": 0,
+      "distinct_event_ids": 0,
+      "event_ids_first_seen_during_run": [],
+      "message": "Public RSS/Atom feed scanned; 2 new or retained article URLs rechecked."
+    },
+    {
+      "id": "cyberph-luma-calendar",
+      "status": "ok",
+      "accepted_announcements": 1,
+      "distinct_event_ids": 1,
+      "event_ids_first_seen_during_run": [],
+      "message": "Public Luma calendar returned 3 event links; 1 qualifying or retained events. Read descriptions before configured topic filtering. No login, cookies, or paid API."
+    },
+    {
+      "id": "cisco-netconnect-luma-calendar",
+      "status": "ok",
+      "accepted_announcements": 0,
+      "distinct_event_ids": 0,
+      "event_ids_first_seen_during_run": [],
+      "message": "Public Luma calendar returned 9 event links; 0 qualifying or retained events. Read descriptions before configured topic filtering. No login, cookies, or paid API."
+    },
+    {
+      "id": "meetup-tech-ph",
+      "status": "ok",
+      "accepted_announcements": 14,
+      "distinct_event_ids": 14,
+      "event_ids_first_seen_during_run": [
+        "27d87a2127a68136c787237d",
+        "4fa75854b646af64d077d772",
+        "d7a35ea5eec75270b7a1b959",
+        "9db77584b3e72cebc6f33497",
+        "1d194859beeb2acc1590cb26",
+        "9cf378bdd98f22dbed5e80f7",
+        "27cc0786af07519c187443ff",
+        "51cfd44324b5766677a6e5b4",
+        "5efab59be55a5e573f6d8f1a",
+        "656f4efaaf270589461ea5a1",
+        "a5b5a33bbaf80058057731bf",
+        "91f02b6d3ec01c4a38268ff0",
+        "412479fb706bf8ceeb6e0348",
+        "4945ea1a614f503b361606a6"
+      ],
+      "message": "Public calendars: 3 search hits; 27 public page checks; 14 verified or retained opportunities. Search output supplies discovery only; public pages supply event facts. Public calendar links fetched directly; no search provider was called."
+    },
+    {
+      "id": "luma-tech-community",
+      "status": "ok",
+      "accepted_announcements": 5,
+      "distinct_event_ids": 5,
+      "event_ids_first_seen_during_run": [
+        "4086d79cc6099e485d7193fe",
+        "6bd31249b69fe8ba454bb77c",
+        "7cc2e8baa13bef1e66669e47",
+        "a141a1e0e81c12ddbd2b2dd2",
+        "61ebdea75aef6eada886a544"
+      ],
+      "message": "Public calendars: 2 search hits; 29 public page checks; 5 verified or retained opportunities. Search output supplies discovery only; public pages supply event facts. Public calendar links fetched directly; no search provider was called."
+    },
+    {
+      "id": "online-tech-conferences",
+      "status": "partial",
+      "accepted_announcements": 1,
+      "distinct_event_ids": 1,
+      "event_ids_first_seen_during_run": [
+        "7ccc5f4c51d7c22d3e454237"
+      ],
+      "message": "Public calendars: 1 search hits; 8 public page checks; 1 verified or retained opportunities. Search output supplies discovery only; public pages supply event facts. Public calendar links fetched directly; no search provider was called. Public detail limit 8; 109 pages were not checked"
+    },
+    {
+      "id": "devpost-public-hackathons",
+      "status": "partial",
+      "accepted_announcements": 8,
+      "distinct_event_ids": 8,
+      "event_ids_first_seen_during_run": [
+        "4f72f3806fb4456474973ac6",
+        "78891c514dc5fe5e23cd8b4a",
+        "f14f0eb4f7aa52ad26316cef",
+        "0802acacfad2486f4b3e88a8",
+        "8d0defb047f5da450e58c741",
+        "c53c77c18aa19c7cd551b550",
+        "16a2186202444ade404eba78",
+        "e34a6d97ef4d8e5df8d7377c"
+      ],
+      "message": "Public calendars: 1 search hits; 50 public page checks; 8 verified or retained opportunities. Search output supplies discovery only; public pages supply event facts. Public calendar links fetched directly; no search provider was called. Public opportunity verification failed: Devpost country exceptions are not readable; Philippine eligibility is unverified; Public opportunity verification failed: Devpost country exceptions are not readable; Philippine eligibility is unverified; Public opportunity verification failed: Devpost country exceptions are not readable; Philippine eligibility is unverified; Shared public-page budget reached; ownership or event verification incomplete; Public detail limit 50; 39 pages were not checked"
+    },
+    {
+      "id": "community-opportunity-search",
+      "status": "partial",
+      "accepted_announcements": 0,
+      "distinct_event_ids": 0,
+      "event_ids_first_seen_during_run": [],
+      "message": "Tavily keyless: 99 search hits; 80 public page checks; 0 verified or retained opportunities. Search output supplies discovery only; public pages supply event facts. Free keyless access; no API key or paid fallback. Public opportunity verification failed: Cannot verify robots.txt: HTTP 403; Public opportunity verification failed: Cannot verify robots.txt: HTTP 403; Public opportunity verification failed: Primary Event structured metadata unavailable; page may require JavaScript; Public opportunity verification failed: robots.txt disallows automated access; Public opportunity verification failed: HTTP 403; Public opportunity verification failed: HTTP 403; Public opportunity verification failed: Primary Event structured metadata unavailable; page may require JavaScript; Public opportunity verification failed: HTTP 410; Public opportunity verification failed: robots.txt disallows automated access; Public opportunity verification failed: Redirect outside configured hosts; Public opportunity verification failed: HTTP 403; Public opportunity verification failed: Cannot verify robots.txt: HTTP 403; Public opportunity verification failed: Primary Event structured metadata unavailable; page may require JavaScript; Public opportunity verification failed: HTTP 403; Public opportunity verification failed: Primary Event structured metadata unavailable; page may require JavaScript; Public opportunity verification failed: Primary Event structured metadata unavailable; page may require JavaScript; Public opportunity verification failed: Primary Event structured metadata unavailable; page may require JavaScript; Public opportunity verification failed: HTTP 403; Public opportunity verification failed: Primary Event structured metadata unavailable; page may require JavaScript; Public opportunity verification failed: robots.txt disallows automated access; Public opportunity verification failed: HTTP 403; Public opportunity verification failed: Primary Event structured metadata unavailable; page may require JavaScript; Public opportunity verification failed: Primary Event structured metadata unavailable; page may require JavaScript; Public opportunity verification failed: Primary Event structured metadata unavailable; page may require JavaScript; Public opportunity verification failed: Primary Event structured metadata unavailable; page may require JavaScript; Shared public-page budget reached; ownership or event verification incomplete; Public detail limit 80; 670 pages were not checked"
+    },
+    {
+      "id": "tavily-keyless",
+      "status": "error",
+      "accepted_announcements": 0,
+      "distinct_event_ids": 0,
+      "event_ids_first_seen_during_run": [],
+      "message": "Free Tavily keyless search; no API key or paid fallback. All returned URLs are recorded before scope filtering. Search titles identify leads only; full posts, schedules and registration are unverified. site:facebook.com Philippines cybersecurity CTF competition registration: HTTP 429; retry after 280 seconds"
+    },
+    {
+      "id": "facebook-search",
+      "status": "disabled",
+      "accepted_announcements": 0,
+      "distinct_event_ids": 0,
+      "event_ids_first_seen_during_run": [],
+      "message": "Disabled in the zero-API-fee configuration; Tavily keyless is the secondary search provider. No credentials are read for this source."
+    }
+  ],
+  "decisions": {
+    "rootcon-bluesky": {
+      "enabled": true,
+      "reason": null
+    },
+    "hackthenorth": {
+      "enabled": true,
+      "reason": null
+    },
+    "up-acm": {
+      "enabled": true,
+      "reason": null
+    },
+    "pup-announcements": {
+      "enabled": true,
+      "reason": null
+    },
+    "pup-news": {
+      "enabled": false,
+      "reason": "Six saved checks of the same ten-item news feed produced no accepted events/leads. Keep university announcements separately; revisit news on invitation evidence."
+    },
+    "ncert": {
+      "enabled": false,
+      "reason": "Qualification 2026-11-23: robots verification still returns HTTP 403; paused under existing access rules."
+    },
+    "dict": {
+      "enabled": false,
+      "reason": "Qualification 2026-11-23: robots verification still returns HTTP 403; paused under existing access rules."
+    },
+    "rootcon-website": {
+      "enabled": false,
+      "reason": "Website extraction is policy restricted. Retain the permitted independent Bluesky route."
+    },
+    "ctftime": {
+      "enabled": true,
+      "reason": null
+    },
+    "safeai-luma-calendar": {
+      "enabled": true,
+      "reason": null
+    },
+    "mlh-global-hack-week": {
+      "enabled": true,
+      "reason": null
+    },
+    "up-manila": {
+      "enabled": true,
+      "reason": null
+    },
+    "htb-meetup-ph": {
+      "enabled": true,
+      "reason": null
+    },
+    "feu-eventually": {
+      "enabled": false,
+      "reason": "Calendar is readable, but the documented CTF invitation needs structured date/venue extraction outside its article body. Advance publication timing is also unverified. Not counted as a working CTF monitor."
+    },
+    "crest-asia": {
+      "enabled": false,
+      "reason": "Partner evidence retained; current route follows ROOTCON only and duplicates its permitted primary Bluesky announcements. Requalify broader recurring coverage."
+    },
+    "um-sdc": {
+      "enabled": false,
+      "reason": "Historical CTF invitation exists, but a reliable recurring calendar returning event links has not been verified. No event URL seeded."
+    },
+    "owasp-cebu": {
+      "enabled": false,
+      "reason": "CTF index redirects to login; public feed access not verified. No credentials or cookies used."
+    },
+    "pia": {
+      "enabled": false,
+      "reason": "Advance competition invitations documented, but robots.txt verification returns HTTP 403. Candidate only."
+    },
+    "vektr-community": {
+      "enabled": false,
+      "reason": "Website readable but no recurring announcement feed or archive links found. Indexed social reshares are not a working publisher integration."
+    },
+    "luma-manila": {
+      "enabled": false,
+      "reason": "Same recurring city root is already covered by luma-tech-community; no demonstrated unique contribution from the CTF-only route."
+    },
+    "kakacomputer-ctf": {
+      "enabled": false,
+      "reason": "Research/partner-lead candidate only: observed recap duplicates CyberPH event evidence; no advance invitation demonstrated."
+    },
+    "cyber404-news": {
+      "enabled": false,
+      "reason": "Publisher research only: two partner leads, no event invitations in saved runs. Requalify before routine event collection."
+    },
+    "cyberph-luma-calendar": {
+      "enabled": true,
+      "reason": "Documented public subscription returned event links including an online webinar and a CTF activity. Publisher-name search assisted one-time qualification; registration timing is evaluated per event. Facebook and Luma identities are not automatically merged."
+    },
+    "cisco-netconnect-luma-calendar": {
+      "enabled": false,
+      "reason": "Readable recurring calendar, but nine observed training/community entries did not qualify through the CTF adapter. Candidate until scope/parser contribution is qualified."
+    },
+    "meetup-tech-ph": {
+      "enabled": true,
+      "reason": null
+    },
+    "luma-tech-community": {
+      "enabled": true,
+      "reason": null
+    },
+    "online-tech-conferences": {
+      "enabled": true,
+      "reason": null
+    },
+    "devpost-public-hackathons": {
+      "enabled": true,
+      "reason": null
+    },
+    "cebby-events": {
+      "enabled": true,
+      "reason": null
+    },
+    "gdg-cebu": {
+      "enabled": true,
+      "reason": null
+    },
+    "community-opportunity-search": {
+      "enabled": false,
+      "reason": "Qualification candidate: saved 99-hit/80-page run verified zero events, with low-precision directories and 671 deferrals. Needs narrower publisher discovery qualification; no claim of permanent low value."
+    },
+    "tavily-keyless": {
+      "enabled": false,
+      "reason": "Research-only search leads and temporary quota failures; no newly verified future pages demonstrated. Retain saved leads/history and keyless adapter; requalify for advance verified coverage."
+    },
+    "facebook-search": {
+      "enabled": false,
+      "reason": "Disabled in the zero-API-fee configuration; Tavily keyless is the secondary search provider. No credentials are read for this source."
+    }
+  },
+  "candidate_records": [
+    {
+      "id": "cebby-events",
+      "recurring_url": "https://www.gocebby.com/events",
+      "discovery_path": [
+        "User supplied regional publisher lead",
+        "https://www.gocebby.com/events"
+      ],
+      "publisher_role": "directory / resharer",
+      "geographic_scope": "Cebu / Visayas, Philippines",
+      "topic_scope": "Technology / developer community",
+      "recurrence_evidence": "Multiple edition links lead to distinct primary Luma and Meetup pages",
+      "test_outcome": "Qualified: 3 accepted, 1 unique versus both comparison sets; 18 page checks"
+    },
+    {
+      "id": "gdg-cebu",
+      "recurring_url": "https://gdg.community.dev/gdg-cebu/",
+      "discovery_path": [
+        "User supplied regional publisher lead",
+        "https://gdg.community.dev/gdg-cebu/"
+      ],
+      "publisher_role": "organizer chapter",
+      "geographic_scope": "Cebu / Visayas, Philippines",
+      "topic_scope": "Technology / developer community",
+      "recurrence_evidence": "Chapter root links multiple event editions including past and future candidates",
+      "test_outcome": "Qualified: 1 accepted, unique versus both sets; 6 page checks"
+    },
+    {
+      "id": "devcon-lead",
+      "recurring_url": null,
+      "discovery_path": [
+        "User supplied publisher lead"
+      ],
+      "publisher_role": "community publisher lead",
+      "geographic_scope": "Philippines",
+      "topic_scope": "Developer community",
+      "recurrence_evidence": "Unknown: readable recurring event route not demonstrated in this exercise",
+      "test_outcome": "Not qualified; no route enabled"
+    }
+  ]
+}
