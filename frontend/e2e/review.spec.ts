@@ -52,11 +52,11 @@ for (const width of [1280, 390]) {
     await page.locator('.notice-select').click();
     await expect(page.locator('.review-note')).toContainText('does not confirm the event ended');
     await page.getByRole('tab', {name:/Past/}).click();
-    await expect(page.locator('.event-date')).toContainText('Event date');
-    await expect(page.locator('.event-date')).toHaveAttribute('datetime','2034-10-04');
+    await expect(page.locator('.event-card .event-date')).toContainText('Event date');
+    await expect(page.locator('.event-card .event-date')).toHaveAttribute('datetime','2034-10-04');
     await page.locator('.notice-select').click();
     await expect(page.locator('.parent-schedule')).toContainText('do not establish the complete CTF schedule');
-    await expect(page.locator('.collected-grid .event-schedule')).toHaveCount(0);
+    await expect(page.locator('.notice-lead .event-schedule')).toHaveCount(0);
     await expect(page.locator('.parent-schedule')).toContainText('Oct 4, 2034');
     await expect(page.getByRole('tab', {name:/All events/})).toHaveCount(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();

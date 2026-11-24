@@ -67,7 +67,7 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 }, { name: 
     await page.route('**/api/events', route => route.fulfill({ json: data }));
     await page.setViewportSize(viewport);
     await page.goto('/');
-    await expect(page).toHaveTitle('Tech Board | CommunT');
+    await expect(page).toHaveTitle('Tech Board | CommunIT');
     await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', '/communit.svg');
     const iconLoaded = await page.evaluate(async () => {
       const icon = new Image();

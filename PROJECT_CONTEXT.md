@@ -4,9 +4,13 @@ Last updated: **November 24, 2026, Asia/Manila**.
 
 Read [AGENTS.md](AGENTS.md) for durable rules and [RUN_LOCAL.md](RUN_LOCAL.md) for setup and checks. This is current implementation context, not a claim about running processes or live source availability. Superseded checkpoints are in the [archived November 23–24 handoff](docs/archive/project-context-2026-11-24.md); the [archive index](docs/archive/README.md) records artifact locations and preservation decisions.
 
-## Campus board refresh · November 24
+## Pinned-notice redesign · November 24, 2026, Asia/Manila
 
-The forest-green search panel, calendar stubs and pinned-notice feedback now pair with equal-height paper index tabs. The board uses lighter cork grain, tape-style geography labels, and layered edges on the pinned notice. Switching sections gently settles the result groups into place. The selected tab lifts two pixels and settles in 190 ms. Reduced-motion preferences disable the animation. The frontend production build passed. Interactive browser verification remains pending after Chromium's process socket was denied.
+Implemented the approved “Proposed” notice from `CommunIT-notice-study.html` on `feat/pinned-notice-redesign`, based on latest fetched main **`b59a003`**. Existing browser-title spelling corrections were retained. `frontend/src/App.tsx` reuses `EventDate` beside the supported schedule/venue after review notes; only remaining facts appear in the grid. Parent-event dates, conflicts, deadlines, Manila precision and organizer-link selection retain their existing semantics. `frontend/src/styles.css` adds the green paper edge/month strip, responsive title, one 210 ms stamp press, underlined organizer action and quieter green search panel. The approved paper tabs, cork and date-first cards remain.
+
+**Verified:** production TypeScript/Vite build; **35 Chromium browser tests passed** covering long titles/addresses at 1366/390/320 px, uncertainty/parent dates, separate deadlines, empty grids, URL deduplication, desktop selection/list stability, mobile Back focus/scroll at 390/760 px, reopening the selected notice, reduced motion and keyboard focus. A read-only saved-preview check rendered 41 saved records with no page errors and confirmed the organizer hover/pressed transforms. [Review notes and desktop/mobile screenshots](docs/reviews/pinned-notice-2026-11-24/README.md) describe coverage and reproduction; detailed local logs are under ignored `data/pinned-notice/`.
+
+No live collection, main database access, backend/schema/API/configuration changes or deployment. Backend tests and Firefox/WebKit were not run for this presentation-only change; external organizer pages were not reverified. Startup commands are unchanged; this session used the existing isolated preview through Vite **5174** because 5173 belongs to another checkout. The existing preview remains running.
 
 ## Architecture
 
@@ -34,11 +38,11 @@ Normal listings flow through `backend.db.events()` → public API projection →
 
 ## Current public behavior
 
-- Navbar home link: **CommunIT**, with the cork/two-note inline logo. Browser title: **Tech Board | CommunT**; favicon: [frontend/public/communit.svg](frontend/public/communit.svg). There is no visible hero heading; **Tech events** remains an accessible hidden H1. **Philippines · PHT** sits beside Events; dates use Asia/Manila.
+- Navbar home link: **CommunIT**, with the cork/two-note inline logo. Browser title: **Tech Board | CommunIT**; favicon: [frontend/public/communit.svg](frontend/public/communit.svg). There is no visible hero heading; **Tech events** remains an accessible hidden H1. **Philippines · PHT** sits beside Events; dates use Asia/Manila.
 - The Campus Bulletin cork board has compact date-first cards and one pinned detail paper. Desktop selection preserves list position; mobile Back restores filters, scroll and selected-card focus. Listings sort by displayed Manila calendar day within separate PH/international-online groups; unknown/conflicting dates go last, with stable same-day ties.
 - Public tabs are **Upcoming**, **Past**, **Needs confirmation**, **Archive**. Needs confirmation combines backend unconfirmed/watchlist records without changing their meaning. Undated unresolved leads expire after 45 days from first discovery into Archived leads; rediscovery does not reset verification or imply completion.
 - Controls are **Search events**, **Browse by interest**, **How to attend**. Registration never filters public listings. **Interests in these listings** with **Select to filter** shows at most four categories from current section/search/attendance matches before interest filtering; chips and dropdown share selection. Unsupported topics stay visible under All interests.
-- Important review/source notes precede the **What we can get** fact grid. Only supported schedule, venue, attendance, interests, eligibility, price, account and signup/deadline facts appear. Preserve original date precision; missing facts/empty sections stay absent. Current fully fetched event-page location evidence can supply venues; organizer addresses, stale or search-only evidence cannot.
+- Important review/source notes precede a shared card/notice date stamp beside the supported schedule and venue. Parent-event dates and deadlines remain distinct. The **What we can get** grid contains remaining attendance, interests, eligibility, price, account and signup/deadline facts and disappears when empty. Preserve original date precision; missing facts stay absent. Current fully fetched event-page location evidence can supply venues; organizer addresses, stale or search-only evidence cannot.
 - Primary **View organizer’s page** and a distinct **Register** action remain below collected facts. Internal evidence/history, route inventories and collector diagnostics are not shown in the public notice. The underlying records are retained.
 - **Listings last updated** uses `listings_updated_at`, the latest retained verified event-page check among saved listings; missing/invalid values omit the entire line. **Refresh saved listings** below the board reloads stored data and does not collect. There is no public Fetch events button or source-health panel.
 
@@ -50,7 +54,11 @@ Topics require event evidence: Cloud and DevOps remain separate, organizer/tool 
 
 Benchmark inputs remain evaluation-only. Frozen [November 22 results](docs/prototype-iteration-2026-11-22.md) retain the original **0/8 discovery, 0/4 actionable** blind score and later **8/8, 4/4** known-reference regression. The [November 23 report](docs/benchmark-2026-11-23.md) retains **10/10 event matches, 9/10 reference URLs**, a known-reference result rather than a blind or complete-field pass. These reports, raw evidence and original scores were not revised. Inspect copies of saved benchmark databases only; archived commands are historical records, not current setup instructions.
 
-## Latest verification and cleanup
+## Browser-title spelling — November 24, 2026, Asia/Manila
+
+Corrected **Tech Board | CommunT** to **Tech Board | CommunIT** in `frontend/index.html`, the existing browser-test expectation and current AGENTS/handoff guidance. Favicon and navbar are unchanged. TypeScript/Vite build and a targeted Chromium title/favicon check on port 5174 passed with mocked API data; `git diff --check` passed. Evidence: `data/title-spelling/{build.log,browser-check.json}`. No full browser suite, backend/database change, collection or deployment; the existing preview remains running.
+
+## Earlier docs cleanup verification
 
 Rechecked against **`dd3356cf102bbc5828b0ae93a18cffe296f46d23`** (the audit baseline), with existing interest-label edits in App/CSS/e2e and AGENTS/handoff preserved. This cleanup changes documentation and removes only the unused `frontend/public/flag.svg`; no app logic, API, schema, collector, source configuration or test was changed for it. The favicon, browser title, inline SVG/icons and organizer actions are preserved.
 

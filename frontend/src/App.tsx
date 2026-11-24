@@ -279,7 +279,7 @@ function EventPaper({ event }: { event: Competition }) {
   const registrationUrl = safeEventUrl(event.registration_url);
   const venue = eventVenue(event);
   const status = event.status !== 'scheduled' ? states[event.status] : confirmedReschedule(event) ? 'Rescheduled' : null;
-  const hasCollectedDetails = !!(status || schedule || parentSchedule || venue || location || attendance || interests.length || eligibility || price || account || registration || deadlines.length);
+  const hasCollectedDetails = !!(attendance || interests.length || eligibility || price || account || registration || deadlines.length);
   return <article className="paper" aria-labelledby="paper-title">
       <p className="eyebrow">Pinned notice · {event.geography === 'international_online' ? 'International online' : 'Philippines'}</p>
       <h2 id="paper-title" tabIndex={-1}>{event.name}</h2>
@@ -288,16 +288,23 @@ function EventPaper({ event }: { event: Competition }) {
         {event.review?.required && <div className="review-note"><p><Icon name="flag" size={16}/><strong>Flagged for review</strong></p>{event.review.reasons.map(reason => <p key={reason}>{reason}</p>)}<p>This listing remains visible while these details are unresolved.</p></div>}
         {event.notices.length > 0 && <div className="notices">{event.notices.map(n => <p key={n}><Icon name="info" size={16}/><span>{n}</span></p>)}</div>}
       </section>}
+      <div className="notice-lead">
+        <EventDate event={event}/>
+        <div className="notice-lead-facts">
+          {status && <p className="paper-status">{status}</p>}
+          {(schedule || parentSchedule || venue || location) && <dl>
+            {schedule && <div className="schedule-detail"><dt>When</dt><dd className="event-schedule">{event.parent_event_start && <span>CTF schedule · </span>}{schedule}</dd></div>}
+            {parentSchedule && <div className="parent-schedule"><dt>Parent event schedule</dt><dd><p>{parentSchedule}</p><p className="detail-context">These dates do not establish the complete CTF schedule.</p></dd></div>}
+            {(venue || location) && <div className="location-detail"><dt>Where</dt><dd><p className="paper-location">{venue?.detail || location}</p>{venue?.address && <p className="venue-address">{venue.address}</p>}</dd></div>}
+          </dl>}
+        </div>
+      </div>
       <div className="event-detail-body">
         {hasCollectedDetails && <section className="collected-details" aria-labelledby="collected-details-title">
         <h3 id="collected-details-title">What we can get</h3>
-        {status && <p className="paper-status">{status}</p>}
         <dl className="collected-grid">
-          {schedule && <div className="schedule-detail"><dt>When</dt><dd className="event-schedule">{event.parent_event_start && <span>CTF schedule · </span>}{schedule}</dd></div>}
-          {(venue || location) && <div className="location-detail"><dt>Where</dt><dd><p className="paper-location">{venue?.detail || location}</p>{venue?.address && <p className="venue-address">{venue.address}</p>}</dd></div>}
           {attendance && <div className="attendance-detail"><dt>How to attend</dt><dd>{attendance}</dd></div>}
           {interests.length > 0 && <div className="interests-detail"><dt>Interests</dt><dd>{interests.join(' · ')}</dd></div>}
-          {parentSchedule && <div className="parent-schedule"><dt>Parent event schedule</dt><dd><p>{parentSchedule}</p><p className="detail-context">These dates do not establish the complete CTF schedule.</p></dd></div>}
           {price && <div className="fact-extra price-detail"><dt>Price</dt><dd>{price}</dd></div>}
           {registration && <div className="signup-detail"><dt>Signup</dt><dd>{registration}</dd></div>}
           {deadlines.map(([label, value]) => <div className="deadline-detail" key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
@@ -306,7 +313,7 @@ function EventPaper({ event }: { event: Competition }) {
         </dl>
         </section>}
         {(originalUrl || registrationUrl) && <div className="actions">
-          {originalUrl && <Link href={originalUrl} className="button primary">View organizer’s page <span aria-hidden="true">↗</span></Link>}
+          {originalUrl && <Link href={originalUrl} className="button primary"><span className="organizer-link-label">View organizer’s page</span><span aria-hidden="true">↗</span></Link>}
           {registrationUrl && !sameEventPage(registrationUrl, originalUrl) && <Link href={registrationUrl} className="button secondary">Register <span aria-hidden="true">↗</span></Link>}
         </div>}
         {description && <section className="event-description"><h4>Description</h4><p>{description}</p></section>}

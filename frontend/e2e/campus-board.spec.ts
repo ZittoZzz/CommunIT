@@ -175,7 +175,7 @@ for (const width of [1366, 390]) {
     await expect(notes.locator('.notices p').first()).toBeInViewport();
     await expect(notes.locator('.review-note')).toContainText('remains visible');
     const noteBox = await notes.boundingBox();
-    const dates = await page.locator('.collected-grid').boundingBox();
+    const dates = await page.locator('.notice-lead').boundingBox();
     expect(noteBox!.y + noteBox!.height).toBeLessThanOrEqual(dates!.y);
     expect(await page.locator('.paper-scroll').evaluate(element => element.scrollTop)).toBe(0);
     if (width < 761) {

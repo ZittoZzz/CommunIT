@@ -52,10 +52,9 @@ for (const width of [1366, 390, 320]) {
     await expect(page.locator('.location-detail dt')).toHaveText('Where');
     const when = await page.locator('.schedule-detail').boundingBox();
     const where = await page.locator('.location-detail').boundingBox();
-    if(width > 480) {
-      expect(Math.abs(when!.y - where!.y)).toBeLessThan(1);
-      expect(where!.x).toBeGreaterThan(when!.x + when!.width);
-    } else expect(where!.y).toBeGreaterThanOrEqual(when!.y + when!.height);
+    expect(where!.y).toBeGreaterThanOrEqual(when!.y + when!.height);
+    await expect(page.locator('.notice-lead .schedule-detail, .notice-lead .location-detail')).toHaveCount(2);
+    await expect(collected.locator('.schedule-detail, .location-detail, .parent-schedule')).toHaveCount(0);
 
     await expect(page.locator('.collected-grid')).toContainText('University students');
     await expect(page.locator('.collected-grid')).toContainText('PHP 250');

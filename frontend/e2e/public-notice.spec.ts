@@ -115,8 +115,8 @@ for (const width of [1366,390]) {
     await page.setViewportSize({width,height:900}); await page.goto('/');
     for (const [event, text] of [[update,'Rescheduled'],[cancelled,'Cancelled'],[postponed,'Postponed']] as const) {
       await select(page,event.name);
-      await expect(page.locator('.collected-details > .paper-status')).toHaveText(text);
-      if(event.start) await expect(page.locator('.paper-status + .collected-grid .event-schedule')).toHaveText('Dec 1, 2035');
+      await expect(page.locator('.notice-lead .paper-status')).toHaveText(text);
+      if(event.start) await expect(page.locator('.notice-lead .event-schedule')).toHaveText('Dec 1, 2035');
     }
     for (const event of [routine,older,uncertain]) {
       await select(page,event.name);
