@@ -6,7 +6,7 @@ Read [AGENTS.md](AGENTS.md) for durable rules and [RUN_LOCAL.md](RUN_LOCAL.md) f
 
 ## Campus board refresh · November 24
 
-The forest-green search panel, calendar stubs and pinned-notice feedback now pair with equal-height paper index tabs. The selected tab lifts two pixels and settles in 190 ms. Reduced-motion preferences disable the animation. The frontend production build passed. Interactive browser verification remains pending after Chromium's process socket was denied.
+The forest-green search panel, calendar stubs and pinned-notice feedback now pair with equal-height paper index tabs. The board uses lighter cork grain, tape-style geography labels, and layered edges on the pinned notice. Switching sections gently settles the result groups into place. The selected tab lifts two pixels and settles in 190 ms. Reduced-motion preferences disable the animation. The frontend production build passed. Interactive browser verification remains pending after Chromium's process socket was denied.
 
 ## Architecture
 
