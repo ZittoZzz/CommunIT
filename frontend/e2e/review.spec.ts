@@ -1,3 +1,4 @@
+import {filterTrigger, chooseFilter} from './filter-helpers';
 import { test, expect } from '@playwright/test';
 
 const day = (value: string) => ({raw: value, value, precision: 'date', timezone: null});
@@ -31,13 +32,15 @@ for (const width of [1280, 390]) {
     await page.setViewportSize({width, height:900});
     await page.goto('/');
     await expect(page.locator('.event-card')).toHaveCount(3);
-    await page.getByRole('combobox', {name:/Browse by interest/}).selectOption('cloud');
+    await chooseFilter(filterTrigger(page, 'interest'), 'cloud');
     await expect(page.locator('.event-card')).toHaveCount(2);
     await expect(page.locator('.event-card').filter({hasText:'Delivery automation workshop'})).toHaveCount(0);
-    await page.getByRole('combobox', {name:/Browse by interest/}).selectOption('devops');
+    await chooseFilter(filterTrigger(page, 'interest'), 'devops');
     await expect(page.locator('.event-card')).toHaveCount(2);
-    await page.getByRole('combobox', {name:/Browse by interest/}).selectOption('');
-    await expect(page.getByRole('option', {name:'Cloud & DevOps', exact:true})).toHaveCount(0);
+    await chooseFilter(filterTrigger(page, 'interest'), '');
+    await filterTrigger(page, 'interest').click();
+    await expect(page.getByRole('button', {name:'Cloud & DevOps', exact:true})).toHaveCount(0);
+    await page.keyboard.press('Escape');
     await page.getByRole('tab', {name:/Needs confirmation/}).click();
     await expect(page.locator('.event-card')).toHaveCount(1);
     await expect(page.locator('.preview-facts')).toContainText('Flagged for review');
