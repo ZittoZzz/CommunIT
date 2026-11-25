@@ -5,11 +5,78 @@ type Moment = { raw: string; value: string | null; precision: 'datetime' | 'date
 type Price = { kind: 'free' | 'paid' | 'unknown'; amount?: number; minimum_amount?: number; currency?: string };
 type TicketOption = { name: string; access: 'public' | 'restricted' | 'unknown'; eligibility: string | null; attendance: 'onsite' | 'online' | null; registration_state: string; price: Price; deadline: Moment | null };
 type FieldEvidence = Record<string, { url: string; quote: string }>;
-type Announcement = { url: string; kind: string; access: 'full' | 'search_only' };
+type Announcement = { url: string; kind: string; access: 'full' | 'search_only'; first_seen?: string | null };
 type Review = { required: boolean; reasons: string[]; expired: boolean; expires_at: string | null };
 type Verification = { last_observed_at: string; last_content_fetched_at: string | null; last_event_page_checked_at: string | null; basis: string };
 type Competition = { organizer_event_url?: string | null; lifecycle?: string | null; review?: Review; verification?: Verification; parent_event_start?: Moment | null; parent_event_end?: Moment | null; id: string; name: string; organizer: string; region: string; format: string; eligibility: string | null; announcement_url: string; announcement_label?: string; registration_url: string | null; registration_status: string; status: string; section: 'upcoming' | 'past' | 'finished' | 'unconfirmed' | 'watchlist' | 'archived'; competition_date?: Moment | null; start: Moment | null; end: Moment | null; deadline: Moment | null; registration_opens: Moment | null; posted_at: string | null; first_seen: string; last_checked: string; summary: string | null; description?: string | null; stage: string; edition: string; notices: string[]; announcements: Announcement[]; field_evidence?: FieldEvidence; geography?: string; topic?: string; topics?: string[]; price?: Price; account_required?: boolean | null; submission_deadline?: Moment | null; attendance_options?: string[]; ticket_options?: TicketOption[] };
 type Directory = { events: Competition[]; listings_updated_at?: string | null; generated_at: string };
+
+const savedBoardKey = 'communit:board:v1';
+const isRecord = (value: unknown): value is Record<string, unknown> => !!value && typeof value === 'object' && !Array.isArray(value);
+const optionalText = (value: unknown) => value == null || typeof value === 'string';
+const textArray = (value: unknown): value is string[] => Array.isArray(value) && value.every(item => typeof item === 'string');
+const usableMoment = (value: unknown) => value == null || (isRecord(value) && optionalText(value.raw) && optionalText(value.value) && optionalText(value.timezone) && ['date', 'datetime', 'text'].includes(String(value.precision)));
+const usablePrice = (value: unknown) => value == null || (isRecord(value) && ['free', 'paid', 'unknown'].includes(String(value.kind)) && optionalText(value.currency) && ['amount', 'minimum_amount'].every(key => value[key] == null || typeof value[key] === 'number'));
+function usableDirectory(value: unknown): value is Directory {
+  if (!isRecord(value) || !Array.isArray(value.events) || !optionalText(value.generated_at) || !optionalText(value.listings_updated_at)) return false;
+  const ids = new Set<string>();
+  return value.events.every(event => {
+    if (!isRecord(event) || typeof event.id !== 'string' || !event.id || ids.has(event.id) || typeof event.name !== 'string' || !event.name.trim()) return false;
+    ids.add(event.id);
+    return ['upcoming', 'past', 'finished', 'unconfirmed', 'watchlist', 'archived'].includes(String(event.section)) &&
+      ['organizer', 'region', 'format', 'status', 'registration_status', 'eligibility', 'summary', 'description', 'posted_at', 'first_seen', 'announcement_url', 'organizer_event_url', 'registration_url'].every(key => optionalText(event[key])) &&
+      ['start', 'end', 'competition_date', 'parent_event_start', 'parent_event_end', 'deadline', 'submission_deadline', 'registration_opens'].every(key => usableMoment(event[key])) &&
+      textArray(event.notices) && ['topics', 'attendance_options'].every(key => event[key] == null || textArray(event[key])) &&
+      Array.isArray(event.announcements) && event.announcements.every(ann => isRecord(ann) && typeof ann.url === 'string' && optionalText(ann.kind) && ['full', 'search_only'].includes(String(ann.access))) &&
+      (event.review == null || (isRecord(event.review) && (event.review.reasons == null ? !event.review.required : textArray(event.review.reasons)))) &&
+      (event.field_evidence == null || (isRecord(event.field_evidence) && Object.values(event.field_evidence).every(proof => isRecord(proof) && typeof proof.url === 'string' && typeof proof.quote === 'string'))) &&
+      usablePrice(event.price) && (event.ticket_options == null || (Array.isArray(event.ticket_options) && event.ticket_options.every(ticket => isRecord(ticket) && ['name', 'eligibility', 'attendance', 'registration_state', 'access'].every(key => optionalText(ticket[key])) && usablePrice(ticket.price) && usableMoment(ticket.deadline))));
+  });
+}
+function readSavedBoard(): Directory | null {
+  try {
+    const saved: unknown = JSON.parse(sessionStorage.getItem(savedBoardKey) || 'null');
+    return isRecord(saved) && saved.version === 1 && usableDirectory(saved.data) ? saved.data : null;
+  } catch { return null; }
+}
+function saveBoard(data: Directory) {
+  // Persist only the public board, never collection tokens or other API metadata.
+  try { sessionStorage.setItem(savedBoardKey, JSON.stringify({version: 1, data: {events: data.events, generated_at: data.generated_at, listings_updated_at: data.listings_updated_at}})); }
+  catch { /* Storage may be blocked or full; the live board still works. */ }
+}
+
+function OpeningTicket({error, retry}: {error: string; retry: () => void}) {
+  return <div className="opening-space"><section className="opening-ticket" aria-labelledby="opening-title" data-failed={!!error}>
+    <span className="opening-stamp">CommunIT</span>
+    <h2 id="opening-title">{error ? 'Couldn’t open the board' : 'Opening the board'}</h2>
+    <p>{error ? 'Couldn’t load event listings. Please try again.' : 'Loading event listings…'}</p>
+    {error && <button className="button primary" onClick={retry}>Retry</button>}
+  </section></div>;
+}
+
+type RequestState = 'pending' | 'success' | 'error' | 'idle';
+function RefreshSlip({state, retry}: {state: RequestState; retry: () => void}) {
+  const [leaving, setLeaving] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [focused, setFocused] = useState(false);
+  useEffect(() => {
+    setLeaving(false); setHidden(false);
+    if (state !== 'success' || focused) return;
+    const fade = setTimeout(() => setLeaving(true), 1400);
+    const hide = setTimeout(() => setHidden(true), 1700);
+    return () => { clearTimeout(fade); clearTimeout(hide); };
+  }, [state, focused]);
+  if (state === 'idle') return null;
+  return <div className="refresh-slip" data-state={state} data-leaving={leaving} hidden={hidden && state === 'success'}
+    onFocusCapture={() => setFocused(true)} onBlurCapture={e => { if (!e.currentTarget.contains(e.relatedTarget)) setFocused(false); }}>
+    {state === 'pending' ? <span className="refresh-stack" aria-hidden="true"><i/><i/><i/></span> : <span className="refresh-seal" aria-hidden="true">{state === 'success' ? '✓' : '!'}</span>}
+    <span>{state === 'pending' ? 'Checking listings…' : state === 'success' ? 'Board up to date' : 'Couldn’t refresh · Showing saved listings'}</span>
+    {(state === 'error' || focused) && <button className="text-button" aria-disabled={state === 'pending'}
+      onClick={() => { if (state === 'error') retry(); else if (state === 'success') setHidden(true); }}>
+      {state === 'success' ? 'Dismiss' : 'Retry'}
+    </button>}
+  </div>;
+}
 
 function Icon({ name, size = 18 }: { name: string; size?: number }) {
   const paths: Record<string, ReactNode> = {
@@ -109,6 +176,24 @@ function calendarDay(value?: Moment | null): string | null {
 }
 function eventDay(event: Competition): string | null {
   return event.status === 'date_conflict' ? null : calendarDay(event.start || event.competition_date || event.parent_event_start);
+}
+function DayGroups({events, geography, selectedId, onSelect}: {events: Competition[]; geography: string; selectedId?: string; onSelect: (id: string) => void}) {
+  // Input is already filtered and stably sorted by eventDay. Never group by a cutoff.
+  const groups = new Map<string | null, Competition[]>();
+  for (const event of events) {
+    const day = eventDay(event);
+    const group = groups.get(day);
+    if (group) group.push(event);
+    else groups.set(day, [event]);
+  }
+  return <>{Array.from(groups, ([day, listings]) => {
+    const id = `${geography}-day-${day || 'unconfirmed'}`;
+    const label = day && new Intl.DateTimeFormat('en-US', {timeZone:'Asia/Manila', weekday:'short', month:'short', day:'numeric'}).format(new Date(`${day}T00:00:00+08:00`));
+    return <section className="event-day-group" key={day || 'unconfirmed'} aria-labelledby={id}>
+      <h4 className="event-day-heading" id={id}>{day ? <time dateTime={day}>{label}</time> : 'Date to confirm'}</h4>
+      <div className="event-grid">{listings.map(event => <EventCard event={event} key={event.id} selected={selectedId === event.id} onSelect={onSelect}/>)}</div>
+    </section>;
+  })}</>;
 }
 function clockTime(value?: Moment | null): string | null {
   if (value?.precision !== 'datetime' || !calendarDay(value)) return null;
@@ -231,21 +316,23 @@ function EventCard({ event, selected, onSelect }: { event: Competition; selected
   const location = locationLabel(event);
   const price = priceLabel(event.price);
   const registration = communityRegistration(event.registration_status);
-  const hasFacts = event.notices.length > 0 || event.review?.required || event.review?.expired || previewState || price || registration || event.account_required === true || registerBy || submitBy;
+  const hasFacts = event.notices.length > 0 || event.review?.required || event.review?.expired || previewState || price || event.account_required === true || registerBy || submitBy;
   return <article className={`event-card event-${event.status}${selected ? ' is-selected' : ''}`}>
     <div className="event-preview">
       <EventDate event={event}/>
       <div className="event-overview">
         <h3><button className="notice-select" id={`notice-${event.id}`} aria-pressed={selected} aria-controls="pinned-paper" onClick={() => onSelect(event.id)}>{event.name}</button></h3>{detailText(event.organizer) && <p className="organizer">{event.organizer}</p>}
-        {location && <p className="event-location"><Icon name={event.format === 'online' ? 'globe' : 'pin'} size={15}/><span>{location}</span></p>}
-        {supportedTopics.length > 0 && <div className="event-topics" aria-label="Topics">{supportedTopics.map(topic => <span className="topic-tag" key={topic}>{topics[topic]}</span>)}</div>}
+        {(location || supportedTopics.length > 0 || registration) && <div className="event-metadata">
+          {location && <p className="event-location"><Icon name={event.format === 'online' ? 'globe' : 'pin'} size={15}/><span>{location}</span></p>}
+          {supportedTopics.length > 0 && <div className="event-topics" aria-label="Topics">{supportedTopics.map(topic => <span className="topic-tag" key={topic}>{topics[topic]}</span>)}</div>}
+          {registration && <span className={`badge signup-fact registration-${event.registration_status}`}>{registration}</span>}
+        </div>}
         {hasFacts && <div className="preview-facts">
           {!event.review?.required && event.notices.length > 0 && <span className="badge notes-flag"><Icon name="info" size={13}/> Notes to check</span>}
           {event.review?.required && <span className="badge review-flag">Flagged for review</span>}
           {event.review?.expired && <span className="badge review-flag">Verification expired</span>}
           {previewState && <span className={`badge state-${event.status}`}>{previewState}</span>}
           {price && <span className={`badge price-fact${price === 'Free' ? ' price-free' : ''}`}>{price === 'Free' || price.startsWith('Paid') ? price : `Paid · ${price}`}</span>}
-          {registration && <span className={`badge signup-fact registration-${event.registration_status}`}>{registration}</span>}
           {event.account_required === true && <span className="join-fact">Account required</span>}
           {registerBy && <span className="join-fact deadline-fact">Register by <time dateTime={registerBy}>{recorded(registerBy)}</time></span>}
           {submitBy && <span className="join-fact deadline-fact">Submit by <time dateTime={submitBy}>{recorded(submitBy)}</time></span>}
@@ -254,6 +341,24 @@ function EventCard({ event, selected, onSelect }: { event: Competition; selected
     </div>
     <span className="card-arrow" aria-hidden="true">›</span>
   </article>;
+}
+
+function FoundNote({event, children}: {event: Competition; children: ReactNode}) {
+  const start = event.start || event.competition_date;
+  const venue = eventVenue(event);
+  const missing = [
+    (!calendarDay(start) || event.status === 'date_conflict') && 'confirmed event date',
+    (!clockTime(start) || event.status === 'date_conflict') && 'time',
+    ['in_person', 'hybrid'].includes(event.format) && (!venue || (venue.detail === venue.city && !venue.address)) && 'exact venue',
+    !attendanceLabel(event) && 'attendance format',
+    !priceLabel(event.price) && 'cost',
+    !communityRegistration(event.registration_status) && 'signup status',
+  ].filter(Boolean);
+  return <section className="found-note" aria-labelledby="found-note-title">
+    <h3 id="found-note-title">What we found</h3>
+    {children}
+    <p className="missing-fields"><strong>Missing:</strong> {missing.length ? missing.join(', ') : 'None of the tracked fields.'}<span>Based on the saved details; the organizer may have more information.</span></p>
+  </section>;
 }
 
 // The same evidence-backed detail content now lives on one pinned paper.
@@ -279,7 +384,7 @@ function EventPaper({ event }: { event: Competition }) {
   const registrationUrl = safeEventUrl(event.registration_url);
   const venue = eventVenue(event);
   const status = event.status !== 'scheduled' ? states[event.status] : confirmedReschedule(event) ? 'Rescheduled' : null;
-  const hasCollectedDetails = !!(status || schedule || parentSchedule || venue || location || attendance || interests.length || eligibility || price || account || registration || deadlines.length);
+  const hasCollectedDetails = !!(attendance || interests.length || eligibility || price || account || registration || deadlines.length);
   return <article className="paper" aria-labelledby="paper-title">
       <p className="eyebrow">Pinned notice · {event.geography === 'international_online' ? 'International online' : 'Philippines'}</p>
       <h2 id="paper-title" tabIndex={-1}>{event.name}</h2>
@@ -288,16 +393,24 @@ function EventPaper({ event }: { event: Competition }) {
         {event.review?.required && <div className="review-note"><p><Icon name="flag" size={16}/><strong>Flagged for review</strong></p>{event.review.reasons.map(reason => <p key={reason}>{reason}</p>)}<p>This listing remains visible while these details are unresolved.</p></div>}
         {event.notices.length > 0 && <div className="notices">{event.notices.map(n => <p key={n}><Icon name="info" size={16}/><span>{n}</span></p>)}</div>}
       </section>}
+      <div className="notice-lead">
+        <EventDate event={event}/>
+        <div className="notice-lead-facts">
+          {status && <p className="paper-status">{status}</p>}
+          {(schedule || parentSchedule || venue || location) && <dl>
+            {schedule && <div className="schedule-detail"><dt>When</dt><dd className="event-schedule">{event.parent_event_start && <span>CTF schedule · </span>}{schedule}</dd></div>}
+            {parentSchedule && <div className="parent-schedule"><dt>Parent event schedule</dt><dd><p>{parentSchedule}</p><p className="detail-context">These dates do not establish the complete CTF schedule.</p></dd></div>}
+            {(venue || location) && <div className="location-detail"><dt>Where</dt><dd><p className="paper-location">{venue?.detail || location}</p>{venue?.address && <p className="venue-address">{venue.address}</p>}</dd></div>}
+          </dl>}
+        </div>
+      </div>
       <div className="event-detail-body">
+        <FoundNote event={event}>
         {hasCollectedDetails && <section className="collected-details" aria-labelledby="collected-details-title">
-        <h3 id="collected-details-title">What we can get</h3>
-        {status && <p className="paper-status">{status}</p>}
+        <h3 id="collected-details-title" className="sr-only">Event facts</h3>
         <dl className="collected-grid">
-          {schedule && <div className="schedule-detail"><dt>When</dt><dd className="event-schedule">{event.parent_event_start && <span>CTF schedule · </span>}{schedule}</dd></div>}
-          {(venue || location) && <div className="location-detail"><dt>Where</dt><dd><p className="paper-location">{venue?.detail || location}</p>{venue?.address && <p className="venue-address">{venue.address}</p>}</dd></div>}
           {attendance && <div className="attendance-detail"><dt>How to attend</dt><dd>{attendance}</dd></div>}
           {interests.length > 0 && <div className="interests-detail"><dt>Interests</dt><dd>{interests.join(' · ')}</dd></div>}
-          {parentSchedule && <div className="parent-schedule"><dt>Parent event schedule</dt><dd><p>{parentSchedule}</p><p className="detail-context">These dates do not establish the complete CTF schedule.</p></dd></div>}
           {price && <div className="fact-extra price-detail"><dt>Price</dt><dd>{price}</dd></div>}
           {registration && <div className="signup-detail"><dt>Signup</dt><dd>{registration}</dd></div>}
           {deadlines.map(([label, value]) => <div className="deadline-detail" key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
@@ -305,8 +418,9 @@ function EventPaper({ event }: { event: Competition }) {
           {account && <div className="fact-extra account-detail"><dt>Account</dt><dd>{account}</dd></div>}
         </dl>
         </section>}
+        </FoundNote>
         {(originalUrl || registrationUrl) && <div className="actions">
-          {originalUrl && <Link href={originalUrl} className="button primary">View organizer’s page <span aria-hidden="true">↗</span></Link>}
+          {originalUrl && <Link href={originalUrl} className="button primary"><span className="organizer-link-label">View organizer’s page</span><span aria-hidden="true">↗</span></Link>}
           {registrationUrl && !sameEventPage(registrationUrl, originalUrl) && <Link href={registrationUrl} className="button secondary">Register <span aria-hidden="true">↗</span></Link>}
         </div>}
         {description && <section className="event-description"><h4>Description</h4><p>{description}</p></section>}
@@ -316,8 +430,66 @@ function EventPaper({ event }: { event: Competition }) {
       </div>
   </article>;
 }
-function Select({ label, value, onChange, children }: { label: string; value: string; onChange: (s: string) => void; children: ReactNode }) {
-  return <label className="filter"><span>{label}</span><span className="select-wrap"><select className={value ? '' : 'is-default'} value={value} onChange={e => onChange(e.target.value)}>{children}</select><Icon name="chevron" size={16}/></span></label>;
+function BoardFilters({topic, format, onTopic, onFormat}: {topic: string; format: string; onTopic: (value: string) => void; onFormat: (value: string) => void}) {
+  type Filter = 'interest' | 'attendance';
+  const [open, setOpen] = useState<Filter | null>(null);
+  const root = useRef<HTMLDivElement>(null);
+  const panel = useRef<HTMLDivElement>(null);
+  const triggers = useRef<Partial<Record<Filter, HTMLButtonElement | null>>>({});
+  const groups = {
+    interest: {label: 'Browse by interest', prefix: 'Interest', all: 'All interests', value: topic, options: topics, change: onTopic},
+    attendance: {label: 'How to attend', prefix: 'Attend', all: 'All attendance options', value: format, options: formats, change: onFormat},
+  };
+  const close = () => { if (open) triggers.current[open]?.focus({preventScroll: true}); setOpen(null); };
+  useLayoutEffect(() => {
+    if (open) panel.current?.querySelector<HTMLButtonElement>('[aria-pressed="true"]')?.focus({preventScroll: true});
+  }, [open]);
+  useEffect(() => {
+    if (!open) return;
+    const dismiss = (event: Event) => { if (event.target instanceof Node && !root.current?.contains(event.target)) setOpen(null); };
+    document.addEventListener('pointerdown', dismiss);
+    document.addEventListener('focusin', dismiss);
+    return () => { document.removeEventListener('pointerdown', dismiss); document.removeEventListener('focusin', dismiss); };
+  }, [open]);
+  const group = open ? groups[open] : null;
+  return <div className="filters" ref={root} onKeyDown={event => {
+    if (event.key === 'Escape' && open) { event.preventDefault(); event.stopPropagation(); close(); }
+  }}>
+    {(Object.keys(groups) as Filter[]).map(key => {
+      const item = groups[key];
+      const text = item.value ? `${item.prefix} · ${item.options[item.value]}` : item.label;
+      return <button type="button" key={key} ref={element => { triggers.current[key] = element; }}
+        className={`filter-trigger${item.value ? ' is-active' : ''}`} aria-label={item.value ? `${item.label}: ${text}` : item.label}
+        aria-expanded={open === key} aria-controls={`filter-${key}-panel`} title={text}
+        onClick={() => setOpen(current => current === key ? null : key)}
+        onKeyDown={event => { if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+          event.preventDefault();
+          if (open === key) panel.current?.querySelector<HTMLButtonElement>('[aria-pressed="true"]')?.focus({preventScroll: true});
+          else setOpen(key);
+        } }}>
+        <span>{text}</span><Icon name="chevron" size={16}/>
+      </button>;
+    })}
+    {open && group && <div key={open} id={`filter-${open}-panel`} ref={panel} className={`filter-panel filter-panel-${open}`} role="group" aria-labelledby={`filter-${open}-heading`}
+      onKeyDown={event => {
+        const buttons = Array.from(panel.current?.querySelectorAll<HTMLButtonElement>('.filter-chip') || []);
+        const index = buttons.indexOf(event.target as HTMLButtonElement);
+        if (index < 0) return;
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? buttons.length - 1
+          : ['ArrowRight', 'ArrowDown'].includes(event.key) ? (index + 1) % buttons.length
+          : ['ArrowLeft', 'ArrowUp'].includes(event.key) ? (index + buttons.length - 1) % buttons.length : null;
+        if (next !== null) { event.preventDefault(); buttons[next]?.focus(); }
+      }}>
+      <h2 id={`filter-${open}-heading`}>{group.label}</h2>
+      <div className="filter-chips">{[['', group.all], ...Object.entries(group.options)].map(([value, label]) =>
+        <button type="button" className="filter-chip" key={value} aria-pressed={group.value === value}
+          onClick={() => { group.change(value); close(); }}>
+          {group.value === value && <span aria-hidden="true">✓ </span>}{label}
+        </button>
+      )}</div>
+    </div>}
+    <span className="sr-only" role="status" aria-live="polite" aria-atomic="true">{topic ? `Interest: ${topics[topic]}.` : 'All interests.'} {format ? `Attendance: ${formats[format]}.` : 'All attendance options.'}</span>
+  </div>;
 }
 
 function verifiedTimestamp(value?: string | null): string | null {
@@ -329,23 +501,76 @@ function verifiedTimestamp(value?: string | null): string | null {
   return month >= 1 && month <= 12 && day >= 1 && day <= lastDay && hour < 24 && minute < 60 && second < 60 ? value : null;
 }
 
+function useActivityScrollbar() {
+  const [active, setActive] = useState(false);
+  const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const reveal = useCallback(() => {
+    setActive(true);
+    if (idleTimer.current) clearTimeout(idleTimer.current);
+    idleTimer.current = setTimeout(() => setActive(false), 1000);
+  }, []);
+  useEffect(() => () => { if (idleTimer.current) clearTimeout(idleTimer.current); }, []);
+  return { 'data-scrolling': active, onPointerEnter: reveal, onPointerMove: reveal, onPointerDown: reveal, onPointerUp: reveal,
+    onTouchStart: reveal, onTouchMove: reveal, onKeyDown: reveal, onFocus: reveal, onWheel: reveal, onScroll: reveal };
+}
+
+// Decorative reference notes enter only after scrolling, below the working area.
+// They never reserve space in the initial view or intercept an interaction.
+function BoardDoodles() {
+  const [stage, setStage] = useState(0);
+  useEffect(() => {
+    const update = () => {
+      const distance = Math.max(window.scrollY, document.getElementById('pinned-paper')?.scrollTop || 0);
+      setStage(distance >= 110 ? 2 : distance >= 12 ? 1 : 0);
+    };
+    document.addEventListener('scroll', update, { capture: true, passive: true });
+    return () => document.removeEventListener('scroll', update, true);
+  }, []);
+  if (!stage) return null;
+  return <div className="board-doodles" data-revealed="true" data-stage={stage} aria-hidden="true">
+    <svg viewBox="0 0 96 95" focusable="false"><path d="M3 3h90v78L81 92H3z" fill="#f6dd88"/><path d="M80 92l2-13 11 2" fill="#8d7b4933"/><path d="m33 1 29 1-1 9-29-2z" fill="#f3e6be" opacity=".83"/><g fill="none" stroke="#364035" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="46" cy="38" r="6"/><path d="M45 45l-2 16m1-11-9 5-5-7m14 1 9-4 6-9M43 61l-9 11-8 1m17-12 8 9 7 1M59 36l5-4m1-4 3-2M23 77q21 2 41-1"/><path d="m60 29 5-12 12 5-5 12z" fill="#fff5ce"/><path d="m64 23 7 3m-8 0 6 3"/></g></svg>
+    <svg viewBox="0 0 96 95" focusable="false"><path d="M3 3h90v78L81 92H3z" fill="#d5e3b4"/><path d="M80 92l2-13 11 2" fill="#8d7b4933"/><path d="m33 1 29 1-1 9-29-2z" fill="#f3e6be" opacity=".83"/><g fill="none" stroke="#364035" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="49" cy="38" r="6"/><path d="m48 45-2 16 10 2 5 11m-15-13-8 2-2 10m10-23 10 5 8-2m-23 2-6 6M32 64h20m-18 1-2 12m18-12 2 11M55 59h22m-4 1v18M58 57l4-11 12 1-3 10zM20 78q28 2 58 0"/><path d="m29 30-4-4m9 0-1-6"/></g></svg>
+  </div>;
+}
+
 export default function App() {
-  const [data, setData] = useState<Directory | null>(null);
-  const [loading, setLoading] = useState(true);
+  // Synchronous hydration chooses the first rendered screen, including on Reload.
+  const [data, setData] = useState<Directory | null>(readSavedBoard);
+  const hasBoard = useRef(data !== null);
+  const activeRequest = useRef<AbortController | null>(null);
+  const [requestState, setRequestState] = useState<RequestState>('pending');
+  const loading = requestState === 'pending';
   const [error, setError] = useState('');
   const [section, setSection] = useState<Section>('upcoming');
   const [query, setQuery] = useState('');
   const [topic, setTopic] = useState('');
   const [format, setFormat] = useState('');
-  const load = useCallback(async (signal?: AbortSignal) => {
-    setLoading(true); setError('');
-    try { const r = await fetch('/api/events', {signal}); if (!r.ok) throw new Error(`Server returned ${r.status}.`); const d = await r.json(); if (!Array.isArray(d.events)) throw new Error('Unexpected server response.'); setData(d); }
-    catch (e) { if (!signal?.aborted) setError(e instanceof Error ? e.message : 'Could not load listings.'); }
-    finally { if (!signal?.aborted) setLoading(false); }
+  const load = useCallback(async () => {
+    activeRequest.current?.abort();
+    const controller = new AbortController();
+    activeRequest.current = controller;
+    const refreshing = hasBoard.current;
+    setRequestState('pending'); setError('');
+    try {
+      const response = await fetch('/api/events', {signal: controller.signal});
+      if (!response.ok) throw new Error(`Server returned ${response.status}.`);
+      const next: unknown = await response.json();
+      if (!usableDirectory(next)) throw new Error('Unexpected server response.');
+      if (controller.signal.aborted || activeRequest.current !== controller) return;
+      saveBoard(next);
+      hasBoard.current = true;
+      setData(next);
+      setRequestState(refreshing ? 'success' : 'idle');
+    } catch (e) {
+      if (!controller.signal.aborted && activeRequest.current === controller) {
+        setError(e instanceof Error ? e.message : 'Could not load listings.');
+        setRequestState('error');
+      }
+    }
   }, []);
-  useEffect(() => { const controller = new AbortController(); void load(controller.signal); return () => controller.abort(); }, [load]);
+  useEffect(() => { void load(); return () => activeRequest.current?.abort(); }, [load]);
   const lastUpdated = verifiedTimestamp(data?.listings_updated_at);
-  // Only these three controls affect visibility. Legacy URL/storage registration
+  // Only public browse controls affect visibility. Legacy URL/storage registration
   // values are not read or applied; signup facts remain part of each notice.
   const hasFilters = !!(query.trim() || topic || format);
   const clear = () => { setQuery(''); setTopic(''); setFormat(''); };
@@ -353,16 +578,15 @@ export default function App() {
     (!format || e.format === format) &&
     [e.name, e.organizer, e.eligibility, e.region, e.summary, e.description].join(' ').toLowerCase().includes(query.trim().toLowerCase())
   ), [data, format, query]);
-  const interestChips = useMemo(() => {
-    const available = new Set(browseable.filter(event => inSection(event, section)).flatMap(event => event.topics || []));
-    const order = [...new Set(['cybersecurity', 'ai_data', 'cloud', 'community', ...Object.keys(topics)])];
-    return order.filter(key => available.has(key)).slice(0, 4);
-  }, [browseable, section]);
   const matching = useMemo(() => browseable.filter(event => !topic || event.topics?.includes(topic)), [browseable, topic]);
   const counts = Object.fromEntries(sections.map(key => [key, matching.filter(event => inSection(event, key)).length]));
-  const filtered = useMemo(() => matching.filter(e => inSection(e, section)).sort((a, b) =>
-    (eventDay(a) || 'z').localeCompare(eventDay(b) || 'z')
-  ), [matching, section]);
+  const filtered = useMemo(() => matching.filter(e => inSection(e, section)).sort((a, b) => {
+    const aDay = eventDay(a), bDay = eventDay(b);
+    // Unresolved dates stay last in either direction; same-day ties stay stable.
+    if (!aDay) return bDay ? 1 : 0;
+    if (!bDay) return -1;
+    return section === 'finished' ? bDay.localeCompare(aDay) : aDay.localeCompare(bDay);
+  }), [matching, section]);
   // Match the Manila calendar date shown on each card; undated cards come last.
   // Stable ties preserve source order without inventing times for date-only facts.
   // Group after sorting to keep PH and international-online opportunities separate.
@@ -371,6 +595,8 @@ export default function App() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [reading, setReading] = useState(false);
   const paperRef = useRef<HTMLDivElement>(null);
+  const scrollbar = useActivityScrollbar();
+  const listScrollbar = useActivityScrollbar();
   const returnPosition = useRef<{ y: number; id: string } | null>(null);
   const selected = filtered.find(event => event.id === selectedId) || local[0] || international[0];
   const selectEvent = (id: string) => {
@@ -412,34 +638,63 @@ export default function App() {
   }, [reading, backToBoard]);
   // Only the paper scroll resets on desktop selection. The list DOM and page stay put.
   useLayoutEffect(() => { if (paperRef.current) paperRef.current.scrollTop = 0; }, [selected?.id]);
-  const loadError = error && <div role="alert" className="error"><p><strong>Couldn’t {data ? 'refresh' : 'load'} listings.</strong> {error} {data && 'Previous results are still shown.'}</p><button className="button secondary" disabled={loading} onClick={() => void load()}>Try again</button></div>;
+  const announcement = loading ? data ? 'Checking listings…' : 'Loading event listings…'
+    : error ? data ? 'Couldn’t refresh · Showing saved listings' : 'Couldn’t load event listings. Please try again.'
+    : requestState === 'success' ? 'Board up to date' : 'Event board ready.';
   return <><a href="#events" className="skip">Skip to events</a>
     <header id="top"><nav className="shell topbar" aria-label="Main navigation">
       <a className="brand" href="#top" aria-label="CommunIT">
         <svg className="board-logo" width="28" height="24" viewBox="0 0 80 64" aria-hidden="true" focusable="false"><rect x="0" y="1" width="80" height="62" rx="10" fill="#735038"/><rect x="7.5" y="8" width="65" height="48" rx="3.5" fill="#B98254"/><rect x="17.6" y="18.5" width="21" height="27" rx="1.4" fill="#FDF1D2"/><rect x="46.4" y="29" width="17" height="16" rx="1.4" fill="#245643"/><circle cx="28" cy="23" r="2" fill="#245643"/><path d="M22 32h12m-12 5h9" stroke="#735038" strokeWidth="1.8" strokeLinecap="round"/></svg>
         <span>Commun<strong>IT</strong></span>
       </a>
+      <label className="nav-search"><span className="sr-only">Search events</span><span className="search-wrap"><Icon name="search"/><input type="search" placeholder="Event, organizer, or school" value={query} onChange={e => setQuery(e.target.value)}/></span></label>
       <div className="nav-links"><a href="#events">Events</a><span className="country" role="img" aria-label="Philippines, Philippine Time" title="All dates and times use Asia/Manila (Philippine Time)"><Icon name="globe" size={15}/><span aria-hidden="true">Philippines · PHT</span></span></div>
     </nav></header>
-    <main id="events" className="shell"><h1 className="sr-only">Tech events</h1><section className="controls" aria-label="Find events">
-      <div className="filters">
-        <label className="filter search-filter"><span>Search events</span><span className="search-wrap"><Icon name="search"/><input type="search" placeholder="Event, organizer, or school" value={query} onChange={e => setQuery(e.target.value)}/></span></label>
-        <Select label="Browse by interest" value={topic} onChange={setTopic}><option value="">All interests</option>{Object.entries(topics).map(([key,label]) => <option key={key} value={key}>{label}</option>)}</Select>
-        <Select label="How to attend" value={format} onChange={setFormat}><option value="">Online, in person, or both</option>{Object.entries(formats).map(([key,label]) => <option key={key} value={key}>{label}</option>)}</Select>
+    <div className="refresh-rail shell">{data && <RefreshSlip state={requestState} retry={() => void load()}/>}</div>
+    <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">{announcement}</p>
+    <main id="events" className="shell">
+      <h1 className="sr-only">Tech events</h1>
+      {!data ? <OpeningTicket error={error} retry={() => void load()}/> : <>
+      <div className={`board-split${reading && selected ? ' is-reading' : ''}`}>
+        <div className="browse-column">
+          <section className="controls" aria-label="Find events">
+            <BoardFilters topic={topic} format={format} onTopic={setTopic} onFormat={setFormat}/>
+            {lastUpdated && <p className="directory-updated" role="status"><Icon name="clock" size={16}/><span><strong>Listings last updated: </strong><time dateTime={lastUpdated} title="Latest verified event-page check among saved listings; not every listing was checked at this time.">{recorded(lastUpdated, true)}</time></span></p>}
+            {hasFilters && <div className="filter-footer"><button className="text-button" onClick={clear}>Clear filters</button></div>}
+          </section>
+          <div className="board-section" data-section={section}>
+            <div className="control-top">
+              <div className="tabs" role="tablist" aria-label="Event section">{sections.map(tab => <button key={tab} data-section={tab} id={`tab-${tab}`} role="tab" aria-selected={section === tab} aria-controls="results" tabIndex={section === tab ? 0 : -1} className={section === tab ? 'active' : ''} onClick={() => setSection(tab)} onKeyDown={e => {
+                if (['ArrowLeft','ArrowRight','Home','End'].includes(e.key)) {
+                  e.preventDefault();
+                  const next = e.key === 'Home' ? sections[0] : e.key === 'End' ? sections[sections.length - 1] : sections[(sections.indexOf(tab) + (e.key === 'ArrowRight' ? 1 : sections.length - 1)) % sections.length];
+                  setSection(next); document.getElementById(`tab-${next}`)?.focus();
+                }
+              }}>{sectionLabels[tab]}{(tab !== 'archived' || !data || counts[tab] > 0) && <span>{data ? counts[tab] : '—'}</span>}</button>)}</div>
+            </div>
+            <section id="results" className="board" role="tabpanel" aria-labelledby={`tab-${section}`}>
+              <p className="results-count sr-only" aria-live="polite">{data ? `${filtered.length} ${filtered.length === 1 ? 'event' : 'events'}${hasFilters ? ' matching your filters' : ''}` : loading ? 'Checking the directory…' : 'Listings unavailable'}</p>
+              {filtered.length ?
+                <div className="board-list activity-scroll" key={section} role="region" aria-label="Event listings" tabIndex={0} {...listScrollbar}>
+                  {local.length > 0 && <section className="opportunity-group" aria-labelledby="ph-opportunities-title"><h3 id="ph-opportunities-title">PH opportunities</h3><DayGroups events={local} geography="ph" selectedId={selected?.id} onSelect={selectEvent}/></section>}
+                  {international.length > 0 && <section className="opportunity-group" aria-labelledby="international-online-title"><h3 id="international-online-title">International online opportunities</h3><DayGroups events={international} geography="international" selectedId={selected?.id} onSelect={selectEvent}/></section>}
+                </div> : data ? <div className="empty" key={section}><span className="empty-icon"><Icon name={hasFilters ? 'search' : 'flag'} size={30}/></span><h3>{hasFilters ? 'No matches for these filters.' : section === 'confirmation' ? 'No events needing confirmation.' : section === 'archived' ? 'No archived leads.' : `No ${section === 'finished' ? 'past' : 'upcoming'} events recorded yet.`}</h3><p>{hasFilters ? 'Try another interest, attendance option, or search term.' : 'Only collected announcements appear here. Check back later for more events.'}</p>{hasFilters && <button onClick={clear} className="button primary">Clear filters</button>}</div> : null}
+            </section>
+          </div>
+        </div>
+        {selected && <aside className="pinned-detail" aria-label="Pinned event details">
+          <button className="back-to-board" onClick={backToBoard}>← Back to the board</button>
+          <div id="pinned-paper" ref={paperRef} className="paper-scroll activity-scroll" role="region" aria-label="Selected event notice" tabIndex={0} {...scrollbar}>
+            <EventPaper event={selected} key={selected.id}/>
+          </div>
+        </aside>}
       </div>
-      {interestChips.length > 0 && <div className="explore-interests" role="group" aria-labelledby="explore-interests-label" aria-describedby="explore-interests-hint"><div className="interest-context"><span id="explore-interests-label">Interests in these listings</span><span id="explore-interests-hint">Select to filter</span></div>{interestChips.map(key => <button key={key} type="button" className="interest-chip" aria-pressed={topic === key} onClick={() => setTopic(topic === key ? '' : key)}>{topics[key]}</button>)}</div>}
-      {lastUpdated && <p className="directory-updated" role="status"><Icon name="clock" size={16}/><span><strong>Listings last updated: </strong><time dateTime={lastUpdated} title="Latest verified event-page check among saved listings; not every listing was checked at this time.">{recorded(lastUpdated, true)}</time></span></p>}
-      {hasFilters && <div className="filter-footer"><button className="text-button" onClick={clear}>Clear filters</button></div>}
-    </section>
-    {!data && loadError}
-    <div className="board-section" data-section={section}><div className="control-top"><div className="tabs" role="tablist" aria-label="Event section">{sections.map(tab => <button key={tab} data-section={tab} id={`tab-${tab}`} role="tab" aria-selected={section === tab} aria-controls="results" tabIndex={section === tab ? 0 : -1} className={section === tab ? 'active' : ''} onClick={() => setSection(tab)} onKeyDown={e => { if (['ArrowLeft','ArrowRight','Home','End'].includes(e.key)) { e.preventDefault(); const next = e.key === 'Home' ? sections[0] : e.key === 'End' ? sections[sections.length - 1] : sections[(sections.indexOf(tab) + (e.key === 'ArrowRight' ? 1 : sections.length - 1)) % sections.length]; setSection(next); document.getElementById(`tab-${next}`)?.focus(); } }}>{sectionLabels[tab]}{(tab !== 'archived' || !data || counts[tab] > 0) && <span>{data ? counts[tab] : '—'}</span>}</button>)}</div></div>
-    <section id="results" className={`board${reading && selected ? ' is-reading' : ''}`} role="tabpanel" aria-labelledby={`tab-${section}`} aria-busy={loading}><p className="results-count sr-only" aria-live="polite">{data ? `${filtered.length} ${filtered.length === 1 ? 'event' : 'events'}${hasFilters ? ' matching your filters' : ''}` : loading ? 'Checking the directory…' : 'Listings unavailable'}</p>
-    {loading && !data ? <div className="empty" role="status">Loading verified announcements…</div> : data && filtered.length ? <div className="board-split"><div className="board-list" key={section}>{local.length > 0 && <section className="opportunity-group" aria-labelledby="ph-opportunities-title"><h3 id="ph-opportunities-title">PH opportunities</h3><div className="event-grid">{local.map(e => <EventCard event={e} key={e.id} selected={selected?.id === e.id} onSelect={selectEvent}/>)}</div></section>}{international.length > 0 && <section className="opportunity-group" aria-labelledby="international-online-title"><h3 id="international-online-title">International online opportunities</h3><div className="event-grid">{international.map(e => <EventCard event={e} key={e.id} selected={selected?.id === e.id} onSelect={selectEvent}/>)}</div></section>}</div><aside className="pinned-detail" aria-label="Pinned event details"><button className="back-to-board" onClick={backToBoard}>← Back to the board</button><div id="pinned-paper" ref={paperRef} className="paper-scroll">{selected && <EventPaper event={selected} key={selected.id}/>}</div></aside></div> : data ? <div className="empty" key={section}><span className="empty-icon"><Icon name={hasFilters ? 'search' : 'flag'} size={30}/></span><h3>{hasFilters ? 'No matches for these filters.' : section === 'confirmation' ? 'No events needing confirmation.' : section === 'archived' ? 'No archived leads.' : `No ${section === 'finished' ? 'past' : 'upcoming'} events recorded yet.`}</h3><p>{hasFilters ? 'Try another interest, attendance option, or search term.' : 'Only collected announcements appear here. Check back later for more events.'}</p>{hasFilters && <button onClick={clear} className="button primary">Clear filters</button>}</div> : null}
-    <p className="date-note"><Icon name="clock" size={16}/> Confirmed times use Manila time. Ambiguous dates stay as the organizer wrote them.</p></section></div>
+      <p className="date-note"><Icon name="clock" size={16}/> Confirmed times use Manila time. Ambiguous dates stay as the organizer wrote them.</p>
+      <BoardDoodles/>
     <section className="directory-tools" aria-labelledby="directory-tools-title">
       <div className="directory-tools-heading"><div><h2 id="directory-tools-title">Directory updates</h2><p>Reload the saved event list.</p></div><div className="result-tools"><button className="button secondary refresh" aria-label="Refresh saved listings" title="Refresh saved listings" disabled={loading} onClick={() => void load()}><Icon name="refresh"/>Refresh saved listings</button></div></div>
-      {data && loadError}
       <p className="directory-time">{data && `Directory loaded ${recorded(data.generated_at, true)}.`}</p>
     </section>
+    </>}
     </main><footer className="shell"><span><Icon name="flag" size={19}/> Built for the Philippine tech community.</span><a href="#top">Back to top</a></footer></>;
 }

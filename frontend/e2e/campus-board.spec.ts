@@ -1,3 +1,4 @@
+import {filterTrigger, chooseFilter, expectFilter} from './filter-helpers';
 import { test, expect, type Page } from '@playwright/test';
 
 // Display-only fixtures stress navigation; never used by runtime discovery.
@@ -50,8 +51,8 @@ for (const width of [390, 760]) {
   test(`mobile Back restores composed filters, scroll and selected-card focus at ${width}px`, async ({ page }) => {
     await setup(page, width);
     await page.getByRole('searchbox').fill('Community notice');
-    await page.getByRole('combobox', {name:'Browse by interest', exact:true}).selectOption('community');
-    await page.getByRole('combobox', {name:'How to attend', exact:true}).selectOption('in_person');
+    await chooseFilter(filterTrigger(page, 'interest'), 'community');
+    await chooseFilter(filterTrigger(page, 'attendance'), 'in_person');
     const card = page.locator('.notice-select').nth(10);
     await card.focus();
     const originalY = await page.evaluate(() => window.scrollY);
@@ -63,14 +64,16 @@ for (const width of [390, 760]) {
     await expect(back).toBeInViewport();
     const paper = await page.locator('.paper').boundingBox();
     const board = await page.locator('.board-split').boundingBox();
-    expect(paper!.width).toBeCloseTo(board!.width, 0);
+    // The full-width notice reserves a few pixels for its stacked-paper shadow.
+    expect(paper!.width).toBeGreaterThanOrEqual(board!.width-8);
+    expect(paper!.x+paper!.width).toBeLessThanOrEqual(board!.x+board!.width);
     await page.evaluate(() => window.scrollBy(0, 600));
     await back.click();
     await expect(card).toBeFocused();
     expect(await page.evaluate(() => window.scrollY)).toBe(originalY);
     await expect(page.getByRole('searchbox')).toHaveValue('Community notice');
-    await expect(page.getByRole('combobox', {name:'Browse by interest',exact:true})).toHaveValue('community');
-    await expect(page.getByRole('combobox', {name:'How to attend',exact:true})).toHaveValue('in_person');
+    await expectFilter(filterTrigger(page, 'interest'), 'community');
+    await expectFilter(filterTrigger(page, 'attendance'), 'in_person');
     await expect(card).toHaveAttribute('aria-pressed', 'true');
     await page.keyboard.press('Space');
     await expect(page.locator('#paper-title')).toBeFocused();
@@ -130,27 +133,29 @@ test('editing a filter while reading on mobile returns to results and keeps focu
 });
 
 for (const width of [1366, 390]) {
-  test(`section tabs stay neutral until selected and leave the board frame unchanged at ${width}px`, async ({page}) => {
+  test(`level paper tabs retain selection and keyboard navigation above the folder at ${width}px`, async ({page}) => {
     await setup(page, width);
     const filters = await page.locator('.controls').boundingBox();
     const tabs = await page.getByRole('tablist').boundingBox();
     const board = await page.locator('.board').boundingBox();
     expect(tabs!.y).toBeGreaterThanOrEqual(filters!.y + filters!.height);
     expect(board!.y - (tabs!.y + tabs!.height)).toBeLessThanOrEqual(1);
-    const frame = await page.locator('.board').evaluate(element => getComputedStyle(element).borderColor);
+    const tabNames = await page.getByRole('tab').evaluateAll(tabs=>tabs.map(tab=>tab.childNodes[0].textContent));
+    expect(tabNames).toEqual(['Upcoming','Past','Needs confirmation','Archive']);
+    await expect(page.locator('#tab-archived span')).toHaveCount(0);
 
     for (const section of ['upcoming','finished','confirmation','archived']) {
       const tab = page.locator(`#tab-${section}`);
       await tab.click();
       await expect(tab).toHaveAttribute('aria-selected','true');
-      await expect(tab).toHaveCSS('height', '46px');
       await expect(page.locator('.board-section')).toHaveAttribute('data-section', section);
-      await expect(tab).toHaveCSS('background-color', 'rgb(255, 253, 242)');
-      expect(await page.locator('.board').evaluate(element => getComputedStyle(element).borderColor)).toBe(frame);
       await page.mouse.move(0, 0);
-      for (const other of await page.locator('[role=tab][aria-selected=false]').all()) {
-        await expect(other).toHaveCSS('height', '46px');
-      }
+      // Wait for the short selection feedback to settle before measuring the level tabs.
+      await expect(tab).toHaveCSS('transform','none');
+      const bounds = await page.getByRole('tab').evaluateAll(tabs=>tabs.map(tab=>{const box=tab.getBoundingClientRect(); return {top:box.top,bottom:box.bottom,height:box.height};}));
+      expect(new Set(bounds.map(box=>box.top)).size).toBe(1);
+      expect(new Set(bounds.map(box=>box.bottom)).size).toBe(1);
+      expect(bounds.every(box=>box.height === (width > 760 ? 36 : 40))).toBeTruthy();
     }
     await page.emulateMedia({reducedMotion:'reduce'});
     await expect(page.locator('.tabs .active')).toHaveCSS('animation-name','none');
@@ -175,7 +180,7 @@ for (const width of [1366, 390]) {
     await expect(notes.locator('.notices p').first()).toBeInViewport();
     await expect(notes.locator('.review-note')).toContainText('remains visible');
     const noteBox = await notes.boundingBox();
-    const dates = await page.locator('.collected-grid').boundingBox();
+    const dates = await page.locator('.notice-lead').boundingBox();
     expect(noteBox!.y + noteBox!.height).toBeLessThanOrEqual(dates!.y);
     expect(await page.locator('.paper-scroll').evaluate(element => element.scrollTop)).toBe(0);
     if (width < 761) {
@@ -206,7 +211,7 @@ for (const width of [1366, 390]) {
     await expect(page.locator('.event-card h3')).toHaveText(expected);
     await expect(page.locator('.event-card time.event-date').nth(2)).toHaveAttribute('datetime','2035-12-03');
     await expect(page.locator('.event-card h3')).toHaveText(expected);
-    await page.getByRole('combobox',{name:'Browse by interest',exact:true}).selectOption('community');
+    await chooseFilter(filterTrigger(page, 'interest'), 'community');
     await expect(page.locator('.event-card h3')).toHaveText(expected);
   });
 }

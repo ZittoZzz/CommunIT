@@ -506,7 +506,10 @@ def events(db, now=None, window_days=None):
             today = any(current.get(field) and current[field].get('precision') == 'date'
                         and manila_day(current[field]) == at.astimezone(MANILA).date()
                         for field in ('start', 'competition_date', 'deadline', 'submission_deadline'))
-            if not (qualifying or today) or (current.get('recurring') and current['registration_status'] not in ('open', 'approval_required')):
+            # Lifecycle already checks confirmed start/end bounds and conflicts.
+            # An event still running needs no future start or signup deadline.
+            ongoing = current['status'] == 'live'
+            if not (qualifying or today or ongoing) or (current.get('recurring') and current['registration_status'] not in ('open', 'approval_required')):
                 current['section'] = 'watchlist'
                 current['notices'].append('Watchlist: no confirmed start or cutoff in the next '
                                           + str(window_days) + ' days, or recurring signup is unverified.')

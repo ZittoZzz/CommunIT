@@ -1,3 +1,4 @@
+import {filterTrigger, chooseFilter, expectFilter} from './filter-helpers';
 import { test, expect, type Locator } from '@playwright/test';
 
 async function selectPaper(card: Locator) {
@@ -67,7 +68,7 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 }, { name: 
     await page.route('**/api/events', route => route.fulfill({ json: data }));
     await page.setViewportSize(viewport);
     await page.goto('/');
-    await expect(page).toHaveTitle('Tech Board | CommunT');
+    await expect(page).toHaveTitle('Tech Board | CommunIT');
     await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', '/communit.svg');
     const iconLoaded = await page.evaluate(async () => {
       const icon = new Image();
@@ -87,25 +88,25 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 }, { name: 
       const nav = document.querySelector('.topbar')!.getBoundingClientRect();
       const brand = document.querySelector('.brand')!.getBoundingClientRect();
       const links = document.querySelector('.nav-links')!.getBoundingClientRect();
-      const filters = document.querySelector('.filters')!.getBoundingClientRect();
+      const search = document.querySelector('.topbar input[type=search]')!.getBoundingClientRect();
       const h1 = document.querySelector('h1')!.getBoundingClientRect();
-      return {gap:filters.top-nav.bottom, separate:brand.right < links.left,
+      return {searchInside:search.top>=nav.top && search.bottom<=nav.bottom, separate:brand.right < links.left,
         sameRow:Math.abs(brand.top+brand.height/2-links.top-links.height/2)<2,
         inside:links.right<=nav.right, hiddenHeading:h1.width<=1 && h1.height<=1,
         noOverflow:document.documentElement.scrollWidth<=innerWidth};
     });
-    expect(geometry).toMatchObject({separate:true,sameRow:true,inside:true,hiddenHeading:true,noOverflow:true});
-    expect(geometry.gap).toBe(viewport.width <= 760 ? 16 : 23);
+    expect(geometry).toMatchObject({searchInside:true,separate:true,sameRow:true,inside:true,hiddenHeading:true,noOverflow:true});
 
     await expect(page.getByRole('link', { name: 'Events', exact: true })).toBeVisible();
     await expect(page.getByRole('searchbox', { name: 'Search events', exact: true })).toBeVisible();
     await expect(page.locator('.results-count')).toHaveText('5 events');
-    const topic = page.getByRole('combobox', { name: 'Browse by interest', exact: true });
-    await expect(topic).toHaveValue('');
-    await expect(topic.locator('option')).toHaveText([
-      'All interests', 'Cybersecurity', 'AI & Data', 'Cloud', 'DevOps',
-      'Software Development', 'Networking & Systems', 'Community', 'General IT',
+    const topic = filterTrigger(page, 'interest');
+    await expectFilter(topic, '');
+    await topic.click();
+    await expect(page.locator('.filter-chip')).toHaveText([
+      /All interests/, 'Cybersecurity', 'AI & Data', 'Cloud', 'DevOps', 'Software Development', 'Networking & Systems', 'Community', 'General IT',
     ]);
+    await page.keyboard.press('Escape');
 
     const meetup = page.locator('.event-card').filter({ has: page.getByRole('heading', { includeHidden: true, name: data.events[1].name, exact: true }) });
     await expect(meetup).toBeVisible();
@@ -121,21 +122,21 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 }, { name: 
     await expect(legacy).toBeVisible();
     await expect(legacy.locator('.event-topics')).toHaveCount(0);
 
-    await topic.selectOption('community');
+    await chooseFilter(topic, 'community');
     await expect(page.locator('.event-card h3')).toHaveText([data.events[1].name, data.events[4].name]);
     await expect(page.locator('.event-card').getByRole('heading', { name: data.events[1].name, exact: true })).toHaveCount(1);
     for (const tags of await page.locator('.event-topics').all()) {
       await expect(tags).toContainText('Community');
       await expect(tags).not.toContainText('Careers');
     }
-    await topic.selectOption('cybersecurity');
+    await chooseFilter(topic, 'cybersecurity');
     await expect(page.locator('.event-card h3')).toHaveText([data.events[0].name]);
     await expect(page.locator('.event-topics')).toContainText('Cybersecurity');
     await expect(page.locator('.results-count')).toHaveText('1 event matching your filters');
-    await topic.selectOption('ai_data');
+    await chooseFilter(topic, 'ai_data');
     await expect(page.locator('.event-card')).toHaveCount(2);
     await expect(page.locator('.event-card').getByRole('heading', { name: data.events[1].name, exact: true })).toHaveCount(1);
-    await topic.selectOption('software_development');
+    await chooseFilter(topic, 'software_development');
     await expect(page.locator('.event-card h3')).toHaveText([data.events[1].name]);
     await expect(page.locator('.event-card').getByRole('heading', { name: data.events[1].name, exact: true })).toHaveCount(1);
     await expect(page.locator('.event-topics')).toContainText('AI & Data');
@@ -148,13 +149,13 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 }, { name: 
     await page.route('**/api/events', route => route.fulfill({ json: data }));
     await page.setViewportSize(viewport);
     await page.goto('/');
-    const topic = page.getByRole('combobox', { name: 'Browse by interest', exact: true });
-    const format = page.getByRole('combobox', { name: 'How to attend', exact: true });
+    const topic = filterTrigger(page, 'interest');
+    const format = filterTrigger(page, 'attendance');
     await expect(page.getByRole('combobox', { name: 'Region', exact: true })).toHaveCount(0);
     await expect(page.getByRole('combobox', { name: 'Registration', exact: true })).toHaveCount(0);
     const search = page.getByRole('searchbox', { name: 'Search events', exact: true });
-    await topic.selectOption('ai_data');
-    await format.selectOption('in_person');
+    await chooseFilter(topic, 'ai_data');
+    await chooseFilter(format, 'in_person');
     await expect(page.locator('.event-card h3')).toHaveText([data.events[1].name]);
     await expect(page.locator('.event-card').getByRole('heading', { name: data.events[2].name, exact: true })).toHaveCount(0);
     await search.fill('Community');
@@ -165,19 +166,20 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1000 }, { name: 
     await search.fill('Community');
     await expect(page.locator('.event-card h3')).toHaveText([data.events[1].name]);
 
-    await topic.selectOption('');
-    await expect(format).toHaveValue('in_person');
+    await chooseFilter(topic, '');
+    await expectFilter(format, 'in_person');
     await expect(search).toHaveValue('Community');
     await expect(page.locator('.event-card h3')).toHaveText([data.events[1].name, data.events[3].name]);
     await expect(page.locator('.results-count')).toHaveText('2 events matching your filters');
     await expect(page.getByRole('tab', { name: /Upcoming/ }).locator('span')).toHaveText('2');
-    await topic.selectOption('cybersecurity');
+    await chooseFilter(topic, 'cybersecurity');
     await expect(page.locator('.event-card')).toHaveCount(0);
     await expect(page.locator('.results-count')).toHaveText('0 events matching your filters');
     await expect(page.getByRole('heading', { name: 'No matches for these filters.' })).toBeVisible();
     await expect(page.locator('.empty')).toContainText(/interest/i);
     await page.getByRole('button', { name: 'Clear filters', exact: true }).first().click();
-    for (const filter of [topic, format, search]) await expect(filter).toHaveValue('');
+    await expect(search).toHaveValue('');
+    for (const filter of [topic, format]) await expectFilter(filter, '');
     await expect(page.locator('.event-card')).toHaveCount(5);
     await expect(page.locator('.results-count')).toHaveText('5 events');
     await page.getByRole('tab', { name: /Needs confirmation/ }).click();
@@ -294,9 +296,9 @@ test('real collected listings, filters, and original event links', async ({ page
   await page.getByRole('searchbox').fill('not-a-real-event-abcdef');
   await expect(page.getByRole('heading', { name: 'No matches for these filters.' })).toBeVisible();
   await page.getByRole('button', { name: 'Clear filters' }).first().click();
-  await page.getByRole('combobox', { name: 'How to attend', exact: true }).selectOption('online');
+  await chooseFilter(filterTrigger(page, 'attendance'), 'online');
   await expect(page.locator('.event-card')).toHaveCount(upcoming.filter((e: {format: string}) => e.format === 'online').length);
-  await page.getByRole('combobox', { name: 'How to attend', exact: true }).selectOption('');
+  await chooseFilter(filterTrigger(page, 'attendance'), '');
   await expect(page.getByRole('combobox', { name: 'Registration', exact: true })).toHaveCount(0);
   await expect(page.locator('.event-card')).toHaveCount(upcoming.length);
   await page.getByRole('tab', { name: /Past/ }).click();
@@ -377,9 +379,9 @@ test('date precision, cancellation, and error recovery render correctly (browser
     else await route.fulfill({json:{...live,events:[event]}});
   });
   await page.goto('/');
-  await expect(page.getByRole('alert')).toBeVisible();
+  await expect(page.getByRole('heading',{name:'Couldn’t open the board'})).toBeVisible();
   fails = false;
-  await page.getByRole('button',{name:'Try again'}).click();
+  await page.getByRole('button',{name:'Retry',exact:true}).click();
   await expect(page.locator('.event-card').getByText('Cancelled',{exact:true})).toBeVisible();
   await selectPaper(page.locator('.event-card').first());
   const dates = page.locator('.event-schedule');
@@ -648,9 +650,9 @@ for (const [layout, width] of [['desktop', 1366], ['mobile', 320]] as const) {
     const tab=page.getByRole('tab',{name:/Needs confirmation/}); await tab.click();
     await expect(page.locator('.event-card')).toHaveCount(3);
     expect(new Set(await page.locator('.notice-select').evaluateAll(nodes=>nodes.map(n=>n.id))).size).toBe(3);
-    await page.getByRole('combobox',{name:'Browse by interest'}).selectOption('cybersecurity');
+    await chooseFilter(filterTrigger(page, 'interest'), 'cybersecurity');
     await expect(tab.locator('span')).toHaveText('2');
-    await page.getByRole('combobox',{name:'How to attend'}).selectOption('online');
+    await chooseFilter(filterTrigger(page, 'attendance'), 'online');
     await page.getByRole('searchbox').fill('workshop');
     await expect(page.locator('.event-card')).toHaveCount(1);
     const card=page.locator('#notice-conflict'); await card.focus(); await page.keyboard.press('Enter');
@@ -711,7 +713,7 @@ for (const width of [1366, 390]) {
     expect(posts).toBe(0);
     failRefresh = true;
     await panel.getByRole('button',{name:'Refresh saved listings'}).click();
-    await expect(panel.getByRole('alert')).toContainText('Previous results are still shown');
+    await expect(page.locator('.refresh-slip')).toContainText('Couldn’t refresh · Showing saved listings');
     await expect(page.locator('.event-card')).toHaveCount(5);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
   });
